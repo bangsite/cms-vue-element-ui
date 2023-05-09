@@ -1,0 +1,31 @@
+// Settings
+@import "./settings/font";
+@import "./settings/color";
+@import "./settings/global";
+@import "./settings/spacing";
+@import "./settings/breakpoints";
+
+// Layouts
+@import "./layouts/common";
+@import "./layouts/footer";
+@import "./layouts/header";
+@import "./layouts/main";
+@import "./layouts/sidebar";
+
+// Components
+@import "./components/animates";
+@import "./components/button";
+@import "./components/chart";
+@import "./components/form-search";
+@import "./components/input";
+@import "./components/slide-login";
+@import "./components/upload";
+@import "./components/upload-file";
+@import "./components/upload-file-input";
+
+// Pages
+@import "./pages/dashboard";
+@import "./pages/login";
+@import "./pages/product";
+// @import './pages/product-variant';
+@import "./pages/product-create";

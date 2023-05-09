@@ -1,0 +1,57 @@
+const navigationList = [
+  {
+    id: "dashboard",
+    title: "MENU.DASHBOARD",
+    routeName: "dashboard",
+    icon: "HomeOutlined",
+  },
+  {
+    id: "order",
+    title: "MENU.ORDERS",
+    routeName: "order-list",
+    icon: "ShoppingCartOutlined",
+  },
+  {
+    id: "category",
+    title: "MENU.CATEGORY",
+    icon: "AlignCenterOutlined",
+    children: [
+      {
+        id: "category-list",
+        title: "MENU.CATEGORY_LIST",
+        routeName: "category-list",
+      },
+    ],
+  },
+  {
+    id: "products",
+    title: "MENU.PRODUCTS",
+    icon: "FilterOutlined",
+    children: [
+      {
+        id: "products-list",
+        title: "MENU.PRODUCTS_LIST",
+        routeName: "products-list",
+      },
+      {
+        id: "products-create",
+        title: "MENU.PRODUCTS_CREATE",
+        routeName: "products-create",
+      },
+    ],
+  },
+  {
+    id: "image-simulator",
+    title: "MENU.IMAGE_SIMULATOR",
+    icon: "PictureOutlined",
+    children: [
+      {
+        id: "image-simulator-design",
+        title: "MENU.IMAGE_SIMULATOR_DESIGN",
+        routeName: "image-simulator-design",
+      },
+    ],
+  },
+];
+
+export default navigationList;

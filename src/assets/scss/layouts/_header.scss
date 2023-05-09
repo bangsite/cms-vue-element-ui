@@ -1,0 +1,104 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  margin: 0 1rem;
+
+  &__left {
+    display: flex;
+    align-items: center;
+
+    svg {
+      fill: $cl-primary;
+      cursor: pointer;
+      width: 24px;
+      transition: all 0.3s linear;
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}
+
+.locale {
+  .ant-select {
+    min-width: 100px;
+    .ant-select-selector {
+      border-radius: 6px;
+    }
+  }
+}
+
+.setting {
+  &__wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+  }
+
+  &__avatar {
+    background-color: $cl-primary;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    svg {
+      fill: #fff;
+      width: 20px;
+    }
+  }
+
+  &__name {
+    font-weight: $font-size-medium;
+  }
+
+  &__menu {
+    padding: 0;
+
+    &-item {
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.85rem;
+      gap: 0.5rem;
+
+      &:last-child {
+        border-top: 1px solid #f7f7f7;
+        padding: 1rem;
+      }
+
+      &:hover {
+        a {
+          color: $cl-primary;
+        }
+
+        svg {
+          fill: $cl-primary;
+        }
+      }
+
+      svg {
+        fill: $cl-title;
+        width: 20px;
+      }
+
+      a {
+        color: $cl-title;
+      }
+    }
+  }
+}

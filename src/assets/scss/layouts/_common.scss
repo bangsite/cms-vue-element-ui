@@ -1,0 +1,52 @@
+#app {
+  height: 100%;
+}
+
+// Ant design
+.ant-layout {
+  min-height: 100%;
+  overflow: auto;
+}
+
+.ant-btn,
+textarea.ant-input,
+.ant-input-affix-wrapper,
+.ant-select-selector,
+.ant-select-dropdown,
+.ant-dropdown-menu,
+.ant-notification-notice {
+  border-radius: 6px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-radius: 6px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.notify {
+  &__icon-success,
+  &__icon-error,
+  &__icon-warning {
+    width: 28px;
+  }
+
+  &__icon-success {
+    fill: $cl-green;
+  }
+
+  &__icon-error {
+    fill: $cl-red;
+  }
+
+  &__icon-warning {
+    fill: $cl-yellow;
+  }
+
+  &__close {
+    fill: $cl-text;
+    width: 24px;
+  }
+}

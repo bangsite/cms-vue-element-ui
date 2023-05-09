@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Poppins:wght@300;400;500;600&display=swap");
+
+$font-family: "Poppins", sans-serif;
+// $font-family: 'Noto Sans JP', sans-serif;
+
+// Font size
+$font-size-extra-large: 28px; // 1.75rem
+$font-size-large: 20px; // 1.25rem
+$font-size-base: 16px; // 1rem;
+$font-size-medium: 14px; // 0.875rem
+$font-size-small: 12px; // 0.75rem
+$font-size-tiny: 10px; // 0.625rem
+
+// Font weight
+$font-weight-light: 300;
+$font-weight-light-italic: 300;
+$font-weight-regular: 400;
+$font-weight-regular-italic: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+
+// Light height
+$line-height-base: round($font-size-base * 1.7);
+$line-height-medium: round($font-size-medium * 1.55);
+$line-height-small: round($font-size-small * 1.55);
+$line-height-tiny: round($font-size-tiny * 1.55);
+
+// Z index
+$z-tooltip: 10;
+$z-fixed: 100;

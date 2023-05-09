@@ -1,0 +1,120 @@
+/*----------------------------------
+Tools > Breakpoints
+----------------------------------*/
+// Media-query Breakpoints
+// Desktop first
+
+// Screen <= 320px
+@mixin bp-ip4 {
+  @media only screen and (min-width: 320px) {
+    @content;
+  }
+}
+
+// Screen > 321px
+@mixin bp-ip6 {
+  @media only screen and (min-width: 321px) {
+    @content;
+  }
+}
+
+// Screen > 376px && < 414px
+@mixin bp-ip6-plus {
+  @media only screen and (min-width: 376px) and (max-width: 414px) {
+    @content;
+  }
+}
+
+// Screen > 480px
+@mixin bp-480 {
+  @media only screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+// Screen > 576px
+@mixin bp-tablet-576 {
+  @media only screen and (min-width: 576px) {
+    @content;
+  }
+}
+
+// Screen > 600px
+@mixin bp-tablet-600 {
+  @media only screen and (min-width: 600px) {
+    @content;
+  }
+}
+
+// Screen > 641px
+@mixin bp-tablet-vertical {
+  @media only screen and (min-width: 641px) {
+    @content;
+  }
+}
+
+// Screen > 768px
+@mixin bp-desktop-sm {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@mixin bp-desktop-large {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 1024px and up)
+@mixin bp-desktop-md {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 1200px and up)
+@mixin bp-desktop-1200 {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 1280px and up)
+@mixin bp-desktop-1280 {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 1367px and up)
+@mixin bp-desktop-lg {
+  @media only screen and (min-width: 1367px) {
+    @content;
+  }
+}
+
+// Large devices (desktops, 1441px and up)
+@mixin bp-desktop-ultra {
+  @media only screen and (min-width: 1441px) {
+    @content;
+  }
+}
+
+// Custom devices
+@mixin rwd($screen) {
+  @media only screen and (min-width: $screen+"px") {
+    @content;
+  }
+}
+
+// Mobile first
+// Mobile first
+$bp-340: "only screen and (max-width : 340px)";
+$bp-414: "only screen and (max-width : 414px)";
+$bp-576: "only screen and (max-width : 576px)";
+$bp-768: "only screen and (max-width : 768px)";
+$bp-992: "only screen and (max-width : 992px)";
+$bp-1200: "only screen and (max-width : 1200px)";
+$bp-1400: "only screen and (max-width : 1400px)";

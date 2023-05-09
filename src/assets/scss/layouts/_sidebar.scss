@@ -1,0 +1,79 @@
+.side {
+  background-color: $cl-lighter;
+  box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  height: 100%;
+
+  &__logo {
+    color: $cl-title;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: $font-weight-bold;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  &__menu {
+    border: none;
+
+    .ant-menu-item {
+      font-size: 0.8rem;
+      margin: 0;
+
+      &::after {
+        border-color: $cl-primary;
+      }
+
+      //   &.ant-menu-item-selected {
+      //     background-color: transparent;
+      //     margin: 0;
+      //     a {
+      //       color: $cl-primary;
+      //     }
+      //   }
+
+      &.exact-active-link {
+        background-color: rgba($cl-primary, 0.06);
+        color: $cl-primary;
+      }
+
+      &:hover {
+        color: $cl-primary;
+      }
+    }
+
+    .ant-menu-submenu {
+      &.ant-menu-submenu-active {
+        .ant-menu-submenu-title {
+          color: $cl-primary;
+        }
+        .ant-menu-submenu-arrow {
+          color: $cl-primary;
+        }
+      }
+
+      &.ant-menu-submenu-selected {
+        background-color: transparent;
+        color: $cl-primary;
+        .ant-menu-submenu-arrow {
+          color: $cl-primary;
+        }
+      }
+
+      .ant-menu-submenu-title {
+        margin: 0;
+
+        &:hover {
+          color: $cl-primary;
+
+          .ant-menu-submenu-arrow {
+            color: $cl-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Override menu ant deign
