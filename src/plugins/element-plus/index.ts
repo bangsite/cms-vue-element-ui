@@ -7,6 +7,7 @@ import {
   ElCol,
   ElContainer,
   ElDatePicker,
+  ElDialog,
   ElDropdown,
   ElForm,
   ElIcon,
@@ -26,6 +27,8 @@ import {
   ElUpload,
   ElInfiniteScroll,
   ElLoading,
+  ElMessage,
+  ElMessageBox,
   ElNotification,
   ElPopover,
 } from "element-plus";
@@ -39,6 +42,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElCol)
     .use(ElContainer)
     .use(ElDatePicker)
+    .use(ElDialog)
     .use(ElDropdown)
     .use(ElForm)
     .use(ElIcon)
@@ -57,6 +61,8 @@ export function libElementPlus(app: App<Element>) {
     .use(ElUpload)
     .use(ElInfiniteScroll)
     .use(ElLoading)
+    .use(ElMessage)
+    .use(ElMessageBox)
     .use(ElNotification)
     .use(ElConfigProvider)
     .use(ElNotification)

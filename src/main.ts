@@ -42,6 +42,6 @@ async function setupApp() {
   app.mount("#app");
 }
 
-setupPlugins().then((r) => console.log(r));
+setupPlugins();
 
-setupApp().then((r) => console.log(r));
+setupApp();

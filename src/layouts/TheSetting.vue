@@ -1,6 +1,6 @@
 <template>
   <div class="setting">
-    <a-dropdown placement="bottomLeft" trigger="['hover']">
+    <el-dropdown>
       <div class="setting__wrap">
         <button class="setting__avatar">
           <IconUser />
@@ -8,23 +8,23 @@
         <!-- <span class="setting__name"> Admin</span> -->
       </div>
 
-      <template #overlay>
-        <a-menu class="setting__menu">
-          <li class="setting__menu-item">
+      <template #dropdown>
+        <el-dropdown-menu class="setting__menu">
+          <el-dropdown-item class="setting__menu-item">
             <IconUser />
             <RouterLink to="/"> View Profile </RouterLink>
-          </li>
-          <li class="setting__menu-item">
+          </el-dropdown-item>
+          <el-dropdown-item class="setting__menu-item">
             <IconSetting />
             <RouterLink :to="{ name: 'account-setting' }"> Account Settings </RouterLink>
-          </li>
-          <li class="setting__menu-item">
+          </el-dropdown-item>
+          <el-dropdown-item class="setting__menu-item">
             <IconLogout />
             <a @click="handleLogout"> Logout </a>
-          </li>
-        </a-menu>
+          </el-dropdown-item>
+        </el-dropdown-menu>
       </template>
-    </a-dropdown>
+    </el-dropdown>
   </div>
 </template>
 <script setup lang="ts">

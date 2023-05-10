@@ -1,14 +1,14 @@
-import PaginationProps from "ant-design-vue/lib/pagination";
+import ElPagination from "element-plus/lib/components/pagination";
 import type { PaginationAPI } from "@/core/interfaces/pagination";
 import { i18n } from "@/plugins/i18n";
 
-const pagination = { ...PaginationProps };
+const pagination = { ...ElPagination };
 
-pagination.defaultCurrent = 1;
+pagination.defaultCurrentPage = 1;
 pagination.defaultPageSize = 50;
 
 export const convertPagination = (paginationAPI: PaginationAPI) => {
-  pagination.current = paginationAPI?.currentPage ? parseInt(paginationAPI.currentPage) : pagination.defaultCurrent;
+  pagination.current = paginationAPI?.currentPage ? parseInt(paginationAPI.currentPage) : pagination.defaultCurrentPage;
   pagination.total = paginationAPI?.total ? parseInt(paginationAPI.total) : 0;
   pagination.pageSize = paginationAPI?.pageSize ? parseInt(paginationAPI.pageSize) : pagination.defaultPageSize;
   pagination.pageCount = paginationAPI.total ? parseInt(paginationAPI.total) : 0;

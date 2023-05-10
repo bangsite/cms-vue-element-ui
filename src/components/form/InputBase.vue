@@ -1,12 +1,12 @@
 <template>
-  <a-form-item
+  <el-form-item
     :label="label"
     :help="errorMessage"
     :validate-status="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
   >
     <!--Field-->
-    <a-input
+    <el-input
       autocomplete="new-password"
       :value="value"
       :id="name"
@@ -23,9 +23,9 @@
       <template #suffix>
         <slot name="suffix" />
       </template>
-    </a-input>
+    </el-input>
     <span class="note" v-if="attrs.note">{{ attrs.note }}</span>
-  </a-form-item>
+  </el-form-item>
 </template>
 
 <script setup lang="ts">
