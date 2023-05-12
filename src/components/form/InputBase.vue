@@ -1,19 +1,12 @@
 <template>
   <el-form-item
     :label="label"
-    :help="errorMessage"
-    :validate-status="errorMessage ? 'error' : undefined"
+    :error="errorMessage"
+    :validateMessage="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
   >
     <!--Field-->
-    <el-input
-      autocomplete="new-password"
-      :value="value"
-      :id="name"
-      v-bind="attrs"
-      :disabled="disabled"
-      @input="handleChange"
-    >
+    <el-input v-model="value" :id="name" v-bind="attrs" :disabled="disabled" @input="handleChange">
       <!--Icon prefix-->
       <template #prefix>
         <slot name="prefix" />
@@ -31,17 +24,18 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 import { toRef, useAttrs } from "vue";
-import inputProps from "ant-design-vue/es/input/inputProps";
+import { inputProps } from "element-plus";
 
 const props = defineProps({
-  label: { type: String, default: "" },
+  ...inputProps,
+
+  // label: { type: String, default: "" },
   labelDisplay: { type: Boolean, default: true },
   rules: { type: [String, Object], default: "" },
   rulesAttrMessage: {
     type: [Object],
     default: () => {},
   },
-  ...inputProps(),
   name: {
     type: String,
     required: true,

@@ -1,9 +1,13 @@
 import { h } from "vue";
-import { notification } from "ant-design-vue";
-import type { NotificationArgsProps } from "ant-design-vue/lib/notification";
+// import { notification } from "ant-design-vue";
+import { ElNotification } from "element-plus";
+
+// import type { NotificationArgsProps } from "ant-design-vue/lib/notification";
+// import { notificationProps } from "element-plus/es/components/notification";
 import IconNotifyError from "@/components/icons/IconNotifyError.vue";
 import IconNotifySuccess from "@/components/icons/IconNotifySuccess.vue";
 import IconClose from "@/components/icons/IconClose.vue";
+import { notificationProps } from "element-plus";
 
 const renderIconError = {
   icon: () =>
@@ -26,29 +30,29 @@ const renderIconWarning = {
     }),
 };
 
-const defaultConfig: NotificationArgsProps = {
-  placement: "topRight",
+const defaultConfig = {
+  position: "top-right",
   message: "",
   duration: 3.5,
-  closeIcon: () =>
-    h(IconClose, {
-      class: "notify__close",
-    }),
+  // close: () =>
+  // h(IconClose, {
+  //   class: "notify__close",
+  // }),
 };
 
-const notificationInstance = (type: string, config: NotificationArgsProps) => {
+const notificationInstance = (type: string, config: notificationProps) => {
   switch (type) {
     case "success":
-      notification.success({ ...defaultConfig, ...config, ...renderIconSuccess });
+      ElNotification.success({ ...defaultConfig, ...config, ...renderIconSuccess });
       break;
     case "info":
-      notification.info({ ...defaultConfig, ...config, ...renderIconWarning });
+      ElNotification.info({ ...defaultConfig, ...config, ...renderIconWarning });
       break;
     case "warning":
-      notification.warning({ ...defaultConfig, ...config, ...renderIconWarning });
+      ElNotification.warning({ ...defaultConfig, ...config, ...renderIconWarning });
       break;
     case "error":
-      notification.error({ ...defaultConfig, ...config, ...renderIconError });
+      ElNotification.error({ ...defaultConfig, ...config, ...renderIconError });
       break;
     default:
       break;

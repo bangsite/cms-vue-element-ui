@@ -1,8 +1,14 @@
-.btn-submit {
+.el-button {
   background: $cl-primary;
-  border-color: $cl-primary;
-  border-radius: 4px;
-  min-height: 36px;
+  border-radius: 6px;
+  border: none;
+  min-height: 42px;
+}
+
+.btn-submit {
+  //border-radius: 4px;
+  //min-height: 36px;
+
   &:hover {
     background: $cl-alt;
     border-color: $cl-alt;
@@ -43,9 +49,4 @@
     fill: #fff;
     width: 16px;
   }
-}
-
-.ant-btn {
-  background: $cl-primary;
-  border: none;
 }

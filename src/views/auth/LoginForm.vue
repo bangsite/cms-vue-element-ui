@@ -5,25 +5,25 @@
       We strongly believe that the interface should be clear, informative and just beautiful.
     </p>
 
-    <a-form :model="data" @submit="onSubmit" class="form">
+    <el-form :model="data" class="form">
       <div class="form__group">
-        <label for="username">Username</label>
-        <InputBase name="email" rules="" label="" placeholder="Please input your username!" />
+        <label for="email">Username</label>
+        <InputBase name="email" rules="required" placeholder="Please input your username!" :autocomplete="'off'" />
       </div>
 
       <div class="form__group">
         <label for="password">Password</label>
-        <PasswordBase name="password" rules="" label="" placeholder="Please input your password!" />
+        <PasswordBase name="password" rules="required" placeholder="Please input your password!" />
       </div>
 
       <div class="form__group">
-        <a-checkbox v-model:checked="data.remember">Remember me</a-checkbox>
+        <el-checkbox v-model:checked="data.remember">Remember me</el-checkbox>
       </div>
 
       <div class="form__group">
-        <a-button type="primary" html-type="submit" class="btn-submit w-100">Submit</a-button>
+        <el-button type="primary" @click="onSubmit" class="btn-submit w-100">Submit</el-button>
       </div>
-    </a-form>
+    </el-form>
   </div>
 </template>
 <script setup lang="ts">
