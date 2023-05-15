@@ -1,29 +1,27 @@
 <template>
-  <a-spin :spinning="isFetching">
-    <a-form layout="vertical" @submit="onSubmit">
-      <a-row :gutter="16">
-        <a-col :xs="24" :sm="24" :md="12" :lg="12">
-          <InputBase name="name" :label="$t('USER.NAME')" rules="required" />
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12">
-          <InputBase name="email" :label="$t('USER.EMAIL')" rules="required|email_format" />
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12">
-          <PasswordBase name="password" :label="$t('USER.PASSWORD')" rules="password" />
-        </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12">
-          <PasswordBase
-            name="password_confirmation"
-            :label="$t('USER.PASSWORD_CONFIRMATION')"
-            rules="password|confirmed:@password"
-          />
-        </a-col>
-      </a-row>
-      <a-button type="primary" html-type="submit" :loading="isLoading">
-        {{ $t("COMMON.UPDATE") }}
-      </a-button>
-    </a-form>
-  </a-spin>
+  <el-form layout="vertical" @submit="onSubmit">
+    <el-row :gutter="16">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <InputBase name="name" :label="$t('USER.NAME')" rules="required" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <InputBase name="email" :label="$t('USER.EMAIL')" rules="required|email_format" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <PasswordBase name="password" :label="$t('USER.PASSWORD')" rules="password" />
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <PasswordBase
+          name="password_confirmation"
+          :label="$t('USER.PASSWORD_CONFIRMATION')"
+          rules="password|confirmed:@password"
+        />
+      </el-col>
+    </el-row>
+    <el-button type="primary" html-type="submit" :loading="isLoading">
+      {{ $t("COMMON.UPDATE") }}
+    </el-button>
+  </el-form>
 </template>
 
 <script lang="ts" setup>

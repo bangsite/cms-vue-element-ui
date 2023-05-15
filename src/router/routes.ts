@@ -9,7 +9,7 @@ import { dashboard } from "./modules/dashboard.route";
 // import { categories } from "./modules/category.route";
 // import { orders } from "./modules/order.route";
 // import { simulator } from "./modules/simulator.route";
-// import { setting } from "./modules/setting.route";
+import { setting } from "./modules/setting.route";
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -26,6 +26,6 @@ export const routes: RouteRecordRaw[] = [
     },
     // beforeEnter: ResolveGuard([AuthGuard]),
     component: () => import("@/layouts/MainLayout.vue"),
-    children: [...dashboard],
+    children: [...dashboard, ...setting],
   },
 ];

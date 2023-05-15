@@ -1,10 +1,5 @@
 <template>
   <div>
-    <AppPageHeader>
-      <template #header>
-        <!-- <a-page-header title="Account Setting"></a-page-header> -->
-      </template>
-    </AppPageHeader>
     <AccountSettingForm />
   </div>
 </template>
