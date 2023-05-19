@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
-import { useAuthStore } from "@/core/stores/auth.store";
+import { useAuthStore } from "@/core/stores/modules/auth.store";
 
 /**
  * If the user is not authenticated and the route is not the login route, redirect to the login route

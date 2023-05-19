@@ -34,7 +34,7 @@ import IconUser from "@/components/icons/IconUser.vue";
 import IconLogout from "@/components/icons/IconLogout.vue";
 import IconSetting from "@/components/icons/IconSetting.vue";
 
-import { useAuthStore } from "@/core/stores/auth.store";
+import { useAuthStore } from "@/core/stores/modules/auth.store";
 
 const authStore = useAuthStore();
 const router = useRouter();

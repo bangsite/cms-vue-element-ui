@@ -1,4 +1,4 @@
-import { useLoadingStore } from "@/core/stores/loading.store";
+import { useLoadingStore } from "@/core/stores/modules/loading.store";
 
 const onLoading = (type: string) => {
   const commonStore = useLoadingStore();

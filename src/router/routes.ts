@@ -21,9 +21,8 @@ export const routes: RouteRecordRaw[] = [
 
   {
     path: "/",
-    redirect: () => {
-      return { name: "dashboard" };
-    },
+    redirect: "/dashboard/analysis",
+    name: "Root",
     // beforeEnter: ResolveGuard([AuthGuard]),
     component: () => import("@/layouts/MainLayout.vue"),
     children: [...dashboard, ...setting],
