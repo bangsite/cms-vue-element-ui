@@ -4,15 +4,12 @@ import { useCache } from "@/hooks/web/useCache";
 import { useAppStore } from "./core/stores/modules/app";
 import { isDark } from "./shared/utils/is";
 
-import { createCacheModel, storageLikeDriver } from "./plugins/web-store-cache";
-const localStorageCache = createCacheModel(storageLikeDriver(localStorage));
-localStorageCache.set("foo", "bar");
 const appStore = useAppStore();
 const { wsCache } = useCache();
 
 const setDefaultTheme = () => {
-  if (wsCache.get("isDark") !== null) {
-    appStore.setIsDark(wsCache.get("isDark"));
+  if (wsCache.getItem("isDark") !== null) {
+    appStore.setIsDark(wsCache.getItem("isDark"));
     return;
   }
   const isDarkTheme = isDark();

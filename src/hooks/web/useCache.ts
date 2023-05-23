@@ -1,10 +1,12 @@
-import { createCacheModel, storageLikeDriver } from "@/plugins/web-store-cache";
+import { LocalStorage, SessionStorage } from "@/plugins/web-store-cache";
 
-// export const localStorageCache = createCacheModel(storageLikeDriver(localStorage));
+type CacheType = "sessionStorage" | "localStorage";
 
-export const useCache = (type: Storage = sessionStorage) => {
-  const wsCache = createCacheModel(storageLikeDriver(type));
+export const useCache = (type: CacheType = "sessionStorage") => {
+  let wsCache;
 
-  return wsCache;
+  if (type === "sessionStorage") wsCache = new SessionStorage();
+  else wsCache = new LocalStorage();
+
+  return { wsCache };
 };
-// https://giancarlobuomprisco.com/rxjs/caching-rxjs-streams-into-web-storage

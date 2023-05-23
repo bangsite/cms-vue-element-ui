@@ -40,8 +40,8 @@ export const useAppStore = defineStore("app", {
       breadcrumb: true,
       footer: true,
       locale: true,
-      layout: wsCache.get("layout") || "classic",
-      isDark: wsCache.get("isDark") || false,
+      layout: wsCache.getItem("layout") || "classic",
+      isDark: wsCache.getItem("isDark") || false,
       mobile: false,
       title: import.meta.env.VITE_APP_TITLE,
       pageLoading: false,
@@ -81,7 +81,7 @@ export const useAppStore = defineStore("app", {
         return;
       }
       this.layout = layout;
-      wsCache.set("layout", this.layout);
+      wsCache.setItem("layout", this.layout);
     },
     setIsDark(isDark: boolean) {
       this.isDark = isDark;
@@ -92,7 +92,7 @@ export const useAppStore = defineStore("app", {
         document.documentElement.classList.add("light");
         document.documentElement.classList.remove("dark");
       }
-      wsCache.set("isDark", this.isDark);
+      wsCache.setItem("isDark", this.isDark);
     },
     setTitle(title: string) {
       this.title = title;
