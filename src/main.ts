@@ -33,11 +33,11 @@ async function setupApp() {
   // Setup Store
   libPinia(app);
 
-  // Setup Router
-  await setupRouter(app);
-
   // Setup I18n
   await setupI18n(app);
+
+  // Setup Router
+  await setupRouter(app);
 
   app.mount("#app");
 }

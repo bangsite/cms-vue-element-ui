@@ -159,7 +159,7 @@ export abstract class WebStorage implements TypedStorage {
    *
    * @param rawValue - The value to be parsed.
    */
-  static parseRawValue<T extends StoreValue>(rawValue: string | null): T | null {
+  static parseRawValue<T extends StoreValue>(rawValue: string | null): T | any {
     return rawValue ? JSON.parse(rawValue).value : null;
   }
 }
