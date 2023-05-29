@@ -1,24 +1,35 @@
 import type { App } from "vue";
-import { createRouter, createWebHistory } from "vue-router";
-import { routes } from "./routes";
+import { createRouter, createWebHashHistory } from "vue-router";
+import type { RouteRecordRaw } from "vue-router";
+
+import { constantRouterMap } from "./routes";
 import { routeBeforeEach } from "@/core/guard/routeBeforeEach.guard";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  linkActiveClass: "active",
-  routes,
-  scrollBehavior() {
-    return { top: 0, behavior: "smooth" };
-  },
+    history: createWebHashHistory(),
+    linkActiveClass: "active",
+    linkExactActiveClass: "",
+    routes: constantRouterMap as RouteRecordRaw[],
+    scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
 });
 
 router.beforeEach(routeBeforeEach);
 
-const setupRouter = async (app: App) => {
-  // createRouterGuards(router, name);
-  app.use(router);
-  await router.isReady();
+const setupRouter = async (app: App<Element>) => {
+    // createRouterGuards(router, name);
+    app.use(router);
+    // await router.isReady();
+};
+const resetRouter = (): void => {
+    const resetWhiteNameList = ["Redirect", "Login", "NoFind", "Root"];
+    router.getRoutes().forEach((route) => {
+        const { name } = route;
+        if (name && !resetWhiteNameList.includes(name as string)) {
+            router.hasRoute(name) && router.removeRoute(name);
+        }
+    });
 };
 
-export { setupRouter };
-export default { router };
+export { setupRouter, resetRouter };
+
+export default router;

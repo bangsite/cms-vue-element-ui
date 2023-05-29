@@ -68,18 +68,18 @@ import navigation from "@/core/config/navigation";
 const route = useRoute();
 
 const subIsActive = (id: string | number) => {
-  let paths = [];
+    let paths = [];
 
-  const parentMenu: Record<string, any> = {
-    order: ["/order"],
-    product: ["/product"],
-  };
+    const parentMenu: Record<string, any> = {
+        order: ["/order"],
+        product: ["/product"],
+    };
 
-  if (id) paths = parentMenu[id];
+    if (id) paths = parentMenu[id];
 
-  if (paths)
-    return paths.some((path: string) => {
-      return route.path.indexOf(path) !== -1; // current path starts with this path string
-    });
+    if (paths)
+        return paths.some((path: string) => {
+            return route.path.indexOf(path) !== -1; // current path starts with this path string
+        });
 };
 </script>

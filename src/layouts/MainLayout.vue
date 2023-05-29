@@ -1,50 +1,45 @@
 <template>
-  <el-config-provider :locale="localeCurrent">
-    <div class="layout">
-      <el-aside class="layout__side" v-model:collapsed="collapsed" :trigger="null" collapsible>
-        <TheNavigation />
-      </el-aside>
+    <section :class="[prefixCls, `${prefixCls}__${layout}`, 'w-[100%] h-[100%] relative']">
+        <template v-if="mobile && !collapse ">
+            <div class="absolute top-0 left-0 w-full h-full opacity-30 z-99 bg-[var(--el-color-black)]" @click="handleClickOutside"
+            ></div>
+        </template>
 
-      <el-container>
-        <el-header class="layout__header">
-          <TheHeader @onMenuCollapsed="onMenuCollapsed" />
-        </el-header>
+        <component :is="useRenderLayout()"></component>
 
-        <el-main class="layout__content">
-          <router-view />
-        </el-main>
-      </el-container>
-    </div>
-  </el-config-provider>
+        <Backtop></Backtop>
+
+        <Setting></Setting>
+    </section>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed } from "vue";
+import { useDesign } from "@/hooks/web/useDesign";
+import { useAppStore } from "@/core/stores/modules/app.store";
+import { useRenderLayout } from "@/hooks/web/useRenderLayout";
 
-import TheHeader from "@/layouts/TheHeader.vue";
-import TheNavigation from "@/layouts/TheNavigation.vue";
+const appStore = useAppStore();
+const { getPrefixCls } = useDesign();
+const prefixCls = getPrefixCls("layout");
 
-import en from "element-plus/dist/locale/en.mjs";
-import vi from "element-plus/dist/locale/vi.mjs";
-import ja from "element-plus/dist/locale/ja.mjs";
+const collapse = computed(() => appStore.getCollapse);
+const mobile = computed(() => appStore.getMobile);
+const layout = computed(() => appStore.getLayout);
 
-const { locale } = useI18n();
-
-const collapsed = ref(false);
-const language = ref({ en: en, vi: vi, ja: ja });
-
-// onMounted(() => {
-//     language.value = {
-//     en: { ...language.value.en, Empty: { description: "The corresponding item was not found" } },
-//     ja: { ...language.value.ja, Empty: { description: "該当する企業が見つかりませんでした" } },
-//   };
-// });
-
-const localeCurrent = computed(() => (locale ? language.value[locale.value] : en));
-
-const onMenuCollapsed = ($event: boolean) => {
-  collapsed.value = $event;
+const handleClickOutside = () => {
+    appStore.setCollapse(true);
 };
 
-// const langGlobal = (lang: string) => (lang ? language.value[lang] : "");
+
 </script>
+<style lang="scss" scoped>
+$prefix-cls: '#{$namespace}-layout';
+
+.#{$prefix-cls} {
+    background-color: var(--app-content-bg-color);
+
+    :deep(.#{$elNamespace}-scrollbar__view) {
+        height: 100% !important;
+    }
+}
+</style>

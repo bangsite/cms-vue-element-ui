@@ -4,8 +4,8 @@ import type { Ref } from "vue";
 import type { PaginateResponse } from "@/core/services/modules/category.service";
 
 export const useGetListOrders = (
-  params?: Ref<PaginationParams>,
-  options?:
+    params?: Ref<PaginationParams>,
+    options?:
     | Omit<
         UseQueryOptions<
           PaginateResponse<any>,
@@ -17,11 +17,11 @@ export const useGetListOrders = (
       >
     | undefined
 ) => {
-  return useQuery(
-    ["orders", params],
-    () => {
-      return getListOrders(params?.value);
-    },
-    options
-  );
+    return useQuery(
+        ["orders", params],
+        () => {
+            return getListOrders(params?.value);
+        },
+        options
+    );
 };

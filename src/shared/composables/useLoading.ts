@@ -1,26 +1,26 @@
 import { useLoadingStore } from "@/core/stores/modules/loading.store";
 
 const onLoading = (type: string) => {
-  const commonStore = useLoadingStore();
-  const { startLoading, endLoading, cancelLoading } = commonStore;
+    const commonStore = useLoadingStore();
+    const { startLoading, endLoading, cancelLoading } = commonStore;
 
-  switch (type) {
+    switch (type) {
     case "start": {
-      startLoading();
-      break;
+        startLoading();
+        break;
     }
     case "end": {
-      endLoading();
-      break;
+        endLoading();
+        break;
     }
     case "cancel": {
-      cancelLoading();
-      break;
+        cancelLoading();
+        break;
     }
     default: {
-      break;
+        break;
     }
-  }
+    }
 };
 
 export { onLoading };

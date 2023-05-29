@@ -7,21 +7,21 @@ type PropTypes = VueTypesInterface & {
 };
 
 const propTypes = createTypes({
-  func: undefined,
-  bool: undefined,
-  string: undefined,
-  number: undefined,
-  object: undefined,
-  integer: undefined,
+    func: undefined,
+    bool: undefined,
+    string: undefined,
+    number: undefined,
+    object: undefined,
+    integer: undefined,
 }) as PropTypes;
 
 propTypes.extend([
-  {
-    name: "style",
-    getter: true,
-    type: [String, Object],
-    default: undefined,
-  },
+    {
+        name: "style",
+        getter: true,
+        type: [String, Object],
+        default: undefined,
+    },
 ]);
 
 export { propTypes };

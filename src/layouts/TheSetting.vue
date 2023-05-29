@@ -40,8 +40,8 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const handleLogout = () => {
-  authStore.logout();
-  router.push("/login");
+    authStore.logout();
+    router.push("/login");
 };
 </script>
 <style lang="scss"></style>

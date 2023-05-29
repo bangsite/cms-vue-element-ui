@@ -8,12 +8,12 @@ import { useAuthStore } from "@/core/stores/modules/auth.store";
  * @param {NavigationGuardNext} next - This is a function that you must call to resolve the hook.
  */
 const routeBeforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  const authStore = useAuthStore();
+    const authStore = useAuthStore();
 
-  if (!authStore.token && to.name !== "login") {
+    if (!authStore.token && to.name !== "login") {
     // next({ name: 'login' });
-    next();
-  } else next();
+        next();
+    } else next();
 };
 
 export { routeBeforeEach };

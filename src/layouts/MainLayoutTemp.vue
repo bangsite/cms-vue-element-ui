@@ -43,7 +43,7 @@ const language = ref({ en: en, vi: vi, ja: ja });
 const localeCurrent = computed(() => (locale ? language.value[locale.value] : en));
 
 const onMenuCollapsed = ($event: boolean) => {
-  collapsed.value = $event;
+    collapsed.value = $event;
 };
 
 // const langGlobal = (lang: string) => (lang ? language.value[lang] : "");

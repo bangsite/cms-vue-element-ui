@@ -29,7 +29,7 @@ const collapsed = ref<boolean>(false);
 const emits = defineEmits(["onMenuCollapsed"]);
 
 const triggerMenu = () => {
-  collapsed.value = !collapsed.value;
-  emits("onMenuCollapsed", collapsed.value);
+    collapsed.value = !collapsed.value;
+    emits("onMenuCollapsed", collapsed.value);
 };
 </script>

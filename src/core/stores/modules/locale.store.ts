@@ -10,50 +10,50 @@ import type { LocaleDropdownType, LocaleState } from "@/core/interfaces/locale.i
 
 const { wsCache } = useCache();
 const elLocaleMap = {
-  en: en,
-  ja: ja,
-  vi: vi,
+    en: en,
+    ja: ja,
+    vi: vi,
 };
 
 const useLocaleStore = defineStore("locales", {
-  state: (): LocaleState => {
-    return {
-      currentLocale: {
-        lang: wsCache.getItem("lang") || "en",
-        elLocale: elLocaleMap[(wsCache.getItem("lang") as LocaleType) || "en"],
-      },
-      localeMap: [
-        {
-          lang: "en",
-          name: "English",
+    state: (): LocaleState => {
+        return {
+            currentLocale: {
+                lang: wsCache.getItem("lang") || "en",
+                elLocale: elLocaleMap[(wsCache.getItem("lang") as LocaleType) || "en"],
+            },
+            localeMap: [
+                {
+                    lang: "en",
+                    name: "English",
+                },
+                {
+                    lang: "vi",
+                    name: "VietNam",
+                },
+            ],
+        };
+    },
+    getters: {
+        getCurrentLocale(): LocaleDropdownType {
+            return this.currentLocale;
         },
-        {
-          lang: "vi",
-          name: "VietNam",
+        getLocaleMap(): LocaleDropdownType[] {
+            return this.localeMap;
         },
-      ],
-    };
-  },
-  getters: {
-    getCurrentLocale(): LocaleDropdownType {
-      return this.currentLocale;
     },
-    getLocaleMap(): LocaleDropdownType[] {
-      return this.localeMap;
+    actions: {
+        setCurrentLocale(localeMap: LocaleDropdownType) {
+            // this.locale = Object.assign(this.locale, localeMap)
+            this.currentLocale.lang = localeMap?.lang;
+            this.currentLocale.elLocale = elLocaleMap[localeMap?.lang];
+            wsCache.setItem("lang", localeMap?.lang);
+        },
     },
-  },
-  actions: {
-    setCurrentLocale(localeMap: LocaleDropdownType) {
-      // this.locale = Object.assign(this.locale, localeMap)
-      this.currentLocale.lang = localeMap?.lang;
-      this.currentLocale.elLocale = elLocaleMap[localeMap?.lang];
-      wsCache.setItem("lang", localeMap?.lang);
-    },
-  },
 });
 
 const useLocaleStoreWithOut = () => {
-  return useLocaleStore(store);
+    return useLocaleStore(store);
 };
 
 export { useLocaleStore, useLocaleStoreWithOut };

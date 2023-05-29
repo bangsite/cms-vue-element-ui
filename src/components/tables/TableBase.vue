@@ -34,18 +34,18 @@ interface TableItem {
 }
 
 const props = defineProps({
-  fields: {
-    type: Array as PropType<TableField[]>,
-    default: () => [],
-  },
-  items: {
-    type: Array as PropType<TableItem[]>,
-    default: () => [],
-  },
+    fields: {
+        type: Array as PropType<TableField[]>,
+        default: () => [],
+    },
+    items: {
+        type: Array as PropType<TableItem[]>,
+        default: () => [],
+    },
 });
 
 const displayedFieldKeys = computed(() => {
-  return Object.entries(props.fields).map(([_key, value]) => value.key);
+    return Object.entries(props.fields).map(([_key, value]) => value.key);
 });
 </script>
 <!-- https://github.com/themesberg/flowbite-vue/blob/main/src/components/Table/Table.vue -->

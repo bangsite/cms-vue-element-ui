@@ -32,10 +32,10 @@ import UploadFileInput from "@/components/upload/UploadFileInput.vue";
 // import useAllowPermission from '@/shared/composables/useAllowPermission';
 
 const props = defineProps({
-  label: { type: String },
-  uploadStatus: { type: [Boolean], default: false },
-  uploadError: { type: [Object, String] },
-  progress: { type: [String, Number], default: 0 },
+    label: { type: String },
+    uploadStatus: { type: [Boolean], default: false },
+    uploadError: { type: [Object, String] },
+    progress: { type: [String, Number], default: 0 },
 });
 
 const emits = defineEmits(["uploadFiles", "removeAll", "uploadNewFile"]);
@@ -49,33 +49,33 @@ const multipleFile = ref(false);
 const { uploadError } = toRefs(props);
 
 const handleFiles = (data: string | any[]) => {
-  if (data && data.length) {
-    dataFiles.value = data;
-    emits("uploadNewFile", true);
-  } else dataFiles.value = [];
+    if (data && data.length) {
+        dataFiles.value = data;
+        emits("uploadNewFile", true);
+    } else dataFiles.value = [];
 };
 
 const handleUploadFiles = (data: any) => {
-  multipleFile.value = false;
-  emits("uploadFiles", {
-    dataFiles: data,
-    type: "one",
-    length: dataFiles.value.length,
-  });
+    multipleFile.value = false;
+    emits("uploadFiles", {
+        dataFiles: data,
+        type: "one",
+        length: dataFiles.value.length,
+    });
 };
 
 const handleUploadAllFiles = () => {
-  multipleFile.value = true;
-  emits("uploadFiles", {
-    dataFiles: dataFiles.value,
-    type: "all",
-    length: dataFiles.value.length,
-  });
+    multipleFile.value = true;
+    emits("uploadFiles", {
+        dataFiles: dataFiles.value,
+        type: "all",
+        length: dataFiles.value.length,
+    });
 };
 
 const handleRemoveAll = () => {
-  dataFiles.value = [];
-  emits("removeAll", true);
+    dataFiles.value = [];
+    emits("removeAll", true);
 };
 
 // watch(uploadError, () => {

@@ -27,17 +27,17 @@ import { toRef, useAttrs } from "vue";
 import textAreaProps from "ant-design-vue/es/input/inputProps";
 
 const props = defineProps({
-  label: { type: String, default: "" },
-  labelDisplay: { type: Boolean, default: true },
-  //   disabled: { type: Boolean, default: false },
-  rules: { type: [String, Object], default: "" },
-  rulesAttrMessage: {
-    type: [Object],
-    default: () => {},
-  },
-  ...textAreaProps(),
-  name: { type: String, required: true },
-  rows: { type: Number },
+    label: { type: String, default: "" },
+    labelDisplay: { type: Boolean, default: true },
+    //   disabled: { type: Boolean, default: false },
+    rules: { type: [String, Object], default: "" },
+    rulesAttrMessage: {
+        type: [Object],
+        default: () => {},
+    },
+    ...textAreaProps(),
+    name: { type: String, required: true },
+    rows: { type: Number },
 });
 
 const name = toRef(props, "name");

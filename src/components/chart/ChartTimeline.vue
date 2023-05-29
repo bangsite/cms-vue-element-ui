@@ -8,73 +8,73 @@
 import { reactive } from "vue";
 
 const chartOptions = reactive({
-  title: {
-    text: "Chart Timeline",
-    align: "left",
-  },
+    title: {
+        text: "Chart Timeline",
+        align: "left",
+    },
 
-  chart: {
-    type: "rangeBar",
-    zoom: {
-      enabled: false,
+    chart: {
+        type: "rangeBar",
+        zoom: {
+            enabled: false,
+        },
+        toolbar: {
+            show: false,
+        },
+        stroke: {
+            curve: "smooth",
+        },
     },
-    toolbar: {
-      show: false,
+    plotOptions: {
+        bar: {
+            horizontal: true,
+            distributed: true,
+            dataLabels: {
+                hideOverflowingLabels: false,
+            },
+        },
     },
-    stroke: {
-      curve: "smooth",
-    },
-  },
-  plotOptions: {
-    bar: {
-      horizontal: true,
-      distributed: true,
-      dataLabels: {
-        hideOverflowingLabels: false,
-      },
-    },
-  },
 
-  xaxis: {
-    type: "datetime",
-  },
-  grid: {
-    row: {
-      colors: ["#f3f4f5", "#fff"],
-      opacity: 1,
+    xaxis: {
+        type: "datetime",
     },
-  },
-  legend: {
-    position: "top",
-    horizontalAlign: "right",
-    floating: true,
-    offsetY: -25,
-    offsetX: -5,
-  },
+    grid: {
+        row: {
+            colors: ["#f3f4f5", "#fff"],
+            opacity: 1,
+        },
+    },
+    legend: {
+        position: "top",
+        horizontalAlign: "right",
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+    },
 });
 
 const series = reactive([
-  {
-    data: [
-      {
-        x: "Code",
-        y: [new Date("20023-03-02").getTime(), new Date("2023-03-04").getTime()],
-        fillColor: "#008FFB",
-      },
-      {
-        x: "Test",
-        y: [new Date("2023-03-04").getTime(), new Date("2023-03-08").getTime()],
-      },
-      {
-        x: "Validation",
-        y: [new Date("2023-03-08").getTime(), new Date("2023-03-12").getTime()],
-      },
-      {
-        x: "Deployment",
-        y: [new Date("2023-03-12").getTime(), new Date("2023-03-18").getTime()],
-        fillColor: "#FF4560",
-      },
-    ],
-  },
+    {
+        data: [
+            {
+                x: "Code",
+                y: [new Date("20023-03-02").getTime(), new Date("2023-03-04").getTime()],
+                fillColor: "#008FFB",
+            },
+            {
+                x: "Test",
+                y: [new Date("2023-03-04").getTime(), new Date("2023-03-08").getTime()],
+            },
+            {
+                x: "Validation",
+                y: [new Date("2023-03-08").getTime(), new Date("2023-03-12").getTime()],
+            },
+            {
+                x: "Deployment",
+                y: [new Date("2023-03-12").getTime(), new Date("2023-03-18").getTime()],
+                fillColor: "#FF4560",
+            },
+        ],
+    },
 ]);
 </script>

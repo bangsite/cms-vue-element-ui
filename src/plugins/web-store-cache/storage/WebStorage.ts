@@ -11,7 +11,7 @@ export interface WebStorageEvent<T extends StoreValue>
 }
 
 export abstract class WebStorage implements TypedStorage {
-  private readonly _listeners = new Map<
+    private readonly _listeners = new Map<
     string,
     Map<{ (event: WebStorageEvent<StoreValue>): unknown }, StorageListener>
   >();
@@ -19,21 +19,21 @@ export abstract class WebStorage implements TypedStorage {
   protected abstract readonly store: Storage;
 
   get length(): number {
-    return this.store.length;
+      return this.store.length;
   }
 
   getItem<T extends StoreValue>(key: string): T | null {
-    return WebStorage.parseRawValue(this.store.getItem(key));
+      return WebStorage.parseRawValue(this.store.getItem(key));
   }
 
   setItem<T extends StoreValue>(key: string, value: T): this {
-    this.store.setItem(key, JSON.stringify({ value }));
-    return this;
+      this.store.setItem(key, JSON.stringify({ value }));
+      return this;
   }
 
   removeItem(key: string): this {
-    this.store.removeItem(key);
-    return this;
+      this.store.removeItem(key);
+      return this;
   }
 
   /**
@@ -42,12 +42,12 @@ export abstract class WebStorage implements TypedStorage {
    * @param index - An integer representing the index of the key to get the name of. This is a zero-based index.
    */
   key(index: number): string | null {
-    return this.store.key(index);
+      return this.store.key(index);
   }
 
   clear(): this {
-    this.store.clear();
-    return this;
+      this.store.clear();
+      return this;
   }
 
   /**
@@ -58,32 +58,32 @@ export abstract class WebStorage implements TypedStorage {
    */
   // istanbul ignore next
   addListener<T extends StoreValue, R = void | never>(
-    key: string,
-    listener: { (event: WebStorageEvent<T>): R }
+      key: string,
+      listener: { (event: WebStorageEvent<T>): R }
   ): typeof listener {
-    const innerListener: StorageListener = ({ key: eventKey, storageArea, oldValue, newValue, ...event }) => {
-      if (key === eventKey && storageArea === this.store) {
-        listener({
-          key: eventKey,
-          ...event,
-          oldValue: WebStorage.parseRawValue(oldValue),
-          newValue: WebStorage.parseRawValue(newValue),
-        });
+      const innerListener: StorageListener = ({ key: eventKey, storageArea, oldValue, newValue, ...event }) => {
+          if (key === eventKey && storageArea === this.store) {
+              listener({
+                  key: eventKey,
+                  ...event,
+                  oldValue: WebStorage.parseRawValue(oldValue),
+                  newValue: WebStorage.parseRawValue(newValue),
+              });
+          }
+      };
+
+      if (!this._listeners.has(key)) {
+          this._listeners.set(key, new Map());
       }
-    };
 
-    if (!this._listeners.has(key)) {
-      this._listeners.set(key, new Map());
-    }
+      const listeners = this._listeners.get(key) as Map<typeof listener, StorageListener>;
 
-    const listeners = this._listeners.get(key) as Map<typeof listener, StorageListener>;
+      if (!listeners.has(listener)) {
+          listeners.set(listener, innerListener);
+          window.addEventListener("storage", innerListener);
+      }
 
-    if (!listeners.has(listener)) {
-      listeners.set(listener, innerListener);
-      window.addEventListener("storage", innerListener);
-    }
-
-    return listener;
+      return listener;
   }
 
   /**
@@ -123,35 +123,35 @@ export abstract class WebStorage implements TypedStorage {
    */
   // istanbul ignore next
   removeListener<T extends StoreValue, R = void | never>(
-    key: string,
-    listener?: { (event: WebStorageEvent<T>): R }
+      key: string,
+      listener?: { (event: WebStorageEvent<T>): R }
   ): boolean {
-    let result = false;
+      let result = false;
 
-    if (this._listeners.has(key)) {
-      const listeners = this._listeners.get(key) as Map<typeof listener, StorageListener>;
+      if (this._listeners.has(key)) {
+          const listeners = this._listeners.get(key) as Map<typeof listener, StorageListener>;
 
-      if (listener) {
-        const innerListener = listeners.get(listener);
+          if (listener) {
+              const innerListener = listeners.get(listener);
 
-        if (innerListener) {
-          window.removeEventListener("storage", innerListener);
-        }
+              if (innerListener) {
+                  window.removeEventListener("storage", innerListener);
+              }
 
-        result = listeners.delete(listener);
-      } else {
-        listeners.forEach((innerListener, listener) => {
-          window.removeEventListener("storage", innerListener);
-          result = listeners.delete(listener) || result;
-        });
+              result = listeners.delete(listener);
+          } else {
+              listeners.forEach((innerListener, listener) => {
+                  window.removeEventListener("storage", innerListener);
+                  result = listeners.delete(listener) || result;
+              });
+          }
+
+          if (listeners.size <= 0) {
+              this._listeners.delete(key);
+          }
       }
 
-      if (listeners.size <= 0) {
-        this._listeners.delete(key);
-      }
-    }
-
-    return result;
+      return result;
   }
 
   /**
@@ -160,6 +160,6 @@ export abstract class WebStorage implements TypedStorage {
    * @param rawValue - The value to be parsed.
    */
   static parseRawValue<T extends StoreValue>(rawValue: string | null): T | any {
-    return rawValue ? JSON.parse(rawValue).value : null;
+      return rawValue ? JSON.parse(rawValue).value : null;
   }
 }

@@ -24,7 +24,7 @@ const { width } = useWindowSize();
 
 const currentLocale = computed(() => localeStore.currentLocale);
 const props = defineProps({
-  size: propTypes.oneOf<ElementPlusSize>(["default", "small", "large"]).def("default"),
+    size: propTypes.oneOf<ElementPlusSize>(["default", "small", "large"]).def("default"),
 });
 
 const elNamespace = ref(variables?.elNamespace || "el");
@@ -32,24 +32,24 @@ const elNamespace = ref(variables?.elNamespace || "el");
 provide("configGlobal", props);
 
 onMounted(() => {
-  appStore.setCssVarTheme();
+    appStore.setCssVarTheme();
 });
 
 watch(
-  () => width.value,
-  (width: number) => {
-    if (width < 768) {
-      !appStore.getMobile ? appStore.setMobile(true) : undefined;
-      setCssVar("--left-menu-min-width", "0");
-      appStore.setCollapse(true);
-      appStore.getLayout !== "classic" ? appStore.setLayout("classic") : undefined;
-    } else {
-      appStore.getMobile ? appStore.setMobile(false) : undefined;
-      setCssVar("--left-menu-min-width", "64px");
+    () => width.value,
+    (width: number) => {
+        if (width < 768) {
+            !appStore.getMobile ? appStore.setMobile(true) : undefined;
+            setCssVar("--left-menu-min-width", "0");
+            appStore.setCollapse(true);
+            appStore.getLayout !== "classic" ? appStore.setLayout("classic") : undefined;
+        } else {
+            appStore.getMobile ? appStore.setMobile(false) : undefined;
+            setCssVar("--left-menu-min-width", "64px");
+        }
+    },
+    {
+        immediate: true,
     }
-  },
-  {
-    immediate: true,
-  }
 );
 </script>

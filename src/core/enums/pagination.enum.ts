@@ -1,4 +1,4 @@
 export const PAGINATION = {
-  page: 1,
-  per_page: 10,
+    page: 1,
+    per_page: 10,
 };

@@ -3,6 +3,6 @@ interface LANGUAGES {
 }
 
 export const LANG_ENUM: LANGUAGES = {
-  en: "English",
-  ja: "Japanese",
+    en: "English",
+    ja: "Japanese",
 };

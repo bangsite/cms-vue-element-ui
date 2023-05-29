@@ -27,19 +27,19 @@ import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 
 const props = defineProps({
-  ...inputProps,
+    ...inputProps,
 
-  // label: { type: String, default: "" },
-  labelDisplay: { type: Boolean, default: true },
-  rules: { type: [String, Object], default: "" },
-  rulesAttrMessage: {
-    type: [Object],
-    default: () => {},
-  },
-  name: {
-    type: String,
-    required: true,
-  },
+    // label: { type: String, default: "" },
+    labelDisplay: { type: Boolean, default: true },
+    rules: { type: [String, Object], default: "" },
+    rulesAttrMessage: {
+        type: [Object],
+        default: () => {},
+    },
+    name: {
+        type: String,
+        required: true,
+    },
 });
 
 const name = toRef(props, "name");
@@ -47,7 +47,7 @@ const rules = toRef(props, "rules");
 const attrs = useAttrs();
 
 const { value, errorMessage, handleChange } = useField(name, rules, {
-  validateOnValueUpdate: false,
+    validateOnValueUpdate: false,
 });
 </script>
 <style lang="scss">

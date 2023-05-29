@@ -3,5 +3,5 @@ import type { UpdateProfile } from "@/core/interfaces/auth";
 import { updateProfile } from "@/core/services/modules/login.service";
 
 export const useUpdateProfileMutation = (
-  options?: Omit<UseMutationOptions<any, unknown, Partial<UpdateProfile>, unknown>, "mutationFn"> | undefined
+    options?: Omit<UseMutationOptions<any, unknown, Partial<UpdateProfile>, unknown>, "mutationFn"> | undefined
 ) => useMutation((data: Partial<UpdateProfile>) => updateProfile(data), options);

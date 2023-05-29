@@ -6,57 +6,57 @@ import { ElNotification } from "element-plus";
 // import { notificationProps } from "element-plus/es/components/notification";
 import IconNotifyError from "@/components/icons/IconNotifyError.vue";
 import IconNotifySuccess from "@/components/icons/IconNotifySuccess.vue";
-import IconClose from "@/components/icons/IconClose.vue";
+// import IconClose from "@/components/icons/IconClose.vue";
 import { notificationProps } from "element-plus";
 
 const renderIconError = {
-  icon: () =>
-    h(IconNotifyError, {
-      class: "notify__icon-error",
-    }),
+    icon: () =>
+        h(IconNotifyError, {
+            class: "notify__icon-error",
+        }),
 };
 
 const renderIconSuccess = {
-  icon: () =>
-    h(IconNotifySuccess, {
-      class: "notify__icon-success",
-    }),
+    icon: () =>
+        h(IconNotifySuccess, {
+            class: "notify__icon-success",
+        }),
 };
 
 const renderIconWarning = {
-  icon: () =>
-    h(IconNotifyError, {
-      class: "notify__icon-warning",
-    }),
+    icon: () =>
+        h(IconNotifyError, {
+            class: "notify__icon-warning",
+        }),
 };
 
 const defaultConfig = {
-  position: "top-right",
-  message: "",
-  duration: 3.5,
-  // close: () =>
-  // h(IconClose, {
-  //   class: "notify__close",
-  // }),
+    position: "top-right",
+    message: "",
+    duration: 3.5,
+    // close: () =>
+    // h(IconClose, {
+    //   class: "notify__close",
+    // }),
 };
 
 const notificationInstance = (type: string, config: notificationProps) => {
-  switch (type) {
+    switch (type) {
     case "success":
-      ElNotification.success({ ...defaultConfig, ...config, ...renderIconSuccess });
-      break;
+        ElNotification.success({ ...defaultConfig, ...config, ...renderIconSuccess });
+        break;
     case "info":
-      ElNotification.info({ ...defaultConfig, ...config, ...renderIconWarning });
-      break;
+        ElNotification.info({ ...defaultConfig, ...config, ...renderIconWarning });
+        break;
     case "warning":
-      ElNotification.warning({ ...defaultConfig, ...config, ...renderIconWarning });
-      break;
+        ElNotification.warning({ ...defaultConfig, ...config, ...renderIconWarning });
+        break;
     case "error":
-      ElNotification.error({ ...defaultConfig, ...config, ...renderIconError });
-      break;
+        ElNotification.error({ ...defaultConfig, ...config, ...renderIconError });
+        break;
     default:
-      break;
-  }
+        break;
+    }
 };
 
 export { notificationInstance };

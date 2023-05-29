@@ -23,15 +23,15 @@ const currentSize = computed(() => appStore.getCurrentSize);
 const greyMode = computed(() => appStore.getGreyMode);
 
 const useDefaultTheme = () => {
-  const isDarkData = wsCache.getItem("isDark");
-  const isDarkTheme = isDark();
+    const isDarkData = wsCache.getItem("isDark");
+    const isDarkTheme = isDark();
 
-  if (isDarkData !== null) {
-    appStore.setIsDark(isDarkData as boolean);
-    return;
-  }
+    if (isDarkData !== null) {
+        appStore.setIsDark(isDarkData as boolean);
+        return;
+    }
 
-  appStore.setIsDark(isDarkTheme);
+    appStore.setIsDark(isDarkTheme);
 };
 
 useDefaultTheme();

@@ -1,21 +1,25 @@
 export declare global {
-  declare interface Fn<T = any> {
+  interface Fn<T = any> {
     (...arg: T[]): T;
   }
 
-  declare type Recordable<T = any, K = string> = Record<K extends null | undefined ? string : K, T>;
+  type Nullable<T> = T | null;
 
-  declare type ComponentRef<T> = InstanceType<T>;
+  type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
 
-  declare type LocaleType = "en" | "vi" | "ja";
+  type Recordable<T = any, K = string> = Record<K extends null | undefined ? string : K, T>;
 
-  declare type AxiosHeaders = "application/json" | "application/x-www-form-urlencoded" | "multipart/form-data";
+  type ComponentRef<T> = InstanceType<T>;
 
-  declare type AxiosMethod = "get" | "post" | "delete" | "put";
+  type LocaleType = "en" | "vi" | "ja";
 
-  declare type AxiosResponseType = "arraybuffer" | "blob" | "document" | "json" | "text" | "stream";
+  type AxiosHeaders = "application/json" | "application/x-www-form-urlencoded" | "multipart/form-data";
 
-  declare interface AxiosConfig {
+  type AxiosMethod = "get" | "post" | "delete" | "put";
+
+  type AxiosResponseType = "arraybuffer" | "blob" | "document" | "json" | "text" | "stream";
+
+  interface AxiosConfig {
     params?: any;
     data?: any;
     url?: string;
@@ -24,7 +28,7 @@ export declare global {
     responseType?: AxiosResponseType;
   }
 
-  declare interface IResponse<T = any> {
+  interface Response<T = any> {
     code: string;
     data: T extends any ? T : T & any;
   }

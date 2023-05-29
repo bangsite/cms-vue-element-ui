@@ -16,30 +16,30 @@ import "@/assets/scss/main.scss";
 const app = createApp(App);
 
 async function setupPlugins() {
-  // Setup AntDesign
-  libElementPlus(app);
+    // Setup AntDesign
+    libElementPlus(app);
 
-  // Setup VeeValidate
-  libVeeValidate(app);
+    // Setup VeeValidate
+    libVeeValidate(app);
 
-  // Setup Vue Query
-  libVueQuery(app);
+    // Setup Vue Query
+    libVueQuery(app);
 
-  // Setup  ApexCharts
-  libApexCharts(app);
+    // Setup  ApexCharts
+    libApexCharts(app);
 }
 
 async function setupApp() {
-  // Setup Store
-  libPinia(app);
+    // Setup Store
+    libPinia(app);
 
-  // Setup I18n
-  await setupI18n(app);
+    // Setup I18n
+    await setupI18n(app);
 
-  // Setup Router
-  await setupRouter(app);
+    // Setup Router
+    await setupRouter(app);
 
-  app.mount("#app");
+    app.mount("#app");
 }
 
 setupPlugins();

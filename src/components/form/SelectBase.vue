@@ -30,14 +30,14 @@ import { toRef, useAttrs } from "vue";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
-  name: { type: String, required: true },
-  label: { type: String, default: "" },
-  labelDisplay: { type: Boolean, default: true },
-  showSearch: { type: Boolean, default: false },
-  filterOption: { type: Boolean, default: false },
-  allowClear: { type: Boolean, default: false },
-  disabled: { type: Boolean, default: false },
-  rules: { type: [String, Object], default: "" },
+    name: { type: String, required: true },
+    label: { type: String, default: "" },
+    labelDisplay: { type: Boolean, default: true },
+    showSearch: { type: Boolean, default: false },
+    filterOption: { type: Boolean, default: false },
+    allowClear: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    rules: { type: [String, Object], default: "" },
 });
 
 const emit = defineEmits(["onSearch"]);
@@ -51,6 +51,6 @@ const rules = toRef(props, "rules");
 const { value, errorMessage, handleChange } = useField(name, rules);
 
 const handleSearch = (values) => {
-  emit("onSearch", { value: values });
+    emit("onSearch", { value: values });
 };
 </script>

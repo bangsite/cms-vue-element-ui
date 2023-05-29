@@ -20,9 +20,9 @@ import { LANG_ENUM } from "@/core/enums/locale.enum";
 const i18n = useI18n();
 
 const onLanguages = (locale: string) => {
-  i18n.locale.value = locale;
+    i18n.locale.value = locale;
 
-  setLocale(locale);
-  localize(locale);
+    setLocale(locale);
+    localize(locale);
 };
 </script>

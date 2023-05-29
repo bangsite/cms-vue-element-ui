@@ -2,9 +2,9 @@ import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
 import { useAuthStore } from "@/core/stores/auth.store";
 
 export const LoginGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  const authStore = useAuthStore();
+    const authStore = useAuthStore();
 
-  if (to.name !== "dashboard" && authStore.token) {
-    return next({ name: "dashboard" });
-  } else next();
+    if (to.name !== "dashboard" && authStore.token) {
+        return next({ name: "dashboard" });
+    } else next();
 };
