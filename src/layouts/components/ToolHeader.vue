@@ -62,8 +62,9 @@ const locale = computed(() => appStore.getLocale);
 
 </script>
 
-<style lang="less" scoped>
-$prefix-cls: ~'${namespace}-tool-header';
+<style lang="scss" scoped>
+@import "@/assets/scss/settings/_variable.module.scss";
+$prefix-cls: '#{$namespace}-tool-header';
 
 .#{$prefix-cls} {
     transition: left var(--transition-time-02);

@@ -50,3 +50,14 @@ textarea.ant-input,
     width: 24px;
   }
 }
+
+.overlay{
+    background-color: $cl-dark;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: .4;
+    z-index: 99;
+}

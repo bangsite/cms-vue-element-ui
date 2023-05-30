@@ -1,6 +1,6 @@
 <template>
   <div class="setting">
-    <el-dropdown>
+    <el-dropdown trigger="click">
       <div class="setting__wrap">
         <button class="setting__avatar">
           <IconUser />
@@ -16,7 +16,7 @@
           </el-dropdown-item>
           <el-dropdown-item class="setting__menu-item">
             <IconSetting />
-            <RouterLink :to="{ name: 'account-setting' }"> Account Settings </RouterLink>
+            <RouterLink to="/"> Account Settings </RouterLink>
           </el-dropdown-item>
           <el-dropdown-item class="setting__menu-item">
             <IconLogout />

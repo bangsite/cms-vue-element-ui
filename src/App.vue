@@ -8,12 +8,11 @@ import { computed } from "vue";
 import { RouterView } from "vue-router";
 
 import { useAppStore } from "@/core/stores/modules/app.store";
-
 import { useDesign } from "@/hooks/web/useDesign";
 import { useCache } from "@/hooks/web/useCache";
-
-import ConfigGlobal from "@/components/ConfigGlobal/ConfigGlobal.vue";
 import { isDark } from "@/shared/utils/isCheck";
+
+import ConfigGlobal from "@/components/ConfigGlobal/Index.vue";
 
 const appStore = useAppStore();
 const { wsCache } = useCache();
@@ -22,6 +21,8 @@ const prefixCls = getPrefixCls("app");
 const currentSize = computed(() => appStore.getCurrentSize);
 const greyMode = computed(() => appStore.getGreyMode);
 
+console.log(greyMode.value);
+console.log(prefixCls);
 const useDefaultTheme = () => {
     const isDarkData = wsCache.getItem("isDark");
     const isDarkTheme = isDark();

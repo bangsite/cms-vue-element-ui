@@ -1,45 +1,24 @@
 const navigationList = [
-    {
-        id: "dashboard",
+  {
+    id: "dashboard",
+    title: "MENU.DASHBOARD",
+    routeName: "Dashboard",
+    icon: "HomeOutlined",
+    children: [
+      {
+        id: "analysis",
         title: "MENU.DASHBOARD",
-        routeName: "dashboard",
+        routeName: "Analysis",
         icon: "HomeOutlined",
-    },
-    {
-        id: "order",
-        title: "MENU.ORDERS",
-        routeName: "order-list",
-        icon: "ShoppingCartOutlined",
-    },
-    {
-        id: "category",
-        title: "MENU.CATEGORY",
-        icon: "AlignCenterOutlined",
-        children: [
-            {
-                id: "category-list",
-                title: "MENU.CATEGORY_LIST",
-                routeName: "category-list",
-            },
-        ],
-    },
-    {
-        id: "products",
-        title: "MENU.PRODUCTS",
-        icon: "FilterOutlined",
-        children: [
-            {
-                id: "products-list",
-                title: "MENU.PRODUCTS_LIST",
-                routeName: "products-list",
-            },
-            {
-                id: "products-create",
-                title: "MENU.PRODUCTS_CREATE",
-                routeName: "products-create",
-            },
-        ],
-    },
+      },
+      {
+        id: "workplace",
+        title: "MENU.DASHBOARD",
+        routeName: "Workplace",
+        icon: "HomeOutlined",
+      },
+    ],
+  },
 ];
 
 export default navigationList;

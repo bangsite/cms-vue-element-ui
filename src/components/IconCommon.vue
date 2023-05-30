@@ -42,9 +42,9 @@
     </ContentWrap>
 </template>
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 
 import { useIcon } from '@/hooks/web/useIcon'
+import { useI18n } from '@/hooks/web/useI18n'
 
 import ContentWrap from "@/components/ContentWrap.vue";
 import InfoTip  from '@/components/InfoTip.vue'

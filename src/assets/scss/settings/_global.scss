@@ -1,3 +1,51 @@
+
+:root{
+    --left-menu-min-width: 64px;
+    --el-color-primary: #409eff;
+    --left-menu-border-color: inherit;
+    --left-menu-bg-color: #001529;
+    --left-menu-bg-light-color: #0f2438;
+    --left-menu-bg-active-color: var(--el-color-primary);
+    --left-menu-collapse-bg-active-color: var(--el-color-primary);
+    --left-menu-text-color: #bfcbd9;
+    --left-menu-text-active-color: #fff;
+    --logo-title-text-color: #fff;
+    --logo-border-color: inherit;
+    --top-header-bg-color: #fff;
+    --top-header-text-color: inherit;
+    --top-header-hover-color: #f6f6f6;
+    --top-tool-border-color: #eee;
+
+    --tags-view-height: 35px;
+    --tags-view-border-color: #eee;
+    --tab-menu-max-width: 80px;
+    --tab-menu-min-width: 30px;
+    --tab-menu-collapse-height: 36px;
+    --tab-menu-border-color: #eee;
+    --app-content-padding: 20px;
+    --app-content-bg-color: #f5f7f9;
+    --app-footer-height: 50px;
+    --transition-time-02: .2s;
+    --el-loading-spinner-size: 42px;
+    --el-loading-fullscreen-spinner-size: 50px;
+    --el-menu-active-color: var(--el-color-primary);
+    --el-menu-text-color: var(--el-text-color-primary);
+    --el-menu-hover-text-color: var(--el-color-primary);
+    --el-menu-bg-color: var(--el-fill-color-blank);
+    --el-menu-hover-bg-color: var(--el-color-primary-light-9);
+    --el-menu-item-height: 56px;
+    --el-menu-sub-item-height: calc(var(--el-menu-item-height) - 6px);
+    --el-menu-horizontal-sub-item-height: 36px;
+    --el-menu-item-font-size: var(--el-font-size-base);
+    --el-menu-item-hover-fill: var(--el-color-primary-light-9);
+    --el-menu-border-color: var(--el-border-color);
+    --el-menu-base-level-padding: 20px;
+    --el-menu-level-padding: 20px;
+    --el-menu-icon-width: 24px;
+
+}
+
+
 html {
   height: 100%;
   scroll-behavior: smooth;

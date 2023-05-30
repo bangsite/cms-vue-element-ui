@@ -1,6 +1,6 @@
 <template>
     <div :class="prefixCls" @click="toggleFullscreen">
-        <Icon
+        <IconCommon
             :size="18"
             :icon="isFullscreen ? 'zmdi:fullscreen-exit' : 'zmdi:fullscreen'"
             :color="color"
@@ -8,11 +8,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import { propTypes } from "@/utils/propTypes";
+import { propTypes } from "@/shared/utils/propTypes";
 import { useDesign } from "@/hooks/web/useDesign";
 import { useFullscreen } from "@vueuse/core";
 
-import Icon  from "@/components/IconCommon.vue";
+import IconCommon  from "@/components/IconCommon.vue";
 
 const { getPrefixCls } = useDesign();
 const prefixCls = getPrefixCls("screenfull");

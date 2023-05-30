@@ -1,7 +1,10 @@
 <template>
-  <ElConfigProvider :namespace="elNamespace" :locale="currentLocale.elLocale" :message="{ max: 1 }" :size="size">
+  <ElConfigProvider :namespace="elNamespace"
+                    :locale="currentLocale.elLocale"
+                    :message="{ max: 1 }" :size="size">
     <slot></slot>
   </ElConfigProvider>
+
 </template>
 
 <script setup lang="ts">
@@ -22,7 +25,7 @@ const localeStore = useLocaleStore();
 const { variables } = useDesign();
 const { width } = useWindowSize();
 
-const currentLocale = computed(() => localeStore.currentLocale);
+const currentLocale = computed(() => localeStore.currentLocale) as object;
 const props = defineProps({
     size: propTypes.oneOf<ElementPlusSize>(["default", "small", "large"]).def("default"),
 });

@@ -78,6 +78,8 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/settings/_variable.module.scss";
+
 $prefix-cls: '#{$elNamespace}-breadcrumb';
 
 .#{$prefix-cls} {
