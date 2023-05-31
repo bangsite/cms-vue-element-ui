@@ -1,21 +1,19 @@
 <template>
-    <section class="layout layout__classic">
-        <template v-if="mobile && !collapse ">
-            <div class="overlay" @click="handleClickOutside" />
-        </template>
+  <section class="b-layout layout layout__classic">
+    <template v-if="mobile && !collapse">
+      <div class="overlay" @click="handleClickOutside" />
+    </template>
 
-        <template v-if="layout === 'classic'">
-            <ClassicLayout />
-        </template>
-
-    </section>
+    <template v-if="layout === 'classic'">
+      <ClassicLayout />
+    </template>
+  </section>
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
 import { useAppStore } from "@/core/stores/modules/app.store";
 
 import ClassicLayout from "@/layouts/components/ClassicLayout.vue";
-
 
 const appStore = useAppStore();
 
@@ -24,9 +22,7 @@ const mobile = computed(() => appStore.getMobile);
 const layout = computed(() => appStore.getLayout);
 
 const handleClickOutside = () => {
-    appStore.setCollapse(true);
+  appStore.setCollapse(true);
 };
-
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

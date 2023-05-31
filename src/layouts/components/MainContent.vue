@@ -1,27 +1,30 @@
 <template>
-    <section class="main">
-        <RouterView #default="{Component, route}">
-            <keep-alive :include="getCaches">
-                <component :is="Component" :key="route.fullPath" />
-            </keep-alive>
-        </RouterView>
-    </section>
-    <TheFooter v-if="footer" />
+  <section class="main">
+    <RouterView v-slot="{ Component, route }">
+      <template v-if="Component">
+        <keep-alive>
+          <component :is="Component" :key="route.fullPath" />
+        </keep-alive>
+      </template>
+      <template v-else>
+        <keep-alive>
+          <component :is="route.name" :key="route.fullPath" />
+        </keep-alive>
+      </template>
+    </RouterView>
+  </section>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppStore } from '@/core/stores/modules/app.store'
-import { useTagsViewStore } from '@/core/stores/modules/tags.store'
+import { computed } from "vue";
+import { useAppStore } from "@/core/stores/modules/app.store";
+// import { useTagsViewStore } from "@/core/stores/modules/tags.store";
 
-import TheFooter  from '@/layouts/components/TheFooter.vue'
+const appStore = useAppStore();
 
-const appStore = useAppStore()
+// const tagsViewStore = useTagsViewStore();
 
-const footer = computed(() => appStore.getFooter)
-
-const tagsViewStore = useTagsViewStore()
-
-const getCaches = computed((): string[] => {
-    return tagsViewStore.getCachedViews
-})
+// const getCaches = computed((): string[] => {
+//   return tagsViewStore.getCachedViews;
+// });
+// console.log(getCaches.value);
 </script>

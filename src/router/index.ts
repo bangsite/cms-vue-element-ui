@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
 import { constantRouterMap } from "./routes";
-import { routeBeforeEach } from "@/core/guard/routeBeforeEach.guard";
+import { routeBeforeEach, routeAfterEach } from "@/core/guard/routeBeforeEach.guard";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +14,7 @@ const router = createRouter({
 });
 
 router.beforeEach(routeBeforeEach);
+router.afterEach(routeAfterEach);
 
 export const resetRouter = (): void => {
   const resetWhiteNameList = ["Redirect", "Login", "NoFind", "Root"];

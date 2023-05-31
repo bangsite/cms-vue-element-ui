@@ -1,0 +1,11 @@
+.analysis {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+
+    &__chart {
+        display: flex;
+        width: 100%;
+    }
+}

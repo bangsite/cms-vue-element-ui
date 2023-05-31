@@ -1,80 +1,82 @@
-import { i18n } from "@/plugins/i18n";
+import { useI18n } from "@/hooks/web/useI18n";
 import { notificationInstance } from "@/shared/composables/useNotifications";
 import { HttpStatusCode, type AxiosError, type AxiosResponse } from "axios";
+
+const { t } = useI18n();
 const showNotifyError = (errorRes: AxiosError) => {
-    console.log("error::", errorRes);
+  console.log("error::", errorRes);
 
-    const { code, message, error } = errorRes?.response?.data ? (errorRes.response.data as any) : null;
-    const statusCode = code ? HttpStatusCode[code] : "";
-    const messageDetail = error && Object.keys(error).length ? error.message : "";
+  const { code, message, error } = errorRes?.response?.data ? (errorRes.response.data as any) : null;
+  const statusCode = code ? HttpStatusCode[code] : "";
+  const messageDetail = error && Object.keys(error).length ? error.message : "";
 
-    switch (statusCode) {
+  switch (statusCode) {
     case "BadRequest":
-        // Error 400
-        notificationInstance("error", {
-            message: message,
-            description: messageDetail,
-        });
-        break;
+      // Error 400
+      notificationInstance("error", {
+        message: message,
+        description: messageDetail,
+      });
+      break;
     case "Unauthorized":
-        // Error 401
-        notificationInstance("error", {
-            message: message,
-            description: messageDetail,
-        });
-        break;
+      // Error 401
+      notificationInstance("error", {
+        message: message,
+        description: messageDetail,
+      });
+      break;
     case "Forbidden":
-        // Error 403
-        notificationInstance("error", {
-            message: message,
-            description: messageDetail,
-        });
-        break;
+      // Error 403
+      notificationInstance("error", {
+        message: message,
+        description: messageDetail,
+      });
+      break;
     case "NotFound":
-        // Error 404
-        notificationInstance("error", {
-            message: message,
-            description: messageDetail,
-        });
-        // router.push({ name: "Error404" }).then();
+      // Error 404
+      notificationInstance("error", {
+        message: message,
+        description: messageDetail,
+      });
+      // router.push({ name: "Error404" }).then();
 
-        break;
+      break;
     case "TooManyRequests":
-        // Error 429
-        break;
+      // Error 429
+      break;
     case "InternalServerError":
-        // Error 500
-        notificationInstance("error", {
-            message: message,
-            description: messageDetail,
-        });
-        break;
+      // Error 500
+      notificationInstance("error", {
+        message: message,
+        description: messageDetail,
+      });
+      break;
     case "NotImplemented":
-        // Error 501
-        break;
+      // Error 501
+      break;
     case "BadGateway":
-        // Error 502
-        break;
+      // Error 502
+      break;
     case "ServiceUnavailable":
-        // Error 503
-        break;
+      // Error 503
+      break;
     default:
-        break;
-    }
+      break;
+  }
 };
 
 const showNotifySuccess = (response: AxiosResponse) => {
-    const statusCode = HttpStatusCode[response?.status];
+  const statusCode = HttpStatusCode[response?.status];
 
-    switch (statusCode) {
+  switch (statusCode) {
     case "Ok":
-        notificationInstance("success", {
-            message: i18n.global.t("COMMON.NOTIFY.SUCCESS_TITLE"),
-            description: i18n.global.t("COMMON.NOTIFY.SUCCESS_DESC"),
-        });
-        break;
+      notificationInstance("success", {
+        message: t("COMMON.NOTIFY.SUCCESS_TITLE"),
+        description: t("COMMON.NOTIFY.SUCCESS_DESC"),
+      });
+      break;
     default:
-        break;
-    }
+      break;
+  }
 };
 export { showNotifySuccess, showNotifyError };

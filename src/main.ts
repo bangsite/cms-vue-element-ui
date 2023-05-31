@@ -8,6 +8,7 @@ import { libVeeValidate } from "@/plugins/vee-validate";
 import { libVueQuery } from "@/plugins/vue-query";
 // import { libApexCharts } from "@/plugins/chart";
 
+// @ts-ignore
 import App from "./App.vue";
 
 import "@/assets/scss/main.scss";
@@ -15,7 +16,7 @@ import "@/assets/scss/main.scss";
 const app = createApp(App);
 
 async function setupAppAll() {
-  // Setup AntDesign
+  // Setup Element Plus
   libElementPlus(app);
 
   // Setup VeeValidate

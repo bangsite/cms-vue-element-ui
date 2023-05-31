@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <div class="header__left">
-        <TheCollapse v-if="hamburger && layout !== 'cutMenu'"/>
-        <TheBreadcrumb v-if="breadcrumb"></TheBreadcrumb>
+      <TheCollapse v-if="hamburger && layout !== 'cutMenu'" />
+      <TheBreadcrumb v-if="breadcrumb"></TheBreadcrumb>
     </div>
 
     <div class="header__right">
@@ -24,7 +24,6 @@ import { useAppStore } from "@/core/stores/modules/app.store";
 const appStore = useAppStore();
 
 const hamburger = computed(() => appStore.getHamburger);
-const breadcrumb = computed(() => appStore.getBreadcrumb)
+const breadcrumb = computed(() => appStore.getBreadcrumb);
 const layout = computed(() => appStore.getLayout);
-
 </script>

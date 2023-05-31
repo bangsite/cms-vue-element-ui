@@ -1,11 +1,11 @@
-// import { Layout } from "@/shared/helpers/router.helper";
+import { Layout } from "@/shared/helpers/router.helper";
 import { useI18n } from "@/hooks/web/useI18n";
 
 const { t } = useI18n();
 export const dashboard: AppRouteRecordRaw[] = [
   {
     path: "/dashboard",
-    component: () => import("@/layouts/MainLayout.vue"),
+    component: Layout,
     redirect: "/dashboard/analysis",
     name: "Dashboard",
     meta: {

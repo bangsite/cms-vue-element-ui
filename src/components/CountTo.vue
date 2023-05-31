@@ -1,182 +1,163 @@
 <template>
-  <span :class="prefixCls">
-    {{ displayValue }}
+  <span>
+    {{ displayedAmount }}
   </span>
 </template>
 <script setup lang="ts">
-import { reactive, computed, watch, onMounted, unref, toRef } from 'vue'
-import type { PropType } from 'vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/shared/utils/propTypes'
-import { isNumber } from '@/shared/utils/isCheck'
+import { computed, onMounted, onUnmounted, reactive, toRefs, watch } from "vue";
 
-const { getPrefixCls } = useDesign()
-const prefixCls = getPrefixCls('count-to')
+interface Data {
+  timestamp: number;
+  startTimestamp: number;
+  currentStartAmount: number;
+  currentAmount: number;
+  currentDuration: number;
+  paused: boolean;
+  remaining: number;
+  animationFrame: number;
+}
 
-
+import { propTypes } from "@/shared/utils/propTypes";
 
 const props = defineProps({
-    startVal: propTypes.number.def(0),
-    endVal: propTypes.number.def(2021),
-    duration: propTypes.number.def(3000),
-    autoplay: propTypes.bool.def(true),
-    decimals: propTypes.number.validate((value: number) => value >= 0).def(0),
-    decimal: propTypes.string.def('.'),
-    separator: propTypes.string.def(','),
-    prefix: propTypes.string.def(''),
-    suffix: propTypes.string.def(''),
-    useEasing: propTypes.bool.def(true),
-    easingFn: {
-        type: Function as PropType<(t: number, b: number, c: number, d: number) => number>,
-        default(t: number, b: number, c: number, d: number) {
-            return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
-        }
-    }
-})
+  startAmount: propTypes.number.def(0),
+  endAmount: propTypes.number.def(0),
+  duration: propTypes.number.def(3),
+  autoplay: propTypes.bool.def(true),
+  autoInit: propTypes.bool.def(true),
+  prefix: propTypes.string.def("$"),
+  suffix: propTypes.string.def(""),
+  separator: propTypes.string.def(","),
+  decimalSeparator: propTypes.string.def("."),
+  decimals: propTypes.number.def(0),
+  decimal: propTypes.string.def("."),
+});
 
-const emit = defineEmits(['mounted', 'callback'])
-const formatNumber = (num: number | string) => {
-    const { decimals, decimal, separator, suffix, prefix } = props
-    num = Number(num).toFixed(decimals)
-    num += ''
-    const x = num.split('.')
-    let x1 = x[0]
-    const x2 = x.length > 1 ? decimal + x[1] : ''
-    const rgx = /(\d+)(\d{3})/
-    if (separator && !isNumber(separator)) {
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + separator + '$2')
-        }
-    }
-    return prefix + x1 + x2 + suffix
-}
+const { startAmount, endAmount, duration, autoInit, decimals, separator, suffix, prefix, decimalSeparator } =
+  toRefs(props);
 
-const state = reactive<{
-    localStartVal: number
-    printVal: number | null
-    displayValue: string
-    paused: boolean
-    localDuration: number | null
-    startTime: number | null
-    timestamp: number | null
-    rAF: any
-    remaining: number | null
-}>({
-    localStartVal: props.startVal,
-    displayValue: formatNumber(props.startVal),
-    printVal: null,
-    paused: false,
-    localDuration: props.duration,
-    startTime: null,
-    timestamp: null,
-    remaining: null,
-    rAF: null
-})
+const emits = defineEmits(["mounted", "callback"]);
 
-const displayValue = toRef(state, 'displayValue');
+const data = reactive<Data>({
+  timestamp: 0,
+  startTimestamp: 0,
+  currentAmount: 0,
+  currentStartAmount: 0,
+  currentDuration: 0,
+  paused: false,
+  remaining: 0,
+  animationFrame: 0,
+});
+
+const isCountingUp = computed(() => endAmount.value > startAmount.value);
+const displayedAmount = computed(() => {
+  return `${prefix.value}${formattedAmount()}${suffix.value}`;
+});
 
 onMounted(() => {
-    if (props.autoplay) {
-        start()
-    }
-    emit('mounted')
-})
+  data.currentAmount = startAmount.value;
+  data.currentStartAmount = startAmount.value;
+  data.currentDuration = duration.value * 1000;
+  data.remaining = duration.value * 1000;
 
-const getCountDown = computed(() => {
-    return props.startVal > props.endVal
-})
+  if (autoInit.value) start();
+  else data.paused = true;
+});
 
-watch([() => props.startVal, () => props.endVal], () => {
-    if (props.autoplay) {
-        start()
-    }
-})
+const formattedAmount = (): string => {
+  const regex = /(\d+)(\d{3})/;
 
+  let numberString: string = data.currentAmount.toFixed(decimals.value);
+
+  numberString += "";
+  let numberArray: Array<string> = numberString.split(".");
+  let numbers: string = numberArray[0];
+  let decimalsNew: string = numberArray.length > 1 ? decimalSeparator.value + numberArray[1] : "";
+  let isNumber = !isNaN(parseFloat(separator.value));
+
+  if (separator.value && !isNumber) {
+    while (regex.test(numbers)) numbers = numbers.replace(regex, "$1" + separator.value + "$2");
+  }
+
+  return numbers + decimalsNew;
+};
 
 const start = () => {
-    const { startVal, duration } = props
-    state.localStartVal = startVal
-    state.startTime = null
-    state.localDuration = duration
-    state.paused = false
-    state.rAF = requestAnimationFrame(count)
-}
-
-const pauseResume = () => {
-    if (state.paused) {
-        resume()
-        state.paused = false
-    } else {
-        pause()
-        state.paused = true
-    }
-}
+  cancelAnimation();
+  data.currentStartAmount = startAmount.value;
+  data.startTimestamp = 0;
+  data.currentDuration = duration.value * 1000;
+  data.paused = false;
+  data.animationFrame = window.requestAnimationFrame(counting);
+};
 
 const pause = () => {
-    cancelAnimationFrame(state.rAF)
-}
-
+  if (data.paused) return;
+  cancelAnimation();
+  data.paused = true;
+};
 const resume = () => {
-    state.startTime = null
-    state.localDuration = +(state.remaining as number)
-    state.localStartVal = +(state.printVal as number)
-    requestAnimationFrame(count)
-}
-
+  if (!data.paused) return;
+  data.startTimestamp = 0;
+  data.currentDuration = +data.remaining;
+  data.currentStartAmount = +data.currentAmount;
+  data.animationFrame = window.requestAnimationFrame(counting);
+  data.paused = false;
+};
 const reset = () => {
-    state.startTime = null
-    cancelAnimationFrame(state.rAF)
-    state.displayValue = formatNumber(props.startVal)
-}
+  data.paused = false;
+  data.startTimestamp = 0;
+  cancelAnimation();
+  data.currentAmount = startAmount.value;
+  if (autoInit.value) start();
+  else data.paused = true;
+};
+const counting = (timestamp: number) => {
+  data.timestamp = timestamp;
+  if (!data.startTimestamp) data.startTimestamp = data.timestamp;
+  let progress: number = data.timestamp - data.startTimestamp;
+  data.remaining = data.currentDuration - progress;
 
-const count = (timestamp: number) => {
-    const { useEasing, easingFn, endVal } = props
-    if (!state.startTime) state.startTime = timestamp
-    state.timestamp = timestamp
-    const progress = timestamp - state.startTime
-    state.remaining = (state.localDuration as number) - progress
-    if (useEasing) {
-        if (unref(getCountDown)) {
-            state.printVal =
-                state.localStartVal -
-                easingFn(progress, 0, state.localStartVal - endVal, state.localDuration as number)
-        } else {
-            state.printVal = easingFn(
-                progress,
-                state.localStartVal,
-                endVal - state.localStartVal,
-                state.localDuration as number
-            )
-        }
-    } else {
-        if (unref(getCountDown)) {
-            state.printVal =
-                state.localStartVal -
-                (state.localStartVal - endVal) * (progress / (state.localDuration as number))
-        } else {
-            state.printVal =
-                state.localStartVal +
-                (endVal - state.localStartVal) * (progress / (state.localDuration as number))
-        }
-    }
-    if (unref(getCountDown)) {
-        state.printVal = state.printVal < endVal ? endVal : state.printVal
-    } else {
-        state.printVal = state.printVal > endVal ? endVal : state.printVal
-    }
-    state.displayValue = formatNumber(state.printVal!)
-    if (progress < (state.localDuration as number)) {
-        state.rAF = requestAnimationFrame(count)
-    } else {
-        emit('callback')
-    }
-}
+  if (!isCountingUp.value) {
+    data.currentAmount =
+      data.currentStartAmount - (data.currentStartAmount - endAmount.value) * (progress / data.currentDuration);
+    data.currentAmount = data.currentAmount < endAmount.value ? endAmount.value : data.currentAmount;
+  } else {
+    data.currentAmount =
+      data.currentStartAmount + (endAmount.value - data.currentStartAmount) * (progress / data.currentDuration);
+    data.currentAmount = data.currentAmount > endAmount.value ? endAmount.value : data.currentAmount;
+  }
 
-defineExpose({
-    pauseResume,
-    reset,
-    start,
-    pause
-})
+  if (progress < data.currentDuration) data.animationFrame = window.requestAnimationFrame(counting);
+  else emits("finished");
+};
 
+const cancelAnimation = () => {
+  if (data.animationFrame) window.cancelAnimationFrame(data.animationFrame);
+};
+
+onUnmounted(() => {
+  cancelAnimation();
+});
+
+watch(
+  () => startAmount,
+  () => {
+    reset();
+  }
+);
+watch(
+  () => endAmount,
+  () => {
+    reset();
+  }
+);
+
+watch(
+  () => duration,
+  () => {
+    reset();
+  }
+);
+start();
 </script>

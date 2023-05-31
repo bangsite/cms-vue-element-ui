@@ -33,9 +33,10 @@ const createI18nOptions = async (): Promise<I18nOptions> => {
   };
 };
 
-export let i18n: ReturnType<typeof createI18n>;
 // setup i18n instance with glob
 export const setupI18n = async (app: App<Element>) => {
   const options = await createI18nOptions();
   app.use(createI18n(options));
 };
+
+export let i18n: ReturnType<typeof createI18n>;

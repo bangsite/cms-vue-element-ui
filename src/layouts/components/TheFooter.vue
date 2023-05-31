@@ -1,5 +1,3 @@
 <template>
-    <section class="footer">
-        the footer
-    </section>
+  <section class="footer">Copyright ©2021 Bangpx Admin</section>
 </template>

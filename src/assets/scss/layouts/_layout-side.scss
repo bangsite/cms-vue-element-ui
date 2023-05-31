@@ -1,78 +1,109 @@
 .side {
-  background-color: $cl-lighter;
-  box-shadow: 0 4px 1px 0 rgba(0, 0, 0, 0.1);
-  height: 100%;
+    height: 100%;
+    overflow: auto;
 
-  &__logo {
-    color: $cl-title;
-    display: flex;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: $font-weight-bold;
-    text-align: center;
-    padding: 1rem 0;
-  }
-
-  &__menu {
-    border: none;
-
-    .ant-menu-item {
-      font-size: 0.8rem;
-      margin: 0;
-
-      &::after {
-        border-color: $cl-primary;
-      }
-
-      //   &.ant-menu-item-selected {
-      //     background-color: transparent;
-      //     margin: 0;
-      //     a {
-      //       color: $cl-primary;
-      //     }
-      //   }
-
-      &.exact-active-link {
-        background-color: rgba($cl-primary, 0.06);
-        color: $cl-primary;
-      }
-
-      &:hover {
-        color: $cl-primary;
-      }
+    &__wrap{
+        height: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+        transition: all .2s cubic-bezier(.34,.69,.1,1);
     }
 
-    .ant-menu-submenu {
-      &.ant-menu-submenu-active {
-        .ant-menu-submenu-title {
-          color: $cl-primary;
+    &__top{
+        background-color: #000c17;
+        display: flex;
+        align-item: center;
+        padding-left: 10px;
+        height: 60px;
+        transition: none!important;
+        color: $cl-title;
+        &-logo{
+            display: flex;
+            align-items: center;
+            margin-right: 8px;
+            width: 36px;
+            object-fit: contain;
         }
-        .ant-menu-submenu-arrow {
-          color: $cl-primary;
+
+        &-title{
+            color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: $font-weight-bold;
         }
-      }
-
-      &.ant-menu-submenu-selected {
-        background-color: transparent;
-        color: $cl-primary;
-        .ant-menu-submenu-arrow {
-          color: $cl-primary;
-        }
-      }
-
-      .ant-menu-submenu-title {
-        margin: 0;
-
-        &:hover {
-          color: $cl-primary;
-
-          .ant-menu-submenu-arrow {
-            color: $cl-primary;
-          }
-        }
-      }
     }
-  }
+
+    &__menu {
+        background-color: #000c17;
+        height: calc(100% - 60px)!important;
+        transition: none;
+        border: none;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 14px;
+        line-height: 1.5715;
+
+        .ant-menu-item {
+            font-size: 0.8rem;
+            margin: 0;
+
+            &::after {
+                border-color: $cl-primary;
+            }
+
+            //   &.ant-menu-item-selected {
+            //     background-color: transparent;
+            //     margin: 0;
+            //     a {
+            //       color: $cl-primary;
+            //     }
+            //   }
+
+            &.exact-active-link {
+                background-color: rgba($cl-primary, 0.06);
+                color: $cl-primary;
+            }
+
+            &:hover {
+                color: $cl-primary;
+            }
+        }
+
+        .ant-menu-submenu {
+            &.ant-menu-submenu-active {
+                .ant-menu-submenu-title {
+                    color: $cl-primary;
+                }
+
+                .ant-menu-submenu-arrow {
+                    color: $cl-primary;
+                }
+            }
+
+            &.ant-menu-submenu-selected {
+                background-color: transparent;
+                color: $cl-primary;
+
+                .ant-menu-submenu-arrow {
+                    color: $cl-primary;
+                }
+            }
+
+            .ant-menu-submenu-title {
+                margin: 0;
+
+                &:hover {
+                    color: $cl-primary;
+
+                    .ant-menu-submenu-arrow {
+                        color: $cl-primary;
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Override menu ant deign
