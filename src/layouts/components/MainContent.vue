@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="main">
         <RouterView #default="{Component, route}">
             <keep-alive :include="getCaches">
                 <component :is="Component" :key="route.fullPath" />

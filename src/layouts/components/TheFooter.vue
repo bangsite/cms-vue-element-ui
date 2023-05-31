@@ -1,3 +1,5 @@
 <template>
-    the footer
+    <section class="footer">
+        the footer
+    </section>
 </template>

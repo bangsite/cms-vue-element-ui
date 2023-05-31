@@ -1,7 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["src/**/__tests__/*"],
+  "include": ["src/**/*", "src/**/*.vue", "env.d.ts"],
+  "exclude": ["node_modules", "src/**/__tests__/*"],
   "compilerOptions": {
     "baseUrl": ".",
     "sourceMap": true,
@@ -13,13 +13,14 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "allowJs": true,
+    //    "allowJs": true,
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "composite": true,
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["node"],
-    "typeRoots": ["./node_modules/@types/", "./src/types"]
+    "typeRoots": ["./node_modules/@types/", "./src/types"],
+    "skipLibCheck": true
   }
 }

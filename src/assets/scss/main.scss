@@ -8,12 +8,13 @@
 @import "./settings/breakpoints";
 
 // Layouts
-@import "./layouts/classic";
+@import "layouts/layout-classic";
 @import "./layouts/common";
-@import "./layouts/footer";
-@import "./layouts/header";
-@import "./layouts/main";
-@import "./layouts/sidebar";
+@import "layouts/layout-footer";
+@import "layouts/layout-header";
+@import "layouts/layout-main";
+@import "layouts/layout-content";
+@import "layouts/layout-side";
 
 // Components
 @import "./components/animates";

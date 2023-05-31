@@ -24,6 +24,7 @@ import {
   ElRow,
   ElSelect,
   ElSkeleton,
+  ElScrollbar,
   ElTable,
   ElTimePicker,
   ElUpload,
@@ -58,6 +59,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElProgress)
     .use(ElRadio)
     .use(ElRow)
+    .use(ElScrollbar)
     .use(ElSelect)
     .use(ElSkeleton)
     .use(ElTable)

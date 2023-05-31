@@ -1,0 +1,17 @@
+.layout {
+    &__side {
+        background-color: var(--app-content-bg-color);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__main {
+        position: absolute;
+        left: 200px;
+        height: 100%;
+        width: calc(100% - 200px);
+    }
+}

@@ -1,5 +1,5 @@
 <template>
-    <div class="layout__classic-sidebar">
+    <div class="layout__side">
         <TheLogo v-if="logo" />
         <TheNavigation />
     </div>
