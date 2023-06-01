@@ -26,7 +26,9 @@ import {
   ElSkeleton,
   ElScrollbar,
   ElTable,
+  ElTag,
   ElTimePicker,
+  ElTimeline,
   ElUpload,
   ElInfiniteScroll,
   ElLoading,
@@ -62,8 +64,10 @@ export function libElementPlus(app: App<Element>) {
     .use(ElScrollbar)
     .use(ElSelect)
     .use(ElSkeleton)
+    .use(ElTag)
     .use(ElTable)
     .use(ElTimePicker)
+    .use(ElTimeline)
     .use(ElUpload)
     .use(ElInfiniteScroll)
     .use(ElLoading)

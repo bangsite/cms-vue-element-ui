@@ -1,9 +1,18 @@
 export type AnalysisTotalTypes = {
-  users: number;
-  messages: number;
-  moneys: number;
-  shopping: number;
+  id: string;
+  title: string;
+  value: number;
+  unit: string;
+  colors: [string, string];
+  icon: string;
 };
+
+// export type AnalysisTotalTypes = {
+//   users: number;
+//   messages: number;
+//   moneys: number;
+//   shopping: number;
+// };
 
 export type UserAccessSource = {
   value: number;

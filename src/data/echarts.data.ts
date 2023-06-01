@@ -4,106 +4,148 @@ import { useI18n } from "@/hooks/web/useI18n";
 const { t } = useI18n();
 
 export const lineOptions: EChartsOption = {
-  title: {
-    text: t("analysis.monthlySales"),
-    left: "center",
-  },
-  xAxis: {
-    data: [
-      t("analysis.january"),
-      t("analysis.february"),
-      t("analysis.march"),
-      t("analysis.april"),
-      t("analysis.may"),
-      t("analysis.june"),
-      t("analysis.july"),
-      t("analysis.august"),
-      t("analysis.september"),
-      t("analysis.october"),
-      t("analysis.november"),
-      t("analysis.december"),
-    ],
-    boundaryGap: false,
-    axisTick: {
-      show: false,
-    },
-  },
-  grid: {
-    left: 20,
-    right: 20,
-    bottom: 20,
-    top: 80,
-    containLabel: true,
-  },
   tooltip: {
     trigger: "axis",
     axisPointer: {
       type: "cross",
-    },
-    padding: [5, 10],
-  },
-  yAxis: {
-    axisTick: {
-      show: false,
+      label: {
+        backgroundColor: "#6a7985",
+      },
     },
   },
   legend: {
-    data: [t("analysis.estimate"), t("analysis.actual")],
-    top: 50,
+    data: ["Downloads", "Registrations"],
   },
+  grid: {
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
+  },
+  xAxis: [
+    {
+      type: "category",
+      boundaryGap: false,
+      data: ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "24:00"],
+    },
+  ],
+
+  yAxis: [
+    {
+      type: "value",
+    },
+  ],
+
   series: [
     {
-      name: t("analysis.estimate"),
-      smooth: true,
+      color: "#8e9dff",
+      name: "Downloads",
       type: "line",
-      data: [100, 120, 161, 134, 105, 160, 165, 114, 163, 185, 118, 123],
-      animationDuration: 2800,
-      animationEasing: "cubicInOut",
+      smooth: true,
+      stack: "Total",
+      areaStyle: {
+        color: {
+          type: "linear",
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0.25,
+              color: "#8e9dff",
+            },
+            {
+              offset: 1,
+              color: "#fff",
+            },
+          ],
+        },
+      },
+      emphasis: {
+        focus: "series",
+      },
+      data: [4623, 6145, 6268, 6411, 1890, 4251, 2978, 3880, 3606, 4311],
     },
     {
-      name: t("analysis.actual"),
-      smooth: true,
+      color: "#26deca",
+      name: "Registrations",
       type: "line",
-      itemStyle: {},
-      data: [120, 82, 91, 154, 162, 140, 145, 250, 134, 56, 99, 123],
-      animationDuration: 2800,
-      animationEasing: "quadraticOut",
+      smooth: true,
+      stack: "Total",
+      areaStyle: {
+        color: {
+          type: "linear",
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0.25,
+              color: "#26deca",
+            },
+            {
+              offset: 1,
+              color: "#fff",
+            },
+          ],
+        },
+      },
+      emphasis: {
+        focus: "series",
+      },
+      data: [2208, 2016, 2916, 4512, 8281, 2008, 1963, 2367, 2956, 678],
     },
   ],
 };
 
 export const pieOptions: EChartsOption = {
-  title: {
-    text: t("analysis.userAccessSource"),
-    left: "center",
-  },
+  // title: {
+  //   text: "Pie Chart",
+  //   left: "center",
+  // },
   tooltip: {
     trigger: "item",
-    formatter: "{a} <br/>{b} : {c} ({d}%)",
+    padding: [5, 10],
   },
   legend: {
-    orient: "vertical",
-    left: "left",
-    data: [
-      t("analysis.directAccess"),
-      t("analysis.mailMarketing"),
-      t("analysis.allianceAdvertising"),
-      t("analysis.videoAdvertising"),
-      t("analysis.searchEngines"),
-    ],
+    bottom: "1%",
+    left: "center",
+    itemStyle: {
+      borderWidth: 0,
+    },
   },
   series: [
     {
-      name: t("analysis.userAccessSource"),
+      color: ["#5da8ff", "#8e9dff", "#fedc69", "#26deca"],
+      name: "Schedule",
       type: "pie",
-      radius: "55%",
-      center: ["50%", "60%"],
+      radius: ["45%", "75%"],
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: "#fff",
+        borderWidth: 1,
+      },
+      label: {
+        show: false,
+        position: "center",
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: "12",
+        },
+      },
+      labelLine: {
+        show: false,
+      },
       data: [
-        { value: 335, name: t("analysis.directAccess") },
-        { value: 310, name: t("analysis.mailMarketing") },
-        { value: 234, name: t("analysis.allianceAdvertising") },
-        { value: 135, name: t("analysis.videoAdvertising") },
-        { value: 1548, name: t("analysis.searchEngines") },
+        { value: 20, name: "Learning" },
+        { value: 10, name: "Entertainment" },
+        { value: 30, name: "Work" },
+        { value: 40, name: "Rest" },
       ],
     },
   ],

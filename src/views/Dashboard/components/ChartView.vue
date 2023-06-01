@@ -1,20 +1,17 @@
 <template>
-  <ElRow class="analysis__chart" :gutter="15">
-    <ElCol :md="24" :lg="12">
-      <ElCard shadow="hover" class="mb-20px">
-        <ElSkeleton :loading="loading" animated :rows="4">
-          <Echart :options="lineOptionsData" :height="350" />
-        </ElSkeleton>
-      </ElCard>
-    </ElCol>
-    <ElCol :md="24" :lg="12">
-      <ElCard shadow="hover" class="mb-20px">
-        <ElSkeleton :loading="loading" animated>
-          <Echart :options="pieOptionsData" :height="350" />
-        </ElSkeleton>
-      </ElCard>
-    </ElCol>
-  </ElRow>
+  <div class="chart">
+    <ElCard shadow="hover" class="chart__line mb-20px">
+      <ElSkeleton :loading="loading" animated :rows="4">
+        <Echart :options="lineOptionsData" :height="300" />
+      </ElSkeleton>
+    </ElCard>
+
+    <ElCard shadow="hover" class="chart__pie mb-20px">
+      <ElSkeleton :loading="loading" animated>
+        <Echart :options="pieOptionsData" :height="300" />
+      </ElSkeleton>
+    </ElCard>
+  </div>
 </template>
 <script setup lang="ts">
 import { ref, reactive } from "vue";
