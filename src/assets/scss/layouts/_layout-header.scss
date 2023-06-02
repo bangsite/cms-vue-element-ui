@@ -21,7 +21,7 @@
     &__left {
         display: flex;
         align-items: center;
-        padding-left: 20px;
+        //padding-left: 4px;
 
         svg {
             fill: $cl-primary;
@@ -40,7 +40,7 @@
     }
 }
 
-.full-screen, .dark-mode, .lang, .notify, .user-info {
+.menu-collapse, .search, .full-screen, .dark-mode, .lang, .notify, .user-info {
     cursor: pointer;
 
     &:hover {

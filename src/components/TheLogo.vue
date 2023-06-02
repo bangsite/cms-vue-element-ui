@@ -1,6 +1,6 @@
 <template>
   <div class="side__top">
-    <img class="side__top-logo" src="@/assets/images/logo.png" alt="" />
+    <img class="side__top-logo" src="@/assets/images/logo.png" alt="logo" />
 
     <div class="side__top-title" v-if="show">{{ title }}</div>
   </div>

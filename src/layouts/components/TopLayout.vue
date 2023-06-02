@@ -1,3 +1,0 @@
-<template>
-    top layout
-</template>

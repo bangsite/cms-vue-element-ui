@@ -13,16 +13,16 @@
         //background-color: #000c17;
         display: flex;
         align-items: center;
-        justify-content: center;
         height: 60px;
         transition: none !important;
-        //color: $cl-title;
+        padding: 0 22px;
+        gap: 0.5rem;
+
         &-logo {
             display: flex;
-            align-items: center;
-            margin-right: 8px;
-            width: 36px;
-            object-fit: contain;
+            //align-items: center;
+            width: 30px;
+            object-fit: cover;
         }
 
         &-title {
