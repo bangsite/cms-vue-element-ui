@@ -1,9 +1,10 @@
 .layout__header {
-    background-color:$cl-white;
-    border-bottom: 1px solid rgb(229,230,235);
+    background-color: $cl-white;
+    border-bottom: 1px solid rgb(229, 230, 235);
     flex-shrink: 0;
     position: fixed;
     padding-left: 250px;
+    padding-right: 1rem;
     top: 0;
     left: 0;
     width: 100%;
@@ -11,8 +12,6 @@
     transition: all .2s cubic-bezier(.34, .69, .1, 1);
     z-index: 99;
 }
-
-
 
 .header {
     display: flex;
@@ -34,55 +33,61 @@
 
     &__right {
         display: flex;
-        padding-right: 20px;
+        //padding-right: 20px;
         list-style: none;
         align-items: center;
         justify-content: flex-end;
-        gap: 1rem;
     }
 }
 
-.locale {
-    .ant-select {
-        min-width: 100px;
+.full-screen, .dark-mode, .lang, .notify, .user-info {
+    cursor: pointer;
 
-        .ant-select-selector {
-            border-radius: 6px;
+    &:hover {
+        outline: none;
+        background-color: $cl-bg-hover;
+    }
+
+    &__icon {
+        outline: none;
+
+        &:hover {
+            outline: none;
         }
+
+        color: $cl-title;
     }
 }
 
-.setting {
+.notify {
+    position: relative;
+
+    &__badge {
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+}
+
+.user-info {
     &__wrap {
-        display: flex;
-        align-items: center;
         gap: 0.4rem;
-        cursor: pointer;
+        padding: 0 0.4rem;
     }
 
     &__avatar {
-        background-color: $cl-primary;
+        background-color: $cl-container;
         border-radius: 50%;
         border: none;
-        cursor: pointer;
         width: 34px;
         height: 34px;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        &:hover {
-            opacity: 0.85;
-        }
-
-        svg {
-            fill: #fff;
-            width: 20px;
-        }
     }
 
     &__name {
-        font-weight: $font-size-medium;
+        font-weight: $font-weight-semi-bold;
     }
 
     &__menu {
@@ -122,3 +127,4 @@
         }
     }
 }
+

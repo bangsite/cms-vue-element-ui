@@ -6,7 +6,10 @@
     </div>
 
     <div class="header__right">
-      <TheLanguage />
+      <FullScreen />
+      <ThemeMode />
+      <LangSwitch />
+      <SystemMessage />
       <UserInfo />
     </div>
   </div>
@@ -16,10 +19,14 @@ import { computed } from "vue";
 
 import TheCollapse from "@/layouts/components/TheCollapse.vue";
 import TheBreadcrumb from "@/layouts/components/TheBreadcrumb.vue";
-import TheLanguage from "@/layouts/components/TheLanguage.vue";
+import LangSwitch from "@/layouts/components/header/LangSwitch.vue";
+import ThemeMode from "@/layouts/components/header/ThemeMode.vue";
+
 import UserInfo from "@/layouts/components/UserInfo.vue";
 
 import { useAppStore } from "@/core/stores/modules/app.store";
+import FullScreen from "@/layouts/components/header/FullScreen.vue";
+import SystemMessage from "@/layouts/components/header/SystemMessage.vue";
 
 const appStore = useAppStore();
 

@@ -37,41 +37,41 @@ import { login } from "@/core/services/modules/login.service";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 
-import { useAuthStore } from "@/core/stores/auth.store";
+import { useAuthStore } from "@/core/stores/modules/auth.store";
 import { transformErrors } from "@/shared/utils/transformErrors";
 
 const authStore = useAuthStore();
 const router = useRouter();
 
 const data = ref<LoginInput>({
-    email: "",
-    password: "",
-    //   remember: false,
+  email: "",
+  password: "",
+  //   remember: false,
 });
 
 const { handleSubmit, setErrors } = useForm({ initialValues: { ...data.value } });
 
 const useDoLogin = () => {
-    return useMutation((data: LoginInput) => login(data));
+  return useMutation((data: LoginInput) => login(data));
 };
 
 const { mutateAsync } = useDoLogin();
 
 const onSubmit = handleSubmit(async (values, actions) => {
-    await mutateAsync(values, {
-        onSuccess: (data) => {
-            authStore.setToken(data.token);
-            authStore.getProfile();
-            router.push({ name: "dashboard" });
-        },
-        onError: (error) => {
-            const { data } = error as Record<string, any>;
+  await mutateAsync(values, {
+    onSuccess: (data) => {
+      authStore.setToken(data.token);
+      authStore.getProfile();
+      router.push({ name: "dashboard" });
+    },
+    onError: (error) => {
+      const { data } = error as Record<string, any>;
 
-            let errors = transformErrors(data.errors);
-            setErrors(errors);
-        },
-    });
+      let errors = transformErrors(data.errors);
+      setErrors(errors as object);
+    },
+  });
 
-    actions.resetField;
+  actions.resetField;
 });
 </script>

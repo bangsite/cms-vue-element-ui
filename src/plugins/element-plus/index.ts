@@ -2,6 +2,7 @@ import "element-plus/dist/index.css";
 import {
   ElBreadcrumb,
   ElButton,
+  ElBadge,
   ElCard,
   ElConfigProvider,
   ElCheckbox,
@@ -29,6 +30,7 @@ import {
   ElTag,
   ElTimePicker,
   ElTimeline,
+  ElTooltip,
   ElUpload,
   ElInfiniteScroll,
   ElLoading,
@@ -43,6 +45,7 @@ export function libElementPlus(app: App<Element>) {
   app
     .use(ElBreadcrumb)
     .use(ElButton)
+    .use(ElBadge)
     .use(ElCard)
     .use(ElCheckbox)
     .use(ElCol)
@@ -68,6 +71,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElTable)
     .use(ElTimePicker)
     .use(ElTimeline)
+    .use(ElTooltip)
     .use(ElUpload)
     .use(ElInfiniteScroll)
     .use(ElLoading)

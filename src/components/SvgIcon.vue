@@ -34,5 +34,4 @@ const symbolId = computed(() => {
 });
 
 const renderLocalIcon = computed(() => props.localIcon || !props.icon);
-console.log(props.icon);
 </script>

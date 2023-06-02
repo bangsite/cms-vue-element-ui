@@ -37,7 +37,7 @@ interface AppState {
   tagsView: boolean;
   tagsViewIcon: boolean;
   //   uniqueOpened: boolean;
-  screenFull: boolean;
+  fullScreen: boolean;
   sizeMap: ElementPlusSize[];
   size: boolean;
 }
@@ -94,7 +94,7 @@ export const useAppStore = defineStore("app", {
       title: import.meta.env.VITE_APP_TITLE,
       pageLoading: false,
       userInfo: "userInfo",
-      screenFull: true,
+      fullScreen: true,
       size: true,
       sizeMap: ["default", "large", "small"],
     };
@@ -154,7 +154,7 @@ export const useAppStore = defineStore("app", {
     getFooter(): boolean {
       return this.footer;
     },
-    getScreenFull(): boolean {
+    getFullScreen(): boolean {
       return this.screenFull;
     },
     getSize(): boolean {
@@ -238,7 +238,7 @@ export const useAppStore = defineStore("app", {
       this.title = title;
     },
 
-    setScreenFull(screenFull: boolean) {
+    setFullScreen(screenFull: boolean) {
       this.screenFull = screenFull;
     },
     setSize(size: boolean) {
