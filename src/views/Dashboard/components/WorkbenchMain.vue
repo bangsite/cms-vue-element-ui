@@ -64,6 +64,7 @@ import WorkbenchTechCard from "@/views/Dashboard/components/WorkbenchTechCard.vu
 import WorkbenchShortcut from "@/views/Dashboard/components/WorkbenchShortcut.vue";
 import IconWorkbenchBanner from "@/components/icons/IconWorkbenchBanner.vue";
 import SvgIcon from "@/components/SvgIcon.vue";
+
 const WorkTechData = computed(() => WorkTech);
 const WorkShortcutsData = computed(() => WorkShortcuts);
 const WorkActivityData = computed(() => WorkActivity);
