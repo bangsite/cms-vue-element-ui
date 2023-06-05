@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown class="lang flex flex-center w-40 h-full" @command="setLang">
+  <el-dropdown class="lang flex flex-center w-40px h-full" @command="setLang">
     <span class="el-dropdown-link lang__icon">
       <SvgIcon :icon="'lucide:languages'" :size="20" />
     </span>

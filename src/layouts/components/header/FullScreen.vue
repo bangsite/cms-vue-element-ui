@@ -3,7 +3,7 @@
     <template #content>
       <span>Full screen</span>
     </template>
-    <div class="full-screen w-40 h-full flex flex-center" @click="toggle">
+    <div class="full-screen w-40px h-full flex flex-center" @click="toggle">
       <SvgIcon :icon="'gridicons:fullscreen-exit'" :size="20" v-if="isFullscreen"></SvgIcon>
       <SvgIcon :icon="'gridicons:fullscreen'" :size="20" v-else></SvgIcon>
     </div>

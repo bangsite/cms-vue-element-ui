@@ -35,10 +35,10 @@ interface Modal {
 }
 const props = defineProps<Modal>();
 
-const emit = defineEmits<Emits>();
+// const emit = defineEmits<Emits>();
 
 const router = useRouter();
-const routeStore = useRouteStore();
+// const routeStore = useRouteStore();
 const keyword = ref("");
 const activePath = ref("");
 const dialogVisible = ref(false);

@@ -1,5 +1,5 @@
 <template>
-  <div class="dark-mode w-40 h-full flex flex-center" @click="handleSwitch">
+  <div class="dark-mode w-40px h-full flex flex-center" @click="handleSwitch">
     <SvgIcon :icon="'solar:moon-stars-bold'" :size="20" v-if="darkMode"></SvgIcon>
     <SvgIcon :icon="'uil:sun'" :size="20" v-else></SvgIcon>
   </div>

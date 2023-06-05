@@ -3,7 +3,7 @@
     <template #content>
       <span>Search</span>
     </template>
-    <div class="search w-40 h-full flex flex-center">
+    <div class="search w-40px h-full flex flex-center">
       <SvgIcon :icon="'uil:search'" :size="20" />
     </div>
   </ElTooltip>

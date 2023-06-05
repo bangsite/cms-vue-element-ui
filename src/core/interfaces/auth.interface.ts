@@ -1,3 +1,9 @@
+export interface AuthState {
+  userInfo: Auth.UserInfo;
+  token: string;
+  loginLoading: boolean;
+}
+
 export interface AdminUserInfo {
   id: number;
   name: string;

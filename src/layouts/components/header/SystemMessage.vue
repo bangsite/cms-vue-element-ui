@@ -1,7 +1,7 @@
 <template>
   <ElPopover trigger="click" placement="bottom">
     <template #reference>
-      <div class="notify w-50 h-full flex flex-center" @mouseover="(e) => (buttonRef = e.currentTarget)">
+      <div class="notify w-50px h-full flex flex-center" @mouseover="(e) => (buttonRef = e.currentTarget)">
         <SvgIcon :icon="'clarity:notification-line'" :size="20" />
         <ElBadge :value="count" :max="99" :class="[count < 10 ? '-right-2px' : '-right-10px']" class="notify__badge" />
       </div>

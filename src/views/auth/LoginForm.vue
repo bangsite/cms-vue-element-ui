@@ -32,12 +32,12 @@ import { useRouter } from "vue-router";
 import { useMutation } from "vue-query";
 import { useForm } from "vee-validate";
 
-import type { LoginInput } from "@/core/interfaces/auth";
+import type { LoginInput } from "@/core/interfaces/auth.interface";
 import { login } from "@/core/services/modules/login.service";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 
-import { useAuthStore } from "@/core/stores/modules/auth.store";
+import { useAuthStore } from "@/core/stores/auth.store";
 import { transformErrors } from "@/shared/utils/transformErrors";
 
 const authStore = useAuthStore();
@@ -68,7 +68,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
       const { data } = error as Record<string, any>;
 
       let errors = transformErrors(data.errors);
-      setErrors(errors as object);
+      setErrors(errors);
     },
   });
 
