@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-collapse w-50 h-full flex flex-center" @click="toggleCollapse">
+  <div class="menu-collapse w-50px h-full flex flex-center" @click="toggleCollapse">
     <SvgIcon :icon="'line-md:menu-unfold-left'" :size="20" v-if="collapse" />
     <SvgIcon :icon="'line-md:menu-fold-left'" :size="20" v-else />
   </div>

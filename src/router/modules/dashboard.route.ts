@@ -26,7 +26,7 @@ export const dashboard: AppRouteRecordRaw[] = [
       },
       {
         path: "workplace",
-        component: () => import("@/views/Dashboard/WorkplaceView.vue"),
+        component: () => import("@/views/Dashboard/WorkbenchView.vue"),
         name: "Workplace",
         meta: {
           title: t("router.workplace"),

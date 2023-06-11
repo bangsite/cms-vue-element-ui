@@ -1,13 +1,13 @@
 <template>
   <div class="side__top">
-    <img class="side__top-logo" src="@/assets/images/logo.png" alt="logo" />
-
+    <SvgIcon :icon="'logos:segment-icon'" :size="30"></SvgIcon>
     <div class="side__top-title" v-if="show">{{ title }}</div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, watch, computed, onMounted } from "vue";
 import { useAppStore } from "@/core/stores/modules/app.store";
+import SvgIcon from "@/components/SvgIcon.vue";
 
 const appStore = useAppStore();
 const show = ref(true);

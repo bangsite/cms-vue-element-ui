@@ -10,6 +10,7 @@ import {
   ElContainer,
   ElDatePicker,
   ElDialog,
+  ElDivider,
   ElDropdown,
   ElForm,
   ElIcon,
@@ -17,7 +18,6 @@ import {
   ElInputNumber,
   ElLink,
   ElMenu,
-  ElOverlay,
   ElPageHeader,
   ElPagination,
   ElProgress,
@@ -26,6 +26,8 @@ import {
   ElSelect,
   ElSkeleton,
   ElScrollbar,
+  ElSpace,
+  ElStatistic,
   ElTable,
   ElTag,
   ElTimePicker,
@@ -52,6 +54,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElContainer)
     .use(ElDatePicker)
     .use(ElDialog)
+    .use(ElDivider)
     .use(ElDropdown)
     .use(ElForm)
     .use(ElIcon)
@@ -67,6 +70,8 @@ export function libElementPlus(app: App<Element>) {
     .use(ElScrollbar)
     .use(ElSelect)
     .use(ElSkeleton)
+    .use(ElSpace)
+    .use(ElStatistic)
     .use(ElTag)
     .use(ElTable)
     .use(ElTimePicker)
