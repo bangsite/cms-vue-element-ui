@@ -2,7 +2,7 @@
   <ElDialog
     title="Tips"
     width="30%"
-    v-model:show="show"
+    :model-value="show"
     :segmented="{ footer: 'soft' }"
     :closable="false"
     class="fixed left-0 right-0"
@@ -12,11 +12,11 @@
     <span>It's a draggable Dialog</span>
     <div class="mt-20px">
       <n-empty v-if="resultOptions.length === 0" description="暂无搜索结果" />
-      <search-result v-else v-model:value="activePath" :options="resultOptions" @enter="handleEnter" />
+      <SearchResult v-else v-model:value="activePath" :options="resultOptions" @enter="handleEnter" />
     </div>
 
     <template #footer>
-      <search-footer v-if="!isMobile" />
+      <SearchFooter v-if="!isMobile" />
       <span class="dialog-footer">
         <el-button @click="show = false">Cancel</el-button>
         <el-button type="primary" @click="show = false"> Confirm </el-button>
@@ -29,20 +29,28 @@ import { computed, nextTick, ref, shallowRef, watch } from "vue";
 import { useRouter } from "vue-router";
 
 import { onKeyStroke, useDebounceFn } from "@vueuse/core";
+import SearchResult from "@/components/Search/components/SearchResult.vue";
+import SearchFooter from "@/components/Search/components/SearchFooter.vue";
+import { useAppStore } from "@/core/stores/modules/app.store";
 
 interface Modal {
   value: boolean;
 }
 const props = defineProps<Modal>();
-
-const emit = defineEmits<Emits>();
+console.log(props.value);
+const emit = defineEmits<{ (event: "update:value", val: boolean): void }>();
 
 const router = useRouter();
-const routeStore = useRouteStore();
+const appStore = useAppStore();
+// const routeStore = useRouteStore();
+
+const inputRef = ref<HTMLInputElement>();
 const keyword = ref("");
 const activePath = ref("");
 const dialogVisible = ref(false);
+const resultOptions = shallowRef<AppRouteRecordRaw[]>([]);
 
+const isMobile = computed(() => appStore.getMobile);
 const show = computed({
   get() {
     return props.value;
@@ -51,11 +59,12 @@ const show = computed({
     emit("update:value", val);
   },
 });
+const handleSearch = useDebounceFn(search, 300);
 
 function search() {
-  resultOptions.value = routeStore.searchMenus.filter(
-    (menu) => keyword.value && menu.meta?.title.toLocaleLowerCase().includes(keyword.value.toLocaleLowerCase().trim())
-  );
+  // resultOptions.value = routeStore.searchMenus.filter(
+  //   (menu) => keyword.value && menu.meta?.title.toLocaleLowerCase().includes(keyword.value.toLocaleLowerCase().trim())
+  // );
   if (resultOptions.value?.length > 0) {
     activePath.value = resultOptions.value[0].path;
   } else {

@@ -3,7 +3,7 @@
     <template #content>
       <span>Search</span>
     </template>
-    <div class="search w-40 h-full flex flex-center">
+    <div class="search w-40 h-full flex flex-center" @click="handleSearch">
       <SvgIcon :icon="'uil:search'" :size="20" />
     </div>
   </ElTooltip>
@@ -12,4 +12,11 @@
 <script setup lang="ts">
 import SvgIcon from "@/components/SvgIcon.vue";
 import SearchModal from "@/components/Search/components/SearchModal.vue";
+import { ref } from "vue";
+
+const show = ref(false);
+const handleSearch = () => {
+  console.log(show.value);
+  show.value = !show.value;
+};
 </script>

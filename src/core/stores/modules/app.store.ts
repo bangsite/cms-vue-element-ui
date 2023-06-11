@@ -155,7 +155,7 @@ export const useAppStore = defineStore("app", {
       return this.footer;
     },
     getFullScreen(): boolean {
-      return this.screenFull;
+      return this.fullScreen;
     },
     getSize(): boolean {
       return this.size;
@@ -238,8 +238,12 @@ export const useAppStore = defineStore("app", {
       this.title = title;
     },
 
-    setFullScreen(screenFull: boolean) {
-      this.screenFull = screenFull;
+    setTheme(theme: object) {
+      this.theme = theme;
+    },
+
+    setFullScreen(fullScreen: boolean) {
+      this.fullScreen = fullScreen;
     },
     setSize(size: boolean) {
       this.size = size;
