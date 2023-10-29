@@ -1,24 +1,55 @@
 <template>
-  <ACard title="Holtel Popular">
+  <el-card title="Holtel Popular">
     <div class="table-operations">
-      <a-button @click="setAgeSort">Sort Name</a-button>
-      <a-button @click="clearFilters">Clear Filters</a-button>
-      <a-button @click="clearAll">Clear All</a-button>
+      <el-button @click="setAgeSort">Sort Name</el-button>
+      <el-button @click="clearFilter">Clear Filters</el-button>
+      <el-button @click="clearAll">Clear All</el-button>
     </div>
 
-    <ATable bordered :dataSource="data" :columns="columns" :loading="isLoading" @change="handleChange">
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <div class="table-action">
-            <a-button type="primary" @click="handleEdit">Edit</a-button>
-            <a-popconfirm v-if="data.length" title="Sure to delete?" @confirm="handleDelete(record)">
-              <a-button type="primary" danger ghost>Delete</a-button>
-            </a-popconfirm>
-          </div>
-        </template>
+    <el-table
+      ref="table"
+      size="small"
+      border
+      :data="data"
+      highlight-current-row
+      :default-sort="tableSort ? { prop: tableSortBy, order: tableSortOrder } : { prop: '', order: '' }"
+    >
+      <el-table-column type="index" label="#" width="50" align="center" />
+      <template v-for="column in columns" :key="column.key">
+        <el-table-column v-if="column.key === 'action'" :prop="column.key" :label="column.title">
+          <template #default="scope">
+            <div class="table-action">
+              <el-button type="primary" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+              <el-button type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column
+          v-else-if="column.key === 'number_of_rooms'"
+          :prop="column.dataIndex"
+          :label="column.title"
+          sortable
+          width="90"
+        />
+        <el-table-column v-else-if="column.key === 'zip'" :prop="column.dataIndex" :label="column.title" width="90" />
+        <el-table-column
+          v-else-if="column.key === 'currency'"
+          :prop="column.dataIndex"
+          :label="column.title"
+          width="120"
+        />
+        <el-table-column v-else :prop="column.dataIndex" :label="column.title" width="auto" />
       </template>
-    </ATable>
-  </ACard>
+    </el-table>
+    <el-divider />
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="data.length"
+      :page-size="pagination.pageSize"
+      @current-change="handleCurrentChange"
+    />
+  </el-card>
 
   <CustomModal @closeModal="toggleModal" :showModal="showModal">
     <template #header>
@@ -30,35 +61,43 @@
     </template>
     <template #footer>
       <div class="btn-action">
-        <a-button>Cancel</a-button>
-        <a-button type="primary">Submit</a-button>
+        <el-button>Cancel</el-button>
+        <el-button type="primary">Submit</el-button>
       </div>
     </template>
   </CustomModal>
+  <!--    https://laracasts.com/discuss/channels/vue/element-ui-table-combine-pagination-and-search-->
 </template>
 <script setup lang="ts">
 import { computed, onBeforeMount, ref } from "vue";
-import type { TableProps } from "ant-design-vue";
 import useFilter from "@/views/Components/Table/useFilter";
 import useSorter from "@/views/Components/Table/useSorter";
 import { columnsTableBasic } from "@/views/Components/Table/useColumns";
 import CustomModal from "@/components/modal/Custom.vue";
 import useBooking from "@/composables/useBooking";
+import type { TableInstance } from "element-plus";
+import { ElMessageBox } from "element-plus";
 
 const { fetchListHotels, response, isLoading } = useBooking();
 const { filteredInfo, clearFilters } = useFilter();
 const { sortedInfo, setAgeSort } = useSorter();
 
 const columns = computed(() => columnsTableBasic);
+const tableRef = ref<TableInstance>();
 const data = ref([]);
 const showModal = ref(false);
-
+const pagination = ref({
+  page: 1,
+  pageSize: 10,
+  total: 0,
+});
 onBeforeMount(async () => {
   await fetchListHotels();
 
   if (response.value) {
-    let get50Item = response.value.filter((item, idx) => idx < 50) || [];
+    let get50Item = response.value.filter((item, idx) => idx < 20) || [];
     data.value = [...get50Item];
+    pagination.value.total = data.value.length;
   }
 });
 
@@ -71,20 +110,43 @@ const clearAll = () => {
   filteredInfo.value = null;
   sortedInfo.value = null;
 };
+// TODO: improvement typing when refactor table
+const clearFilter = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  tableRef.value!.clearFilter();
+};
 
-const handleChange: TableProps["onChange"] = (pagination, filters, sorter) => {
+const handleChange = (pagination, filters, sorter) => {
   console.log("Various parameters", pagination, filters, sorter);
   filteredInfo.value = filters;
   sortedInfo.value = sorter;
 };
 
-const handleEdit = () => {
-  console.log("edit row");
+const handleEdit = (index: number, row) => {
+  console.log(index, row);
   showModal.value = !showModal.value;
 };
 
-const handleDelete = (record: Record<string, any>) => {
-  console.log("delete row:", record);
+const handleDelete = (index: number, row) => {
+  console.log(index, row);
+  ElMessageBox.confirm("Are you sure to delete this?", "Warning", {
+    confirmButtonText: "OK",
+    cancelButtonText: "Cancel",
+    type: "warning",
+  });
+};
+
+const confirmEvent = () => {
+  console.log("confirm!");
+};
+const cancelEvent = () => {
+  console.log("cancel!");
+};
+
+const handleCurrentChange = (val: number) => {
+  console.log(val);
+  pagination.value.page = val;
 };
 </script>
 <style>

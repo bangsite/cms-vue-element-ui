@@ -2,16 +2,16 @@
   <div class="post__create">
     <form class="form post__create-form" @submit="onSubmit">
       <div class="post__create-left">
-        <a-card title="Add new post" class="form__card">
+        <el-card title="Add new post" class="form__card">
           <div class="post__create-title">
             <InputBase name="title" rules="required" placeholder="Enter title here" />
 
-            <TextAreaBase name="description" rules="required" placeholder="Enter description here" />
+            <TextAreaBase name="description" row="4" rules="required" placeholder="Enter description here" />
           </div>
           <div class="post__create-body">
             <EditorTinyMCE name="body" rules="required" placeholder="Please input content!" />
           </div>
-        </a-card>
+        </el-card>
       </div>
 
       <div class="post__create-right">

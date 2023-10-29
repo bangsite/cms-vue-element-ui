@@ -22,6 +22,7 @@
       v-model="value"
       @input="handleChange"
       api-key="mtcofzlrhwstpl59my0b38duawanx4r283nahsk7xcfwrh2z"
+      style="width: 100%"
     />
     <span class="note" v-if="attrs.note">{{ attrs.note }}</span>
   </el-form-item>
@@ -52,10 +53,12 @@ const props = defineProps({
 // const emit = defineEmits(["update:modelValue"]);
 
 const init = reactive({
-  selector: "div#editable",
-  plugins: "quickbars",
+  selector: "textarea#ifram",
+  plugins: ["quickbars"],
+
   quickbars_selection_toolbar: "bold italic | blocks | quicklink blockquote",
-  height: 700,
+  height: 600,
+  resize: "both",
 });
 
 // const { modelValue } = toRefs(props);

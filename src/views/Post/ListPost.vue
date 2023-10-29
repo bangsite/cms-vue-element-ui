@@ -1,7 +1,7 @@
 <template>
-  <a-card title="Search" class="form__card">
+  <el-card title="Search" class="form__card">
     <template #extra>
-      <a-button type="primary"> Add</a-button>
+      <el-button type="primary"> Add</el-button>
     </template>
 
     <form class="form form__search" @submit.prevent="onSubmit">
@@ -23,12 +23,12 @@
       </div>
 
       <div class="form__action">
-        <a-button class="btn-submit mb-10">Cancel</a-button>
-        <a-button type="primary" class="btn-submit mb-10" htmlType="submit">Submit</a-button>
+        <el-button class="btn-submit mb-10">Cancel</el-button>
+        <el-button type="primary" class="btn-submit mb-10" htmlType="submit">Submit</el-button>
       </div>
     </form>
-  </a-card>
-  <a-table
+  </el-card>
+  <el-table
     :columns="columns"
     :data-source="data"
     :row-selection="{ selectedRowKeys: state.selectedRowKeys, onChange: onSelectChange }"
@@ -36,9 +36,9 @@
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'tags'">
         <span>
-          <a-tag v-for="tag in record.tags" :key="tag" :color="tag.length > 5 ? '#793FDF' : '#0E21A0'">
+          <el-tag v-for="tag in record.tags" :key="tag" :color="tag.length > 5 ? '#793FDF' : '#0E21A0'">
             {{ tag }}
-          </a-tag>
+          </el-tag>
         </span>
       </template>
       <template v-if="column.key === 'date'">
@@ -46,12 +46,12 @@
       </template>
       <template v-if="column.key === 'action'">
         <span>
-          <a-button type="primary" class="btn mr-10">Edit</a-button>
-          <a-button type="dashed" danger class="btn">Delete </a-button>
+          <el-button type="primary" class="btn mr-10">Edit</el-button>
+          <el-button type="dashed" danger class="btn">Delete </el-button>
         </span>
       </template>
     </template>
-  </a-table>
+  </el-table>
 </template>
 
 <script setup lang="ts">

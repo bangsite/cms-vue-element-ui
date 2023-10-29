@@ -1,5 +1,5 @@
 import type { AxiosError } from "axios";
-import { showNotifyError } from "./http-status.axios";
+import { showNotifyError } from "@/services/config/notify.axios";
 import { onLoading } from "@/composables/useLoading";
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {

@@ -1,6 +1,6 @@
 <template>
-  <ACard title="Table Draggable Row">
-    <ATable bordered :dataSource="data" :columns="columns" :loading="isLoading" @change="handleChange">
+  <el-card title="Table Draggable Row">
+    <el-table bordered :dataSource="data" :columns="columns" :loading="isLoading" @change="handleChange">
       <template #bodyCell="{ column, record }">
         <Draggable
           :list="record"
@@ -29,8 +29,8 @@
         <!--          &lt;!&ndash;          </div>&ndash;&gt;-->
         <!--        </template>-->
       </template>
-    </ATable>
-  </ACard>
+    </el-table>
+  </el-card>
 </template>
 
 <script setup lang="ts">

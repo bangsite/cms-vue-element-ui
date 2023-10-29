@@ -1,15 +1,16 @@
 <template>
-  <a-form-item
+  <el-form-item
     :label="labelDisplay ? label : ' '"
-    :help="errorMessage"
+    :error="errorMessage"
     :validate-status="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
     :class="{ 'no-label': !labelDisplay }"
   >
     <!--Field-->
-    <a-textarea
+    <el-input
       autocomplete="new-password"
-      :value="value"
+      type="textarea"
+      v-model="value"
       :id="name"
       :rows="rows"
       v-bind="attrs"
@@ -19,7 +20,7 @@
     />
 
     <span class="note" v-if="attrs.note">{{ attrs.note }}</span>
-  </a-form-item>
+  </el-form-item>
 </template>
 
 <script setup lang="ts">
@@ -28,7 +29,6 @@ import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 
 const props = defineProps({
-  label: { type: String, default: "" },
   labelDisplay: { type: Boolean, default: true },
   //   disabled: { type: Boolean, default: false },
   rules: { type: [String, Object], default: "" },

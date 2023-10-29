@@ -4,7 +4,6 @@ export const columnsTableBasic = [
     dataIndex: "name",
     key: "name",
     ellipsis: true,
-    width: 120,
   },
   {
     title: "Description",
@@ -18,7 +17,6 @@ export const columnsTableBasic = [
     dataIndex: "number_of_rooms",
     key: "number_of_rooms",
     align: "center",
-    width: 90,
   },
   {
     title: "Address",
@@ -31,19 +29,16 @@ export const columnsTableBasic = [
     dataIndex: "currency",
     key: "currency",
     align: "center",
-    width: 150,
   },
   {
     title: "Zip",
     dataIndex: "zip",
     key: "zip",
-    width: 80,
   },
   {
     key: "action",
     title: "Action",
     align: "center",
-    width: 200,
   },
 ];
 
