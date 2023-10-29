@@ -1,26 +1,48 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["src/**/*", "src/**/*.vue", "env.d.ts"],
-  "exclude": ["node_modules", "src/**/__tests__/*"],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "sourceMap": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    //    "allowJs": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "composite": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["node"],
-    "typeRoots": ["./node_modules/@types/", "./src/types"],
-    "skipLibCheck": true
-  }
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": [
+        "src/**/*",
+        "src/**/*.vue",
+        "env.d.ts",
+        "src/**/*.ts",
+        "src/**/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+        "src/**/__tests__/*"
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "sourceMap": true,
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        "target": "esnext",
+        "module": "esnext",
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "composite": true,
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable"
+        ],
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "./node_modules/@types/",
+            "./src/types"
+        ],
+        "skipLibCheck": true
+    }
 }

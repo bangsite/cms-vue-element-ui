@@ -1,0 +1,117 @@
+.side {
+    &__top {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        padding-left: 20px;
+        gap: 0.5rem;
+
+        &-logo {
+            display: flex;
+            width: 30px;
+            object-fit: cover;
+        }
+
+        &-title {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: $font-weight-bold;
+        }
+    }
+
+    // override element ui
+    &.el-menu{
+        border-right:none;
+    }
+
+    .el-menu-item {
+        background-color: #f7f8f9;
+
+        &.is-active {
+            a {
+                color: var(--el-menu-active-color);
+            }
+        }
+
+        &:hover a {
+            color: var(--el-menu-active-color);
+        }
+
+        a {
+            color: var(--el-menu-text-color);
+        }
+    }
+
+    //
+    //        &__menu {
+    //            background-color: #000c17;
+    //            height: calc(100% - 60px) !important;
+    //            transition: none;
+    //            border: none;
+    //            position: relative;
+    //            box-sizing: border-box;
+    //            width: 100%;
+    //            font-size: 14px;
+    //            line-height: 1.5715;
+    //
+    //            .ant-menu-item {
+    //                font-size: 0.8rem;
+    //                margin: 0;
+    //
+    //                &::after {
+    //                    border-color: $cl-primary;
+    //                }
+    //
+    //                //   &.ant-menu-item-selected {
+    //                //     background-color: transparent;
+    //                //     margin: 0;
+    //                //     a {
+    //                //       color: $cl-primary;
+    //                //     }
+    //                //   }
+    //
+    //                &.exact-active-link {
+    //                    background-color: rgba($cl-primary, 0.06);
+    //                    color: $cl-primary;
+    //                }
+    //
+    //                &:hover {
+    //                    color: $cl-primary;
+    //                }
+    //            }
+    //
+    //            .ant-menu-submenu {
+    //                &.ant-menu-submenu-active {
+    //                    .ant-menu-submenu-title {
+    //                        color: $cl-primary;
+    //                    }
+    //
+    //                    .ant-menu-submenu-arrow {
+    //                        color: $cl-primary;
+    //                    }
+    //                }
+    //
+    //                &.ant-menu-submenu-selected {
+    //                    background-color: transparent;
+    //                    color: $cl-primary;
+    //
+    //                    .ant-menu-submenu-arrow {
+    //                        color: $cl-primary;
+    //                    }
+    //                }
+    //
+    //                .ant-menu-submenu-title {
+    //                    margin: 0;
+    //
+    //                    &:hover {
+    //                        color: $cl-primary;
+    //
+    //                        .ant-menu-submenu-arrow {
+    //                            color: $cl-primary;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+}

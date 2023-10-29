@@ -1,77 +1,155 @@
 .auth {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-
-  &__wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-    overflow: hidden;
-    //animation: blow-up 0.4s ease-in;
-  }
-
-  &__left {
-    background: linear-gradient(120deg, #f7f8f9 0%, #f1f1f1 90%);
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
-    overflow: hidden;
 
-    .swiper {
-      padding: 4rem 2rem;
-    }
-  }
-
-  &__title {
-    font-size: 2.25rem;
-    font-weight: bold;
-    margin-bottom: 0.75rem;
-    text-align: center;
-  }
-
-  &__subtitle {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  &__right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 4rem;
-
-    .auth__subtitle {
-      max-width: 380px;
+    &__wrap {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        height: 100%;
+        overflow: hidden;
     }
 
-    .form {
-      max-width: 380px;
-      width: 100%;
+    &__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 8rem;
+        margin-bottom: 2rem;
 
-      &__group {
-        margin-bottom: 1.2rem;
-      }
+        &-logo {
+            border-radius: 50%;
+            border: 1px solid rgba($cl-text, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        &-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        &-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 30rem;
+        }
     }
-  }
+
+    &__form {
+        flex: 1;
+        max-width: 30rem;
+        margin-bottom: 4rem;
+        width: 100%;
+    }
+
+    &__footer {
+        &-signup{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+        }
+    }
+
+    &__left {
+        background-image: url("@/assets/images/bg-noise-50.png"), linear-gradient( #1677ff, #eee 90% , #ebebeb 12%);
+        background-position: 0 0;
+        background-size: 200px auto;
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        transition: all .3s ease-in;
+        animation: fadeLeft 0.4s ease-in;
+
+        &--bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: hard-light;
+            z-index: 2;
+
+            img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                //background-image: url("@/assets/images/bg-blue.png");
+                //background-repeat: no-repeat;
+                //background: rgba(#ebebeb, 0.69);
+
+                transform: translate(-50%, -50%) scale(2.5);
+
+            }
+        }
+
+
+        .swiper {
+            padding: 4rem 2rem;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 1rem;
+        transition: all .3s ease-in;
+        animation: fadeRight 0.4s ease-in;
+
+        .auth__subtitle {
+            max-width: 30rem;
+        }
+
+        .form {
+            max-width: 30rem;
+            width: 100%;
+
+            &__group {
+                margin-bottom: 1.2rem;
+            }
+        }
+    }
 }
 
-@keyframes blow-up {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.1;
-  }
-  50% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(1.01);
-    opacity: 1;
-  }
+@keyframes fadeLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0.1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0.1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

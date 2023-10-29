@@ -1,6 +1,6 @@
 import type { RouteComponent } from "vue-router";
 import type { AuthRoute } from "@/types/router";
-import { isFunction } from "@/shared/utils/typeof";
+import { isFunction } from "@/utils/typeof";
 const MainLayout = () => import("@/layouts/MainLayout.vue");
 const BlankLayout = () => import("@/layouts/BlankLayout.vue");
 

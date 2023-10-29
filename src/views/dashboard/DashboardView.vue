@@ -11,8 +11,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import ChartLine from "@/components/chart/ChartLine.vue";
-import ChartColumn from "@/components/chart/ChartColumn.vue";
-import ChartArea from "@/components/chart/ChartArea.vue";
-import ChartTimeline from "@/components/chart/ChartTimeline.vue";
+import ChartLine from "@/components/charts/ChartLine.vue";
+import ChartColumn from "@/components/charts/ChartColumn.vue";
+import ChartArea from "@/components/charts/ChartArea.vue";
+import ChartTimeline from "@/components/charts/ChartTimeline.vue";
 </script>

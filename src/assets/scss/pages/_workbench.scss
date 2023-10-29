@@ -1,146 +1,136 @@
 .overview {
-    overflow: hidden;
+  overflow: hidden;
 
-    &__wrap {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-    }
+  &__wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
 }
 
 .work {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    gap: 16px;
-    width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  gap: 16px;
+  width: 100%;
 
-    &__top {
-        &-avatar {
-            background-color: $cl-container;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            width: 48px;
-            height: 48px;
-        }
-
-        &-para {
-            h3, p {
-                margin: 0;
-            }
-
-            p {
-                color: $cl-text;
-                font-size: $font-size-medium;
-            }
-        }
-
-        &-statistic {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .el-statistic__head {
-                color: $cl-text;
-                font-size: $font-size-base;
-                text-transform: capitalize;
-            }
-
-            .el-statistic__content {
-                text-align: center;
-                color: $cl-title;
-            }
-        }
+  &__top {
+    &-avatar {
+      background-color: $cl-container;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      width: 48px;
+      height: 48px;
     }
 
-    &__main {
+    &-para {
+      h3,
+      p {
+        margin: 0;
+      }
 
-        &-tech {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-
-            .el-card {
-                cursor: pointer;
-            }
-
-            .el-card__body {
-                padding: 1rem;
-            }
-
-            p {
-                font-size: $font-size-medium;
-                color: $cl-text;
-            }
-
-            span {
-                color: $cl-text;
-                font-size: $font-size-small;
-                font-style: italic;
-            }
-        }
-
-        &-activity {
-            .avatar {
-                background-color: $cl-container;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-right: 1rem;
-                width: 48px;
-                height: 48px;
-            }
-
-            span {
-                color: $cl-text;
-                font-size: $font-size-medium;
-            }
-
-        }
-
-        &-shortcut {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            align-items: center;
-            justify-content: center;
-
-            .el-card {
-                cursor: pointer;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 1rem;
-                min-height: 132px;
-            }
-
-            p {
-                font-size: $font-size-small;
-                text-align: center;
-            }
-        }
-
-        &-banner{
-
-            svg{
-                color: rgba(64,158,255,1);
-            }
-
-            .el-card__body{
-                min-height: 400px;
-            }
-        }
+      p {
+        color: $cl-text;
+        font-size: $font-size-medium;
+      }
     }
 
-    .el-card__header {
+    &-statistic {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .el-statistic__head {
+        color: $cl-text;
+        font-size: $font-size-base;
+        text-transform: capitalize;
+      }
+
+      .el-statistic__content {
+        text-align: center;
+        color: $cl-title;
+      }
+    }
+  }
+
+  &__main {
+    &-tech {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+
+      .ant-card {
+        cursor: pointer;
+      }
+
+      .ant-card-body {
+        padding: 1rem;
+      }
+
+      p {
+        font-size: $font-size-medium;
+        color: $cl-text;
+      }
+
+      span {
+        color: $cl-text;
+        font-size: $font-size-small;
+        font-style: italic;
+      }
+    }
+
+    &-activity {
+      .ant-list-item {
+        padding: 0.55rem 0;
+      }
+
+      .avatar {
+        background-color: $cl-container;
+        border-radius: 50%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        min-height: 69px;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+      }
+
+      span {
+        color: $cl-text;
+        font-size: $font-size-medium;
+      }
     }
+
+    &-shortcut {
+      display: grid;
+      grid-template-columns: repeat(3, 32%);
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+
+      .ant-card {
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        min-height: 136px;
+      }
+
+      p {
+        font-size: $font-size-small;
+        text-align: center;
+      }
+    }
+
+    &-banner {
+      svg {
+        color: rgba(64, 158, 255, 1);
+      }
+    }
+  }
 }

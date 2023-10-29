@@ -1,3 +1,5 @@
+import { AuthRoute } from "@/types/router";
+
 interface ImportMetaEnv {
   readonly VITE_BASE_URL: string;
   readonly VITE_APP_NAME: string;
@@ -6,8 +8,19 @@ interface ImportMetaEnv {
   readonly VITE_ICON_LOCAL_PREFIX: string;
   readonly VITE_AUTH_ROUTE_MODE: "static" | "dynamic";
   readonly VITE_ROUTE_HOME_PATH: AuthRoute.RoutePath;
+  readonly VITE_HASH_ROUTE?: "Y" | "N";
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv;
+    url: string
+
+    readonly hot?: import('./hot').ViteHotContext
+
+    readonly env: ImportMetaEnv
+
+    glob: import('./importGlob').ImportGlobFunction
+    /**
+     * @deprecated Use `import.meta.glob('*', { eager: true })` instead
+     */
+    globEager: import('./importGlob').ImportGlobEagerFunction
 }
