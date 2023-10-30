@@ -1,16 +1,17 @@
 <template>
-  <AFormItem
+  <el-form-item
     :label="label"
-    :help="errorMessage"
+    :error="errorMessage"
     :validate-status="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
   >
     <!--Field-->
-    <AInput
+    <el-input
       v-bind="attrs"
       v-model="value"
-      :show-password="true"
+      show-password
       autocomplete="new-password"
+      type="password"
       :id="name"
       :disabled="disabled"
       :placeholder="placeholder"
@@ -25,9 +26,9 @@
       <template #suffix>
         <slot name="suffix" />
       </template>
-    </AInput>
+    </el-input>
     <span class="note" v-if="attrs.note">{{ attrs.note }}</span>
-  </AFormItem>
+  </el-form-item>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +37,6 @@ import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 
 const props = defineProps({
-  label: { type: String, default: "" },
   labelDisplay: { type: Boolean, default: true },
   rules: { type: [String, Object], default: "" },
   rulesAttrMessage: {
@@ -47,7 +47,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  ...inputProps(),
+  ...inputProps,
 });
 
 const name = toRef(props, "name");

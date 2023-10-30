@@ -4,54 +4,71 @@
       <el-button type="primary"> Add</el-button>
     </template>
 
-    <form class="form form__search" @submit.prevent="onSubmit">
+    <el-form class="form form__search">
       <div class="form__search-wrap">
-        <div class="form__group">
+        <el-form-item class="form__group">
           <InputBase name="title" :label="$t('POST.SEARCH.TITLE')" placeholder="Please input text!" />
-        </div>
-        <div class="form__group">
+        </el-form-item>
+
+        <el-form-item class="form__group">
           <RangePickerBase
             name="create_at"
             type="select"
             :label="$t('POST.SEARCH.CREATE_AT')"
             :placeholder="[$t('COMMON.PLH_DATE'), $t('COMMON.PLH_DATE')]"
           />
-        </div>
-        <div class="form__group">
+        </el-form-item>
+
+        <el-form-item class="form__group">
           <SelectBase name="tags" type="select" :label="$t('POST.SEARCH.TAGS')" :options="POST_TAGS" />
-        </div>
+        </el-form-item>
       </div>
 
-      <div class="form__action">
+      <el-form-item class="form__action">
         <el-button class="btn-submit mb-10">Cancel</el-button>
-        <el-button type="primary" class="btn-submit mb-10" htmlType="submit">Submit</el-button>
-      </div>
-    </form>
+        <el-button type="primary" class="btn-submit mb-10" @click="onSubmit">Submit</el-button>
+      </el-form-item>
+    </el-form>
   </el-card>
-  <el-table
-    :columns="columns"
-    :data-source="data"
-    :row-selection="{ selectedRowKeys: state.selectedRowKeys, onChange: onSelectChange }"
-  >
-    <template #bodyCell="{ column, record }">
-      <template v-if="column.key === 'tags'">
-        <span>
-          <el-tag v-for="tag in record.tags" :key="tag" :color="tag.length > 5 ? '#793FDF' : '#0E21A0'">
-            {{ tag }}
-          </el-tag>
-        </span>
+  <el-card title="Posts">
+    <el-table
+      ref="table"
+      size="small"
+      border
+      highlight-current-row
+      v-loading="isLoading"
+      :data="data"
+      :default-sort="tableSort ? { prop: tableSortBy, order: tableSortOrder } : { prop: '', order: '' }"
+    >
+      <el-table-column type="index" label="#" width="50" align="center" />
+      <template v-for="column in columns" :key="column.key">
+        <el-table-column v-if="column.key === 'action'" :prop="column.key" :label="column.title">
+          <template #default="scope">
+            <div class="table-action">
+              <el-button type="primary" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+              <el-button type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column
+          v-else-if="column.key === 'number_of_rooms'"
+          :prop="column.dataIndex"
+          :label="column.title"
+          sortable
+          width="90"
+        />
+        <el-table-column v-else-if="column.key === 'zip'" :prop="column.dataIndex" :label="column.title" width="90" />
+        <el-table-column
+          v-else-if="column.key === 'currency'"
+          :prop="column.dataIndex"
+          :label="column.title"
+          width="120"
+        />
+        <el-table-column v-else :prop="column.dataIndex" :label="column.title" width="auto" />
       </template>
-      <template v-if="column.key === 'date'">
-        {{ dateTime(record.date) }}
-      </template>
-      <template v-if="column.key === 'action'">
-        <span>
-          <el-button type="primary" class="btn mr-10">Edit</el-button>
-          <el-button type="dashed" danger class="btn">Delete </el-button>
-        </span>
-      </template>
-    </template>
-  </el-table>
+    </el-table>
+    <el-divider />
+  </el-card>
 </template>
 
 <script setup lang="ts">

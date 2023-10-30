@@ -10,8 +10,9 @@
       ref="table"
       size="small"
       border
-      :data="data"
       highlight-current-row
+      v-loading="isLoading"
+      :data="data"
       :default-sort="tableSort ? { prop: tableSortBy, order: tableSortOrder } : { prop: '', order: '' }"
     >
       <el-table-column type="index" label="#" width="50" align="center" />
@@ -42,13 +43,7 @@
       </template>
     </el-table>
     <el-divider />
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="data.length"
-      :page-size="pagination.pageSize"
-      @current-change="handleCurrentChange"
-    />
+    <Pagiantion :page="1" :total="data.length" :page-size="pagination.pageSize" />
   </el-card>
 
   <CustomModal @closeModal="toggleModal" :showModal="showModal">
@@ -77,6 +72,7 @@ import CustomModal from "@/components/modal/Custom.vue";
 import useBooking from "@/composables/useBooking";
 import type { TableInstance } from "element-plus";
 import { ElMessageBox } from "element-plus";
+import Pagiantion from "@/components/common/Pagiantion.vue";
 
 const { fetchListHotels, response, isLoading } = useBooking();
 const { filteredInfo, clearFilters } = useFilter();

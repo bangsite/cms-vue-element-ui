@@ -10,39 +10,57 @@
       </p>
     </div>
     <div class="auth__form">
-      <form class="form" @submit="onSubmit">
-        <div class="form__group">
-          <label for="email">Email</label>
-          <InputBase name="email" rules="required|email" placeholder="Please input your username!" />
-        </div>
+      <el-form :labelPosition="'top'" ref="formRef" class="form">
+        <el-form-item label="Email">
+          <InputBase
+            name="email"
+            rules="required|email"
+            placeholder="Please input your username!"
+            style="width: 100%"
+          />
+        </el-form-item>
 
-        <div class="form__group">
-          <label for="password">Password</label>
-          <PasswordBase name="password" rules="required" placeholder="Please input your password!" />
-        </div>
+        <el-form-item label="Password">
+          <PasswordBase
+            name="password"
+            rules="required"
+            placeholder="Please input your password!"
+            style="width: 100%"
+          />
+        </el-form-item>
 
-        <div class="form__group form__group--flex mb-50">
-          <a-checkbox v-model:checked="data.remember">Remember me</a-checkbox>
-          <a href="#">Recovery Password</a>
-        </div>
+        <el-form-item jus>
+          <el-col :span="16">
+            <el-checkbox v-model:checked="ruleForm.remember">Remember me</el-checkbox>
+          </el-col>
+          <el-col :span="8" style="text-align: end">
+            <el-link href="#" disabled>Recovery Password</el-link>
+          </el-col>
+        </el-form-item>
 
-        <div class="form__group">
-          <a-button type="primary" class="btn-submit w-100 mb-10" htmlType="submit" :disabled="isLoading"
-            >Submit
-          </a-button>
-          <a-button type="default" class="btn-submit btn-submit--social w-100" htmlType="submit" :disabled="isLoading">
-            <SvgIcon :icon="'flat-color-icons:google'" :size="30"></SvgIcon>
-            <span> Sign in with Google </span>
-          </a-button>
-        </div>
-      </form>
-    </div>
+        <el-form-item>
+          <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
+            >Sign In
+          </el-button>
+          <span class="w-100 text-center"><strong>OR</strong></span>
 
-    <div class="auth__footer">
-      <div class="auth__footer-signup">
-        <span>Don't have an account yet ?</span>
-        <a href="#">Sign Up</a>
-      </div>
+          <el-row :gutter="10" justify="center" class="w-100">
+            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
+              <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
+            </el-button>
+            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
+              <SvgIcon :icon="'logos:facebook'" :size="24" />
+            </el-button>
+          </el-row>
+
+          <el-divider />
+
+          <el-row :gutter="10" justify="center" class="w-100">
+            <span class="mr-5">Don't have an account yet ? </span>
+            <el-link href="#"> Sign Up</el-link>
+          </el-row>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -55,7 +73,7 @@ import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import type { UserLogin } from "@/core/interfaces/user.interface";
+import type { LoginInput } from "@/core/interfaces/auth.interface";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import useAuth from "@/composables/useAuth";
 // import { transformErrors } from "@/shared/utils/transformErrors";
@@ -64,13 +82,13 @@ const router = useRouter();
 const authStore = useAuthStore();
 const { doLogin, response, errors, isLoading } = useAuth();
 
-const data = ref<UserLogin>({
+const ruleForm = ref<LoginInput>({
   email: "",
   password: "",
   remember: false,
 });
 
-const { handleSubmit, setErrors } = useForm({ initialValues: { ...data.value } });
+const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);
@@ -88,4 +106,6 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   actions.resetForm();
 });
+
+const handleLoginWith = () => {};
 </script>

@@ -12,17 +12,33 @@
       @slideChange="onSlideChange"
     >
       <swiper-slide class="slide__item">
-        <LoginIteration class="slide__img" />
+        <LoginDesignComponent class="slide__img" />
         <div class="slide__content">
-          <h3 class="slide__title">Customization & Content Management</h3>
-          <p class="slide__para">Offer customization options, implement features for optimizing content</p>
+          <h3 class="slide__title">Real-time Data Synchronization</h3>
+          <p class="slide__para">
+            Ensures that any changes in the control system are instantly reflected in the manager, providing users with
+            up-to-the-moment information.
+          </p>
         </div>
       </swiper-slide>
       <swiper-slide class="slide__item">
         <LoginProcess class="slide__img" />
         <div class="slide__content">
-          <h3 class="slide__title">Analytics & Performance Optimization</h3>
-          <p class="slide__para">Integrate analytics tools to track content performance</p>
+          <h3 class="slide__title">Modular Component Architecture</h3>
+          <p class="slide__para">
+            Allows for the creation of modular and reusable components. Each component can represent a specific aspect
+            of the control system, promoting code organization and maintainability.
+          </p>
+        </div>
+      </swiper-slide>
+      <swiper-slide class="slide__item">
+        <LoginSolutionMindSet class="slide__img" />
+        <div class="slide__content">
+          <h3 class="slide__title">State Management With Pinia</h3>
+          <p class="slide__para">
+            Ensures a centralized and predictable state management system, crucial for maintaining the integrity of the
+            control system's data.
+          </p>
         </div>
       </swiper-slide>
       <div class="swiper-pagination slide__pagination"></div>
@@ -39,10 +55,11 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-import LoginIteration from "@/components/svgs/LoginIteration.vue";
-import LoginProcess from "@/components/svgs/LoginProcess.vue";
 import { PaginationOptions } from "swiper/types";
+
+import LoginProcess from "@/components/svgs/LoginProcess.vue";
+import LoginDesignComponent from "@/components/svgs/LoginDesignComponent.vue";
+import LoginSolutionMindSet from "@/components/svgs/LoginSolutionMindSet.vue";
 
 const modules = reactive([Pagination, Autoplay]);
 const autoPlay = reactive({
