@@ -1,111 +1,77 @@
 <template>
   <div class="auth__right">
-    <div class="auth__header">
-      <div class="auth__header-logo">
-        <SvgIcon :icon="'logos:zenhub-icon'" :size="30"></SvgIcon>
+    <h3 class="auth__title">System Manager</h3>
+    <p class="auth__subtitle">
+      We strongly believe that the interface should be clear, informative and just beautiful.
+    </p>
+
+    <el-form :model="data" class="form">
+      <div class="form__group">
+        <label for="email">Username</label>
+        <InputBase name="email" rules="required" placeholder="Please input your username!" :autocomplete="'off'" />
       </div>
-      <h3 class="auth__header-title">System Manager</h3>
-      <p class="auth__header-subtitle">
-        A management system is in place for analytics and informative and just beautiful.
-      </p>
-    </div>
-    <div class="auth__form">
-      <el-form :labelPosition="'top'" ref="formRef" class="form">
-        <el-form-item label="Email">
-          <InputBase
-            name="email"
-            rules="required|email"
-            placeholder="Please input your username!"
-            style="width: 100%"
-          />
-        </el-form-item>
 
-        <el-form-item label="Password">
-          <PasswordBase
-            name="password"
-            rules="required"
-            placeholder="Please input your password!"
-            style="width: 100%"
-          />
-        </el-form-item>
+      <div class="form__group">
+        <label for="password">Password</label>
+        <PasswordBase name="password" rules="required" placeholder="Please input your password!" />
+      </div>
 
-        <el-form-item jus>
-          <el-col :span="16">
-            <el-checkbox v-model:checked="ruleForm.remember">Remember me</el-checkbox>
-          </el-col>
-          <el-col :span="8" style="text-align: end">
-            <el-link href="#" disabled>Recovery Password</el-link>
-          </el-col>
-        </el-form-item>
+      <div class="form__group">
+        <el-checkbox v-model:checked="data.remember">Remember me</el-checkbox>
+      </div>
 
-        <el-form-item>
-          <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
-            >Sign In
-          </el-button>
-          <span class="w-100 text-center"><strong>OR</strong></span>
-
-          <el-row :gutter="10" justify="center" class="w-100">
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
-            </el-button>
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'logos:facebook'" :size="24" />
-            </el-button>
-          </el-row>
-
-          <el-divider />
-
-          <el-row :gutter="10" justify="center" class="w-100">
-            <span class="mr-5">Don't have an account yet ? </span>
-            <el-link href="#"> Sign Up</el-link>
-          </el-row>
-        </el-form-item>
-      </el-form>
-    </div>
+      <div class="form__group">
+        <el-button type="primary" @click="onSubmit" class="btn-submit w-100">Submit</el-button>
+      </div>
+    </el-form>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
+import { useMutation } from "vue-query";
+import { useForm } from "vee-validate";
 
+import type { LoginInput } from "@/core/interfaces/auth";
+import { login } from "@/core/services/modules/login.service";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 
-import { useAuthStore } from "@/stores/auth.store";
-import type { LoginInput } from "@/core/interfaces/auth.interface";
-import SvgIcon from "@/components/common/SvgIcon.vue";
-import useAuth from "@/composables/useAuth";
-// import { transformErrors } from "@/shared/utils/transformErrors";
+import { useAuthStore } from "@/core/stores/auth.store";
+import { transformErrors } from "@/shared/utils/transformErrors";
 
-const router = useRouter();
 const authStore = useAuthStore();
-const { doLogin, response, errors, isLoading } = useAuth();
+const router = useRouter();
 
-const ruleForm = ref<LoginInput>({
-  email: "",
-  password: "",
-  remember: false,
+const data = ref<LoginInput>({
+    email: "",
+    password: "",
+    //   remember: false,
 });
 
-const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
+const { handleSubmit, setErrors } = useForm({ initialValues: { ...data.value } });
+
+const useDoLogin = () => {
+    return useMutation((data: LoginInput) => login(data));
+};
+
+const { mutateAsync } = useDoLogin();
 
 const onSubmit = handleSubmit(async (values, actions) => {
-  await doLogin(values);
-  console.log(response.value);
+    await mutateAsync(values, {
+        onSuccess: (data) => {
+            authStore.setToken(data.token);
+            authStore.getProfile();
+            router.push({ name: "dashboard" });
+        },
+        onError: (error) => {
+            const { data } = error as Record<string, any>;
 
-  const { shop, tokens } = response.value;
-  if (shop) authStore.setUserInfo(shop);
-  if (tokens) authStore.setToken(tokens);
+            let errors = transformErrors(data.errors);
+            setErrors(errors);
+        },
+    });
 
-  if (errors.value) {
-    console.log("errors:::", errors.value);
-  }
-
-  await router.push("/dashboard");
-
-  actions.resetForm();
+    actions.resetField;
 });
-
-const handleLoginWith = () => {};
 </script>
