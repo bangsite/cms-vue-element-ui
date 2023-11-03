@@ -21,7 +21,7 @@ export const MessageData: MessageTab = [
   {
     key: 2,
     name: "information",
-    badgeProps: { type: "error" },
+    badgeProps: { type: "success" },
     list: [
       {
         id: 1,

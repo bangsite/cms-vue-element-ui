@@ -1,3 +1,4 @@
+import BLOCK from "./block";
 import COMMON from "./common";
 import EXCEPTION from "./exception";
 import POST from "./post";
@@ -11,6 +12,7 @@ import login from "./login";
 import ROUTER from "./router";
 
 export default {
+  BLOCK,
   COMMON,
   EXCEPTION,
   login,

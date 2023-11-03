@@ -14,6 +14,8 @@
 
         <el-main class="layout__content">
           <MainContent />
+
+          <DynamicDialog v-if="active" />
         </el-main>
 
         <el-footer class="layout__footer">
@@ -26,15 +28,21 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { storeToRefs } from "pinia";
+
 import { useAppStore } from "@/stores/app.store";
+import { useDialogStore } from "@/stores/dialog.store";
 
 import MainContent from "@/layouts/MainContent.vue";
 import TheHeader from "@/components/header/TheHeader.vue";
 import TheFooter from "@/components/footer/TheFooter.vue";
 import LogoBrand from "@/components/common/LogoBrand.vue";
 import VerticalMenu from "@/components/navigation/VerticalMenu.vue";
+import DynamicDialog from "@/components/dialog/DynamicDialog.vue";
 
 const appStore = useAppStore();
+const { active } = storeToRefs(useDialogStore());
+
 const logo = computed(() => appStore.logo);
 const pageLoading = computed(() => appStore.getPageLoading);
 const collapsed = computed(() => appStore.getCollapse);

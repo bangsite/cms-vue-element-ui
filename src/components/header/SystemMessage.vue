@@ -2,7 +2,7 @@
   <el-popover
     trigger="hover"
     placement="bottom"
-    class="notify w-50px h-full flex flex-center"
+    class="notify w-100 h-full flex flex-center"
     :open="hovered"
     @openChange="handleHoverChange"
   >
@@ -10,18 +10,12 @@
       <div class="notify flex flex-center">
         <SvgIcon :icon="'clarity:notification-line'" :size="20" />
 
-        <el-badge
-          :value="count"
-          :max="99"
-          size="small"
-          :class="[count < 10 ? '-right-2px' : '-right-10px']"
-          class="notify__badge"
-        />
+        <el-badge :value="count" :max="99" :class="[count < 10 ? '-right-2px' : '-right-10px']" class="notify__badge" />
       </div>
     </template>
     <template #default>
-      <el-tabs v-model:value="currentTab" class="flex flex-col" @tab-click="handleTabClick">
-        <el-tab-pane v-for="(item, index) in tabData" :key="item.key" :name="index">
+      <el-tabs type="card" v-model:value="currentTab" class="flex flex-col" @tab-click="handleTabClick">
+        <el-tab-pane v-for="(item, index) in tabData" :key="item.key" :label="item.name" :name="index">
           <span class="mr-5">{{ item.name }}</span>
           <el-badge
             v-bind="item.badgeProps"

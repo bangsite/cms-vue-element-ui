@@ -4,7 +4,7 @@
       <div class="modal-overlay" id="modal-overlay"></div>
       <Transition name="modal-animate-inner">
         <div
-          v-show="showModal"
+          v-show="modalActive"
           class="modal"
           id="modal"
           role="dialog"
@@ -14,8 +14,8 @@
           <div class="modal-container" :style="{ width: width, height: height }">
             <header class="modal-header" id="modal-header">
               <slot name="header"></slot>
-              <button class="modal-close" @click.prevent="closeModal">
-                <SvgIcon :icon="'ic:round-close'" :size="24" />
+              <button class="modal-header-close" @click.prevent="closeModal">
+                <SvgIcon :icon="'ic:round-close'" :size="26" />
               </button>
             </header>
 
@@ -23,7 +23,7 @@
               <slot name="body"></slot>
             </section>
 
-            <footer class="modal-footer">
+            <footer class="modal-footer" id="modal-footer">
               <slot name="footer"></slot>
             </footer>
           </div>
@@ -37,10 +37,9 @@ import { ref } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 const props = defineProps({
-  showModal: {
-    type: Boolean,
-    default: false,
-  },
+  className: { type: String },
+  stopEvent: { type: Boolean, default: false },
+  modalActive: { type: Boolean },
   width: {
     type: [Number],
   },
@@ -54,7 +53,11 @@ const width = ref(props.width + "px");
 const height = ref(props.width + "px");
 
 const closeModal = () => {
-  emits("closeModal");
+  emits("closeModal", false);
+};
+
+const clickOutside = (event) => {
+  if (event) emit("closeModal", false);
 };
 </script>
 
