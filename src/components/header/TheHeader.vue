@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header__left">
       <MenuCollapse />
-      <!--      <TheBreadcrumb v-if="breadcrumb"></TheBreadcrumb>-->
+      <!-- <TheBreadcrumb v-if="breadcrumb"></TheBreadcrumb>-->
     </div>
 
     <div class="header__right">

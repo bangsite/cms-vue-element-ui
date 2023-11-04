@@ -7,6 +7,8 @@ import { Components } from "@/router/modules/components.route";
 import { Builder } from "@/router/modules/builder.route";
 import { Post } from "@/router/modules/post.route";
 import { Product } from "@/router/modules/product.route";
+import { LoginGuard } from "@/router/guard/login.guard";
+import { AuthGuard } from "@/router/guard/auth.guard";
 
 export const constantRouterMap: AppRouteRecordRaw[] = [
   {
@@ -14,6 +16,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     component: Layout,
     redirect: "/dashboard/analysis",
     name: "Root",
+    beforeEnter: [AuthGuard],
     meta: {
       hidden: true,
     },
@@ -22,6 +25,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     path: "/login",
     name: "Login",
     component: () => import("@/views/Auth/LoginView.vue"),
+    beforeEnter: [LoginGuard],
     meta: {
       title: i18n.global.t("router.login.title"),
       hidden: true,

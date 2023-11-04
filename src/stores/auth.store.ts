@@ -15,7 +15,7 @@ export const useAuthStore = defineStore("AuthStore", {
   },
 
   actions: {
-    setUserInfo(data) {
+    setUserInfo(data: Record<string, any>) {
       const { _id, email } = data;
 
       if (_id) this.userInfo["id"] = _id;
