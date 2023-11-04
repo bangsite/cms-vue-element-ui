@@ -1,6 +1,6 @@
 import { watch, ref } from "vue";
-import { isString } from "@/shared/utils/isCheck";
-import { useAppStoreWithOut } from "@/core/stores/modules/app.store";
+import { isString } from "@/utils/isCheck";
+import { useAppStoreWithOut } from "@/stores/app.store";
 import { useI18n } from "@/hooks/web/useI18n";
 
 const appStore = useAppStoreWithOut();

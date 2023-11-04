@@ -1,7 +1,5 @@
 import type { EChartsOption } from "echarts";
-import { useI18n } from "@/hooks/web/useI18n";
-
-const { t } = useI18n();
+import { i18n } from "@/plugins/i18n";
 
 export const lineOptions: EChartsOption = {
   tooltip: {
@@ -153,7 +151,7 @@ export const pieOptions: EChartsOption = {
 
 export const barOptions: EChartsOption = {
   title: {
-    text: t("analysis.weeklyUserActivity"),
+    text: i18n.global.t("analysis.weeklyUserActivity"),
     left: "center",
   },
   tooltip: {
@@ -170,13 +168,13 @@ export const barOptions: EChartsOption = {
   xAxis: {
     type: "category",
     data: [
-      t("analysis.monday"),
-      t("analysis.tuesday"),
-      t("analysis.wednesday"),
-      t("analysis.thursday"),
-      t("analysis.friday"),
-      t("analysis.saturday"),
-      t("analysis.sunday"),
+      i18n.global.t("analysis.monday"),
+      i18n.global.t("analysis.tuesday"),
+      i18n.global.t("analysis.wednesday"),
+      i18n.global.t("analysis.thursday"),
+      i18n.global.t("analysis.friday"),
+      i18n.global.t("analysis.saturday"),
+      i18n.global.t("analysis.sunday"),
     ],
     axisTick: {
       alignWithLabel: true,
@@ -187,7 +185,7 @@ export const barOptions: EChartsOption = {
   },
   series: [
     {
-      name: t("analysis.activeQuantity"),
+      name: i18n.global.t("analysis.activeQuantity"),
       data: [13253, 34235, 26321, 12340, 24643, 1322, 1324],
       type: "bar",
     },
@@ -196,30 +194,30 @@ export const barOptions: EChartsOption = {
 
 export const radarOption: EChartsOption = {
   legend: {
-    data: [t("workplace.personal"), t("workplace.team")],
+    data: [i18n.global.t("workplace.personal"), i18n.global.t("workplace.team")],
   },
   radar: {
     // shape: 'circle',
     indicator: [
-      { name: t("workplace.quote"), max: 65 },
-      { name: t("workplace.contribution"), max: 160 },
-      { name: t("workplace.hot"), max: 300 },
-      { name: t("workplace.yield"), max: 130 },
-      { name: t("workplace.follow"), max: 100 },
+      { name: i18n.global.t("workplace.quote"), max: 65 },
+      { name: i18n.global.t("workplace.contribution"), max: 160 },
+      { name: i18n.global.t("workplace.hot"), max: 300 },
+      { name: i18n.global.t("workplace.yield"), max: 130 },
+      { name: i18n.global.t("workplace.follow"), max: 100 },
     ],
   },
   series: [
     {
-      name: `xxx${t("workplace.index")}`,
+      name: `xxx${i18n.global.t("workplace.index")}`,
       type: "radar",
       data: [
         {
           value: [42, 30, 20, 35, 80],
-          name: t("workplace.personal"),
+          name: i18n.global.t("workplace.personal"),
         },
         {
           value: [50, 140, 290, 100, 90],
-          name: t("workplace.team"),
+          name: i18n.global.t("workplace.team"),
         },
       ],
     },

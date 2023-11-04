@@ -1,7 +1,0 @@
-$namespace: v;
-$elNamespace: el;
-
-:export {
-  namespace: unquote($namespace);
-  elNamespace: unquote($elNamespace);
-}

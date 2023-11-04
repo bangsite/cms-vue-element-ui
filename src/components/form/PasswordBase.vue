@@ -1,18 +1,20 @@
 <template>
   <el-form-item
     :label="label"
-    :help="errorMessage"
+    :error="errorMessage"
     :validate-status="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
   >
     <!--Field-->
     <el-input
-      :show-password="true"
-      autocomplete="new-password"
-      v-model="value"
-      :id="name"
       v-bind="attrs"
+      v-model="value"
+      show-password
+      autocomplete="new-password"
+      type="password"
+      :id="name"
       :disabled="disabled"
+      :placeholder="placeholder"
       @input="handleChange"
     >
       <!--Icon prefix-->
@@ -35,19 +37,17 @@ import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 
 const props = defineProps({
-    ...inputProps,
-
-    // label: { type: String, default: "" },
-    labelDisplay: { type: Boolean, default: true },
-    rules: { type: [String, Object], default: "" },
-    rulesAttrMessage: {
-        type: [Object],
-        default: () => {},
-    },
-    name: {
-        type: String,
-        required: true,
-    },
+  labelDisplay: { type: Boolean, default: true },
+  rules: { type: [String, Object], default: "" },
+  rulesAttrMessage: {
+    type: [Object],
+    default: () => {},
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  ...inputProps,
 });
 
 const name = toRef(props, "name");
@@ -55,12 +55,7 @@ const rules = toRef(props, "rules");
 const attrs = useAttrs();
 
 const { value, errorMessage, handleChange } = useField(name, rules, {
-    validateOnValueUpdate: false,
+  validateOnValueUpdate: false,
 });
 </script>
-<style lang="scss">
-.ant-tooltip.ant-tooltip-placement-top {
-  width: auto;
-  max-width: 500px;
-}
-</style>
+<style lang="scss"></style>

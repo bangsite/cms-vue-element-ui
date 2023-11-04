@@ -1,9 +1,25 @@
 declare namespace Auth {
-  type RoleType = "super" | "admin" | "user";
+  type RoleType = "SHOP" | "ADMIN" | "TEST";
 
-  interface UserInfo {
+  type Shop = {
     id: string;
     name: string;
-    role: RoleType;
-  }
+    email: string;
+    roles?: RoleType[];
+  };
+
+  type Tokens = {
+    accessToken: string;
+    refreshToken: string;
+  };
+
+  type Keys = {
+    key: string;
+  };
+
+  type Access = {
+    shop: Shop;
+    token: Tokens;
+    key?: Keys;
+  };
 }

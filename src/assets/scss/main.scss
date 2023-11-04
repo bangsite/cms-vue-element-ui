@@ -1,36 +1,14 @@
 @import "element-plus/theme-chalk/dark/css-vars.css";
 
 // Settings
-@import "./settings/font";
-@import "./settings/color";
-@import "./settings/global";
-@import "./settings/spacing";
-@import "./settings/breakpoints";
+@import "./settings";
 
 // Layouts
-@import "layouts/layout-classic";
-@import "./layouts/common";
-@import "layouts/layout-footer";
-@import "layouts/layout-header";
-@import "layouts/layout-main";
-@import "layouts/layout-content";
-@import "layouts/layout-side";
+@import "./layouts";
 
 // Components
-@import "./components/animates";
-@import "./components/button";
-@import "./components/chart";
-@import "./components/form-search";
-@import "./components/input";
-@import "./components/slide-login";
-@import "./components/upload";
-@import "./components/upload-file";
-@import "./components/upload-file-input";
+@import "./components";
 
 // Pages
-@import "./pages/workbench";
-@import "./pages/login";
-@import "./pages/analysis";
+@import "./pages";
 
-// @import './pages/product-variant';
-@import "./pages/product-create";

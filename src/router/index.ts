@@ -3,12 +3,13 @@ import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
 import { constantRouterMap } from "./routes";
-import { routeBeforeEach, routeAfterEach } from "@/core/guard/routeBeforeEach.guard";
+import { routeBeforeEach, routeAfterEach } from "./guard/routeBeforeEach.guard";
 
+console.log(constantRouterMap);
 const router = createRouter({
+  strict: true,
   history: createWebHistory(),
   linkActiveClass: "active",
-  strict: true,
   routes: constantRouterMap as RouteRecordRaw[],
   scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
 });
@@ -17,8 +18,8 @@ router.beforeEach(routeBeforeEach);
 router.afterEach(routeAfterEach);
 
 export const resetRouter = (): void => {
-  const resetWhiteNameList = ["Redirect", "Login", "NoFind", "Root"];
-  console.log(router.getRoutes());
+  const resetWhiteNameList = ["Redirect", "Login", "NotFound", "Root"];
+
   router.getRoutes().forEach((route) => {
     const { name } = route;
     if (name && !resetWhiteNameList.includes(name as string)) {
@@ -28,8 +29,9 @@ export const resetRouter = (): void => {
 };
 
 export const setupRouter = async (app: App<Element>) => {
-  // createRouterGuards(router, name);
+  console.log(router);
   app.use(router);
+  // createRouterGuards(router, name);
   // await router.isReady();
 };
 

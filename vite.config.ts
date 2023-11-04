@@ -6,11 +6,12 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    envDir: "./environments",
-    plugins: [vue(), vueJsx()],
-    resolve: {
-        alias: {
-            "@": fileURLToPath(new URL("./src", import.meta.url)),
-        },
+  envDir: "./environments",
+  plugins: [vue(), vueJsx()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
+  },
+  extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
 });

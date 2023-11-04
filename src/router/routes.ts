@@ -1,12 +1,17 @@
-import { dashboard } from "./modules/dashboard.route";
-import { useI18n } from "@/hooks/web/useI18n";
+import { i18n } from "@/plugins/i18n";
 
-const { t } = useI18n();
+import { Layout } from "@/helpers/router.helper";
+import { Dashboard } from "@/router/modules/dashboard.route";
+import { Exception } from "@/router/modules/exception.route";
+import { Components } from "@/router/modules/components.route";
+import { Builder } from "@/router/modules/builder.route";
+import { Post } from "@/router/modules/post.route";
+import { Product } from "@/router/modules/product.route";
 
 export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: "/",
-    component: () => import("@/layouts/MainLayout.vue"),
+    component: Layout,
     redirect: "/dashboard/analysis",
     name: "Root",
     meta: {
@@ -14,8 +19,54 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     },
   },
   {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Auth/LoginView.vue"),
+    meta: {
+      title: i18n.global.t("router.login.title"),
+      hidden: true,
+      noTagsView: true,
+    },
+  },
+  { ...Dashboard },
+  { ...Components },
+  { ...Builder },
+  { ...Post },
+  { ...Product },
+  { ...Exception },
+  {
+    path: "/403",
+    name: "403",
+    component: () => import("@/views/Exception/Error403.vue"),
+    meta: {
+      title: i18n.global.t("router.exception.403"),
+      hidden: true,
+      noTagsView: true,
+    },
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/Exception/Error404.vue"),
+    meta: {
+      title: i18n.global.t("router.exception.404"),
+      hidden: true,
+      noTagsView: true,
+    },
+  },
+  {
+    path: "/500",
+    name: "500",
+    component: () => import("@/views/Exception/Error500.vue"),
+    meta: {
+      title: i18n.global.t("router.exception.500"),
+      hidden: true,
+      noTagsView: true,
+    },
+  },
+  {
     path: "/redirect",
-    component: () => import("@/layouts/MainLayout.vue"),
+    component: Layout,
     name: "Redirect",
     children: [
       {
@@ -30,27 +81,4 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
       noTagsView: true,
     },
   },
-  {
-    path: "/login",
-    component: () => import("@/views/Auth/LoginView.vue"),
-    name: "Login",
-    meta: {
-      hidden: true,
-      title: t("router.login"),
-      noTagsView: true,
-    },
-  },
-  {
-    path: "/404",
-    component: () => import("@/views/Error/404.vue"),
-    name: "NoFind",
-    meta: {
-      hidden: true,
-      title: "404",
-      noTagsView: true,
-    },
-  },
-  ...dashboard,
 ];
-
-export const asyncRouterMap: AppRouteRecordRaw[] = [...dashboard];
