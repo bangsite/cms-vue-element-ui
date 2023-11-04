@@ -1,7 +1,7 @@
 <template>
   <div class="upload">
     <div class="upload__wrap">
-      <UploadFileInput
+      <FileInput
         name="files"
         accept=".png, .jpg, .jpeg"
         :label="label"
@@ -12,30 +12,30 @@
       >
         <template v-slot:description>
           <div class="upload__desc">
-            <IconUploadImage />
+            <IconUpload />
             <!-- <span>{{ $t('IMAGE_MANAGE.NOTES') }}</span> -->
           </div>
         </template>
-      </UploadFileInput>
+      </FileInput>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, watch } from "vue";
+import { ref, toRefs } from "vue";
 import { useI18n } from "vue-i18n";
 import { useForm } from "vee-validate";
 
-import IconUploadImage from "@/components/icons/IconUploadImage.vue";
-import UploadFileInput from "@/components/upload/UploadFileInput.vue";
+import IconUpload from "@/components/svgs/IconUpload.vue";
+import FileInput from "@/components/upload/FileInput.vue";
 
-// import useAllowPermission from '@/shared/composables/useAllowPermission';
+// import useAllowPermission from '@/composables/useAllowPermission';
 
 const props = defineProps({
-    label: { type: String },
-    uploadStatus: { type: [Boolean], default: false },
-    uploadError: { type: [Object, String] },
-    progress: { type: [String, Number], default: 0 },
+  label: { type: String },
+  uploadStatus: { type: [Boolean], default: false },
+  uploadError: { type: [Object, String] },
+  progress: { type: [String, Number], default: 0 },
 });
 
 const emits = defineEmits(["uploadFiles", "removeAll", "uploadNewFile"]);
@@ -49,33 +49,33 @@ const multipleFile = ref(false);
 const { uploadError } = toRefs(props);
 
 const handleFiles = (data: string | any[]) => {
-    if (data && data.length) {
-        dataFiles.value = data;
-        emits("uploadNewFile", true);
-    } else dataFiles.value = [];
+  if (data && data.length) {
+    dataFiles.value = data;
+    emits("uploadNewFile", true);
+  } else dataFiles.value = [];
 };
 
 const handleUploadFiles = (data: any) => {
-    multipleFile.value = false;
-    emits("uploadFiles", {
-        dataFiles: data,
-        type: "one",
-        length: dataFiles.value.length,
-    });
+  multipleFile.value = false;
+  emits("uploadFiles", {
+    dataFiles: data,
+    type: "one",
+    length: dataFiles.value.length,
+  });
 };
 
 const handleUploadAllFiles = () => {
-    multipleFile.value = true;
-    emits("uploadFiles", {
-        dataFiles: dataFiles.value,
-        type: "all",
-        length: dataFiles.value.length,
-    });
+  multipleFile.value = true;
+  emits("uploadFiles", {
+    dataFiles: dataFiles.value,
+    type: "all",
+    length: dataFiles.value.length,
+  });
 };
 
 const handleRemoveAll = () => {
-    dataFiles.value = [];
-    emits("removeAll", true);
+  dataFiles.value = [];
+  emits("removeAll", true);
 };
 
 // watch(uploadError, () => {

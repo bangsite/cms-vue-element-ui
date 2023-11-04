@@ -1,4 +1,4 @@
-import { MessageTab } from "@/core/interfaces/notify-message.interface";
+import { type MessageTab } from "@/core/interfaces/notify-message.interface";
 
 export const MessageData: MessageTab = [
   {
@@ -21,7 +21,7 @@ export const MessageData: MessageTab = [
   {
     key: 2,
     name: "information",
-    badgeProps: { type: "error" },
+    badgeProps: { type: "success" },
     list: [
       {
         id: 1,

@@ -7,6 +7,7 @@ import {
   ElConfigProvider,
   ElCheckbox,
   ElCol,
+  ElCollapse,
   ElContainer,
   ElDatePicker,
   ElDialog,
@@ -30,6 +31,7 @@ import {
   ElStatistic,
   ElTable,
   ElTag,
+  ElTabs,
   ElTimePicker,
   ElTimeline,
   ElTooltip,
@@ -51,6 +53,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElCard)
     .use(ElCheckbox)
     .use(ElCol)
+    .use(ElCollapse)
     .use(ElContainer)
     .use(ElDatePicker)
     .use(ElDialog)
@@ -74,6 +77,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElStatistic)
     .use(ElTag)
     .use(ElTable)
+    .use(ElTabs)
     .use(ElTimePicker)
     .use(ElTimeline)
     .use(ElTooltip)

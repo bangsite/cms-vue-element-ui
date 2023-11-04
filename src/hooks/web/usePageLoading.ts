@@ -1,4 +1,4 @@
-import { useAppStoreWithOut } from "@/core/stores/modules/app.store";
+import { useAppStoreWithOut } from "@/stores/app.store";
 
 const appStore = useAppStoreWithOut();
 

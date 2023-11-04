@@ -2,11 +2,18 @@
   <el-form-item
     :label="label"
     :error="errorMessage"
-    :validateMessage="errorMessage ? 'error' : undefined"
+    :validate-status="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
   >
     <!--Field-->
-    <el-input v-model="value" :id="name" v-bind="attrs" :disabled="disabled" @input="handleChange">
+    <el-input
+      v-bind="attrs"
+      v-model="value"
+      :id="name"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      @input="handleChange"
+    >
       <!--Icon prefix-->
       <template #prefix>
         <slot name="prefix" />
@@ -27,19 +34,18 @@ import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 
 const props = defineProps({
-    ...inputProps,
-
-    // label: { type: String, default: "" },
-    labelDisplay: { type: Boolean, default: true },
-    rules: { type: [String, Object], default: "" },
-    rulesAttrMessage: {
-        type: [Object],
-        default: () => {},
-    },
-    name: {
-        type: String,
-        required: true,
-    },
+  labelDisplay: { type: Boolean, default: true },
+  labelPosition: { type: String },
+  rules: { type: [String, Object], default: "" },
+  rulesAttrMessage: {
+    type: [Object],
+    default: () => {},
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  ...inputProps,
 });
 
 const name = toRef(props, "name");
@@ -47,12 +53,7 @@ const rules = toRef(props, "rules");
 const attrs = useAttrs();
 
 const { value, errorMessage, handleChange } = useField(name, rules, {
-    validateOnValueUpdate: false,
+  validateOnValueUpdate: false,
 });
 </script>
-<style lang="scss">
-.ant-tooltip.ant-tooltip-placement-top {
-  width: auto;
-  max-width: 500px;
-}
-</style>
+<style lang="scss"></style>

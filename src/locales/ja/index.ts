@@ -5,9 +5,9 @@ import ORDER from "./order";
 import PRODUCT from "./product";
 
 export default {
-    COMMON,
-    MENU,
-    CATEGORY,
-    ORDER,
-    PRODUCT,
+  COMMON,
+  MENU,
+  CATEGORY,
+  ORDER,
+  PRODUCT,
 };
