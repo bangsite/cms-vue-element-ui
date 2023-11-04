@@ -1,7 +1,20 @@
+::-webkit-scrollbar {
+    background-color: #eee;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #cecece;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b5b5b5;
+}
+
 #app {
     height: 100%;
 }
-
 
 .overlay {
     background-color: $cl-dark;
@@ -21,35 +34,43 @@
         flex-direction: column;
     }
 
-    &-align-center {
+    &-row {
+        flex-direction: row;
+    }
+}
+
+.align {
+    &-center {
         align-items: center;
     }
 
     &-start {
-        align-items: center;
-        justify-content: flex-start;
+        align-items: start;
     }
 
     &-end {
-        align-items: center;
-        justify-content: flex-end;
+        align-items: end;
+    }
+}
+
+.justify {
+    &-start {
+        justify-content: flex-start;
     }
 
     &-center {
-        align-items: center;
         justify-content: center;
     }
 
-    &-center-space {
-        align-items: center;
-        justify-content: space-between;
+    &-end {
+        justify-content: flex-end;
     }
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
-.w-100{
+.w-100 {
     width: 100%;
 }

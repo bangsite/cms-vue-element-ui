@@ -1,30 +1,30 @@
 <template>
-  <el-dropdown trigger="click" arrow class="user w-60px h-full flex flex-center">
-    <div class="flex flex-center user__wrap">
-      <span class="user__avatar">
-        <SvgIcon :icon="'logos:zenhub-icon'" :size="20" />
-      </span>
+  <el-dropdown class="ml-10">
+    <el-button class="user__avatar">
+      <SvgIcon :icon="'logos:zenhub-icon'" :size="20" />
+    </el-button>
 
-      <span class="user__name"> Admin</span>
-    </div>
-
-    <template #overlay>
-      <el-menu class="user__menu">
-        <el-menu-item class="user__menu-item">
-          <SvgIcon :icon="'ant-design:user-outlined'" :size="20" />
-
-          <RouterLink to="/"> View Profile </RouterLink>
-        </el-menu-item>
-        <el-menu-item class="user__menu-item">
-          <SvgIcon :icon="'ant-design:setting-outlined'" :size="20" />
-
-          <RouterLink to="/"> Account Settings </RouterLink>
-        </el-menu-item>
-        <el-menu-item class="user__menu-item">
-          <SvgIcon :icon="'tabler:logout'" :size="20" />
-          <a @click="handleLogout"> Logout </a>
-        </el-menu-item>
-      </el-menu>
+    <template #dropdown>
+      <el-dropdown-menu class="pt-10 pb-10">
+        <el-dropdown-item>
+          <el-link :underline="false" @click="handleSetStatus">
+            <SvgIcon :icon="'ant-design:user-outlined'" :size="20" class="mr-5" />
+            <span>Set status </span>
+          </el-link>
+        </el-dropdown-item>
+        <el-dropdown-item>
+          <el-link :underline="false" @click="handleSetting">
+            <SvgIcon :icon="'ant-design:setting-outlined'" :size="20" class="mr-5" />
+            <span>Account Settings</span>
+          </el-link>
+        </el-dropdown-item>
+        <el-dropdown-item>
+          <el-link :underline="false" @click="handleLogout">
+            <SvgIcon :icon="'tabler:logout'" :size="20" class="mr-5" />
+            <span>Logout</span>
+          </el-link>
+        </el-dropdown-item>
+      </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>
@@ -33,12 +33,22 @@ import { useRouter } from "vue-router";
 
 import { useAuthStore } from "@/stores/auth.store";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import { deleteCookie } from "@/utils/useCookies";
 
-const authStore = useAuthStore();
+const { resetAuth } = useAuthStore();
 const router = useRouter();
 
+const handleSetStatus = () => {
+  console.log("");
+};
+
+const handleSetting = () => {
+  console.log("");
+};
 const handleLogout = () => {
-  // authStore.logout();
+  resetAuth();
+  deleteCookie("__x_key_at");
+  deleteCookie("__x_key_rf");
   router.push("/login");
 };
 </script>

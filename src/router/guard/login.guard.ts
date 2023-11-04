@@ -1,10 +1,8 @@
 import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
-import { useAuthStore } from "@/stores/auth.store";
+import { getCookie } from "@/utils/useCookies";
 
 export const LoginGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  const authStore = useAuthStore();
-
-  if (to.name !== "dashboard" && authStore.token) {
-    return next({ name: "dashboard" });
+  if (to.name === "Login" && getCookie("__x_key_at")) {
+    return next({ name: "Dashboard" });
   } else next();
 };

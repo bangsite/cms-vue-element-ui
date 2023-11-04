@@ -1,7 +1,8 @@
 import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
-import { useAuthStore } from "@/stores/auth.store";
+// import { useAuthStore } from "@/stores/auth.store";
 import { useTitle } from "@/hooks/web/useTitle";
 import { usePageLoading } from "@/hooks/web/usePageLoading";
+import { getCookie } from "@/utils/useCookies";
 
 const { loadStart, loadDone } = usePageLoading();
 
@@ -13,11 +14,10 @@ const { loadStart, loadDone } = usePageLoading();
  */
 const routeBeforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   loadStart();
-  const authStore = useAuthStore();
+  // const authStore = useAuthStore();
 
-  if (!authStore.token && to.name !== "login") {
-    // next({ name: 'login' });
-    next();
+  if (to.name !== "Login" && !getCookie("__x_key_at")) {
+    next({ name: "Login" });
   } else next();
 };
 
