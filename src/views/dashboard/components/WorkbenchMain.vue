@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="15">
-    <el-col :span="15">
+    <el-col :span="16">
       <el-card title="Project main technology stack" shadow="hover" class="mb-15">
         <template #extra><a href="#">More tech stacks</a></template>
 
@@ -9,11 +9,11 @@
         </div>
       </el-card>
       <el-card title="Dynamic" shadow="hover" class="work__main-activity">
-        <template #extra><a href="#">More news</a></template>
+        <template #header><a href="#">More news</a></template>
 
         <el-descriptions title="Activity">
           <el-descriptions-item v-for="item in WorkActivityData" :key="item.id">
-            <el-row :gutter="15">
+            <el-row :gutter="15" justify="start" align="middle" class="mb-10">
               <el-col :span="2">
                 <el-avatar class="avatar" src="#">
                   <SvgIcon :icon="'logos:mps-icon'" :size="24" />

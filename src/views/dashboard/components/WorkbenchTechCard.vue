@@ -1,12 +1,12 @@
 <template>
-  <el-card hoverable>
-    <div class="flex flex-col" @click="handleOpenSite">
-      <div class="flex flex-start">
-        <SvgIcon :icon="icon" :size="30" :style="{ color: iconColor }" class="mr-15" />
+  <el-card shadow="hover">
+    <div class="flex flex-col justify-center cursor-pointer" @click="handleOpenSite">
+      <div class="flex justify-start">
+        <SvgIcon :icon="icon" :size="24" :style="{ color: iconColor }" class="mr-5" />
         <h3 class="m-0">{{ name }}</h3>
       </div>
       <p class="m-5 line-clamp-2">{{ description }}</p>
-      <div class="flex flex-end">
+      <div class="flex justify-end">
         <span>{{ author }}</span>
       </div>
     </div>

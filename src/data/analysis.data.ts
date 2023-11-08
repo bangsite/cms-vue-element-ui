@@ -5,7 +5,7 @@ export const Timelines: AnalysisTimelines[] = [
   { type: "green", title: "Success", content: "Where is the success", time: "2021-10-10 20:46" },
   { type: "red", title: "Error", content: "Where is the error", time: "2021-10-10 20:46" },
   { type: "yellow", title: "Warning", content: "Where is the warning", time: "2021-10-10 20:46" },
-  { type: "blue", title: "Information", content: "Where is the info", time: "2021-10-10 20:46" },
+
   { type: "orange", title: "Danger", content: "Where is the danger", time: "2021-10-10 20:46" },
 ];
 

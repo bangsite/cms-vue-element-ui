@@ -1,6 +1,6 @@
 <template>
   <el-card hoverable shadow="hover">
-    <div class="flex flex-col flex-center">
+    <div class="flex flex-col align-center">
       <SvgIcon :icon="icon" :size="32" :style="{ color: iconColor }" />
       <p class="m-5 line-clamp-3">{{ label }}</p>
     </div>
