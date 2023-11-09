@@ -5,7 +5,7 @@ export interface Technology {
   author: string;
   site: string;
   icon: string;
-  iconColor?: string;
+  color?: string;
 }
 
 export interface Activity {
@@ -18,5 +18,5 @@ export interface Shortcuts {
   id: number;
   label: string;
   icon: string;
-  iconColor?: string;
+  color?: string;
 }

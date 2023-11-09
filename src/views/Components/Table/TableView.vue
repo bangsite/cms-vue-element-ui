@@ -68,7 +68,7 @@ import { computed, onBeforeMount, ref } from "vue";
 import useFilter from "@/views/Components/Table/useFilter";
 import useSorter from "@/views/Components/Table/useSorter";
 import { columnsTableBasic } from "@/views/Components/Table/useColumns";
-import CustomModal from "@/components/modal/Custom.vue";
+import CustomModal from "@/components/modal/ModalCommon.vue";
 import useBooking from "@/composables/useBooking";
 import type { TableInstance } from "element-plus";
 import { ElMessageBox } from "element-plus";

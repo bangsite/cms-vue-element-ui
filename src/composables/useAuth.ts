@@ -6,7 +6,7 @@ export default function useAuth() {
   const response = ref({});
   const errors = ref(null);
 
-  const doLogin = async (data: Record<string, any>) => {
+  const doLogin = async (data: Auth.Login) => {
     isLoading.value = true;
 
     try {
@@ -20,7 +20,7 @@ export default function useAuth() {
     }
   };
 
-  const doSignUp = async (data: Record<string, any>) => {
+  const doSignUp = async (data: Auth.Register) => {
     isLoading.value = true;
 
     try {

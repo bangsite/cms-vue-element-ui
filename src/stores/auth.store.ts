@@ -5,6 +5,7 @@ export const useAuthStore = defineStore("AuthStore", {
   state: () => ({
     userInfo: <Auth.Shop>{ roles: ["ADMIN"] },
     tokens: <Auth.Tokens>{},
+    layoutForm: "LoginForm",
     isLoading: false,
   }),
 
@@ -15,6 +16,9 @@ export const useAuthStore = defineStore("AuthStore", {
   },
 
   actions: {
+    setLayoutForm(name: string) {
+      this.layoutForm = name;
+    },
     setUserInfo(data: Record<string, any>) {
       const { _id, email } = data;
 

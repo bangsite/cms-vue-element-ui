@@ -17,6 +17,15 @@ declare namespace Auth {
     key: string;
   };
 
+  type Login = {
+    email: string;
+    password: string;
+  };
+  type Register = {
+    email: string;
+    password: string;
+  };
+
   type Access = {
     shop: Shop;
     token: Tokens;

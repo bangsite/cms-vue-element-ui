@@ -1,63 +1,85 @@
 <template>
-  <ASkeleton :loading="loading" active>
-    <ACard>
-      <ARow :gutter="16" class="flex-align-center">
-        <ACol :span="16">
-          <div class="flex flex-align-center">
-            <div class="work__top-avatar">
-              <SvgIcon :icon="'logos:mps-icon'" :size="24" />
+  <el-skeleton :loading="isLoading" :rows="3" animated>
+    <template #template>
+      <el-card>
+        <el-skeleton-item variant="text" style="width: 30%" />
+        <el-skeleton-item variant="text" style="width: 80%; margin-right: 16px" />
+        <el-skeleton-item variant="text" style="margin-right: 16px" />
+      </el-card>
+    </template>
+    <template #default>
+      <el-card>
+        <el-row justify="space-between" align="middle" class="mb-10">
+          <div class="flex flex-col">
+            <el-row :gutter="20" justify="start" align="middle">
+              <img :src="currentWeather.condition.icon" alt="icon" :width="48" />
+              <span>
+                <strong style="font-size: 34px">
+                  {{ currentWeather.temp_c }}
+                </strong>
+                <sup style="font-size: 20px">°C</sup>
+              </span>
+            </el-row>
+            <span>{{ currentWeather.condition.text }}</span>
+          </div>
+          <div class="flex flex-col">
+            <div>
+              <span>Wind Status: </span>
+              <span>
+                <strong style="font-size: 20px">
+                  {{ currentWeather.wind_kph }}
+                </strong>
+                <strong>km/h</strong>
+              </span>
             </div>
-
-            <div class="work__top-para">
-              <h3>Good morning, {{ auth?.userInfo?.name }}, today is another day full of energy!</h3>
-              <p>Cloudy to sunny today, 20°C - 25°C!</p>
+            <div>
+              <span>Humidity: </span>
+              <span>
+                <strong style="font-size: 20px">
+                  {{ currentWeather.humidity }}
+                </strong>
+                <strong>%</strong>
+              </span>
             </div>
           </div>
-        </ACol>
-
-        <ACol :span="8" justify="space-between">
-          <div class="work__top-statistic">
-            <AStatistic v-for="item in statisticData" :key="item.id" :title="item.label" :value="item.value" />
+          <div class="flex flex-col">
+            <div>
+              <span>Clouds: </span>
+              <span>
+                <strong style="font-size: 20px">
+                  {{ currentWeather.cloud }}
+                </strong>
+                <strong>%</strong>
+              </span>
+            </div>
+            <div>
+              <span>UV Index: </span>
+              <span>
+                <strong style="font-size: 20px">{{ currentWeather.uv }}</strong>
+              </span>
+            </div>
           </div>
-        </ACol>
-      </ARow>
-      <!--      <div class="flex"></div>-->
-    </ACard>
-  </ASkeleton>
+          <div class="flex flex-col">
+            <span>{{ locationWeather.name }}</span>
+            <span>{{ dateFull(locationWeather.localtime) }}</span>
+          </div>
+        </el-row>
+      </el-card>
+    </template>
+  </el-skeleton>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useAuthStore } from "@/stores/auth.store";
-import SvgIcon from "@/components/common/SvgIcon.vue";
+import { computed, onBeforeMount } from "vue";
+import useWorkBench from "@/composables/useWorkBench";
+import { dateFull } from "@/utils/formatDateTime";
 
-interface StatisticData {
-  id: number;
-  label: string;
-  value: string;
-}
-const auth = useAuthStore();
+const { fetchWeather, response, errors, isLoading } = useWorkBench();
 
-const loading = ref(true);
-const statisticData: StatisticData[] = [
-  {
-    id: 0,
-    label: "number of items",
-    value: "25",
-  },
-  {
-    id: 1,
-    label: "to do",
-    value: "4/16",
-  },
-  {
-    id: 2,
-    label: "message",
-    value: "12",
-  },
-];
+const currentWeather = computed(() => response.value?.current);
+const locationWeather = computed(() => response.value?.location);
 
-onMounted(() => {
-  loading.value = false;
+onBeforeMount(async () => {
+  await fetchWeather();
 });
 </script>

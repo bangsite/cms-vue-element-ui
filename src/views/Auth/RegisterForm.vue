@@ -19,18 +19,9 @@
           <PasswordBase name="password" rules="required" placeholder="Enter password..." style="width: 100%" />
         </el-form-item>
 
-        <el-form-item jus>
-          <el-col :span="16">
-            <el-checkbox v-model:checked="ruleForm.remember">Remember me</el-checkbox>
-          </el-col>
-          <el-col :span="8" style="text-align: end">
-            <el-link href="#" disabled>Recovery Password</el-link>
-          </el-col>
-        </el-form-item>
-
         <el-form-item>
           <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
-            >Sign in
+            >Sign up
           </el-button>
           <span class="w-100 text-center"><strong>OR</strong></span>
 
@@ -44,10 +35,9 @@
           </el-row>
 
           <el-divider />
-
           <el-row :gutter="10" justify="center" class="w-100">
-            <span class="mr-5">Don't have an account yet ? </span>
-            <el-link href="#" @click="handleRegisterNew">Sign Up</el-link>
+            <span class="mr-5">Already have an account ? </span>
+            <el-link href="#" @click="handleRegisterNew">Sign in</el-link>
           </el-row>
         </el-form-item>
       </el-form>
@@ -69,20 +59,18 @@ import useAuth from "@/composables/useAuth";
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
 const router = useRouter();
+const { doSignUp, response, errors, isLoading } = useAuth();
 const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
-
-const { doLogin, response, errors, isLoading } = useAuth();
 
 const ruleForm = ref<LoginInput>({
   email: "",
   password: "",
-  remember: false,
 });
 
 const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
-  await doLogin(values);
+  await doSignUp(values);
 
   const { shop, tokens } = response.value;
   if (shop) setUserInfo(shop);
@@ -98,8 +86,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
 });
 
 const handleLoginWith = () => {};
-
 const handleRegisterNew = () => {
-  setLayoutForm("RegisterForm");
+  setLayoutForm("LoginForm");
 };
 </script>
