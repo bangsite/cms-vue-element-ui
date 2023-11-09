@@ -53,35 +53,40 @@ export const WorkTech: Technology[] = [
 
 export const WorkActivity: Activity[] = [
   {
-    id: 4,
+    id: 1,
     content: "Soybean wrote some casually on the workbench page just now, and I can read it!",
     time: "2021-11-07 22:45:32",
   },
-  { id: 3, content: "Soybean is busy writing project documentation for soybean-admin!", time: "2021-11-03 20:33:31" },
+  { id: 2, content: "Soybean is busy writing project documentation for soybean-admin!", time: "2021-11-03 20:33:31" },
   {
-    id: 2,
+    id: 3,
     content: "Soybean is ready to make full preparations for the release of soybean-admin 1.0!",
     time: "2021-10-31 22:43:12",
   },
   {
-    id: 1,
+    id: 4,
     content: "@yanbowe submitted a bug to soybean-admin, the multi-tab bar will not be adaptive.",
     time: "2021-10-27 10:24:54",
   },
   {
-    id: 0,
+    id: 5,
+    content: "Soybean created the open source project soybean-admin on May 28, 2021!",
+    time: "2021-05-28 22:22:22",
+  },
+  {
+    id: 6,
     content: "Soybean created the open source project soybean-admin on May 28, 2021!",
     time: "2021-05-28 22:22:22",
   },
 ];
 
 export const WorkShortcuts: Shortcuts[] = [
-  { id: 0, label: "Dashboard", icon: "mdi:desktop-mac-dashboard", iconColor: "#409eff" },
-  { id: 1, label: "System", icon: "ic:outline-settings", iconColor: "#7238d1" },
-  { id: 2, label: "Privilege", icon: "mdi:family-tree", iconColor: "#f56c6c" },
-  { id: 3, label: "Component", icon: "vscode-icons:folder-type-component", iconColor: "#19a2f1" },
-  { id: 4, label: "Table", icon: "mdi:table-large", iconColor: "#d35400" },
-  { id: 5, label: "Chart", icon: "mdi:chart-areaspline", iconColor: "#8aca6b" },
-  { id: 6, label: "Languages", icon: "vscode-icons:file-type-locale", iconColor: "#2c3e50" },
-  { id: 7, label: "Dynamic", icon: "material-symbols-light:dynamic-form-outline-rounded", iconColor: "#c0392b" },
+  { id: 0, label: "System", icon: "mdi:desktop-mac-dashboard", color: "#409eff" },
+  { id: 1, label: "Setting", icon: "ic:outline-settings", color: "#7238d1" },
+  { id: 2, label: "Privilege", icon: "mdi:family-tree", color: "#f56c6c" },
+  { id: 3, label: "Component", icon: "vscode-icons:folder-type-component", color: "#19a2f1" },
+  { id: 4, label: "Table", icon: "mdi:table-large", color: "#d35400" },
+  { id: 5, label: "Chart", icon: "mdi:chart-areaspline", color: "#8aca6b" },
+  { id: 6, label: "Languages", icon: "vscode-icons:file-type-locale", color: "#2c3e50" },
+  { id: 7, label: "Dynamic", icon: "material-symbols-light:dynamic-form-outline-rounded", color: "#c0392b" },
 ];

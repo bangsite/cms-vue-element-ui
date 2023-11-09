@@ -15,47 +15,7 @@
   gap: 16px;
   width: 100%;
 
-  &__top {
-    &-avatar {
-      background-color: $cl-container;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1rem;
-      width: 48px;
-      height: 48px;
-    }
-
-    &-para {
-      h3,
-      p {
-        margin: 0;
-      }
-
-      p {
-        color: $cl-text;
-        font-size: $font-size-medium;
-      }
-    }
-
-    &-statistic {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .el-statistic__head {
-        color: $cl-text;
-        font-size: $font-size-base;
-        text-transform: capitalize;
-      }
-
-      .el-statistic__content {
-        text-align: center;
-        color: $cl-title;
-      }
-    }
-  }
+  &__top {}
 
   &__main {
     &-tech {
@@ -63,13 +23,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 0.5rem;
 
-      .ant-card {
-        cursor: pointer;
-      }
-
-      .ant-card-body {
-        padding: 1rem;
-      }
 
       p {
         font-size: $font-size-medium;
@@ -108,18 +61,6 @@
       display: grid;
       grid-template-columns: repeat(3, 32%);
       gap: 0.5rem;
-      align-items: center;
-      justify-content: center;
-
-      .ant-card {
-        cursor: pointer;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        min-height: 136px;
-      }
 
       p {
         font-size: $font-size-small;
@@ -128,6 +69,7 @@
     }
 
     &-banner {
+
       svg {
         color: rgba(64, 158, 255, 1);
       }
