@@ -4,7 +4,7 @@ import { Booking } from "@/constant/externalAPI.ts";
 
 const { url, key, host } = Booking;
 
-const getHotels = async (config: AxiosRequestConfig): Promise<any> => {
+const getHotels = async (config?: AxiosRequestConfig): Promise<any> => {
   return await ApiService.get(`/static/hotels`, {
     baseURL: url,
     headers: {

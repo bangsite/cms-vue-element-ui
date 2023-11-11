@@ -13,6 +13,7 @@ import {
   ElDialog,
   ElDivider,
   ElDropdown,
+  ElEmpty,
   ElForm,
   ElIcon,
   ElInput,
@@ -59,6 +60,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElDialog)
     .use(ElDivider)
     .use(ElDropdown)
+    .use(ElEmpty)
     .use(ElForm)
     .use(ElIcon)
     .use(ElInput)
