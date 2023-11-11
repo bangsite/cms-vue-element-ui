@@ -1,28 +1,38 @@
 <template>
-  <div class="flex flex-col flex-center h-full">
-    <div class="flex flex-col">
-      <img src="@/assets/svgs/no-permission.svg" v-if="type === '403'" alt="403" />
-      <img src="@/assets/svgs/not-found.svg" v-if="type === '404'" alt="404" />
-      <img src="@/assets/svgs/network-error.svg" v-if="type === '500'" alt="500" />
-      <div class="mb-20">
-        {{ $t(`EXCEPTION.${type}`) }}
-      </div>
-    </div>
+  <el-row :gutter="15" justify="center" align="middle">
+    <el-col :span="12" class="flex justify-center align-center">
+      <div class="flex flex-col justify-center align-center">
+        <NoPermissionSvg v-if="+exception === 403" name="403" />
+        <NotFoundSvg v-if="+exception === 404" name="404" />
+        <NetworkError v-if="+exception === 500" name="500" />
 
-    <el-button type="primary" @click="btnClick">{{ $t("COMMON.BTN_BACK_HOME") }}</el-button>
-  </div>
+        <div class="mb-20">
+          {{ $t(`EXCEPTION.${exception}`) }}
+        </div>
+
+        <el-button type="primary" @click="goBackHome">
+          {{ $t("COMMON.BTN_BACK_HOME") }}
+        </el-button>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 <script setup lang="ts">
-import { propTypes } from "@/utils/propTypes";
-type ExceptionType = "403" | "404" | "500";
+import router from "@/router";
 
-const props = defineProps({
-  type: propTypes.string.validate((v: ExceptionType) => ["404", "500", "403"].includes(v)).def("404"),
+import NoPermissionSvg from "@/components/svgs/NoPermissionSvg.vue";
+import NotFoundSvg from "@/components/svgs/NotFoundSvg.vue";
+import NetworkError from "@/components/svgs/NetworkError.vue";
+
+defineProps({
+  exception: {
+    type: Number,
+    default: 404,
+  },
 });
-const emit = defineEmits(["errorClick"]);
 
-const btnClick = () => {
-  emit("errorClick", props.type);
+const goBackHome = () => {
+  router.push("/");
 };
 </script>
 <style scoped lang="scss"></style>
