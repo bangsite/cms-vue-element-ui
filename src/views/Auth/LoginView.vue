@@ -30,7 +30,6 @@ const DYNAMIC_LAYOUT = {
 };
 
 const { layoutForm } = storeToRefs(useAuthStore());
-console.log(layoutForm.value);
 
 const layout = computed(() => DYNAMIC_LAYOUT[layoutForm.value]);
 </script>

@@ -4,8 +4,9 @@
       <el-skeleton :loading="loading" active :rows="2">
         <GradientBackground :startColor="item.colors[0]" :endColor="item.colors[1]">
           <h3>{{ item.title }}</h3>
-          <div class="flex flex-center-space">
-            <SvgIcon :icon="item.icon" :size="32" />
+
+          <div class="flex align-center">
+            <SvgIcon :icon="item.icon" :size="32" class="mr-5" />
             <h4>
               <CountTo :prefix="item.unit" :startAmount="1" :endAmount="item.value" />
             </h4>

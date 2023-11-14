@@ -73,11 +73,12 @@ const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
 
 const { doLogin, response, errors, isLoading } = useAuth();
 
-const ruleForm = ref<LoginInput>({
+const ruleForm: LoginInput = {
   email: "",
   password: "",
   remember: false,
-});
+};
+console.log(ruleForm);
 
 const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 

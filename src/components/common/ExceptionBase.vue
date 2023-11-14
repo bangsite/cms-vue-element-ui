@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="15" justify="center" align="middle">
     <el-col :span="12" class="flex justify-center align-center">
-      <div class="flex flex-col justify-center align-center">
+      <div class="flex flex-col justify-center align-center" style="max-height: 40rem">
         <NoPermissionSvg v-if="+exception === 403" name="403" />
         <NotFoundSvg v-if="+exception === 404" name="404" />
         <NetworkError v-if="+exception === 500" name="500" />

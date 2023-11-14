@@ -86,3 +86,8 @@ const batchDelete = (id: string[]) => {
   console.log(id);
 };
 </script>
+<style lang="scss">
+.el-popper {
+  max-width: 30rem;
+}
+</style>
