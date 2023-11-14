@@ -7,9 +7,10 @@ export default {
     ANALYSIS: "Analysis",
     WORKBENCH: "Workbench",
   },
-  COMPONENTS: {
-    TITLE: "Component",
-    TABLE_BASIC: "Table basic",
+  TABLES: {
+    TITLE: "Tables",
+    BASIC_TABLE: "Basic Table",
+    PRO_TABLE: "Pro Table",
     TABLE_DRAG_COLUMN: "Table drag column",
     TABLE_DRAG_ROW: "Table drag row",
   },

@@ -21,7 +21,7 @@ import { ref, reactive } from "vue";
 import { useI18n } from "vue-i18n";
 
 import type { EChartsOption } from "echarts";
-import Echart from "@/components/Charts/Echart.vue";
+import Echart from "@/components/charts/Echart.vue";
 
 import { barOptions, lineOptions, pieOptions } from "@/data/echarts.data";
 import {
@@ -30,9 +30,11 @@ import {
   getWeeklyUserActivityApi,
 } from "@/services/modules/dashboard.service";
 import { set } from "@/helpers/object.helper";
+import { reactify } from "@vueuse/core";
 
 const { t } = useI18n();
-const loading = ref(true);
+let loading = ref(true);
+console.log("loading::", loading);
 
 const pieOptionsData = reactive<EChartsOption>(pieOptions) as EChartsOption;
 const barOptionsData = reactive<EChartsOption>(barOptions) as EChartsOption;

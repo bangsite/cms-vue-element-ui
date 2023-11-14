@@ -1,5 +1,13 @@
 export const columnsTableBasic = [
   {
+    title: "#",
+    key: "sort",
+  },
+  {
+    title: "Id",
+    key: "id",
+  },
+  {
     title: "Name",
     dataIndex: "name",
     key: "name",
@@ -30,11 +38,11 @@ export const columnsTableBasic = [
     key: "currency",
     align: "center",
   },
-  {
-    title: "Zip",
-    dataIndex: "zip",
-    key: "zip",
-  },
+  // {
+  //   title: "Zip",
+  //   dataIndex: "zip",
+  //   key: "zip",
+  // },
   {
     key: "action",
     title: "Action",

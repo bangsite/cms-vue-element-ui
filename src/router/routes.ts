@@ -3,7 +3,7 @@ import { i18n } from "@/plugins/i18n";
 import { Layout } from "@/helpers/router.helper";
 import { Dashboard } from "@/router/modules/dashboard.route";
 import { Exception } from "@/router/modules/exception.route";
-import { Components } from "@/router/modules/components.route";
+import { Tables } from "@/router/modules/tables.route";
 import { Builder } from "@/router/modules/builder.route";
 import { Post } from "@/router/modules/post.route";
 import { Product } from "@/router/modules/product.route";
@@ -33,7 +33,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     },
   },
   { ...Dashboard },
-  { ...Components },
+  { ...Tables },
   { ...Builder },
   { ...Post },
   { ...Product },

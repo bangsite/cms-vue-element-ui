@@ -2,13 +2,14 @@ import { ref } from "vue";
 import { getTables } from "@/services/modules/tables.service";
 import { convertPagination } from "@/utils/convertPagination";
 import { onLoading } from "@/hooks/web/useLoading";
+import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/web/useLoadingFullSceen";
 
 export default function useFetchData() {
   const dataList = ref(null);
   const pagination = ref({});
 
   const fetchListHotel = async (params: any) => {
-    onLoading("start");
+    showFullScreenLoading();
     try {
       const result = await getTables({ ...params });
 
@@ -18,9 +19,9 @@ export default function useFetchData() {
         console.log();
       }
 
-      onLoading("end");
+      hideFullScreenLoading();
     } catch (err) {
-      onLoading("end");
+      hideFullScreenLoading();
       console.log(err);
     }
   };

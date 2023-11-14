@@ -1,5 +1,6 @@
 import { ref, toRefs } from "vue";
 import { getHotels } from "@/services/modules/booking.service";
+import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/web/useLoadingFullSceen";
 
 export default function useBooking() {
   const isLoading = ref(false);
@@ -8,6 +9,7 @@ export default function useBooking() {
 
   const fetchListHotels = async (payload: Record<string, any> = {}) => {
     isLoading.value = true;
+    showFullScreenLoading();
 
     try {
       const res = await getHotels(payload);
@@ -17,6 +19,7 @@ export default function useBooking() {
       errors.value = data;
     } finally {
       isLoading.value = false;
+      hideFullScreenLoading();
     }
   };
 

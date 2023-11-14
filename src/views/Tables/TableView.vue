@@ -15,7 +15,6 @@
       :data="data"
       :default-sort="tableSort ? { prop: tableSortBy, order: tableSortOrder } : { prop: '', order: '' }"
     >
-      <el-table-column type="index" label="#" width="50" align="center" />
       <template v-for="column in columns" :key="column.key">
         <el-table-column v-if="column.key === 'action'" :prop="column.key" :label="column.title">
           <template #default="scope">
@@ -25,6 +24,8 @@
             </div>
           </template>
         </el-table-column>
+        <el-table-column v-else-if="column.key === 'id'" type="index" :label="column.title" width="50" align="center" />
+
         <el-table-column
           v-else-if="column.key === 'number_of_rooms'"
           :prop="column.dataIndex"
