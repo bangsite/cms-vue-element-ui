@@ -90,7 +90,7 @@
   <slot name="pagination">
     <Pagination
       v-if="pagination"
-      :pageable="pageable"
+      :pageable="pagination"
       :handle-size-change="handleSizeChange"
       :handle-current-change="handleCurrentChange"
     />
@@ -112,7 +112,6 @@ import SvgIcon from "@/components/Common/SvgIcon.vue";
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
   requestAuto: true,
-  pagination: false,
   initParam: {},
   border: true,
   toolButton: true,
@@ -139,13 +138,15 @@ const isShowSearch = ref(true);
 const colRef = ref();
 
 const processTableData = computed(() => {
+  console.log(props.data);
   if (!props.data) return tableData.value;
   if (!props.pagination) return props.data;
 
-  return props.data.slice(
-    (pageable.value.pageNum - 1) * pageable.value.pageSize,
-    pageable.value.pageSize * pageable.value.pageNum
-  );
+  return props.data;
+  // return props.data.slice(
+  //   (pageable.value.pageNum - 1) * pageable.value.pageSize,
+  //   pageable.value.pageSize * pageable.value.pageNum
+  // );
 });
 
 const searchColumns = computed(() => {

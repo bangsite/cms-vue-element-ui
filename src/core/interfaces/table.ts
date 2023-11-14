@@ -86,7 +86,7 @@ export interface ProTableProps {
   requestError?: (params: any) => void;
   dataCallback?: (data: any) => any;
   title?: string;
-  pagination?: boolean;
+  pagination?: Record<string, any>;
   initParam?: any;
   border?: boolean;
   toolButton?: ("refresh" | "setting" | "search")[] | boolean;

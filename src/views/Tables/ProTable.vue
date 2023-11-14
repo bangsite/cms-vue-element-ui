@@ -43,7 +43,7 @@ import { computed, onBeforeMount, reactive } from "vue";
 import { ElMessage } from "element-plus";
 import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
 
-import { COLUMNS } from "@/views/Tables/useColumns";
+import { COLUMNS_PRO } from "@/views/Tables/useColumns";
 import ProTable from "@/components/tables/ProTable.vue";
 
 import type { ColumnProps } from "@/core/interfaces/table";
@@ -51,7 +51,7 @@ import useBooking from "@/composables/useBooking";
 
 const initParam = reactive({ type: 1 });
 
-const columns = computed((): ColumnProps => COLUMNS);
+const columns = computed((): ColumnProps => COLUMNS_PRO);
 
 const { fetchListHotels, response, isLoading } = useBooking();
 

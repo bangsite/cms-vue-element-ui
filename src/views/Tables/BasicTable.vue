@@ -1,16 +1,20 @@
 <template>
+  <el-card class="mb-15">
+    <template #header> Search Music </template>
+  </el-card>
   <el-card>
-    <ProTable
+    <BasicTable
       ref="proTable"
       :columns="columns"
       :data="response"
+      :pagination="pagination"
       :init-param="initParam"
       :data-callback="dataCallback"
       @drag-sort="sortTable"
     >
       <!--table header button-->
       <template #tableHeader="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="openDrawer('new')">Create</el-button>
+        <el-button type="primary" :icon="RefreshRight" @click="getAccessTokenApp">Connect Spotify</el-button>
         <el-button type="primary" :icon="Download" plain @click="downloadFile">Export data</el-button>
         <el-button
           type="danger"
@@ -28,39 +32,39 @@
         {{ scope.row }}
       </template>
 
+      <!-- images -->
+      <template #images="scope">
+        <img :src="scope.row.images[2].url" :width="scope.row.images[2].height" alt="" />
+      </template>
+
       <!-- operation -->
       <template #operation="scope">
         <el-button type="primary" link :icon="View" @click="openDrawer('check', scope.row)">View</el-button>
-        <el-button type="primary" link :icon="EditPen" @click="openDrawer('edit', scope.row)">Edit</el-button>
-        <el-button type="primary" link :icon="Delete" @click="deleteRow(scope.row)">Delete</el-button>
+        <el-button type="primary" link :icon="EditPen" @click="openDrawer('edit', scope.row)" disabled>Edit</el-button>
+        <el-button type="primary" link :icon="Delete" @click="deleteRow(scope.row)" disabled>Delete</el-button>
       </template>
-    </ProTable>
+    </BasicTable>
   </el-card>
 </template>
 
 <script setup lang="ts">
 import { computed, onBeforeMount, reactive } from "vue";
 import { ElMessage } from "element-plus";
-import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
+import { Delete, EditPen, Download, RefreshRight, View, Refresh } from "@element-plus/icons-vue";
 
-import { COLUMNS } from "@/views/Tables/useColumns";
-import ProTable from "@/components/tables/ProTable.vue";
-
-import type { ColumnProps } from "@/core/interfaces/table";
-import useBooking from "@/composables/useBooking";
+import { COLUMNS_ALBUM } from "@/views/Tables/useColumns";
+import BasicTable from "@/components/tables/BasicTable.vue";
+import useSpotify from "@/composables/useSpotify";
 
 const initParam = reactive({ type: 1 });
 
-const columns = computed((): ColumnProps => COLUMNS);
+const columns = computed(() => COLUMNS_ALBUM);
 
-const { fetchListHotels, response, isLoading } = useBooking();
+const { getAccessTokenApp, fetchNewRelease, response, pagination, isLoading } = useSpotify();
 
 onBeforeMount(async () => {
-  await fetchListHotels();
-
-  if (response.value) {
-    response.value = response.value.filter((item, idx) => idx < 15) || [];
-  }
+  const token = localStorage.getItem("__at_spotify_key");
+  if (token) await fetchNewRelease({ Authorization: token });
 });
 
 const dataCallback = (data: any) => {

@@ -9,17 +9,17 @@ const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConf
   const { headers } = config;
   const token = localStorage.getItem("token");
 
-  if (headers) {
-    headers.Authorization = token;
+  if (token) headers.Authorization = token;
+  if (i18n.global.locale) {
     // headers.locale = i18n.global.locale.value;
     headers["Accept-Language"] = i18n.global.locale;
   }
 
-  if (config?.data instanceof FormData) {
-    headers["Content-Type"] = "multipart/form-data";
-  } else {
-    headers["Content-Type"] = "application/json";
-  }
+  // if (config?.data instanceof FormData) {
+  //   headers["Content-Type"] = "multipart/form-data";
+  // } else {
+  //   headers["Content-Type"] = "application/json";
+  // }
 
   return config;
 };

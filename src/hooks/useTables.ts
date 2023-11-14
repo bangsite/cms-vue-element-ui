@@ -37,7 +37,6 @@ export const useTables = (
   dataCallBack?: (data: any) => any,
   requestError?: (error: any) => void
 ) => {
-  debugger;
   const state = reactive<StateProps>({
     tableData: [],
     pageable: {
@@ -76,7 +75,6 @@ export const useTables = (
       const res = await api({ ...state.searchInitParam, ...state.totalParam });
       let data = res?.data;
       console.log(data);
-      debugger;
       dataCallBack && (data = dataCallBack(data?.data));
       state.tableData = isPageable ? data.list : data;
       // Deconstruct the paging data returned by the background (if there is paging, update the paging information)
