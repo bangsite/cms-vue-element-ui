@@ -7,7 +7,7 @@ const ApiService = {
     return axiosInstance.get<T>(`${url}`, { ...config });
   },
 
-  post<T = unknown>(url: string, data: Record<string, any> | [], config: AxiosRequestConfig) {
+  post<T = unknown>(url: string, data: Record<string, any> | [] | any, config: AxiosRequestConfig) {
     return axiosInstance.post<T>(`${url}`, data, config);
   },
 
