@@ -61,7 +61,7 @@
           </div>
           <div class="flex flex-col">
             <span>{{ locationWeather.name }}</span>
-            <span>{{ dateFull(locationWeather.localtime) }}</span>
+            <span>{{ dateFull(locationWeather?.localtime) }}</span>
           </div>
         </el-row>
       </el-card>
@@ -71,15 +71,15 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount } from "vue";
-import useWorkBench from "@/composables/useWorkBench";
 import { dateFull } from "@/utils/formatDateTime";
+import useFetchWeather from "@/hooks/api/useFetchWeather";
 
-const { fetchWeather, response, errors, isLoading } = useWorkBench();
+const { fetchDataWeather, response, errors, isLoading } = useFetchWeather();
 
 const currentWeather = computed(() => response.value?.current);
 const locationWeather = computed(() => response.value?.location);
 
 onBeforeMount(async () => {
-  await fetchWeather();
+  await fetchDataWeather();
 });
 </script>

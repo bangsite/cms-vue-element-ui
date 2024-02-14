@@ -1,7 +1,6 @@
 import type { InternalAxiosRequestConfig } from "axios";
 import { i18n } from "@/plugins/i18n";
-
-import { onLoading } from "@/composables/useLoading";
+import { onLoading } from "@/hooks/event/useLoading";
 
 const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
   onLoading("start");
@@ -10,6 +9,7 @@ const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConf
   const token = localStorage.getItem("token");
 
   if (token) headers.Authorization = token;
+
   if (i18n.global.locale) {
     // headers.locale = i18n.global.locale.value;
     headers["Accept-Language"] = i18n.global.locale;

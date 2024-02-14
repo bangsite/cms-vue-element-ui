@@ -18,3 +18,7 @@ export const Spotify = {
   refresh_token:
     "AQCNzJMD-PI7h7idb-fflf5EHrbnECOJjziOsQELR16TDbyxGZUByFZRu-d-yvvtCak2LEEipbSymHTCaih8sd5__1JMzIqq_zznqQxiGwo0fNZRVukx8ZifgKs6e-VJ6kU",
 };
+
+export const AnimeJikan = {
+  url: "https://api.jikan.moe/v4",
+};

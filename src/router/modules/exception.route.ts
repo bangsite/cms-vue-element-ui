@@ -1,5 +1,6 @@
 import { Layout } from "@/helpers/router.helper";
 import { i18n } from "@/plugins/i18n";
+
 export const Exception: AppRouteRecordRaw = {
   path: "/exception",
   name: "Exception",

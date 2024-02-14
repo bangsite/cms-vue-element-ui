@@ -7,6 +7,11 @@ export default {
     ANALYSIS: "Analysis",
     WORKBENCH: "Workbench",
   },
+  MOVIES: {
+    TITLE: "Movie",
+    MOVIES_LIST: "Movie List",
+    MOVIES_PRO_LIST: "Movie List Pro",
+  },
   TABLES: {
     TITLE: "Tables",
     BASIC_TABLE: "Basic Table",

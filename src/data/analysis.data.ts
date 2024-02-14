@@ -1,4 +1,4 @@
-import type { AnalysisTimelines, AnalysisTables } from "@/core/interfaces/analysis.interface";
+import type { AnalysisTimelines, AnalysisTables } from "@/config/interfaces/analysis.interface";
 
 export const Timelines: AnalysisTimelines[] = [
   { type: "blue", title: "Default", content: "", time: "2021-10-10 20:46" },

@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { ThemeModeSwitch } from "@/core/interfaces/theme.interface";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import type { ThemeModeSwitch } from "@/config/interfaces/theme.interface";
 
 const props = withDefaults(defineProps<ThemeModeSwitch>(), {
   dark: false,

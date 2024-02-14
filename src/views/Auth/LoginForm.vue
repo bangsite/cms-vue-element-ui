@@ -16,8 +16,13 @@
         </el-form-item>
 
         <el-form-item label="Password">
-          <PasswordBase name="password" rules="required" placeholder="Enter password..." style="width: 100%" />
-        </el-form-item>
+          <PasswordBase
+            name="password"
+            rules="required"
+            placeholder="Enter password..."
+            style="width: 100%"
+          /> </el-form-item
+        >ls
 
         <el-form-item jus>
           <el-col :span="16">
@@ -55,7 +60,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 
@@ -63,15 +67,15 @@ import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import type { LoginInput } from "@/core/interfaces/auth.interface";
+import type { LoginInput } from "@/config/interfaces/auth.interface";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import useAuth from "@/composables/useAuth";
+import useFetchAuth from "@/hooks/api/useFetchAuth";
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
 const router = useRouter();
 const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
 
-const { doLogin, response, errors, isLoading } = useAuth();
+const { doLogin, response, errors, isLoading } = useFetchAuth();
 
 const ruleForm: LoginInput = {
   email: "",

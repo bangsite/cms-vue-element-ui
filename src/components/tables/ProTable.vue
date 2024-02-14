@@ -101,13 +101,13 @@ import { computed, onMounted, reactive, ref } from "vue";
 import { Operation, Refresh, Search } from "@element-plus/icons-vue";
 import Sortable from "sortablejs";
 
-import RenderColumn from "@/components/tables/components/RenderColumn.vue";
+import RenderColumn from "@/components/tables/components/ColumnRender.vue";
 import Pagination from "@/components/tables/components/Pagination.vue";
 
 import type { ColumnProps, ProTableProps, TypeProps } from "@/core/interfaces/table";
 import { useTables } from "@/hooks/useTables";
 import { useSelection } from "@/hooks/useSelection";
-import SvgIcon from "@/components/Common/SvgIcon.vue";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],

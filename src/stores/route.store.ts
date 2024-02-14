@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { RouteState } from "@/core/interfaces/route.interface";
+import { RouteState } from "@/config/interfaces/route.interface";
 
 export const useRouteStore = defineStore("route-store", {
   state: (): RouteState => ({

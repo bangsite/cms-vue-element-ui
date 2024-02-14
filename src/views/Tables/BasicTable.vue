@@ -53,7 +53,7 @@ import { ElMessage } from "element-plus";
 import { Delete, EditPen, Download, RefreshRight, View, Refresh } from "@element-plus/icons-vue";
 
 import { COLUMNS_ALBUM } from "@/views/Tables/useColumns";
-import BasicTable from "@/components/tables/BasicTable.vue";
+import BasicTable from "@/components/tables/TableList.vue";
 import useSpotify from "@/composables/useSpotify";
 
 const initParam = reactive({ type: 1 });

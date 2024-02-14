@@ -1,5 +1,5 @@
 import type { AxiosResponse } from "axios";
-import { onLoading } from "@/composables/useLoading";
+import { onLoading } from "@/hooks/event/useLoading";
 import { showNotifySuccess } from "@/services/config/notify.axios";
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {

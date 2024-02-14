@@ -11,7 +11,7 @@ import { debounce } from "lodash-es";
 import echarts from "@/plugins/echarts";
 import { useAppStore } from "@/stores/app.store";
 import { propTypes } from "@/utils/propTypes";
-import { isString } from "@/utils/isCheck";
+import { isString } from "@/utils/isCheckVal";
 
 const appStore = useAppStore();
 

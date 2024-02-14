@@ -1,4 +1,4 @@
-import { isDark } from "@/utils/isCheck";
+import { isDark } from "@/utils/isCheckVal";
 import { useCache } from "@/hooks/web/useCache";
 import { useAppStore } from "@/stores/modules/app.store";
 

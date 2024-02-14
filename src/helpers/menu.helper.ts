@@ -1,6 +1,6 @@
 import type { RouteMeta } from "vue-router";
 import { findPath } from "./tree.helper";
-import { isUrl } from "@/utils/isCheck";
+import { isUrl } from "@/utils/isCheckVal";
 import { pathResolve } from "@/helpers/router.helper";
 
 type OnlyOneChildType = AppRouteRecordRaw & { noShowingChildren?: boolean };

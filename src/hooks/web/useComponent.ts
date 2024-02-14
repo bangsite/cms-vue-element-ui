@@ -1,6 +1,6 @@
 import type { RouteComponent } from "vue-router";
 import type { AuthRoute } from "@/types/router";
-import { isFunction } from "@/utils/typeof";
+import { isFunction } from "@/utils/isCheckTypeof";
 const MainLayout = () => import("@/layouts/MainLayout.vue");
 const BlankLayout = () => import("@/layouts/BlankLayout.vue");
 
@@ -23,7 +23,7 @@ export function getLayoutComponent(layoutType: LayoutComponentType) {
  */
 export function getViewComponent(routeKey: AuthRoute.LastDegreeRouteKey) {
   if (!views[routeKey]) {
-    throw new Error(`路由“${routeKey}”没有对应的组件文件！`);
+    throw new Error(`Route“${routeKey}”does not have a corresponding component file！`);
   }
   return setViewComponentName(views[routeKey], routeKey);
 }

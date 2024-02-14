@@ -3,11 +3,12 @@
     "include": [
         "src/**/*",
         "src/**/*.vue",
-        "env.d.ts",
+        "src/**/**/*.vue",
         "src/**/*.ts",
         "src/**/**/*.ts",
         "src/**/*.d.ts",
-        "src/**/*.tsx"
+        "src/**/*.tsx",
+        "env.d.ts"
     ],
     "exclude": [
         "node_modules",
