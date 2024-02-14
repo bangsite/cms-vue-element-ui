@@ -47,9 +47,9 @@ import { defineAsyncComponent, onBeforeMount, ref, watch } from "vue";
 import { useFieldArray, useForm } from "vee-validate";
 import { storeToRefs } from "pinia";
 
-import { useBuilderLayout } from "@/composables/useBuilderLayout";
+import { useBuilderLayout } from "@/hooks/web/useBuilderLayout";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
-import { SECTION_FIELD, SECTION_FORM } from "@/core/enums/builderLayout.enum";
+import { SECTION_FIELD, SECTION_FORM } from "@/config/enums/builderLayout.enum";
 
 const RenderBlock = defineAsyncComponent(() => import("@/components/builders/RenderBlock.vue"));
 const SvgIcon = defineAsyncComponent(() => import("@/components/common/SvgIcon.vue"));

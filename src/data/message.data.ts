@@ -1,4 +1,4 @@
-import { type MessageTab } from "@/core/interfaces/notify-message.interface";
+import { type MessageTab } from "@/config/interfaces/notify-message.interface";
 
 export const MessageData: MessageTab = [
   {

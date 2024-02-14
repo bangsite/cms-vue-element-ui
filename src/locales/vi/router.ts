@@ -17,6 +17,11 @@ export default {
     TITLE: "Builder",
     DYNAMIC_BLOCK: "Dynamic Block",
   },
+  MOVIES: {
+    TITLE: "Phim",
+    MOVIES_LIST: "Danh Sách Phim",
+    MOVIES_PRO_LIST: "Danh Sách Phim Pro",
+  },
   POST: {
     TITLE: "Posts",
     LIST: "List Post",

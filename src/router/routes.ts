@@ -1,13 +1,14 @@
 import { i18n } from "@/plugins/i18n";
 
 import { Layout } from "@/helpers/router.helper";
+import { Auth } from "@/router/modules/auth.route";
 import { Dashboard } from "@/router/modules/dashboard.route";
 import { Exception } from "@/router/modules/exception.route";
-import { Tables } from "@/router/modules/tables.route";
 import { Builder } from "@/router/modules/builder.route";
 import { Post } from "@/router/modules/post.route";
 import { Product } from "@/router/modules/product.route";
-import { LoginGuard } from "@/router/guard/login.guard";
+import { Movies } from "@/router/modules/movies.route";
+
 import { AuthGuard } from "@/router/guard/auth.guard";
 
 export const constantRouterMap: AppRouteRecordRaw[] = [
@@ -21,20 +22,10 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
       hidden: true,
     },
   },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("@/views/Auth/LoginView.vue"),
-    beforeEnter: [LoginGuard],
-    meta: {
-      title: i18n.global.t("router.login.title"),
-      hidden: true,
-      noTagsView: true,
-    },
-  },
+  { ...Auth },
   { ...Dashboard },
-  { ...Tables },
   { ...Builder },
+  { ...Movies },
   { ...Post },
   { ...Product },
   { ...Exception },

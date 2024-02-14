@@ -1,7 +1,7 @@
 import type { RouteLocationMatched, RouteMeta } from "vue-router";
 import { hasOneShowingChild } from "@/helpers/menu.helper";
 import { pathResolve } from "@/helpers/router.helper";
-import { isUrl } from "@/utils/isCheck";
+import { isUrl } from "@/utils/isCheckVal";
 
 export const useFilterMenu = (routers: RouteLocationMatched[]) => {
   const filterMenuFirst = routers.filter((item) => {

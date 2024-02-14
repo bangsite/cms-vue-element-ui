@@ -1,5 +1,5 @@
 import type { Slots } from "vue";
-import { isFunction } from "@/utils/isCheck";
+import { isFunction } from "@/utils/isCheckVal";
 
 export const getSlot = (slots: Slots, slot = "default", data?: Recordable) => {
   // Reflect.has determines whether an object has a property

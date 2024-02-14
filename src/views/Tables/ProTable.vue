@@ -46,7 +46,7 @@ import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@e
 import { COLUMNS_PRO } from "@/views/Tables/useColumns";
 import ProTable from "@/components/tables/ProTable.vue";
 
-import type { ColumnProps } from "@/core/interfaces/table";
+import type { ColumnProps } from "@/config/interfaces/table.interface";
 import useBooking from "@/composables/useBooking";
 
 const initParam = reactive({ type: 1 });

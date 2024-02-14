@@ -1,6 +1,6 @@
 import type { AxiosError } from "axios";
 import { showNotifyError } from "@/services/config/notify.axios";
-import { onLoading } from "@/composables/useLoading";
+import { onLoading } from "@/hooks/event/useLoading";
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   onLoading("cancel");

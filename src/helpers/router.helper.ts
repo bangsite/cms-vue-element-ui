@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { Router, RouteLocationNormalized, RouteRecordNormalized, RouteMeta, RouteRecordRaw } from "vue-router";
 import { deepCopy, omit } from "@/helpers/object.helper";
-import { isUrl } from "@/utils/isCheck";
+import { isUrl } from "@/utils/isCheckVal";
 
 const modules = import.meta.glob("../views/**/*.{vue}");
 

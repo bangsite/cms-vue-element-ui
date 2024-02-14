@@ -1,5 +1,5 @@
 import type { AxiosError } from "axios";
-import { onLoading } from "@/composables/useLoading";
+import { onLoading } from "@/hooks/event/useLoading";
 
 const onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
   onLoading("cancel");

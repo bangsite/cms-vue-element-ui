@@ -48,7 +48,7 @@ import TextAreaBase from "@/components/form/TextAreaBase.vue";
 
 import { POST_FORM } from "@/views/Post/composables/useDataForm";
 import { useSubmitForm } from "@/views/Post/composables/useSubmitForm";
-import { transformErrors } from "@/utils/transformErrors";
+import { convertErrors } from "@/utils/convertErrors";
 
 const route = useRoute();
 const { handleSubmit, setErrors, setFieldValue, setValues, errors, isSubmitting, values } = useForm({
@@ -73,7 +73,7 @@ const onSubmitPublish = handleSubmit(async (values) => {
 
   if (errorsAPI.value && Object.keys(errorsAPI.value).length) {
     // set error key each field of form
-    const errs = transformErrors(errorsAPI);
+    const errs = convertErrors(errorsAPI);
     setErrors(errs);
   }
 });

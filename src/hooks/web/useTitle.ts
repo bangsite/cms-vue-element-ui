@@ -1,5 +1,5 @@
 import { watch, ref } from "vue";
-import { isString } from "@/utils/isCheck";
+import { isString } from "@/utils/isCheckVal";
 import { useAppStoreWithOut } from "@/stores/app.store";
 import { useI18n } from "@/hooks/web/useI18n";
 

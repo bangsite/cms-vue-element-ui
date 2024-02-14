@@ -1,4 +1,4 @@
-<script setup lang="ts" name="Pagination">
+<script setup lang="ts">
 interface Pageable {
   pageNum: number;
   pageSize: number;

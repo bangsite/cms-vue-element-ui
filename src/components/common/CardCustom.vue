@@ -12,7 +12,7 @@
 </template>
 <script setup>
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import type { Technology } from "@/core/interfaces/workbench.interface";
+import type { Technology } from "@/config/interfaces/workbench.interface";
 
 
 

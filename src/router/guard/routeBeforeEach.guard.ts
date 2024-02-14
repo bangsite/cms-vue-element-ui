@@ -1,10 +1,8 @@
-import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
+import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 // import { useAuthStore } from "@/stores/auth.store";
 import { useTitle } from "@/hooks/web/useTitle";
-import { usePageLoading } from "@/hooks/web/usePageLoading";
 import { getCookie } from "@/utils/useCookies";
-
-const { loadStart, loadDone } = usePageLoading();
+import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/event/useLoadingFullSceen";
 
 /**
  * If the user is not authenticated and the route is not the login route, redirect to the login route
@@ -13,17 +11,19 @@ const { loadStart, loadDone } = usePageLoading();
  * @param {NavigationGuardNext} next - This is a function that you must call to resolve the hook.
  */
 const routeBeforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  loadStart();
+  showFullScreenLoading();
+
   // const authStore = useAuthStore();
 
   if (to.name !== "Login" && !getCookie("__x_key_at")) {
     next({ name: "Login" });
+    hideFullScreenLoading();
   } else next();
 };
 
 const routeAfterEach = (to: RouteLocationNormalized) => {
   useTitle(to?.meta?.title as string);
-  loadDone();
+  hideFullScreenLoading();
 };
 
 export { routeBeforeEach, routeAfterEach };

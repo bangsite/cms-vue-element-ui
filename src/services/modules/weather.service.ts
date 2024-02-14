@@ -1,6 +1,6 @@
 import type { AxiosRequestConfig } from "axios";
 import ApiService from "../api.service";
-import { Weather } from "@/constant/externalAPI.ts";
+import { Weather } from "@/constant/externalAPI";
 
 const { url, key } = Weather;
 const query = {
