@@ -20,7 +20,7 @@ console.log(slots);
     :label="column.label"
     :align="column.align ?? 'center'"
     :sortable="column.sortable"
-    :show-overflow-tooltip="column.showOverflowTooltip ?? column.key !== 'operation'"
+    :show-overflow-tooltip="column.showOverflowTooltip"
     :width="column.width ?? 'auto'"
     :fixed="column.fixed"
   >

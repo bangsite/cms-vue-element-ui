@@ -23,9 +23,9 @@
           <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
             >Sign up
           </el-button>
-          <span class="w-100 text-center"><strong>OR</strong></span>
+          <span class="w-full text-center"><strong>OR</strong></span>
 
-          <el-row :gutter="10" justify="center" class="w-100">
+          <el-row :gutter="10" justify="center" class="w-full">
             <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
               <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
             </el-button>
@@ -35,7 +35,7 @@
           </el-row>
 
           <el-divider />
-          <el-row :gutter="10" justify="center" class="w-100">
+          <el-row :gutter="10" justify="center" class="w-full">
             <span class="mr-5">Already have an account ? </span>
             <el-link href="#" @click="handleRegisterNew">Sign in</el-link>
           </el-row>

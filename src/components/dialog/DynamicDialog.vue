@@ -31,10 +31,8 @@ const DYNAMIC_LAYOUT = {
 };
 
 const { title, active, activeFooter, layoutName, setActive } = useDialogStore();
-console.log("active:::", active);
 const dialogVisible = computed(() => active);
 
-console.log("dialogVisible:::", dialogVisible);
 const layout = computed(() => DYNAMIC_LAYOUT[layoutName]);
 
 const handleClose = () => setActive(false);

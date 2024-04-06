@@ -71,7 +71,6 @@ onMounted(() => {
 
 const getCount = async () => {
   const res = await getCountApi().catch((err) => {
-    console.log(err);
     loading.value = false;
   });
   if (res) {

@@ -37,13 +37,11 @@ onBeforeMount(async () => {
 });
 
 const handleChange: TableProps["onChange"] = (pagination, filters, sorter) => {
-  console.log("Various parameters", pagination, filters, sorter);
   filteredInfo.value = filters;
   sortedInfo.value = sorter;
 };
 
 const handleEdit = () => {
-  console.log("edit row");
   showModal.value = !showModal.value;
 };
 

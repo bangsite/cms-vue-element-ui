@@ -87,7 +87,6 @@ const onToggleSearch = (data) => (isShowSearch.value = data);
 
 // handle table
 const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: number }) => {
-  console.log(newIndex, oldIndex);
   ElMessage.success("Modify list sorting successfully");
 };
 

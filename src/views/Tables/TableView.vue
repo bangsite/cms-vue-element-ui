@@ -99,7 +99,6 @@ onBeforeMount(async () => {
 });
 
 const toggleModal = () => {
-  console.log(showModal);
   showModal.value = !showModal.value;
 };
 
@@ -115,18 +114,15 @@ const clearFilter = () => {
 };
 
 const handleChange = (pagination, filters, sorter) => {
-  console.log("Various parameters", pagination, filters, sorter);
   filteredInfo.value = filters;
   sortedInfo.value = sorter;
 };
 
 const handleEdit = (index: number, row) => {
-  console.log(index, row);
   showModal.value = !showModal.value;
 };
 
 const handleDelete = (index: number, row) => {
-  console.log(index, row);
   ElMessageBox.confirm("Are you sure to delete this?", "Warning", {
     confirmButtonText: "OK",
     cancelButtonText: "Cancel",
@@ -142,7 +138,6 @@ const cancelEvent = () => {
 };
 
 const handleCurrentChange = (val: number) => {
-  console.log(val);
   pagination.value.page = val;
 };
 </script>

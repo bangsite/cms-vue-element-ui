@@ -67,7 +67,6 @@ export const useTables = (
    * @return void
    * */
   const getTableList = async () => {
-    console.log(api);
     if (!api) return;
 
     try {
@@ -75,7 +74,7 @@ export const useTables = (
       Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
       const res = await api({ ...state.searchInitParam, ...state.totalParam });
       let data = res?.data;
-      console.log(data);
+
       dataCallBack && (data = dataCallBack(data?.data));
       state.tableData = isPageable ? data.list : data;
       // Deconstruct the paging data returned by the background (if there is paging, update the paging information)

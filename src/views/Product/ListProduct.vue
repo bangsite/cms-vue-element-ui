@@ -65,7 +65,6 @@ const state = reactive<{ selectedRowKeys: Key[]; loading: boolean }>({
 const hasSelected = computed(() => state.selectedRowKeys.length > 0);
 
 const onSelectChange = (selectedRowKeys: Key[]) => {
-  console.log("selectedRowKeys changed: ", selectedRowKeys);
   state.selectedRowKeys = selectedRowKeys;
 };
 

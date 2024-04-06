@@ -60,7 +60,6 @@ const editBlock = (data: Record<string, any>, index: number) => {
   setTitle(`Edit ${data.value.block_title}`);
   setLayoutName(data.value.block_type);
   setDataRender(data);
-  console.log(index);
 };
 
 const removeBlock = (index: number) => {

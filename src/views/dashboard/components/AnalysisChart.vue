@@ -34,7 +34,6 @@ import { reactify } from "@vueuse/core";
 
 const { t } = useI18n();
 let loading = ref(true);
-console.log("loading::", loading);
 
 const pieOptionsData = reactive<EChartsOption>(pieOptions) as EChartsOption;
 const barOptionsData = reactive<EChartsOption>(barOptions) as EChartsOption;
@@ -42,7 +41,6 @@ const lineOptionsData = reactive<EChartsOption>(lineOptions) as EChartsOption;
 
 const getUserAccessSource = async () => {
   const res = await getUserAccessSourceApi().catch((err) => {
-    console.log(err);
     loading.value = false;
   });
   if (res) {
@@ -74,7 +72,6 @@ const getWeeklyUserActivity = async () => {
 
 const getMonthlySales = async () => {
   const res = await getMonthlySalesApi().catch((err) => {
-    console.log(err);
     loading.value = false;
   });
   if (res) {

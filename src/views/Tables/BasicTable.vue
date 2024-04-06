@@ -77,7 +77,6 @@ const dataCallback = (data: any) => {
 };
 
 const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: number }) => {
-  console.log(newIndex, oldIndex);
   ElMessage.success("Modify list sorting successfully");
 };
 

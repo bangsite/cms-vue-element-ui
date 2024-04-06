@@ -33,9 +33,9 @@
             >Sign in
           </el-button>
 
-          <p class="w-100 text-center"><strong>OR</strong></p>
+          <p class="w-full text-center"><strong>OR</strong></p>
 
-          <el-row :gutter="10" justify="center" class="w-100">
+          <el-row :gutter="10" justify="center" class="w-full">
             <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
               <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
             </el-button>
@@ -46,7 +46,7 @@
 
           <el-divider />
 
-          <el-row :gutter="10" justify="center" class="w-100">
+          <el-row :gutter="10" justify="center" class="w-full">
             <span class="mr-5">Don't have an account yet ? </span>
             <el-link href="#" @click="handleRegisterNew">Sign Up</el-link>
           </el-row>
@@ -78,7 +78,6 @@ const ruleForm: LoginInput = {
   password: "",
   remember: false,
 };
-console.log(ruleForm);
 
 const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 

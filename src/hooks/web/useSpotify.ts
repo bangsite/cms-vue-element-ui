@@ -63,7 +63,6 @@ export default function useSpotify() {
       const { data } = await getNewRelease({ params: { ...track }, headers: { ...config } });
       response.value = data?.albums?.items;
       setPagination(data?.albums);
-      console.log(pagination);
     } catch (error) {
       const { data } = error as any;
       errors.value = data;

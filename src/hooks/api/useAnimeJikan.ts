@@ -21,7 +21,6 @@ export default function useAnimeJikan() {
       const { data, pagination } = res.data;
 
       response.value = data;
-      console.log(pagination);
 
       pagination.value.total = pagination?.items.total;
       pagination.value.pageSize = pagination?.items.per_page;

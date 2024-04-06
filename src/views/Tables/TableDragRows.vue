@@ -90,7 +90,6 @@ const handleDelete = (record: Record<string, any>) => {
 
 const rowDrop = () => {
   const tbody = document.querySelector(".el-table__body-wrapper tbody") as HTMLElement;
-  console.log(tbody);
   Sortable.create(tbody, {
     // draggable: ".draggable .el-table__row",
     handle: ".drag__row",

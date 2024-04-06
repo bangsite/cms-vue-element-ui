@@ -29,8 +29,7 @@ const { sectionName } = storeToRefs(useBuilderLayoutStore());
 const { setActive } = useDialogStore();
 const { data } = storeToRefs(useDialogStore());
 const { key, value } = data.value;
-console.log(key);
-console.log(value);
+
 const { handleSubmit, setValues, setFieldValue, setErrors, errors, isSubmitting, values } = useForm({
   initialValues: {},
 });

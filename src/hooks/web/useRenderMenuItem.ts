@@ -28,9 +28,7 @@ export const useRenderMenuItem = () => {
       if (!meta.hidden) {
         const { oneShowingChild, onlyOneChild } = hasOneShowingChild(item.children, item);
         const fullPath = isUrl(item.path) ? item.path : pathResolve(parentPath, item.path);
-        console.log(fullPath);
-        console.log(oneShowingChild);
-        console.log(onlyOneChild);
+
         return {
           oneShowingChild,
           onlyOneChild,
