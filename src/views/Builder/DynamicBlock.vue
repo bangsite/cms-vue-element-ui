@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="formSection" :labelPosition="'top'">
+  <el-form ref="formSection" :labelPosition="'top'" class="container mx-auto max-w-[65%]">
     <el-collapse
       v-model="activeKey"
       v-for="(item, idx) in Object.keys(SECTION_FIELD)"

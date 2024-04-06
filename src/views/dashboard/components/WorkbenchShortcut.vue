@@ -3,7 +3,7 @@
     <template #header>Shortcuts</template>
     <div class="work__main-shortcut">
       <el-card hoverable shadow="hover" v-for="item in WorkShortcutsData" :key="item.id">
-        <div class="flex flex-col align-center">
+        <div class="flex flex-col items-center">
           <SvgIcon :icon="item.icon" :size="32" :style="{ color: item.color }" />
           <p class="line-clamp-3">{{ item.label }}</p>
         </div>

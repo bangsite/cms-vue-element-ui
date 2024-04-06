@@ -13,7 +13,7 @@ import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
 import { useDialogStore } from "@/stores/dialog.store";
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { BLOCK_FORM, BLOCK_TYPES } from "@/core/enums/builderLayout.enum";
+import { BLOCK_FORM, BLOCK_TYPES } from "@/config/enums/builderLayout.enum";
 import { storeToRefs } from "pinia";
 
 const blockTitle = reactive({

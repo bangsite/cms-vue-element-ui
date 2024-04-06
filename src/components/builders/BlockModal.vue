@@ -1,7 +1,7 @@
 <template>
   <div class="block__type">
     <div class="block__type-item" v-for="(item, idx) in blockTypes" :key="idx" @click="addBlockForm(item?.type)">
-      <SvgIcon :icon="item.icon" :size="24" class="block__type-icon" />
+      <SvgIcon :icon="item?.icon" :size="24" class="block__type-icon" />
       <span class="block__type-name">{{ $t(item?.name) }}</span>
     </div>
   </div>

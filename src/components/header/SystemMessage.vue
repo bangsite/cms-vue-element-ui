@@ -2,7 +2,7 @@
   <el-popover
     trigger="hover"
     placement="bottom"
-    class="notify w-100 h-full flex flex-center"
+    class="notify w-[100px] flex item-center"
     :open="hovered"
     @openChange="handleHoverChange"
   >

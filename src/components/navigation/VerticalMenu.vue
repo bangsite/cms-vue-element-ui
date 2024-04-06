@@ -20,7 +20,7 @@
             :key="`menu_sub_${parentIdx}_${index}`"
             :index="`${parentIdx}_${index}`"
           >
-            <router-link :to="fullPath(childOne, item.path)" class="flex align-center">
+            <router-link :to="fullPath(childOne, item.path)" class="flex items-center">
               <SvgIcon v-if="childOne.meta.icon" :icon="childOne.meta.icon" :size="24" class="mr-5" />
               {{ $t(childOne.meta.title) }}
             </router-link>
@@ -40,7 +40,7 @@
             :key="`menu_sub_${parentIdx}_${index}`"
             :index="`${parentIdx}_${index}`"
           >
-            <router-link :to="fullPath(childOne, item.path)" class="flex align-center">
+            <router-link :to="fullPath(childOne, item.path)" class="flex items-center">
               <SvgIcon v-if="childOne.meta.icon" :icon="childOne.meta.icon" :size="24" class="mr-5" />
               {{ $t(childOne.meta.title) }}
             </router-link>

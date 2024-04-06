@@ -16,15 +16,10 @@
         </el-form-item>
 
         <el-form-item label="Password">
-          <PasswordBase
-            name="password"
-            rules="required"
-            placeholder="Enter password..."
-            style="width: 100%"
-          /> </el-form-item
-        >ls
+          <PasswordBase name="password" rules="required" placeholder="Enter password..." style="width: 100%" />
+        </el-form-item>
 
-        <el-form-item jus>
+        <el-form-item>
           <el-col :span="16">
             <el-checkbox v-model:checked="ruleForm.remember">Remember me</el-checkbox>
           </el-col>
@@ -37,7 +32,8 @@
           <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
             >Sign in
           </el-button>
-          <span class="w-100 text-center"><strong>OR</strong></span>
+
+          <p class="w-100 text-center"><strong>OR</strong></p>
 
           <el-row :gutter="10" justify="center" class="w-100">
             <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
