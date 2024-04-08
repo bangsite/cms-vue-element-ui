@@ -25,5 +25,17 @@ export const Builder: AppRouteRecordRaw = {
         affix: true,
       },
     },
+    {
+      path: "dynamic-page",
+      name: "DynamicPage",
+      component: () => import("@/views/Builder/DynamicPage.vue"),
+      beforeEnter: [AuthGuard],
+      meta: {
+        title: i18n.global.t("ROUTER.BUILDER.DYNAMIC_PAGE"),
+        icon: "radix-icons:section",
+        noCache: true,
+        affix: true,
+      },
+    },
   ],
 };

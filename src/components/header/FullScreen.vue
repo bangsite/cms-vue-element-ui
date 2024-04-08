@@ -9,7 +9,7 @@
     </div>
   </el-tooltip>
 </template>
-<script setup>
+<script setup lang="ts">
 import { useFullscreen } from "@vueuse/core";
 import { propTypes } from "@/utils/propTypes";
 import SvgIcon from "@/components/common/SvgIcon.vue";

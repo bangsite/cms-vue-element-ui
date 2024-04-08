@@ -13,7 +13,7 @@
     </a-menu-item>
   </a-sub-menu>
 </template>
-<script setup>
+<script setup lang="ts">
 import { fullPath } from "@/helpers/menu.helper";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import { array } from "vue-types";

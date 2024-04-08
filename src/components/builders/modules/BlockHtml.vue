@@ -39,19 +39,23 @@ const handleRemoveBlockItem = (position: number) => {
         <span>{{ title }}</span>
 
         <el-row :gutter="10" justify="space-between" align="middle">
-          <el-button v-if="currentIndex !== 0" @click="handleMoveBlockItem('up', +currentIndex)" class="btn-up">
+          <el-button
+            v-if="Number(currentIndex) !== 0"
+            @click="handleMoveBlockItem('up', +Number(currentIndex))"
+            class="btn-up"
+          >
             <SvgIcon :icon="'solar:arrow-up-outline'" :size="20" />
           </el-button>
 
           <el-button
-            v-if="data.length !== currentIndex + 1"
-            @click="handleMoveBlockItem('down', currentIndex)"
+            v-if="data.length !== Number(currentIndex) + 1"
+            @click="handleMoveBlockItem('down', Number(currentIndex))"
             class="btn-down"
           >
             <SvgIcon :icon="'solar:arrow-down-outline'" :size="20" />
           </el-button>
 
-          <el-button @click="handleRemoveBlockItem(currentIndex)" class="btn-close block__btn-close">
+          <el-button @click="handleRemoveBlockItem(Number(currentIndex))" class="btn-close block__btn-close">
             <SvgIcon :icon="'ic:round-close'" :size="20" />
           </el-button>
         </el-row>
@@ -60,7 +64,7 @@ const handleRemoveBlockItem = (position: number) => {
     <el-row :gutter="10">
       <el-col :span="12">
         <InputBase
-          :name="`${label}[${currentIndex}].id`"
+          :name="`${label}[${Number(currentIndex)}].id`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_ID')"
@@ -69,7 +73,7 @@ const handleRemoveBlockItem = (position: number) => {
           :rulesAttrMessage="{ max: 250 }"
         />
         <InputBase
-          :name="`${label}[${currentIndex}].class`"
+          :name="`${label}[${Number(currentIndex)}].class`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_CLASS')"
@@ -79,7 +83,7 @@ const handleRemoveBlockItem = (position: number) => {
         />
 
         <InputBase
-          :name="`${label}[${currentIndex}].background_color`"
+          :name="`${label}[${Number(currentIndex)}].background_color`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_COLOR')"
@@ -91,7 +95,7 @@ const handleRemoveBlockItem = (position: number) => {
       <el-col :span="12">
         <EditorTinyMCE
           class="block__item-editor"
-          :name="`${label}[${currentIndex}].html`"
+          :name="`${label}[${Number(currentIndex)}].html`"
           type="text"
           :disabled="disabled"
           :label="$t('BLOCK.BLOCK_EDITOR_HTML')"

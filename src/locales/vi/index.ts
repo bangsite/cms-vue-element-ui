@@ -2,7 +2,7 @@ import BLOCK from "./block";
 import COMMON from "./common";
 import EXCEPTION from "./exception";
 import POST from "./post";
-import login from "./login";
+import LOGIN from "./login";
 // import MENU from "./menu";
 // import CATEGORY from "./category";
 // import ORDER from "./order";
@@ -14,7 +14,7 @@ export default {
   BLOCK,
   COMMON,
   EXCEPTION,
-  login,
+  LOGIN,
   POST,
   ROUTER,
 };

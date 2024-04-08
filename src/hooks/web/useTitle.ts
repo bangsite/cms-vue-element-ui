@@ -1,13 +1,11 @@
 import { watch, ref } from "vue";
 import { isString } from "@/utils/isCheckVal";
 import { useAppStoreWithOut } from "@/stores/app.store";
-import { useI18n } from "@/hooks/web/useI18n";
 
 const appStore = useAppStoreWithOut();
 
 export const useTitle = (newTitle?: string) => {
-  const { t } = useI18n();
-  const title = ref(newTitle ? `${appStore.getTitle} - ${t(newTitle as string)}` : appStore.getTitle);
+  const title = ref(newTitle ? `${appStore.getTitle} - ${$t(newTitle as string)}` : appStore.getTitle);
 
   watch(
     title,

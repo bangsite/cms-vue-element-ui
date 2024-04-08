@@ -10,11 +10,9 @@
     </div>
   </ElCard>
 </template>
-<script setup>
+<script setup lang="ts">
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import type { Technology } from "@/config/interfaces/workbench.interface";
 
-
-
-const props= defineProps<Technology>();
+const props = defineProps<Technology>();
 </script>

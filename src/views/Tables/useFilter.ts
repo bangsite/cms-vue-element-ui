@@ -5,9 +5,7 @@ export default function useFilter() {
     page: 0,
   });
 
-  const clearFilters = () => {
-    filteredInfo.value = null;
-  };
+  const clearFilters = () => {};
 
   return {
     params,

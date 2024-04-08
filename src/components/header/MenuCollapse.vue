@@ -4,7 +4,7 @@
     <SvgIcon :icon="'line-md:menu-fold-left'" :size="22" v-else />
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import { useAppStore } from "@/stores/app.store";
 

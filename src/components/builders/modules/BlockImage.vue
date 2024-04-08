@@ -42,15 +42,18 @@ const handleModalImages = (url: string, position: number) => {
       <el-row :gutter="10" justify="space-between" align="middle">
         <span>{{ title }}</span>
         <el-row :gutter="5" justify="space-between" align="middle">
-          <el-button v-if="currentIndex !== 0" @click="handleMoveBlockItem('up', +currentIndex)">
+          <el-button v-if="Number(currentIndex) !== 0" @click="handleMoveBlockItem('up', Number(currentIndex))">
             <SvgIcon :icon="'solar:arrow-up-outline'" :size="20" />
           </el-button>
 
-          <el-button v-if="data.length !== +currentIndex + 1" @click="handleMoveBlockItem('down', +currentIndex)">
+          <el-button
+            v-if="data.length !== Number(currentIndex) + 1"
+            @click="handleMoveBlockItem('down', +Number(currentIndex))"
+          >
             <SvgIcon :icon="'solar:arrow-down-outline'" :size="20" />
           </el-button>
 
-          <el-button @click="handleRemoveBlockItem(+currentIndex)">
+          <el-button @click="handleRemoveBlockItem(Number(currentIndex))">
             <SvgIcon :icon="'ic:round-close'" :size="20" />
           </el-button>
         </el-row>
@@ -59,7 +62,7 @@ const handleModalImages = (url: string, position: number) => {
     <el-row :gutter="15" align="top">
       <el-col :span="12">
         <InputBase
-          :name="`${label}[${currentIndex}].id`"
+          :name="`${label}[${Number(currentIndex)}].id`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_ID')"
@@ -68,7 +71,7 @@ const handleModalImages = (url: string, position: number) => {
           :rulesAttrMessage="{ max: 250 }"
         />
         <InputBase
-          :name="`${label}[${currentIndex}].class`"
+          :name="`${label}[${Number(currentIndex)}].class`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_CLASS')"
@@ -78,7 +81,7 @@ const handleModalImages = (url: string, position: number) => {
         />
 
         <InputBase
-          :name="`${label}[${currentIndex}].background_color`"
+          :name="`${label}[${Number(currentIndex)}].background_color`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_COLOR')"
@@ -91,7 +94,7 @@ const handleModalImages = (url: string, position: number) => {
         <el-row :gutter="15" align="middle">
           <el-col :span="18">
             <InputBase
-              :name="`${label}[${currentIndex}].url`"
+              :name="`${label}[${Number(currentIndex)}].url`"
               type="text"
               :disabled="disabled"
               :placeholder="$t('BLOCK.PLH_IMAGE_URL')"
@@ -103,7 +106,7 @@ const handleModalImages = (url: string, position: number) => {
           </el-col>
           <el-col :span="6">
             <InputBase
-              :name="`${label}[${currentIndex}].image_id`"
+              :name="`${label}[${Number(currentIndex)}].image_id`"
               type="file"
               :disabled="disabled"
               :label="$t('BLOCK.BTN_CHOOSE_FILE')"
@@ -112,7 +115,7 @@ const handleModalImages = (url: string, position: number) => {
           </el-col>
         </el-row>
         <InputBase
-          :name="`${label}[${currentIndex}].alt`"
+          :name="`${label}[${Number(currentIndex)}].alt`"
           type="text"
           :disabled="disabled"
           :placeholder="$t('BLOCK.PLH_ALT')"

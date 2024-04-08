@@ -1,8 +1,12 @@
+export const SECTION_DEFAULT = {
+  name: "Section demo",
+};
+
 export const SECTION_FORM = {
   section_1: [],
-  section_2: [],
-  section_3: [],
-  section_4: [],
+  // section_2: [],
+  // section_3: [],
+  // section_4: [],
 };
 export const SECTION_FIELD = {
   section_1: "section_1",

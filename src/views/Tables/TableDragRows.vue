@@ -53,7 +53,7 @@ import Sortable from "sortablejs";
 
 import { columnsTableBasic } from "@/views/Components/Table/useColumns";
 import useBooking from "@/composables/useBooking";
-import SvgIcon from "@/components/Common/SvgIcon.vue";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 
 const columns = computed(() => columnsTableBasic);
 const data = ref([]);
@@ -64,7 +64,7 @@ onBeforeMount(async () => {
   await fetchListHotels();
 
   if (response.value) {
-    let get50Item = response.value.filter((item, idx) => idx < 15) || [];
+    let get50Item: [] = response.value.filter((item: any, idx: number) => idx < 15) || [];
     data.value = [...get50Item];
   }
 });
@@ -79,12 +79,12 @@ const handleChange = (pagination: string, filters: string, sorter: string) => {
   // sortedInfo.value = sorter;
 };
 
-const handleEdit = () => {
+const handleEdit = (index: number, record: Record<string, any>) => {
   console.log("edit row");
   // showModal.value = !showModal.value;
 };
 
-const handleDelete = (record: Record<string, any>) => {
+const handleDelete = (index: number, record: Record<string, any>) => {
   console.log("delete row:", record);
 };
 
@@ -94,7 +94,7 @@ const rowDrop = () => {
     // draggable: ".draggable .el-table__row",
     handle: ".drag__row",
     animation: 300,
-    onEnd({ newIndex, olIndex }) {
+    onEnd({ newIndex, olIndex }: Record<any, any>) {
       const currentRow = data.value.splice(olIndex, 1)[0];
       data.value.splice(newIndex, 0, currentRow);
     },

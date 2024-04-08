@@ -31,7 +31,7 @@
   </a-form-item>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toRef, useAttrs, reactive } from "vue";
 import { useField } from "vee-validate";
 

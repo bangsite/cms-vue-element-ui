@@ -18,7 +18,10 @@ const routeBeforeEach = (to: RouteLocationNormalized, from: RouteLocationNormali
   if (to.name !== "Login" && !getCookie("__x_key_at")) {
     next({ name: "Login" });
     hideFullScreenLoading();
-  } else next();
+  } else {
+    next();
+    hideFullScreenLoading();
+  }
 };
 
 const routeAfterEach = (to: RouteLocationNormalized) => {

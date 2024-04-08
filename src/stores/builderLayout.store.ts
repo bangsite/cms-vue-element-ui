@@ -1,32 +1,75 @@
-import { acceptHMRUpdate, defineStore } from "pinia";
+import { defineStore } from "pinia";
+import type { Block, BlockFormMap, BuilderState, Section } from "@/types/builderLayout";
 
-export const useBuilderLayoutStore = defineStore("BlockStore", {
-  state: () => ({
-    sectionIndex: 0,
-    sectionName: "",
-    sectionData: [],
+// interface Section {
+//   sectionIndex: number;
+//   sectionName: string;
+//   sectionData: SectionForm[];
+//   blocks: BlockFormMap[];
+//   blockTypeSelected: [];
+// }
+//
+// interface BuilderState {
+//   sections: Section[];
+// }
+
+export const useBuilderLayoutStore = defineStore("BuilderLayoutStore", {
+  state: (): BuilderState => ({
+    sections: [],
     blockTypes: [],
-    blockTypeSelected: [],
   }),
 
   getters: {},
 
   actions: {
-    setSectionIndex(position: number) {
-      this.sectionIndex = +position;
+    // Add a new section
+    addSection(section: Section): void {
+      this.sections.push(section);
     },
-    setSectionName(name: string) {
-      this.sectionName = name;
+
+    // Remove a section by index
+    removeSection(index: number): void {
+      this.sections.splice(index, 1);
     },
-    setBlockTypes(types: []) {
-      this.blockTypes = [...types];
+
+    // Add a block to a section
+    addBlock(sectionIndex: number, blockForm: BlockFormMap): void {
+      if (this.sections[sectionIndex]) {
+        debugger;
+        if (!this.sections[sectionIndex]?.blocks) this.sections[sectionIndex].blocks = [];
+        this.sections[sectionIndex].blocks.push(blockForm);
+      }
     },
-    setBlockTypeSelected(data: []) {
-      this.blockTypeSelected = data;
+
+    // Remove a block from a section by index
+    removeBlock(sectionIndex: number, blockIndex: number): void {
+      if (this.sections[sectionIndex] && this.sections[sectionIndex].blocks[blockIndex]) {
+        this.sections[sectionIndex].blocks.splice(blockIndex, 1);
+      }
     },
+
+    // Set block types for dynamic block selection
+    setBlockTypes(blockTypes: Block[]): void {
+      this.blockTypes.push({ ...blockTypes });
+    },
+
+    // setSectionIndex(position: number) {
+    //   this.sections.sec = position;
+    // },
+    // setSectionName(name: string) {
+    //   this.sectionName = name;
+    // },
+    // setBlockTypes(types: Block[]) {
+    //   this.blockTypes.push({ ...types });
+    // },
+    // setBlockTypeSelected(data: []) {
+    //   this.blockTypeSelected = data;
+    // },
   },
 });
 
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useBuilderLayoutStore, import.meta.hot));
-}
+// Hot Module Replacement (HMR) handling
+// Hot Module Replacement (HMR): The HMR code is not needed if you are not using Hot Module Replacement. If you are not using HMR, you can remove that part of the code.
+// if (import.meta.hot) {
+//   import.meta.hot.accept(acceptHMRUpdate(useBuilderLayoutStore, import.meta.hot));
+// }

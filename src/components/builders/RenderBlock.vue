@@ -6,9 +6,9 @@
           <el-row justify="start" align="middle">
             <!--btn drag-->
             <el-button type="primary" @click="dragBlock(+idx)" class="btn-up mr-20" link>
-              <SvgIcon :icon="'carbon:drag-vertical'" :size="26" />
+              <SvgIcon :icon="'carbon:drag-vertical'" :size="24" />
             </el-button>
-            <h3>{{ block.value?.block_title }}</h3>
+            <h4>{{ block.value?.block_title || `Block ${idx}` }}</h4>
           </el-row>
         </el-col>
 
@@ -16,12 +16,12 @@
           <el-row justify="end" align="middle">
             <!--btn edit-->
             <el-button type="primary" @click="editBlock(block, +idx)" class="btn-edit" link>
-              <SvgIcon :icon="'circum:edit'" :size="26" />
+              <SvgIcon :icon="'circum:edit'" :size="24" />
             </el-button>
 
             <!--btn remove-->
             <el-button @click="removeBlock(+idx)" class="btn-close" link type="danger">
-              <SvgIcon :icon="'material-symbols:delete-outline'" :size="26" />
+              <SvgIcon :icon="'material-symbols:delete-outline'" :size="24" />
             </el-button>
           </el-row>
         </el-col>
