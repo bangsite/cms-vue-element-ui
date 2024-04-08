@@ -22,6 +22,7 @@ export default {
   BUILDER: {
     TITLE: "Builder",
     DYNAMIC_BLOCK: "Dynamic Block",
+    DYNAMIC_PAGE: "Dynamic Page",
   },
   POST: {
     TITLE: "Post",
