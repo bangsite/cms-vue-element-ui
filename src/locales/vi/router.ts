@@ -16,6 +16,7 @@ export default {
   BUILDER: {
     TITLE: "Builder",
     DYNAMIC_BLOCK: "Dynamic Block",
+    DYNAMIC_PAGE: "Giao diện Động",
   },
   MOVIES: {
     TITLE: "Phim",
