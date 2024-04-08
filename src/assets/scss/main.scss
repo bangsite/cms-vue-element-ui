@@ -1,0 +1,18 @@
+//@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "element-plus/theme-chalk/dark/css-vars.css";
+
+// Settings
+@import "./settings";
+
+// Layouts
+@import "./layouts";
+
+// Components
+@import "./components";
+
+// Pages
+@import "./pages";
+

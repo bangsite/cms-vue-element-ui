@@ -62,7 +62,7 @@ jspm_packages/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
-# TypeScript cache
+# TypeScript webStorage
 *.tsbuildinfo
 
 # dotenv environment variable files
@@ -73,7 +73,7 @@ web_modules/
 .env.local
 
 # yarn v2
-.yarn/cache
+.yarn/memoryCacheProvider
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
@@ -85,8 +85,5 @@ web_modules/
 
 ### Source ###
 .DS_Store
-dist-ssr
 coverage
-*.local
-/cypress/videos/
-/cypress/screenshots/
+

@@ -1,0 +1,19 @@
+$hsl: 215;
+
+$cl-red: hsl(0, 86%, 57%);
+$cl-green: hsl(155, 67%, 45%);
+$cl-yellow: hsl(54, 89%, 64%);
+
+$cl-primary: hsl($hsl, 100%, 54%);
+$cl-secondary: hsl($hsl, 87%, 54%);
+$cl-alt: hsl($hsl, 89%, 60%);
+
+$cl-lighter: hsl(0, 0%, 100%);
+$cl-container: hsl(0, 25%, 97%);
+$cl-dark: hsl(0, 0%, 0%);
+$cl-white: hsl(255, 100%, 100%);
+
+$cl-title: hsl(0, 0%, 20%);
+$cl-text: #313233;
+
+$cl-bg-hover:hsl(0, 0%, 96%);
