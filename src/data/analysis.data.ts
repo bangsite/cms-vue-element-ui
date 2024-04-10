@@ -1,5 +1,4 @@
 import type { AnalysisTimelines, AnalysisTables } from "@/config/interfaces/analysis.interface";
-
 export const Timelines: AnalysisTimelines[] = [
   { type: "blue", title: "Default", content: "", time: "2021-10-10 20:46" },
   { type: "green", title: "Success", content: "Where is the success", time: "2021-10-10 20:46" },
@@ -8,7 +7,6 @@ export const Timelines: AnalysisTimelines[] = [
 
   { type: "orange", title: "Danger", content: "Where is the danger", time: "2021-10-10 20:46" },
 ];
-
 export const Tables: AnalysisTables[] = [
   {
     key: 0,

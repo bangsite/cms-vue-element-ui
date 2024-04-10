@@ -21,9 +21,11 @@
       v-loading="isLoading"
     >
       <!-- expand -->
-      <template #expand="scope">
-        {{ scope.row }}
-      </template>
+      <el-table-column type="expand">
+        <template #default="scope">
+          {{ scope.row }}
+        </template>
+      </el-table-column>
 
       <!-- images -->
       <template #images="scope">
@@ -31,11 +33,15 @@
       </template>
 
       <!-- operation -->
-      <template #operation="scope">
-        <el-button type="primary" link :icon="View" @click="openDrawer('check', scope.row)">View</el-button>
-        <el-button type="primary" link :icon="EditPen" @click="openDrawer('edit', scope.row)" disabled>Edit </el-button>
-        <el-button type="primary" link :icon="Delete" @click="deleteRow(scope.row)" disabled>Delete</el-button>
-      </template>
+      <el-table-column label="Operations">
+        <template #default="scope">
+          <el-button type="primary" link :icon="View" @click="openDrawer('check', scope.row)">View</el-button>
+          <el-button type="primary" link :icon="EditPen" @click="openDrawer('edit', scope.row)" disabled
+            >Edit
+          </el-button>
+          <el-button type="primary" link :icon="Delete" @click="deleteRow(scope.row)" disabled>Delete </el-button>
+        </template>
+      </el-table-column>
     </TableList>
   </el-card>
 </template>
@@ -65,15 +71,16 @@ onBeforeMount(async () => {
 
 // handle form search
 const searchColumns = computed(() => {
-  return columns.value?.filter((item) => item.search?.el || item.search?.render).sort((a, b) => a.search - b.search);
+  return columns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
 });
-const onSearch = (val) => {
+
+const onSearch = () => {
   // set pageNum= 1
   // updated search param
   // get list
   fetchTopAnimes();
 };
-const onReset = (val) => {
+const onReset = () => {
   // set pageNum= 1
   // updated search param
   // get list
@@ -83,7 +90,7 @@ const onReset = (val) => {
 // handle tool header
 const onRefreshData = async () => await fetchTopAnimes();
 
-const onToggleSearch = (data) => (isShowSearch.value = data);
+const onToggleSearch = (data: boolean) => (isShowSearch.value = data);
 
 // handle table
 const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: number }) => {

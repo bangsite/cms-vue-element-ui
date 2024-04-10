@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted } from "vue";
 import { useForm } from "vee-validate";
 import { useRoute } from "vue-router";
 
@@ -48,16 +47,15 @@ import TextAreaBase from "@/components/form/TextAreaBase.vue";
 
 import { POST_FORM } from "@/views/Post/composables/useDataForm";
 import { useSubmitForm } from "@/views/Post/composables/useSubmitForm";
-import { convertErrors } from "@/utils/convertErrors";
 
 const route = useRoute();
-const { handleSubmit, setErrors, setFieldValue, setValues, errors, isSubmitting, values } = useForm({
+const { handleSubmit } = useForm({
   initialValues: {
     ...POST_FORM,
   },
 });
 
-const { responseApi, errorsAPI, status, onCreate, onUpdate } = useSubmitForm();
+const { onCreate, onUpdate } = useSubmitForm();
 
 const onSubmitPublish = handleSubmit(async (values) => {
   if (route?.params?.id) {
@@ -65,37 +63,17 @@ const onSubmitPublish = handleSubmit(async (values) => {
   } else {
     await onCreate(values);
   }
-
-  if (status.value === 200) {
-    // show notify
-    // back to list
-  }
-
-  if (errorsAPI.value && Object.keys(errorsAPI.value).length) {
-    // set error key each field of form
-    const errs = convertErrors(errorsAPI);
-    setErrors(errs);
-  }
 });
 
-const onSubmitDraft = (event) => {
+const onSubmitDraft = (event: any) => {
   console.log(event);
 };
 
-const onModalPreview = (event) => {
+const onModalPreview = (event: any) => {
   console.log(event);
 };
 
 const onSubmit = () => {};
-
-onBeforeMount(() => {
-  // load data api related
-});
-
-onMounted(() => {
-  // set data
-  // action
-});
 </script>
 
 <style scoped></style>

@@ -3,9 +3,10 @@ export default {
     TITLE: "Login",
   },
   DASHBOARD: {
-    TITLE: "Dashboard",
-    ANALYSIS: "Analysis",
-    WORKBENCH: "Workbench",
+    TITLE: "Bảng Điều Khiển",
+    OVERVIEW: "Tổng Quan",
+    ANALYSIS: "Phân Tích",
+    WORKBENCH: "Môi Trường Làm Việc",
   },
   COMPONENT: {
     TITLE: "Component",

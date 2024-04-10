@@ -79,12 +79,12 @@ const ruleForm: LoginInput = {
   remember: false,
 };
 
-const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
+const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);
 
-  const { shop, tokens } = response.value;
+  const { shop, tokens }: Record<any, any> = response.value;
   if (shop) setUserInfo(shop);
   if (tokens) setToken(tokens);
 
@@ -92,7 +92,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
     console.log("errors:::", errors.value);
   }
 
-  await router.push("/dashboard");
+  await router.push("/");
 
   actions.resetForm();
 });

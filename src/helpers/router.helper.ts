@@ -148,11 +148,7 @@ const promoteRouteLevel = (route: AppRouteRecordRaw) => {
 
   route.children = route.children?.map((item) => omit(item, ["children"]));
 };
-const addToChildren = (
-  routes: RouteRecordNormalized[],
-  children: AppRouteRecordRaw[],
-  routeModule: AppRouteRecordRaw
-) => {
+const addToChildren = (routes: RouteRecordNormalized[], children: [], routeModule: AppRouteRecordRaw) => {
   for (let index = 0; index < children.length; index++) {
     const child = children[index];
     const route = routes.find((item) => item.name === child.name);

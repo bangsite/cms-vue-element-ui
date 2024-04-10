@@ -97,7 +97,8 @@ const SvgIcon = defineAsyncComponent(() => import("@/components/common/SvgIcon.v
 const activeKey = ref([""]);
 
 const { initBlockTypes, initSection, initBlock, addNewSection } = useBuilderLayout();
-const { sections, blockTypeSelected } = storeToRefs(useBuilderLayoutStore());
+const { blockTypeSelected } = useBuilderLayoutStore();
+const { sections } = storeToRefs(useBuilderLayoutStore());
 
 const { handleSubmit, setValues, setFieldValue, setErrors, errors, isSubmitting, values } = useForm({
   initialValues: {

@@ -79,7 +79,7 @@ export interface ColumnProps<T = any>
 }
 
 export interface ProTableProps {
-  columns: ColumnProps[];
+  columns: any[];
   data?: any[];
   requestApi?: (params: any) => Promise<any>;
   requestAuto?: boolean;

@@ -12,30 +12,30 @@ export const useSearch = () => {
     state.totalParam = {};
     const nowSearchParam: Table.StateProps["searchParam"] = {};
     for (const key in state.searchParam) {
-      if (state.searchParam[key] || state.searchParam[key] === false || state.searchParam[key] === 0) {
-        nowSearchParam[key] = state.searchParam[key];
+      if (state?.searchParam[key] || state?.searchParam[key] === false || state?.searchParam[key] === 0) {
+        nowSearchParam[key] = state?.searchParam[key];
       }
     }
     Object.assign(state.totalParam, nowSearchParam, isPageable ? pageParam.value : {});
   };
 
   const onSearch = () => {
-    state.pageable.pageNum = 1;
+    state?.pageable.pageNum = 1;
     updatedTotalParam();
-    getTableList();
+    // getTableList();
   };
 
   const onReset = () => {
     state.pageable.pageNum = 1;
     state.searchParam = { ...state.searchInitParam };
     updatedTotalParam();
-    getTableList();
+    // getTableList();
   };
 
   const handleSizeChange = (val: number) => {
     state.pageable.pageNum = 1;
     state.pageable.pageSize = val;
-    getTableList();
+    // getTableList();
   };
 
   return {
@@ -43,7 +43,7 @@ export const useSearch = () => {
     onSearch,
     onReset,
     handleSizeChange,
-    handleCurrentChange,
+    // handleCurrentChange,
     updatedSearchParam,
   };
 };

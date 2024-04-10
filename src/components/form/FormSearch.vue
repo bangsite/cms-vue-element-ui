@@ -23,10 +23,10 @@
 <script setup lang="ts">
 import { Delete, Search } from "@element-plus/icons-vue";
 import type { BreakPoint } from "@/config/interfaces/responsive.interface";
-import type { ColumnProps } from "@/config/interfaces/table.interface";
+// import type { ColumnProps } from "@/config/interfaces/table.interface";
 
 interface ProTableProps {
-  searchColumns?: ColumnProps[];
+  searchColumns?: any[];
   searchParam?: { [key: string]: any };
   searchCol: number | Record<BreakPoint, number>;
 }

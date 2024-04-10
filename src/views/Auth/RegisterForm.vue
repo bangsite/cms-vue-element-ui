@@ -72,7 +72,7 @@ const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value
 const onSubmit = handleSubmit(async (values, actions) => {
   await doSignUp(values);
 
-  const { shop, tokens } = response.value;
+  const { shop, tokens }: Record<any, any> = response.value;
   if (shop) setUserInfo(shop);
   if (tokens) setToken(tokens);
 

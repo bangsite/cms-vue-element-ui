@@ -9,11 +9,11 @@ import type { EChartsOption } from "echarts";
 import { debounce } from "lodash-es";
 
 import echarts from "@/plugins/echarts";
-import { useAppStore } from "@/stores/app.store";
+// import { useAppStore } from "@/stores/app.store";
 import { propTypes } from "@/utils/propTypes";
 import { isString } from "@/utils/isCheckVal";
 
-const appStore = useAppStore();
+// const appStore = useAppStore();
 
 const props = defineProps({
   options: {
@@ -24,19 +24,19 @@ const props = defineProps({
   height: propTypes.oneOfType([Number, String]).def("500px"),
 });
 
-const isDark = computed(() => appStore.getIsDark);
+// const isDark = computed(() => appStore.getIsDark);
 
-const theme = computed(() => {
-  return isDark.value ? true : "auto";
-});
+// const theme = computed(() => {
+//   return isDark.value ? true : "auto";
+// });
 
-const options = computed(() => {
-  const { options } = props;
-
-  return Object.assign(options, {
-    darkMode: theme.value,
-  });
-});
+// const options = computed(() => {
+//   const { options } = props;
+//
+//   return Object.assign(options, {
+//     darkMode: theme.value,
+//   });
+// });
 
 const elRef = ref<ElRef>();
 

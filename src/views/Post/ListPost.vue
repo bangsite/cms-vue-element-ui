@@ -31,15 +31,7 @@
     </el-form>
   </el-card>
   <el-card title="Posts">
-    <el-table
-      ref="table"
-      size="small"
-      border
-      highlight-current-row
-      v-loading="isLoading"
-      :data="data"
-      :default-sort="tableSort ? { prop: tableSortBy, order: tableSortOrder } : { prop: '', order: '' }"
-    >
+    <el-table ref="table" size="small" border highlight-current-row :data="data">
       <el-table-column type="index" label="#" width="50" align="center" />
       <template v-for="column in columns" :key="column.key">
         <el-table-column v-if="column.key === 'action'" :prop="column.key" :label="column.title">
@@ -92,6 +84,15 @@ const hasSelected = computed(() => state.selectedRowKeys.length > 0);
 const onSelectChange = (selectedRowKeys: Key[]) => {
   console.log("selectedRowKeys changed: ", selectedRowKeys);
   state.selectedRowKeys = selectedRowKeys;
+};
+
+const handleEdit = (index: number, record: Record<string, any>) => {
+  console.log("edit row");
+  // showModal.value = !showModal.value;
+};
+
+const handleDelete = (index: number, record: Record<string, any>) => {
+  console.log("delete row:", record);
 };
 
 const onSubmit = () => {

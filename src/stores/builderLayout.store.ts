@@ -35,22 +35,24 @@ export const useBuilderLayoutStore = defineStore("BuilderLayoutStore", {
     // Add a block to a section
     addBlock(sectionIndex: number, blockForm: BlockFormMap): void {
       if (this.sections[sectionIndex]) {
-        debugger;
-        if (!this.sections[sectionIndex]?.blocks) this.sections[sectionIndex].blocks = [];
-        this.sections[sectionIndex].blocks.push(blockForm);
+        if (!this.sections[sectionIndex]?.blocks) {
+          this.sections[sectionIndex]["blocks"] = [];
+        }
+
+        this.sections[sectionIndex]?.blocks.push(blockForm);
       }
     },
 
     // Remove a block from a section by index
     removeBlock(sectionIndex: number, blockIndex: number): void {
-      if (this.sections[sectionIndex] && this.sections[sectionIndex].blocks[blockIndex]) {
+      if (this.sections[sectionIndex] && this.sections[sectionIndex]?.blocks[blockIndex]) {
         this.sections[sectionIndex].blocks.splice(blockIndex, 1);
       }
     },
 
     // Set block types for dynamic block selection
     setBlockTypes(blockTypes: Block[]): void {
-      this.blockTypes.push({ ...blockTypes });
+      this.blockTypes = blockTypes;
     },
 
     // setSectionIndex(position: number) {

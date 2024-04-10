@@ -1,12 +1,12 @@
 import { reactive, toRefs } from "vue";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
 import { useDialogStore } from "@/stores/dialog.store";
-import { BLOCK_FORM, BLOCK_TYPES, SECTION_DEFAULT } from "@/config/enums/builderLayout.enum";
+import { BLOCK_FORM, BLOCK_TYPES, SECTION_DEFAULT } from "@/enums/builderLayout.enum";
 
 export const useBuilderLayout = () => {
   const { setTitle, setLayoutName, setActive } = useDialogStore();
 
-  const { sections, addSection, addBlock, setBlockTypes, setSectionIndex, setSectionName } = useBuilderLayoutStore();
+  const { sections, addSection, addBlock, setBlockTypes } = useBuilderLayoutStore();
   const state = reactive({
     sectionName: "",
     setBlockAt: 0,

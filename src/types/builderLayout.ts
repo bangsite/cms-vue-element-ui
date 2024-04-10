@@ -55,8 +55,11 @@ export interface BlockFormMap {
   [key: string]: BlockFormCommon | BlockFormButton | BlockFormImage | BlockFormHtml;
 }
 
-export interface BlockData {
+// Fixed attributes
+interface BlockFormExtras {
   block_title: string;
   block_type: string;
   section_name: string;
 }
+
+export type ExtendedBlockFormMap = BlockFormMap & BlockFormExtras;

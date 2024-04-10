@@ -15,7 +15,7 @@ export const getAllParentPath = <T = Recordable>(treeData: T[], path: string) =>
   return (menuList || []).map((item) => item.path);
 };
 
-export const fullPath = (data: AppRouteRecordRaw, parentPath = "/") => {
+export const fullPath = (data: any, parentPath = "/") => {
   return isUrl(data.path) ? data.path : pathResolve(parentPath, data.path);
 };
 export const hasOneShowingChild = (children: AppRouteRecordRaw[] = []) => {

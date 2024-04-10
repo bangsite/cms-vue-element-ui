@@ -3,7 +3,7 @@ export type PRODUCT = {
   product_thumb: string;
   product_description: string;
   product_price: number;
-  product_quantity: string;
+  product_quantity: number;
   product_type: string;
   product_attributes: PRODUCT_ATTRIBUTES[];
 };
@@ -20,10 +20,12 @@ export const PRODUCT_FORM: PRODUCT = {
   product_description: "",
   product_price: 0,
   product_quantity: 0,
-  product_type: 8,
-  product_attributes: {
-    manufacturer: "",
-    model: "",
-    color: "",
-  },
+  product_type: "8",
+  product_attributes: [
+    {
+      manufacturer: "",
+      model: "",
+      color: "",
+    },
+  ],
 };

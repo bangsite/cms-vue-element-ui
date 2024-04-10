@@ -7,16 +7,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, reactive, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
 import { useDialogStore } from "@/stores/dialog.store";
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { BLOCK_TYPES } from "@/config/enums/builderLayout.enum";
+import { BLOCK_FORM, BLOCK_TYPES } from "@/enums/builderLayout.enum";
 
 import { storeToRefs } from "pinia";
-import { Block, BlockFormMap } from "@/types/builderLayout";
+import { type BlockFormMap, type ExtendedBlockFormMap } from "@/types/builderLayout";
 
 // const blockTitle: Record<string, string> = reactive({
 //   button: "BLOCK.BLOCK_BUTTON",
@@ -25,14 +25,13 @@ import { Block, BlockFormMap } from "@/types/builderLayout";
 // });
 
 // Define a type excluding the 'section_name' property
-type BlockFormIntoSection = Omit<BlockFormMap, "section_name" | "block_title" | "block_type">;
 
 const { t } = useI18n();
 const { setActive } = useDialogStore();
 const { setBlockTypes, addBlock } = useBuilderLayoutStore();
-const { blockTypes, sectionName } = storeToRefs(useBuilderLayoutStore());
+const { blockTypes, sections } = storeToRefs(useBuilderLayoutStore());
 
-const selectedBlock = ref<BlockFormIntoSection | null>(null);
+const selectedBlock = ref<ExtendedBlockFormMap>();
 
 onBeforeMount(() => {
   initBlockTypes();
@@ -40,24 +39,23 @@ onBeforeMount(() => {
 
 const initBlockTypes = (page: string = "") => {
   const data = page ? BLOCK_TYPES.get(page) : BLOCK_TYPES.get("default");
-  debugger;
   if (data && data.length) setBlockTypes(data);
 };
 
-const mapBlockForm = (data: Block) => {
+const mapBlockForm = (data: BlockFormMap) => {
   if (!data) {
     console.error("Block form data not found");
     return;
   }
 
   selectedBlock.value = {
+    block_title: "name",
+    block_type: "type",
+    section_name: "section",
     ...data,
-    block_title: t(data.title),
-    block_type: data.type || "",
-    section_name: sectionName.value,
-  };
+  } as ExtendedBlockFormMap;
 
-  addBlock({ ...selectedBlock.value });
+  addBlock(0, { ...selectedBlock.value });
 
   setActive(false);
 };

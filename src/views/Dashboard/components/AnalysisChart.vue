@@ -30,8 +30,11 @@ import {
   getWeeklyUserActivityApi,
 } from "@/services/modules/dashboard.service";
 import { set } from "@/helpers/object.helper";
-import { reactify } from "@vueuse/core";
 
+// Define the API response type
+interface ApiResponse {
+  data: { name: string; value: any }[]; // Adjust the type of 'value' as per your actual data type
+}
 const { t } = useI18n();
 let loading = ref(true);
 
@@ -40,61 +43,89 @@ const barOptionsData = reactive<EChartsOption>(barOptions) as EChartsOption;
 const lineOptionsData = reactive<EChartsOption>(lineOptions) as EChartsOption;
 
 const getUserAccessSource = async () => {
-  const res = await getUserAccessSourceApi().catch((err) => {
+  try {
+    const res: ApiResponse = await getUserAccessSourceApi(); // Specify the return type
+    if (res && res.data) {
+      const mappedData = res.data.map((item) => ({
+        name: t(item.name), // Assuming `t` is a translation function
+        value: item.value,
+      }));
+      set(
+        pieOptionsData,
+        "legend.data",
+        res.data.map((item) => t(item.name))
+      );
+      pieOptionsData!.series![0].data = mappedData;
+    }
+  } catch (error) {
+    console.error("Error fetching user access source:", error);
+    // Handle error or notify user as needed
+  } finally {
+    // Ensure loading indicator is hidden after API call completes
     loading.value = false;
-  });
-  if (res) {
-    set(pieOptionsData, "legend.data", res?.data?.map((v) => t(v.name)));
-    pieOptionsData!.series![0].data = res?.data.map((v) => {
-      return {
-        name: t(v.name),
-        value: v.value,
-      };
-    });
   }
 };
 const getWeeklyUserActivity = async () => {
-  const res = await getWeeklyUserActivityApi().catch((err) => {
-    console.log(err);
+  try {
+    const res: ApiResponse = await getWeeklyUserActivityApi(); // Specify the return type
+    if (res && res.data) {
+      set(
+        barOptionsData,
+        "xAxis.data",
+        res.data.map((v) => t(v.name))
+      );
+      set(barOptionsData, "series", [
+        {
+          name: t("analysis.activeQuantity"),
+          data: res.data.map((v) => v.value),
+          type: "bar",
+        },
+      ]);
+    }
+  } catch (error) {
+    console.error("Error fetching weekly user activity:", error);
+    // Handle error or notify user as needed
+  } finally {
+    // Ensure loading indicator is hidden after API call completes
     loading.value = false;
-  });
-  if (res) {
-    set(barOptionsData, "xAxis.data", res?.data.map((v) => t(v.name)));
-    set(barOptionsData, "series", [
-      {
-        name: t("analysis.activeQuantity"),
-        data: res?.data.map((v) => v.value),
-        type: "bar",
-      },
-    ]);
   }
 };
 
 const getMonthlySales = async () => {
-  const res = await getMonthlySalesApi().catch((err) => {
+  try {
+    const res: ApiResponse = await getMonthlySalesApi(); // Specify the return type
+    if (res && res.data) {
+      set(
+        lineOptionsData,
+        "xAxis.data",
+        res.data.map((v) => t(v.name))
+      );
+      set(lineOptionsData, "series", [
+        {
+          name: t("analysis.estimate"),
+          smooth: true,
+          type: "line",
+          data: res.data.map((v) => v.estimate),
+          animationDuration: 2800,
+          animationEasing: "cubicInOut",
+        },
+        {
+          name: t("analysis.actual"),
+          smooth: true,
+          type: "line",
+          itemStyle: {},
+          data: res.data.map((v) => v.actual),
+          animationDuration: 2800,
+          animationEasing: "quadraticOut",
+        },
+      ]);
+    }
+  } catch (error) {
+    console.error("Error fetching monthly sales:", error);
+    // Handle error or notify user as needed
+  } finally {
+    // Ensure loading indicator is hidden after API call completes
     loading.value = false;
-  });
-  if (res) {
-    set(lineOptionsData, "xAxis.data", res?.data.map((v) => t(v.name)));
-    set(lineOptionsData, "series", [
-      {
-        name: t("analysis.estimate"),
-        smooth: true,
-        type: "line",
-        data: res?.data.map((v) => v.estimate),
-        animationDuration: 2800,
-        animationEasing: "cubicInOut",
-      },
-      {
-        name: t("analysis.actual"),
-        smooth: true,
-        type: "line",
-        itemStyle: {},
-        data: res?.data.map((v) => v.actual),
-        animationDuration: 2800,
-        animationEasing: "quadraticOut",
-      },
-    ]);
   }
 };
 const getAllApi = async () => {

@@ -3,7 +3,7 @@ import { getWeather } from "@/services/modules/weather.service";
 
 export default function useFetchWeather() {
   const isLoading = ref(false);
-  const response = ref({});
+  const response = ref(null);
   const errors = ref(null);
 
   const fetchDataWeather = async () => {

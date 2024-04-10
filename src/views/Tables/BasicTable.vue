@@ -54,7 +54,7 @@ import { Delete, EditPen, Download, RefreshRight, View, Refresh } from "@element
 
 import { COLUMNS_ALBUM } from "@/views/Tables/useColumns";
 import BasicTable from "@/components/tables/TableList.vue";
-import useSpotify from "@/composables/useSpotify";
+import useSpotify from "@/hooks/api/useSpotify";
 
 const initParam = reactive({ type: 1 });
 
@@ -80,8 +80,12 @@ const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: numbe
   ElMessage.success("Modify list sorting successfully");
 };
 
-const openDrawer = () => {};
-const deleteRow = () => {};
+const openDrawer = (type: string, dataRow: any) => {
+  console.log(type, dataRow);
+};
+const deleteRow = (dataRow: any) => {
+  console.log(dataRow);
+};
 const batchAdd = () => {};
 const downloadFile = () => {};
 const toDetail = () => {};
