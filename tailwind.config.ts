@@ -12,6 +12,7 @@ export default {
       success: colors.green,
       gray: colors.gray,
       red: colors.red,
+      para: "#232323",
     },
     extend: {},
   },

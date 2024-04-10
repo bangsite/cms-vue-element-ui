@@ -1,13 +1,14 @@
 <template>
-  <el-card :bordered="false" class="rounded-xl">
+  <el-card :bordered="false" class="rounded-xl p-1">
     <div :class="`overview-card overview-card-${ocData.type}`">
-      <div class="overview-card__top flex items-center justify-between gap-4 mb-2">
+      <div class="overview-card__top flex items-center justify-between gap-4 mb-6">
         <div class="overview-card__top--content">
           <template v-if="halfCircleIcon">
             <span class="text-base">{{ ocData.label }}</span>
             <h4 class="text-2xl md:text-3xl font-medium mb-1">
               <vue3-autocounter
                 ref="counter"
+                :loop="true"
                 :startAmount="0"
                 :endAmount="didViewCountUp ? Number(ocData.total) : 0"
                 :duration="2"
@@ -58,7 +59,7 @@ import CountUp from "vue-countup-v3";
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
-const props = defineProps({
+defineProps({
   ocData: VueTypes.object.def({
     id: "1",
     type: "primary",

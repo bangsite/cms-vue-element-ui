@@ -1,6 +1,15 @@
 <template>
-  <el-row :gutter="20">
-    <el-col v-for="(item, i) in OverviewDataSorted" :lg="12" :md="12" :sm="12" :xs="24" :key="i" class="mb-[20px]">
+  <el-row :gutter="20" class="overview-card">
+    <el-col
+      v-for="(item, i) in overviewCardSorted"
+      :xl="6"
+      :lg="6"
+      :md="12"
+      :sm="12"
+      :xs="24"
+      :key="i"
+      class="mb-[20px]"
+    >
       <Suspense>
         <template #default>
           <OverviewCard :ocData="item" />
@@ -15,23 +24,10 @@
   </el-row>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import OverviewCard from "@/components/cards/OverviewCard.vue";
 import OverviewData from "@/db/overviewCard.json";
 
-const OverviewDataList = defineComponent({
-  name: "OverviewDataList",
-  components: {
-    OverviewCard,
-    //OverviewDataStyleWrap,
-  },
-  setup() {
-    const OverviewDataSorted = OverviewData.slice(0, 4);
-    return {
-      OverviewDataSorted,
-    };
-  },
-});
-export default OverviewDataList;
+const overviewCardSorted = computed(() => OverviewData.slice(0, 4));
 </script>
