@@ -6,7 +6,7 @@
       </el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :xs="24" :md="24" :lg="12" :xl="12" class="mb-[20px]">
+      <el-col :xs="24" :lg="12" :md="24" :xl="12" class="mb-[20px]">
         <Suspense>
           <template #default>
             <SalesReport />
@@ -18,7 +18,7 @@
           </template>
         </Suspense>
       </el-col>
-      <el-col :xs="24" :md="24" :lg="12" :xl="12" class="mb-[20px]">
+      <el-col :xs="24" :lg="12" :md="24" :xl="12" class="mb-[20px]">
         <Suspense>
           <template #default>
             <SalesGrowth />
@@ -32,10 +32,10 @@
       </el-col>
     </el-row>
     <el-row :gutter="25">
-      <el-col :xxl="16" :xs="24">
+      <el-col :xl="12" :lg="12" :md="24" :xs="24" class="mb-[20px]">
         <Suspense>
           <template #default>
-            <SalesByLocation />
+            <LatestTransection />
           </template>
           <template #fallback>
             <el-card headless>
@@ -45,10 +45,10 @@
         </Suspense>
       </el-col>
 
-      <el-col :xxl="12" :xs="24">
+      <el-col :xl="12" :lg="12" :md="24" :xs="24" class="mb-[20px]">
         <Suspense>
           <template #default>
-            <TopSellingProduct />
+            <UpcomingEvents />
           </template>
           <template #fallback>
             <el-card headless>
@@ -57,11 +57,12 @@
           </template>
         </Suspense>
       </el-col>
-
-      <el-col :xxl="12" :xs="24">
+    </el-row>
+    <el-row :gutter="25">
+      <el-col :xl="24" :md="24" :xs="24">
         <Suspense>
           <template #default>
-            <BrowsersState />
+            <BestSellers />
           </template>
           <template #fallback>
             <el-card headless>
@@ -77,5 +78,7 @@
 import OverviewDataList from "@/views/Dashboard/components/OverviewDataList.vue";
 import SalesReport from "@/views/Dashboard/components/SalesReport.vue";
 import SalesGrowth from "@/views/Dashboard/components/SalesGrowth.vue";
-// import SalesReport from "@/views/Dashboard/components/SalesReport.vue";
+import BestSellers from "@/views/Dashboard/components/BestSellers.vue";
+import LatestTransection from "@/views/Dashboard/components/LatestTransection.vue";
+import UpcomingEvents from "@/views/Dashboard/components/UpcomingEvents.vue";
 </script>

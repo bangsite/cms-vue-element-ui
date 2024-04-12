@@ -1,5 +1,6 @@
 import { VNode, ComponentPublicInstance, Ref } from "vue";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
+import type { BreakPoint } from "@/config/interfaces/responsive.interface";
 
 export interface EnumProps {
   label?: string; //
@@ -76,6 +77,24 @@ export interface ColumnProps<T = any>
   fieldNames?: FieldNamesProps; //
   headerRender?: (scope: HeaderRenderScope<T>) => VNode; //
   _children?: ColumnProps<T>[]; //
+}
+
+export interface TableBasicProps {
+  columns: any[];
+  customCols: string[];
+  data?: any[];
+  requestApi?: (params: any) => Promise<any>;
+  requestAuto?: boolean;
+  requestError?: (params: any) => void;
+  dataCallback?: (data: any) => any;
+  title?: string;
+  pagination?: Record<string, any>;
+  showOperations?: boolean;
+  initParam?: any;
+  border?: boolean;
+  toolButton?: ("refresh" | "setting" | "search")[] | boolean;
+  rowKey?: string;
+  searchCol?: number | Record<BreakPoint, number>; // { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }
 }
 
 export interface ProTableProps {

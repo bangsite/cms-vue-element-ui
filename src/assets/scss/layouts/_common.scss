@@ -27,3 +27,12 @@
     z-index: 99;
 }
 
+
+.table-best-seller.el-table thead th,
+.table-best-seller.el-table thead .el-table-fixed-column--right {
+    @apply bg-blue-50;
+}
+
+.table-best-seller.el-table td.el-table__cell:first-child div {
+    padding-left: 0;
+}
