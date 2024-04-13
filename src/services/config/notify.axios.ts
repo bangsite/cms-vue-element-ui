@@ -2,7 +2,7 @@ import { type AxiosError, type AxiosResponse, HttpStatusCode } from "axios";
 import { ElNotification } from "element-plus";
 
 import { i18n } from "@/plugins/i18n";
-import { NOTIFY_CODE } from "@/config/enums/notifyCode.enum";
+import { NOTIFY_CODE } from "@/enums/notifyCode.enum";
 
 const showNotifyError = (errorRes: AxiosError) => {
   const { status, message } = errorRes?.response?.data ? (errorRes.response.data as any) : errorRes;

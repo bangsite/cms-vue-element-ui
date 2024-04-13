@@ -104,10 +104,12 @@ import Sortable from "sortablejs";
 import RenderColumn from "@/components/tables/components/ColumnRender.vue";
 import Pagination from "@/components/tables/components/Pagination.vue";
 
-import type { ColumnProps, ProTableProps, TypeProps } from "@/core/interfaces/table";
-import { useTables } from "@/hooks/useTables";
-import { useSelection } from "@/hooks/useSelection";
+// import type { ColumnProps, ProTableProps, TypeProps } from "@/interfaces/table";
+// import { useTables } from "@/hooks/useTables";
+// import { useSelection } from "@/hooks/useSelection";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import type { ColumnProps, ProTableProps, TypeProps } from "@/config/interfaces/table.interface";
+import { useSelection } from "@/hooks/web/useSelection";
 
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
@@ -159,21 +161,21 @@ const flatColumns = computed(() => flatColumnsFunc(tableColumns));
 onMounted(() => {
   dragSort();
 });
-const setEnumMap = async ({ prop, enum: enumValue }: ColumnProps) => {
+const setEnumMap = async ({ enum: enumValue }: ColumnProps) => {
   if (!enumValue) return;
 
-  // If the same value exists in the current enumMap return
-  if (enumMap.value.has(prop!) && (typeof enumValue === "function" || enumMap.value.get(prop!) === enumValue)) return;
-
-  // The current enum is static data and is stored directly in enumMap.
-  if (typeof enumValue !== "function") return enumMap.value.set(prop!, unref(enumValue!));
-
-  // In order to prevent slow execution of the interface and slow storage, resulting in repeated requests, it is stored as [] in advance, and then stored again after the interface returns.
-  enumMap.value.set(prop!, []);
-
-  // The current enum is background data and needs to request data, then call the request interface and store it in enumMap
-  const { data } = await enumValue();
-  enumMap.value.set(prop!, data);
+  // // If the same value exists in the current enumMap return
+  // if (enumMap.value.has(prop!) && (typeof enumValue === "function" || enumMap.value.get(prop!) === enumValue)) return;
+  //
+  // // The current enum is static data and is stored directly in enumMap.
+  // if (typeof enumValue !== "function") return enumMap.value.set(prop!, unref(enumValue!));
+  //
+  // // In order to prevent slow execution of the interface and slow storage, resulting in repeated requests, it is stored as [] in advance, and then stored again after the interface returns.
+  // enumMap.value.set(prop!, []);
+  //
+  // // The current enum is background data and needs to request data, then call the request interface and store it in enumMap
+  // const { data } = await enumValue();
+  // enumMap.value.set(prop!, data);
 };
 
 const colSetting = tableColumns!.filter((item) => {

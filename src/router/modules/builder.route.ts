@@ -32,7 +32,7 @@ export const Builder: AppRouteRecordRaw = {
       beforeEnter: [AuthGuard],
       meta: {
         title: i18n.global.t("ROUTER.BUILDER.DYNAMIC_PAGE"),
-        icon: "radix-icons:section",
+        icon: "material-symbols:dynamic-feed-rounded",
         noCache: true,
         affix: true,
       },

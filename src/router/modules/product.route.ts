@@ -7,7 +7,7 @@ export const Product: AppRouteRecordRaw = {
   component: Layout,
   meta: {
     title: i18n.global.t("ROUTER.PRODUCT.TITLE"),
-    icon: "fluent-mdl2:product-list",
+    icon: "icon-park-outline:ad-product",
     alwaysShow: true,
   },
   children: [
@@ -17,6 +17,7 @@ export const Product: AppRouteRecordRaw = {
       component: () => import("@/views/Product/ListProduct.vue"),
       meta: {
         title: i18n.global.t("ROUTER.PRODUCT.LIST"),
+        icon: "fluent-mdl2:product-list",
         noCache: true,
         affix: true,
       },
@@ -27,6 +28,7 @@ export const Product: AppRouteRecordRaw = {
       component: () => import("@/views/Product/CreateProduct.vue"),
       meta: {
         title: i18n.global.t("ROUTER.PRODUCT.CREATE"),
+        icon: "fluent-mdl2:product-release",
         noCache: true,
         affix: true,
       },

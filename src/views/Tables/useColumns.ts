@@ -1,4 +1,4 @@
-export const COLUMNS_PRO = [
+export const ColumnProps = [
   { type: "selection", fixed: "left", width: 70 },
   { type: "sort", label: "Sort", width: 80 },
   { prop: "name", label: "Name", align: "left" },

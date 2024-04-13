@@ -18,7 +18,7 @@
           />
         </div>
         <div class="form__group">
-          <SelectBase name="tags" type="select" :label="$t('POST.SEARCH.TAGS')" :options="POST_TAGS" />
+          <!--          <SelectBase name="tags" type="select" :label="$t('POST.SEARCH.TAGS')" :options="POST_TAGS" />-->
         </div>
       </div>
 

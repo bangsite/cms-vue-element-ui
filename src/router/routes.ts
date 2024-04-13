@@ -15,7 +15,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: "/",
     component: Layout,
-    redirect: "/dashboard/analysis",
+    redirect: "/cms",
     name: "Root",
     beforeEnter: [AuthGuard],
     meta: {

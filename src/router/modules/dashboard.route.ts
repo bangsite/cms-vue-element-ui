@@ -3,8 +3,8 @@ import { i18n } from "@/plugins/i18n";
 import { AuthGuard } from "@/router/guard/auth.guard";
 
 export const Dashboard: AppRouteRecordRaw = {
-  path: "/dashboard",
-  redirect: "/dashboard/analysis",
+  path: "/",
+  redirect: "/cms",
   name: "Dashboard",
   component: Layout,
   beforeEnter: [AuthGuard],
@@ -15,7 +15,17 @@ export const Dashboard: AppRouteRecordRaw = {
   },
   children: [
     {
-      path: "analysis",
+      path: "/cms",
+      name: "Overview",
+      component: () => import("@/views/Dashboard/DashboardView.vue"),
+      beforeEnter: [AuthGuard],
+      meta: {
+        title: i18n.global.t("ROUTER.DASHBOARD.OVERVIEW"),
+        icon: "material-symbols:overview-outline-rounded",
+      },
+    },
+    {
+      path: "/cms/analysis",
       name: "Analysis",
       component: () => import("@/views/Dashboard/AnalysisView.vue"),
       beforeEnter: [AuthGuard],
@@ -25,7 +35,7 @@ export const Dashboard: AppRouteRecordRaw = {
       },
     },
     {
-      path: "workbench",
+      path: "/cms/workbench",
       name: "Workbench",
       component: () => import("@/views/Dashboard/WorkbenchView.vue"),
       beforeEnter: [AuthGuard],

@@ -70,8 +70,12 @@ const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: numbe
   ElMessage.success("Modify list sorting successfully");
 };
 
-const openDrawer = () => {};
-const deleteRow = () => {};
+const openDrawer = (type: string, dataRow: any) => {
+  console.log(type, dataRow);
+};
+const deleteRow = (dataRow: any) => {
+  console.log(dataRow);
+};
 const batchAdd = () => {};
 const downloadFile = () => {};
 const toDetail = () => {};

@@ -2,13 +2,15 @@
 import InputBase from "@/components/form/InputBase.vue";
 import { useDialogStore } from "@/stores/dialog.store";
 import { storeToRefs } from "pinia";
-import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
 import { useForm } from "vee-validate";
+import { string } from "vue-types";
 
 defineProps({
   // data: {
   //   type: [Object, Array],
   // },
+  sectionIndex: Number,
+  blockIndex: Number,
   label: {
     type: [String],
   },
@@ -25,9 +27,10 @@ defineProps({
 });
 const emit = defineEmits(["removeBlockItem", "moveBlockItem"]);
 
-const { sectionName } = storeToRefs(useBuilderLayoutStore());
+// const { sectionName } = storeToRefs(useBuilderLayoutStore());
 const { setActive } = useDialogStore();
 const { data } = storeToRefs(useDialogStore());
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { key, value } = data.value;
 
 const { handleSubmit, setValues, setFieldValue, setErrors, errors, isSubmitting, values } = useForm({
@@ -46,7 +49,7 @@ const onCancel = () => {
 <template>
   <el-form ref="formSection" :labelPosition="'top'" v-if="data">
     <InputBase
-      :name="`${sectionName}[${key}].id`"
+      :name="`section_${sectionIndex}.block_${blockIndex}.[${key}].id`"
       type="text"
       :disabled="disabled"
       :placeholder="$t('BLOCK.PLH_ID')"
@@ -55,7 +58,7 @@ const onCancel = () => {
       :rulesAttrMessage="{ max: 250 }"
     />
     <InputBase
-      :name="`${sectionName}[${key}].class`"
+      :name="`section_${sectionIndex}.block_${blockIndex}.[${key}].class`"
       type="text"
       :disabled="disabled"
       :placeholder="$t('BLOCK.PLH_CLASS')"
@@ -64,7 +67,7 @@ const onCancel = () => {
       :rulesAttrMessage="{ max: 250 }"
     />
     <InputBase
-      :name="`${sectionName}[${key}].background_color`"
+      :name="`section_${sectionIndex}.block_${blockIndex}.[${key}].background_color`"
       type="text"
       :disabled="disabled"
       :placeholder="$t('BLOCK.PLH_COLOR')"
@@ -74,7 +77,7 @@ const onCancel = () => {
     />
 
     <InputBase
-      :name="`${sectionName}[${key}].label`"
+      :name="`section_${sectionIndex}.block_${blockIndex}.[${key}].label`"
       type="text"
       :disabled="disabled"
       :placeholder="$t('BLOCK.PLH_LABEL')"
@@ -84,7 +87,7 @@ const onCancel = () => {
     />
 
     <InputBase
-      :name="`${sectionName}[${key}].button_color`"
+      :name="`section_${sectionIndex}.block_${blockIndex}.[${key}].button_color`"
       type="text"
       :disabled="disabled"
       :placeholder="$t('BLOCK.PLH_COLOR')"
@@ -93,7 +96,7 @@ const onCancel = () => {
       :rulesAttrMessage="{ max: 9 }"
     />
     <InputBase
-      :name="`${sectionName}[${key}].url`"
+      :name="`section_${sectionIndex}.block_${blockIndex}.[${key}].url`"
       type="text"
       :disabled="disabled"
       :placeholder="$t('BLOCK.PLH_URL')"
@@ -104,7 +107,7 @@ const onCancel = () => {
     <!-- Actions -->
     <el-divider border-style="dashed" />
     <el-row justify="end" class="mt-20">
-      <el-button @click="onCancel"> Cancel </el-button>
+      <el-button @click="onCancel"> Cancel</el-button>
       <el-button :disabled="Object.keys(errors).length > 0 || isSubmitting" type="primary" @click="onSubmit">
         Submit
       </el-button>

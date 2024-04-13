@@ -5,7 +5,7 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 
 defineProps({
   data: {
-    type: [Object, Array],
+    type: [Array],
   },
   label: {
     type: [String],
@@ -48,7 +48,7 @@ const handleRemoveBlockItem = (position: number) => {
           </el-button>
 
           <el-button
-            v-if="data.length !== Number(currentIndex) + 1"
+            v-if="data?.length !== Number(currentIndex) + 1"
             @click="handleMoveBlockItem('down', Number(currentIndex))"
             class="btn-down"
           >

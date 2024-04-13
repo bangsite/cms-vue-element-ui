@@ -7,7 +7,7 @@ export const Post: AppRouteRecordRaw = {
   component: Layout,
   meta: {
     title: i18n.global.t("ROUTER.POST.TITLE"),
-    icon: "iconoir:page-edit",
+    icon: "ic:outline-article",
     alwaysShow: true,
   },
   children: [
@@ -17,6 +17,7 @@ export const Post: AppRouteRecordRaw = {
       component: () => import("@/views/Post/ListPost.vue"),
       meta: {
         title: i18n.global.t("ROUTER.POST.LIST"),
+        icon: "mdi:list-box-outline",
         noCache: true,
         affix: true,
       },
@@ -27,6 +28,7 @@ export const Post: AppRouteRecordRaw = {
       component: () => import("@/views/Post/CreatePost.vue"),
       meta: {
         title: i18n.global.t("ROUTER.POST.CREATE"),
+        icon: "ic:round-post-add",
         noCache: true,
         affix: true,
       },

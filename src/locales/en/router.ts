@@ -4,6 +4,7 @@ export default {
   },
   DASHBOARD: {
     TITLE: "Dashboard",
+    OVERVIEW: "Overview",
     ANALYSIS: "Analysis",
     WORKBENCH: "Workbench",
   },

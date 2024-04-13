@@ -11,20 +11,7 @@
           <h4>{{ `Section  ${idx + 1}` }}</h4>
         </template>
 
-        <RenderBlock
-          v-if="activeKey && activeKey.length"
-          :label="item"
-          :disabled="true"
-          :data="
-            item === 'section_1'
-              ? fieldsS1
-              : item === 'section_2'
-              ? fieldsS2
-              : item === 'section_3'
-              ? fieldsS3
-              : fieldsS4
-          "
-        />
+        <RenderBlock v-if="activeKey && activeKey.length" :label="item" :disabled="true" />
         <!-- Add Block -->
         <el-button v-if="activeKey" @click="addBlockTypes(idx + 1, item)" class="btn-add-block" plain>
           <SvgIcon :icon="'ion:add-circle-outline'" :size="20" />
@@ -48,7 +35,7 @@ import { storeToRefs } from "pinia";
 
 import { useBuilderLayout } from "@/hooks/web/useBuilderLayout";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
-import { SECTION_FIELD, SECTION_FORM } from "@/config/enums/builderLayout.enum";
+import { SECTION_FIELD, SECTION_FORM } from "@/enums/builderLayout.enum";
 
 const RenderBlock = defineAsyncComponent(() => import("@/components/builders/RenderBlock.vue"));
 const SvgIcon = defineAsyncComponent(() => import("@/components/common/SvgIcon.vue"));

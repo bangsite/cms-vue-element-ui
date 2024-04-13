@@ -1,4 +1,4 @@
-import ApiService from "@/core/services/api.service";
+import ApiService from "@/services/api.service";
 import type { ResponseAPI } from "@/config/interfaces/response";
 
 export const listProduct = (config?: Record<string, any>) => {
