@@ -6,6 +6,13 @@ module.exports = {
             instances: 1,
             max_memory_restart: '1G',
             script: './dist',
+            watch: ["server", "client"],
+            // Delay between restart
+            watch_delay: 1000,
+            ignore_watch : ["node_modules", "client/img"],
+            watch_options: {
+              "followSymlinks": false
+            }
 
             // Logging
             // out_file: "./out.log",
