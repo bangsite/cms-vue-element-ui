@@ -5,7 +5,7 @@ module.exports = {
             exec_mode: 'cluster',
             instances: 1,
             max_memory_restart: '1G',
-            script: '/dist',
+            script: './dist',
 
             // Logging
             // out_file: "./out.log",
