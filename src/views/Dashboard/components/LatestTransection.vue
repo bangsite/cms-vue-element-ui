@@ -51,14 +51,14 @@
           </div>
 
           <div class="flex flex-col">
-            <strong>{{ scope.row.paymentMethod }}</strong>
-            <span>{{ scope.row.duration }}</span>
+            <strong>{{ scope.row?.paymentMethod }}</strong>
+            <span>{{ scope.row?.duration }}</span>
           </div>
         </div>
       </template>
       <!-- credit -->
       <template #amount="scope">
-        <template v-if="scope.row.paymentType === 'credit'">
+        <template v-if="scope.row?.paymentType === 'credit'">
           <span class="test-success">+{{ scope.row.amount }}</span>
         </template>
         <template v-else>
@@ -81,8 +81,8 @@ import { TRANSACTION_COLUMNS } from "@/enums/transactionsColumns.enum";
 const transectionTab = ref("today");
 const isLoading = ref(false);
 
-const transectionColumns = computed(() => TRANSACTION_COLUMNS);
-const transectionData = computed(() => TableData[transectionTab.value]);
+const transectionColumns: any = computed(() => TRANSACTION_COLUMNS);
+const transectionData: any = computed(() => TableData[transectionTab.value]);
 const handleTabActivation = (value: string) => {
   isLoading.value = true;
   transectionTab.value = value;

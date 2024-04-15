@@ -1,8 +1,8 @@
 <template>
-  <el-card shadow="hover" class="mb-15">
-    <template #header>Shortcuts</template>
-    <div class="work__main-shortcut">
-      <el-card hoverable shadow="hover" v-for="item in WorkShortcutsData" :key="item.id">
+  <el-card shadow="hover" class="rounded-xl">
+    <template #header><h4 class="title">Shortcuts</h4></template>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      <el-card hoverable shadow="hover" v-for="item in WorkShortcutsData" :key="item.id" class="rounded-xl">
         <div class="flex flex-col items-center">
           <SvgIcon :icon="item.icon" :size="32" :style="{ color: item.color }" />
           <p class="line-clamp-3">{{ item.label }}</p>

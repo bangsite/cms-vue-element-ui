@@ -1,6 +1,6 @@
 <template>
   <TransitionGroup name="slide" tag="div">
-    <el-card shadow="hover" v-for="(block, idx) in data" :key="block.key" class="block mb-10">
+    <el-card shadow="hover" v-for="(block, idx) in data" :key="block.key" class="block mb-10 rounded-lg">
       <el-row :gutter="10" justify="space-between" align="middle">
         <el-col :span="18">
           <el-row justify="start" align="middle">
@@ -8,7 +8,7 @@
             <el-button type="primary" @click="dragBlock(+idx)" class="btn-up mr-20" link>
               <SvgIcon :icon="'carbon:drag-vertical'" :size="24" />
             </el-button>
-            <h4>{{ block.value?.block_title || `Block ${idx}` }}</h4>
+            <h5>{{ block.value?.block_title || `Block ${idx}` }}</h5>
           </el-row>
         </el-col>
 

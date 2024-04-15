@@ -25,16 +25,6 @@ export const Dashboard: AppRouteRecordRaw = {
       },
     },
     {
-      path: "/cms/analysis",
-      name: "Analysis",
-      component: () => import("@/views/Dashboard/AnalysisView.vue"),
-      beforeEnter: [AuthGuard],
-      meta: {
-        title: i18n.global.t("ROUTER.DASHBOARD.ANALYSIS"),
-        icon: "icon-park-outline:analysis",
-      },
-    },
-    {
       path: "/cms/workbench",
       name: "Workbench",
       component: () => import("@/views/Dashboard/WorkbenchView.vue"),

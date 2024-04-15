@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-import type { ResponseAPI } from "@/config/interfaces/response";
+import type { ResponseAPI } from "@/interfaces/response";
 
 export const listProduct = (config?: Record<string, any>) => {
   return ApiService.get<ResponseAPI<[]>>(`/products`, { ...config }).then((response) => response.data);

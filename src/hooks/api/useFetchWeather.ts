@@ -1,5 +1,5 @@
 import { ref, toRefs } from "vue";
-import { getWeather } from "@/services/modules/weather.service";
+import { getOpenWeatherMap } from "@/services/modules/weather.service";
 
 export default function useFetchWeather() {
   const isLoading = ref(false);
@@ -10,7 +10,7 @@ export default function useFetchWeather() {
     isLoading.value = true;
 
     try {
-      const { data } = await getWeather();
+      const { data } = await getOpenWeatherMap();
       response.value = data;
     } catch (error) {
       const { data } = error as any;

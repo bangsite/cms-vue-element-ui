@@ -15,8 +15,8 @@
       @change="handleChange"
       @search="handleSearch"
     >
-      <el-option v-for="(item, index) in attrs.options" :key="item.id + index" :value="item.id">
-        <span v-if="te(item.name)">{{ $t(item.name) }}</span>
+      <el-option v-for="(item, index) in attrs.options" :key="item?.id + index" :value="item?.id">
+        <span v-if="te(item?.name)">{{ $t(item?.name) }}</span>
         <span v-else>{{ item?.name }}</span>
       </el-option>
     </el-select>

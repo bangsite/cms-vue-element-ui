@@ -79,7 +79,7 @@ import Sortable from "sortablejs";
 import ColumnRender from "@/components/tables/components/ColumnRender.vue";
 import Pagination from "@/components/tables/components/Pagination.vue";
 
-import type { ColumnProps, ProTableProps, TypeProps } from "@/config/interfaces/table.interface";
+import type { ColumnProps, ProTableProps, TypeProps } from "@/interfaces/table.interface";
 import { useTables } from "@/hooks/web/useTables";
 import { useSelection } from "@/hooks/web/useSelection";
 import SvgIcon from "@/components/common/SvgIcon.vue";

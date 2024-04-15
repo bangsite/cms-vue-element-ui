@@ -46,10 +46,10 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 // import Pagination from "@/components/tables/components/Pagination.vue";
-// import type { ColumnProps, ProTableProps } from "@/config/interfaces/table.interface";
+// import type { ColumnProps, ProTableProps } from "@/interfaces/table.interface";
 import ColumnRender from "@/components/tables/components/ColumnRender.vue";
 import type { TableColumn } from "element-plus/es/components/table/src/table-column/defaults";
-import type { TableBasicProps } from "@/config/interfaces/table.interface";
+import type { TableBasicProps } from "@/interfaces/table.interface";
 
 const props = withDefaults(defineProps<TableBasicProps>(), {
   columns: () => [],

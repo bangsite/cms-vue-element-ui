@@ -1,0 +1,86 @@
+<template>
+  <template v-if="!isLoading">
+    <el-card class="rounded-xl">
+      <el-row justify="space-between" align="middle">
+        <el-col>
+          <div class="flex items-center flex-wrap justify-center md:justify-between gap-2">
+            <template v-for="(item, idx) in dataWeather?.list" :key="idx">
+              <template v-if="idx === 0">
+                <div class="bg-blue-500/10 rounded-xl flex flex-col w-full md:w-auto py-2 px-6 items-center">
+                  <img
+                    v-if="item?.weather[0]?.icon"
+                    class="mb-3"
+                    :src="`https://openweathermap.org/img/wn/${item?.weather[0].icon}@2x.png`"
+                    alt="icon"
+                  />
+                  <h4 class="mb-4">
+                    {{ item?.main?.temp }}
+                    <sup>°</sup>
+                    <span>C</span>
+                  </h4>
+                  <div class="mb-4 flex flex-col items-center">
+                    <strong>{{ weekdayNames(item?.dt_txt) }}</strong>
+                    <strong>{{ dataWeather?.city?.name }}</strong>
+                  </div>
+
+                  <span>Humidity: {{ item?.main.humidity }}%</span>
+                  <span class="mb-3">Wind: {{ item?.wind?.speed }} kph </span>
+                </div>
+              </template>
+              <template v-else>
+                <div class="flex flex-col items-center">
+                  <p class="mb-6">{{ weekdayNames(item?.dt_txt) }}</p>
+
+                  <img
+                    v-if="item?.weather[0]?.icon"
+                    class="mb-3"
+                    :src="`https://openweathermap.org/img/wn/${item?.weather[0].icon}@2x.png`"
+                    alt="icon"
+                  />
+
+                  <h5 class="mb-6">
+                    {{ item?.main?.temp }}
+                    <sup>°</sup>
+                    <span>C</span>
+                  </h5>
+
+                  <span>{{ item?.main.humidity }}%</span>
+                  <span>{{ item?.wind?.speed }} kph </span>
+                </div>
+              </template>
+            </template>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
+  </template>
+  <template v-else>
+    <el-skeleton :rows="3" animated />
+    <el-skeleton-item variant="text" style="width: 30%" />
+    <el-skeleton-item variant="text" style="width: 80%; margin-right: 16px" />
+    <el-skeleton-item variant="text" style="margin-right: 16px" />
+  </template>
+</template>
+
+<script setup lang="ts">
+import { computed, onBeforeMount } from "vue";
+import { weekdayNames } from "@/utils/formatDateTime";
+import useFetchWeather from "@/hooks/api/useFetchWeather";
+import { DATA_WEATHER } from "@/db/dataWaether";
+
+const { fetchDataWeather, response, isLoading } = useFetchWeather();
+console.log(response);
+// const currentWeather = computed(() => response.value?.current);
+// const locationWeather = computed(() => response.value?.location);
+// const forecastday = computed(() => {
+//   if (response.value && "forecast" in response.value) {
+//     return response.value.forecast.forecastday;
+//   }
+//   return null;
+// });
+const dataWeather = computed(() => DATA_WEATHER);
+console.log(dataWeather);
+onBeforeMount(async () => {
+  await fetchDataWeather();
+});
+</script>

@@ -22,8 +22,8 @@
 </template>
 <script setup lang="ts">
 import { Delete, Search } from "@element-plus/icons-vue";
-import type { BreakPoint } from "@/config/interfaces/responsive.interface";
-// import type { ColumnProps } from "@/config/interfaces/table.interface";
+import type { BreakPoint } from "@/interfaces/responsive.interface";
+// import type { ColumnProps } from "@/interfaces/table.interface";
 
 interface ProTableProps {
   searchColumns?: any[];
