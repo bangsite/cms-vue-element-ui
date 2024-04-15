@@ -8,7 +8,7 @@ import VueDevTools from "vite-plugin-vue-devtools";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  envDir: "./environments",
+  // envDir: "./environments",
   plugins: [
     vue(),
     vueJsx(),
@@ -26,14 +26,14 @@ export default defineConfig({
   build: {
     target: "esnext",
   },
-  server: {
-    proxy: {
-      "^/api": {
-        target: "api.openweathermap.org",
-        ws: true,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "^/api": {
+  //       target: "api.openweathermap.org",
+  //       ws: true,
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, ""),
+  //     },
+  //   },
+  // },
 });

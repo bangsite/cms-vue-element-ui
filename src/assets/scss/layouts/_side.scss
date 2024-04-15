@@ -16,13 +16,13 @@
             display: flex;
             align-items: center;
             font-size: 1rem;
-            font-weight: $font-weight-bold;
+            @apply font-medium;
         }
     }
 
     // override element ui
-    &.el-menu{
-        border-right:none;
+    &.el-menu {
+        border-right: none;
     }
 
     .el-menu-item {
