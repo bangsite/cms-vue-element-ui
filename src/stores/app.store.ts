@@ -10,7 +10,7 @@ interface AppState {
   locale: boolean;
   layout: LayoutType;
   logo: boolean;
-
+  dark: boolean;
   title: string;
   userInfo: string;
   fullScreen: boolean;
@@ -32,9 +32,13 @@ export const useAppStore = defineStore("app", {
       fullScreen: true,
       pageLoading: false,
       size: true,
+      dark: false,
     };
   },
   getters: {
+    getIsDark(): boolean {
+      return this.dark;
+    },
     getCollapse(): boolean {
       return this.collapse;
     },
@@ -67,6 +71,9 @@ export const useAppStore = defineStore("app", {
     },
   },
   actions: {
+    setIsDark(val: boolean) {
+      this.dark = val;
+    },
     setCollapse(collapse: boolean) {
       this.collapse = collapse;
     },

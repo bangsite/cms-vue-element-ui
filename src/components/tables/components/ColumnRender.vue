@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ColumnProps } from "@/config/interfaces/table.interface";
+import type { ColumnProps } from "@/interfaces/table.interface";
 const props = defineProps<{ column: ColumnProps; customCols: string[] }>();
 </script>
 

@@ -1,7 +1,12 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-aside :collapsed="collapsed" :hide-timeout="3000" class="layout__side" :width="collapsed ? 'auto' : '250px'">
+      <el-aside
+        :collapsed="collapsed"
+        :hide-timeout="3000"
+        class="layout__side shadow"
+        :width="collapsed ? 'auto' : '250px'"
+      >
         <LogoBrand v-if="logo" />
 
         <VerticalMenu class="side" />

@@ -20,7 +20,7 @@
 import { ref } from "vue";
 
 import { Delete, Download, Operation, Refresh, Search } from "@element-plus/icons-vue";
-import { TableHeaderProps } from "@/config/interfaces/table.interface";
+import { TableHeaderProps } from "@/interfaces/table.interface";
 
 withDefaults(defineProps<TableHeaderProps>(), {
   toolButton: true,

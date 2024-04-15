@@ -15,9 +15,9 @@ import SwitchDarkMode from "@/components/common/SwitchDarkMode.vue";
 
 const appStore = useAppStore();
 
-const theme = computed(() => appStore.getIsDark);
-const themeChange = (val) => {
-  appStore.setIsDark(val as boolean);
+const theme = computed(() => appStore?.getIsDark);
+const themeChange = (val: boolean) => {
+  appStore?.setIsDark(val);
 };
 </script>
 

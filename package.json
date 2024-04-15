@@ -3,8 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "vite --mode development  --host",
-        "build": "run-p type-check build-only",
+        "dev": "vite --mode development --host ",
+        "build": "run-p  build-only",
+        "buildtemp": "run-p type-check build-only",
         "preview": "vite preview",
         "test:unit": "vitest",
         "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
@@ -22,6 +23,7 @@
         "@types/sortablejs": "^1.15.8",
         "@vee-validate/i18n": "^4.12.6",
         "@vee-validate/rules": "^4.12.6",
+        "@vitejs/plugin-basic-ssl": "^1.1.0",
         "@vueuse/core": "^10.9.0",
         "apexcharts": "^3.48.0",
         "axios": "^1.6.8",
@@ -76,7 +78,7 @@
         "start-server-and-test": "^2.0.3",
         "tailwindcss": "^3.4.3",
         "typescript": "~5.4.4",
-        "vite": "^5.1.6",
+        "vite": "^5.2.8",
         "vite-plugin-vue-devtools": "^7.0.18",
         "vitest": "^1.4.0",
         "vue-tsc": "^2.0.6"

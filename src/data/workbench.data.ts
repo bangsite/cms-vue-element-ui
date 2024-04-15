@@ -1,4 +1,4 @@
-import type { Activity, Shortcuts, Technology } from "@/config/interfaces/workbench.interface";
+import type { Activity, Shortcuts, Technology } from "@/interfaces/workbench.interface";
 
 export const WorkTech: Technology[] = [
   {

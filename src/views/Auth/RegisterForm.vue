@@ -53,7 +53,7 @@ import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import type { LoginInput, ResLogin } from "@/config/interfaces/auth.interface";
+import type { LoginInput, ResLogin } from "@/interfaces/auth.interface";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import useFetchAuth from "@/hooks/api/useFetchAuth";
 // import { transformErrors } from "@/shared/utils/transformErrors";

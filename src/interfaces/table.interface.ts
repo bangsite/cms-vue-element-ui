@@ -1,6 +1,6 @@
 import { VNode, ComponentPublicInstance, Ref } from "vue";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
-import type { BreakPoint } from "@/config/interfaces/responsive.interface";
+import type { BreakPoint } from "@/interfaces/responsive.interface";
 
 export interface EnumProps {
   label?: string; //

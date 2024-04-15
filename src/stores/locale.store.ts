@@ -5,7 +5,7 @@ import en from "element-plus/es/locale/lang/en";
 import vi from "element-plus/es/locale/lang/vi";
 import ja from "element-plus/es/locale/lang/ja";
 
-import type { LocaleDropdownType, LocaleState } from "@/config/interfaces/locale.interface";
+import type { LocaleDropdownType, LocaleState } from "@/interfaces/locale.interface";
 
 const elLocaleMap = {
   en: en,

@@ -5,6 +5,7 @@ export default {
   content: ["./index.html", "./src/**/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     colors: {
+      white: colors.white,
       blue: colors.blue,
       purple: colors.purple,
       orange: colors.orange,

@@ -13,7 +13,7 @@
       :show-time="showTime"
       :format="format"
       v-bind="attrs"
-      :getPopupContainer="(trigger) => trigger.parentElement"
+      :getPopupContainer="(trigger: any) => trigger.parentElement"
       @calendarChange="handleChangeCustom"
     />
   </a-form-item>
@@ -38,7 +38,7 @@ const attrs = useAttrs();
 
 const { value, errorMessage, handleChange, resetField } = useField(name, rules);
 
-const handleChangeCustom = (dates) => {
+const handleChangeCustom = (dates: any) => {
   handleChange(dates, true);
 
   if (!dates) {

@@ -38,15 +38,15 @@
         <div class="flex items-center gap-3 justify-center">
           <div
             class="label-detailed flex items-center gap-1"
-            v-for="(item, index) in dataSalesRevenueDatasets"
+            v-for="(item, index) in dataSalesGrowthDataset"
             :key="index"
           >
-            <span :class="`label-type--${item.labelType} text-sm`">{{ item.label }}</span>
-            <strong class="total text-xl">{{ item.amount }}</strong>
+            <span :class="`label-type--${item?.labelType} text-sm`">{{ item?.label }}</span>
+            <strong class="total text-xl">{{ item?.amount }}</strong>
             <span :class="`${item.growthStatus === 'up' ? 'text-success' : 'text-danger'} text-sm flex items-center`">
               <SvgIcon :icon="'pajamas:arrow-up'" :size="16" v-if="item.growthStatus === 'up'" />
               <SvgIcon :icon="'pajamas:arrow-down'" :size="16" v-if="item.growthStatus === 'down'" />
-              <strong>{{ item.growthRate }}%</strong>
+              <strong>{{ item?.growthRate }}%</strong>
             </span>
           </div>
         </div>
@@ -59,7 +59,7 @@
             :datasets="dataSalesGrowthDataset"
             :height="heightChart"
             :layout="{ padding: { top: 20 } }"
-            :scales="dataScales"
+            :scales="dataScalesGrowth"
             :tooltip="{
               external: customTooltips,
               ...tooltip,
@@ -67,7 +67,7 @@
           />
         </template>
         <template v-else>
-          <el-skeleton :rows="6" animated />
+          <el-skeleton :rows="3" animated />
         </template>
       </div>
     </el-card>
@@ -78,14 +78,15 @@ import { computed, ref } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import Chart from "@/components/charts/ChartJS.vue";
 
-import { DATA_SALES_GROWTH, filterDataScales, filterSalesGrowthDataset } from "@/db/salesGrowth";
+import { DATA_SALES_GROWTH, filterDataScales, filterSalesGrowthDataset } from "@/db/dataSalesGrowth";
 import { customTooltips } from "@/utils/chartUtilities";
+import type { SalesGrowthData } from "@/interfaces/salesGrowth";
 
 const overviewTab = ref("today");
 const isLoading = ref(false);
 const heightChart = ref(window.innerWidth < 575 ? 200 : 110);
 
-const dataScales = computed(() => filterDataScales(DATA_SALES_GROWTH[overviewTab.value]));
+const dataScalesGrowth = computed(() => filterDataScales(DATA_SALES_GROWTH[overviewTab.value]));
 const dataSalesGrowthDataset = computed(() => filterSalesGrowthDataset(DATA_SALES_GROWTH[overviewTab.value]));
 
 const handleTabActivation = (value: string) => {

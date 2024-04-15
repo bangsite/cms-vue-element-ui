@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import type { ThemeModeSwitch } from "@/config/interfaces/theme.interface";
+import type { ThemeModeSwitch } from "@/interfaces/theme.interface";
 
 const props = withDefaults(defineProps<ThemeModeSwitch>(), {
   dark: false,
@@ -54,22 +54,4 @@ function handleSwitch(event: MouseEvent) {
   });
 }
 </script>
-<style>
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-::view-transition-old(root) {
-  z-index: 9999;
-}
-::view-transition-new(root) {
-  z-index: 1;
-}
-.dark::view-transition-old(root) {
-  z-index: 1;
-}
-.dark::view-transition-new(root) {
-  z-index: 9999;
-}
-</style>
+<style></style>

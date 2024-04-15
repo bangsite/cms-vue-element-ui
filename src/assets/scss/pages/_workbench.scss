@@ -1,78 +1,78 @@
-.overview {
-  overflow: hidden;
-
-  &__wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-}
-
-.work {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  gap: 16px;
-  width: 100%;
-
-  &__top {}
-
-  &__main {
-    &-tech {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-
-
-      p {
-        font-size: $font-size-medium;
-        color: $cl-text;
-      }
-
-      span {
-        color: $cl-text;
-        font-size: $font-size-small;
-        font-style: italic;
-      }
-    }
-
-    &-activity {
-      .ant-list-item {
-        padding: 0.55rem 0;
-      }
-
-      .avatar {
-        background-color: $cl-container;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-      }
-
-      span {
-        color: $cl-text;
-        font-size: $font-size-medium;
-      }
-    }
-
-    &-shortcut {
-      display: grid;
-      grid-template-columns: repeat(3, 32%);
-      gap: 0.5rem;
-
-      p {
-        font-size: $font-size-small;
-        text-align: center;
-      }
-    }
-
-    &-banner {
-
-      svg {
-        color: rgba(64, 158, 255, 1);
-      }
-    }
-  }
-}
+//.overview {
+//  overflow: hidden;
+//
+//  &__wrap {
+//    display: grid;
+//    grid-template-columns: 1fr 1fr;
+//    gap: 1rem;
+//  }
+//}
+//
+//.work {
+//  display: flex;
+//  flex-flow: column nowrap;
+//  justify-content: flex-start;
+//  gap: 16px;
+//  width: 100%;
+//
+//  &__top {}
+//
+//  &__main {
+//    &-tech {
+//      display: grid;
+//      grid-template-columns: repeat(3, 1fr);
+//      gap: 0.5rem;
+//
+//
+//      p {
+//        font-size: $font-size-medium;
+//        color: $cl-text;
+//      }
+//
+//      span {
+//        color: $cl-text;
+//        font-size: $font-size-small;
+//        font-style: italic;
+//      }
+//    }
+//
+//    &-activity {
+//      .ant-list-item {
+//        padding: 0.55rem 0;
+//      }
+//
+//      .avatar {
+//        background-color: $cl-container;
+//        border-radius: 50%;
+//        display: flex;
+//        align-items: center;
+//        justify-content: center;
+//        width: 48px;
+//        height: 48px;
+//      }
+//
+//      span {
+//        color: $cl-text;
+//        font-size: $font-size-medium;
+//      }
+//    }
+//
+//    &-shortcut {
+//      display: grid;
+//      grid-template-columns: repeat(3, 32%);
+//      gap: 0.5rem;
+//
+//      p {
+//        font-size: $font-size-small;
+//        text-align: center;
+//      }
+//    }
+//
+//    &-banner {
+//
+//      svg {
+//        color: rgba(64, 158, 255, 1);
+//      }
+//    }
+//  }
+//}
