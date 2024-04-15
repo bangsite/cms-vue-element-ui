@@ -6,7 +6,7 @@ module.exports = {
             instances: 1,
             max_memory_restart: '1G',
             script: 'serve',
-            args: '-s dist -l 8080 --spa',
+            // args: '--spa',
             // script: './dist',
 
             // Logging
@@ -18,12 +18,13 @@ module.exports = {
 
             // Env Specific Config
             env_production: {
-                "NODE_ENV": "production",
-                // "PORT":8080
+                NODE_ENV: "production",
+                PM2_SERVE_PATH: './dist',
+                PM2_SERVE_PORT: 8080,
             },
             env_development: {
-                "NODE_ENV": "development",
-                "PORT":8080,
+                NODE_ENV: "development",
+                PORT: 8080,
                 watch_delay: 3000,
                 ignore_watch: [
                     "./node_modules",
