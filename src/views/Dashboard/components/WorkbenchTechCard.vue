@@ -1,17 +1,17 @@
 <template>
-  <el-card shadow="hover" class="mb-15">
-    <template #header>Ecosystem</template>
-    <div class="work__main-tech">
-      <el-card shadow="hover" v-for="item in WorkTechData" :key="item.id">
+  <el-card shadow="hover" class="rounded-xl">
+    <template #header><h4 class="title">Ecosystem</h4></template>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <el-card shadow="hover" v-for="item in WorkTechData" :key="item.id" class="rounded-xl">
         <div class="flex flex-col justify-center cursor-pointer" @click="handleOpenSite(item.site)">
           <div class="flex justify-start mb-5">
             <SvgIcon :icon="item.icon" :size="24" :style="{ color: item?.color }" class="mr-5" />
-            <h3 class="m-0">{{ item.name }}</h3>
+            <h4>{{ item.name }}</h4>
           </div>
 
-          <p class="m-5 line-clamp-2">{{ item.description }}</p>
-          <div class="flex justify-end">
-            <span>{{ item.author }}</span>
+          <p class="line-clamp-3">{{ item.description }}</p>
+          <div class="flex justify-end text-gray-500 italic text-[14px]">
+            {{ item.author }}
           </div>
         </div>
       </el-card>

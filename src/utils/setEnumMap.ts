@@ -1,4 +1,4 @@
-import { ColumnProps } from "@/config/interfaces/table.interface";
+import { ColumnProps } from "@/interfaces/table.interface";
 
 export const setEnumMap = async ({ prop, enum: enumValue }: ColumnProps) => {
   if (!enumValue) return;

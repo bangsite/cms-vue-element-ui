@@ -1,5 +1,5 @@
 import ElPagination from "element-plus/lib/components/pagination";
-import type { PaginationAPI } from "@/config/interfaces/pagination.interface";
+import type { PaginationAPI } from "@/interfaces/pagination.interface";
 import { i18n } from "@/plugins/i18n";
 
 const pagination = { ...ElPagination };

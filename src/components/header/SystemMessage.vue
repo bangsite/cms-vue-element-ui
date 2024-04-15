@@ -33,7 +33,7 @@ import { computed, ref } from "vue";
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import { MessageData } from "@/data/message.data";
-import type { MessageTab } from "@/config/interfaces/notify-message.interface";
+import type { MessageTab } from "@/interfaces/notify-message.interface";
 
 const tabData = ref<MessageTab[]>([...MessageData]);
 const clicked = ref<boolean>(false);

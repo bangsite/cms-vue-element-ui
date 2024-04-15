@@ -1,26 +1,28 @@
 <template>
-  <el-card>
+  <el-card class="rounded-lg">
     <template #header>
-      <div class="card-header">
-        <span>Dynamic Section</span>
-      </div>
+      <h4>Dynamic Section</h4>
     </template>
-    <el-form ref="formSection" :labelPosition="'top'" class="border border-gray-300 border-dashed px-16 py-8 w-auto">
+    <el-form
+      ref="formSection"
+      :labelPosition="'top'"
+      class="border border-gray-300 border-dashed px-16 py-8 mx-auto rounded-lg max-w-6xl overflow-auto h-[35rem] max-h-[35rem]"
+    >
       <el-collapse
         v-model="activeKey"
         v-for="(item, idx) in sections"
         :key="idx"
-        class="el-card section mb-10 px-4"
+        class="el-card section mb-10 px-4 rounded-lg"
         @change="handleChange"
       >
         <el-collapse-item :name="idx" class="el-card__body">
           <template #title>
-            <h4>{{ item.name }}</h4>
+            <h5>{{ item.name }}</h5>
           </template>
 
           <RenderBlock v-if="activeKey && activeKey.length" :disabled="true" :data="item.blocks" />
           <!-- Add Block -->
-          <el-button v-if="activeKey" class="btn-add-block" plain>
+          <el-button v-if="activeKey" class="btn-add-block rounded-lg" plain>
             <SvgIcon :icon="'mi:add'" :size="24" />
             Add Block
           </el-button>
@@ -28,7 +30,7 @@
       </el-collapse>
 
       <!-- Add Block -->
-      <el-button v-if="activeKey" @click="addNewSection" class="btn-add-block" plain>
+      <el-button v-if="activeKey" @click="addNewSection" class="btn-add-block rounded-lg" plain>
         <SvgIcon :icon="'mi:add'" :size="24" />
         Add Section
       </el-button>

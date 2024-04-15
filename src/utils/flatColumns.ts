@@ -1,4 +1,4 @@
-import { ColumnProps } from "@/config/interfaces/table.interface";
+import { ColumnProps } from "@/interfaces/table.interface";
 import { setEnumMap } from "@/utils/setEnumMap";
 
 export const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {

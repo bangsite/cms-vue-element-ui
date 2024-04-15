@@ -108,7 +108,7 @@ import Pagination from "@/components/tables/components/Pagination.vue";
 // import { useTables } from "@/hooks/useTables";
 // import { useSelection } from "@/hooks/useSelection";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import type { ColumnProps, ProTableProps, TypeProps } from "@/config/interfaces/table.interface";
+import type { ColumnProps, ProTableProps, TypeProps } from "@/interfaces/table.interface";
 import { useSelection } from "@/hooks/web/useSelection";
 
 const props = withDefaults(defineProps<ProTableProps>(), {

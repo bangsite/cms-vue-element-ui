@@ -1,4 +1,4 @@
-<template>test</template>
+<template></template>
 <script></script>
 <!--<template>-->
 <!--  <el-form ref="formSection" :labelPosition="'top'" class="container mx-auto max-w-[65%]">-->

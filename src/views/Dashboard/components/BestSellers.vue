@@ -56,14 +56,16 @@ import { computed, ref } from "vue";
 
 import TableBasic from "@/components/tables/TableBasic.vue";
 
-import TableData from "@/db/bestSellers.json";
+import { DATA_BEST_SELLER } from "@/db/dataBestSellers";
 import { BEST_SELLER_COLUMNS } from "@/enums/bestSellerColumns.enum";
 
 const sellerTab = ref("today");
 const isLoading = ref(false);
 
 const bestsellerColumns = computed(() => BEST_SELLER_COLUMNS);
-const bestSellerData = computed(() => TableData.bestSeller !== null && TableData.bestSeller[sellerTab.value]);
+const bestSellerData = computed(
+  () => DATA_BEST_SELLER.bestSeller !== null && DATA_BEST_SELLER.bestSeller[sellerTab.value]
+);
 
 const handleTabActivation = (value: string) => {
   isLoading.value = true;

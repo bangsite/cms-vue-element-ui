@@ -9,6 +9,11 @@ export const Weather = {
   key: "2684a6a14fa24cfc92682135230711 ",
 };
 
+export const OpenWeatherMap = {
+  url: "https://api.openweathermap.org/data/2.5/forecast",
+  key: "318496eadd57e983afbe676fe358fd91",
+};
+
 export const Spotify = {
   url: "https://api.spotify.com/v1/",
   client_id: "1e223c5bd76f4e039b75513f543ad622",

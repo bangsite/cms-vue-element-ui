@@ -15,6 +15,11 @@ export const dateYMD = (value: string, format: string = "YYYY-MM-DD") => {
   else return `${dayjs(value).format(format)}`;
 };
 
+export const weekdayNames = (value: string, format: string = "dddd") => {
+  if (!value) return "";
+  else return `${dayjs(value).format(format)}`;
+};
+
 export const timeHSM = (value: string, format: string = "HH:mm:ss") => {
   if (!value) return "";
   else return `${dayjs(value).format(format)}`;

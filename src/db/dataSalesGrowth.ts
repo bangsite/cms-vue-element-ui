@@ -1,4 +1,6 @@
-export const DATA_SALES_GROWTH = {
+import type { SalesGrowthData } from "@/interfaces/salesGrowth";
+
+export const DATA_SALES_GROWTH: SalesGrowthData = {
   today: {
     labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
     orders: [35, 55, 25, 60, 42, 80, 35],
@@ -16,7 +18,9 @@ export const DATA_SALES_GROWTH = {
   },
 };
 
-export const filterDataScales = (data: Record<string, any>) => {
+// @ts-ignore
+
+export const filterDataScales = (data: any) => {
   return {
     y: {
       grid: {
@@ -57,7 +61,7 @@ export const filterDataScales = (data: Record<string, any>) => {
   };
 };
 
-export const filterSalesGrowthDataset = (data: Record<string, any>) => [
+export const filterSalesGrowthDataset = (data: any) => [
   {
     data: [...data.orders],
     backgroundColor: "rgba(130, 49, 211, 0.5)",
