@@ -12,7 +12,7 @@ module.exports = {
             ignore_watch : ["node_modules", "client/img"],
             watch_options: {
               "followSymlinks": false
-            }
+            },
 
             // Logging
             // out_file: "./out.log",
