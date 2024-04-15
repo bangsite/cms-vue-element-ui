@@ -24,11 +24,11 @@ module.exports = {
             // Env Specific Config
             env_production: {
                 "NODE_ENV": "production",
-                "PORT": 3060,
+                "PORT": 8080,
             },
             env_development: {
                 "NODE_ENV": "development",
-                "PORT": 3060,
+                "PORT": 8080,
                 watch_delay: 3000,
                 ignore_watch: [
                     "./node_modules",
