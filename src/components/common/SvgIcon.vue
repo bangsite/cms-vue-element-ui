@@ -5,7 +5,7 @@
     </svg>
   </template>
   <template v-else>
-    <Icon v-if="icon" :icon="icon" v-bind="bindAttrs" :style="{ 'font-size': size + 'px' }" />
+    <Icon v-if="icon" :icon="icon" v-bind="bindAttrs" :height="size" />
   </template>
 </template>
 <script setup lang="ts">

@@ -9,7 +9,7 @@
         //padding-left: 4px;
 
         svg {
-            fill: $cl-primary;
+            //fill: $cl-primary;
             cursor: pointer;
             width: 24px;
             transition: all 0.3s linear;
@@ -37,7 +37,7 @@
 
     &:hover {
         outline: none;
-        background-color: $cl-bg-hover;
+        //background-color: $cl-bg-hover;
     }
 
     &__icon {
@@ -46,8 +46,6 @@
         &:hover {
             outline: none;
         }
-
-        color: $cl-title;
     }
 }
 
@@ -67,7 +65,6 @@
 
 .user {
     &__avatar {
-        background-color: $cl-container;
         border-radius: 50%;
         border: none;
         width: 34px;

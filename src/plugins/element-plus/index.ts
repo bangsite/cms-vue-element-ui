@@ -1,4 +1,3 @@
-import "element-plus/dist/index.css";
 import {
   ElBreadcrumb,
   ElButton,
@@ -90,7 +89,6 @@ export function libElementPlus(app: App<Element>) {
     .use(ElMessageBox)
     .use(ElNotification)
     .use(ElConfigProvider)
-    .use(ElNotification)
     .use(ElPopover);
 
   // Config global notification

@@ -16,7 +16,7 @@
 import { computed } from "vue";
 
 import { useLocaleStore } from "@/stores/locale.store";
-import { useLocale } from "@/hooks/web/useLocale";
+import { useLocale } from "@/hooks/useLocale";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 const localeStore = useLocaleStore();

@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { setupRouter } from "./router";
-import { setupI18n } from "@/plugins/i18n";
+import { setupI18n } from "@/plugins/vue-i18n";
 
 import { setupPinia } from "@/plugins/pinia";
 import { setupTinyMCE } from "@/plugins/tinyMCE";
@@ -49,4 +49,6 @@ async function setupAppAll() {
   app.mount("#app");
 }
 
-setupAppAll();
+setupAppAll().catch((error) => {
+  console.error("Error setting up the app:", error);
+});

@@ -49,7 +49,7 @@ import { computed, ref } from "vue";
 // import type { ColumnProps, ProTableProps } from "@/interfaces/table.interface";
 import ColumnRender from "@/components/tables/components/ColumnRender.vue";
 import type { TableColumn } from "element-plus/es/components/table/src/table-column/defaults";
-import type { TableBasicProps } from "@/interfaces/table.interface";
+import type { TableBasicProps } from "@/interfaces/tables";
 
 const props = withDefaults(defineProps<TableBasicProps>(), {
   columns: () => [],

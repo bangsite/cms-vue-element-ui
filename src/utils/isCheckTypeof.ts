@@ -1,4 +1,4 @@
-import { dataTypeLabels } from "@/constant/datatype";
+import { dataTypeLabels } from "@/constants/datatype";
 
 function getDataTypeString<K extends TypeUtil.DataTypeStringKey>(value: unknown) {
   return Object.prototype.toString.call(value) as TypeUtil.DataTypeString<K>;

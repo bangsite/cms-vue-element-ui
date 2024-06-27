@@ -1,5 +1,5 @@
 import type { EChartsOption } from "echarts";
-import { i18n } from "@/plugins/i18n";
+import { i18n } from "@/plugins/vue-i18n";
 
 export const lineOptions: EChartsOption = {
   tooltip: {

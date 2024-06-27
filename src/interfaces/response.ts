@@ -1,4 +1,4 @@
-import type { PaginationAPI } from "@/interfaces/pagination.interface";
+import type { PaginationAPI } from "@/interfaces/pagination";
 
 export interface ResponseAPI<T> {
   data: T | Record<string, any>;

@@ -1,10 +1,10 @@
 import { LoginGuard } from "@/router/guard/login.guard";
-import { i18n } from "@/plugins/i18n";
+import { i18n } from "@/plugins/vue-i18n";
 
-export const Auth: AppRouteRecordRaw = {
+export const Auth = {
   path: "/login",
   name: "Login",
-  component: () => import("@/views/Auth/LoginView.vue"),
+  component: () => import("@/views/auth/LoginView.vue"),
   beforeEnter: [LoginGuard],
   meta: {
     title: i18n.global.t("router.login.title"),

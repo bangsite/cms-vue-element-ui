@@ -1,21 +1,20 @@
-import { Layout } from "@/helpers/router.helper";
-import { i18n } from "@/plugins/i18n";
+import { i18n } from "@/plugins/vue-i18n";
 import { AuthGuard } from "@/router/guard/auth.guard";
 
-export const Tables: AppRouteRecordRaw = {
+export const Tables = {
   path: "/tables",
   name: "Tables",
-  component: Layout,
+  component: () => import("@/layouts/Default.vue"),
   meta: {
     title: i18n.global.t("ROUTER.TABLES.TITLE"),
     icon: "fluent:table-add-28-regular",
-    alwaysShow: true,
+    hidden: false,
   },
   children: [
     {
       path: "basic-table",
       name: "BasicTable",
-      component: () => import("@/views/Tables/BasicTable.vue"),
+      component: () => import("@/views/tables/BasicTable.vue"),
       beforeEnter: [AuthGuard],
       meta: {
         title: i18n.global.t("ROUTER.TABLES.BASIC_TABLE"),
@@ -27,7 +26,7 @@ export const Tables: AppRouteRecordRaw = {
     {
       path: "pro-table",
       name: "ProTable",
-      component: () => import("@/views/Tables/ProTable.vue"),
+      component: () => import("@/views/tables/ProTable.vue"),
       beforeEnter: [AuthGuard],
       meta: {
         title: i18n.global.t("ROUTER.TABLES.PRO_TABLE"),

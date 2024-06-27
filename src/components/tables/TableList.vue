@@ -1,21 +1,20 @@
 <template>
-  <!--search form-->
-  <!--table-->
-  <!--table header-->
-
   <!--table body-->
   <el-table
     ref="tableRef"
     v-bind="$attrs"
-    :data="processTableData"
+    :data="dataTables"
+    :default-sort="defaultSort"
     :border="border"
     :row-key="rowKey"
-    @selection-change="selectionChange"
+    @selection-change="handleSelectionChange"
+    @sort-change="handleSortChange"
+    @row-click="handleRowClick"
   >
-    <!--default slot-->
+    <!-- Default slot for custom columns -->
     <slot />
 
-    <template v-for="item in tableColumns" :key="item">
+    <template v-for="item in tableColumns" :key="item.prop || item.type">
       <!-- selection || radio || index || expand || sort -->
       <el-table-column
         v-if="item.type && columnTypes.includes(item.type)"
@@ -25,35 +24,33 @@
       >
         <template #default="scope">
           <!-- expand -->
-          <template v-if="item.type === 'expand'">
-            <component :is="item.render" v-bind="scope" v-if="item.render" />
-            <slot v-else :name="item.type" v-bind="scope" />
-          </template>
-          <!-- radio -->
-          <el-radio v-if="item.type === 'radio'" v-model="radio" :label="scope.row[rowKey]">
-            <i></i>
-          </el-radio>
+          <component v-if="item.type === 'expand' && item.render" :is="item.render" v-bind="scope" />
+          <slot v-else-if="item.type === 'expand'" :name="item.type" v-bind="scope" />
           <!-- sort -->
-          <el-link v-if="item.type === 'sort'" :underline="false" class="drag__row">
+          <el-link v-else-if="item.type === 'sort'" :underline="false" class="drag__row">
             <SvgIcon :icon="'carbon:drag-vertical'" />
           </el-link>
+          <!-- radio -->
+          <el-radio v-else-if="item.type === 'radio'" v-model="item.radio" :label="scope.row[rowKey]">
+            <i></i>
+          </el-radio>
         </template>
       </el-table-column>
 
-      <!-- other -->
-      <ColumnRender v-if="!item.type && item.prop" :column="item">
+      <!-- Handle custom columns -->
+      <ColumnRender v-else :column="item" :custom-cols="customCols">
         <template v-for="slot in Object.keys($slots)" #[slot]="scope">
           <slot :name="slot" v-bind="scope" />
         </template>
       </ColumnRender>
     </template>
 
-    <!--insert the slot after the last row of the table-->
+    <!-- Append slot for custom content after the table rows -->
     <template #append>
       <slot name="append" />
     </template>
 
-    <!--no data-->
+    <!-- Empty state slot -->
     <template #empty>
       <slot name="empty">
         <el-empty description="No data" />
@@ -61,134 +58,103 @@
     </template>
   </el-table>
 
-  <!--pagination-->
+  <!-- Pagination slot -->
   <slot name="pagination">
-    <Pagination
-      v-if="pagination"
-      :pageable="pagination"
-      :handle-size-change="handleSizeChange"
-      :handle-current-change="handleCurrentChange"
-    />
+    <div class="my-4" v-if="pagination">
+      <el-pagination
+        v-model:current-page="pagination.currentPage"
+        v-model:page-size="pagination.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pagination.total"
+        @size-change="handleSizeChange"
+        @current-change="handlePageChange"
+      />
+    </div>
   </slot>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from "vue";
-import { Operation, Refresh, Search } from "@element-plus/icons-vue";
+import { onMounted, reactive, toRef, watch } from "vue";
 import Sortable from "sortablejs";
 
+import SvgIcon from "@/components/common/SvgIcon.vue";
 import ColumnRender from "@/components/tables/components/ColumnRender.vue";
-import Pagination from "@/components/tables/components/Pagination.vue";
 
-import type { ColumnProps, ProTableProps, TypeProps } from "@/interfaces/table.interface";
+import type { ColumnProps, TableProProps, TypeProps } from "@/interfaces/tables";
 import { useTables } from "@/hooks/web/useTables";
 import { useSelection } from "@/hooks/web/useSelection";
-import SvgIcon from "@/components/common/SvgIcon.vue";
-// import { flatColumnsFunc } from "@/utils/flatColumns";
 
-const props = withDefaults(defineProps<ProTableProps>(), {
+const props = withDefaults(defineProps<TableProProps>(), {
   columns: () => [],
-  requestAuto: true,
-  initParam: {},
+  customCols: () => [],
+  dataTables: () => [],
   border: true,
   toolButton: true,
   rowKey: "id",
-  searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
 });
-const emit = defineEmits<{ search: []; reset: []; dragSort: [{ newIndex?: number; oldIndex?: number }] }>();
-const {
-  tableData,
-  pageable,
-  search,
-  searchParam,
-  searchInitParam,
-  getTableList,
-  resetTableList,
-  handleSizeChange,
-  handleCurrentChange,
-} = useTables(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
+// const emit = defineEmits<{ search: []; reset: []; dragSort: [{ newIndex?: number; oldIndex?: number }] }>();
+const emit = defineEmits(["update:data", "pagination-change", "sort-change", "selection-change", "dragSort"]);
+
+const { tableData, search, handleSizeChange, handleCurrentChange } = useTables();
 const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 
 const columnTypes: TypeProps[] = ["selection", "radio", "index", "expand", "sort"];
 const tableColumns = reactive<ColumnProps[]>(props.columns);
-const isShowSearch = ref(true);
-const colRef = ref();
 
-const processTableData = computed(() => {
-  if (!props.data) return tableData.value;
-  if (!props.pagination) return props.data;
-
-  return props.data;
-  // return props.data.slice(
-  //   (pageable.value.pageNum - 1) * pageable.value.pageSize,
-  //   pageable.value.pageSize * pageable.value.pageNum
-  // );
-});
-
-const searchColumns = computed(() => {
-  return flatColumns.value
-    ?.filter((item) => item.search?.el || item.search?.render)
-    .sort((a, b) => a.search!.order! - b.search!.order!);
-});
-
-const flatColumns = computed(() => flatColumnsFunc(tableColumns));
-
+const dataTables = toRef(props, "dataTables");
+const pagination = toRef(props, "pagination");
+console.log(pagination.value);
 onMounted(() => {
-  dragSort();
+  initDragSort();
 });
 
-const setEnumMap = async ({ prop, enum: enumValue }: ColumnProps) => {
-  if (!enumValue) return;
+watch(
+  () => dataTables,
+  (newValue) => {
+    dataTables.value = newValue;
+  }
+);
 
-  // If the same value exists in the current enumMap return
-  if (enumMap.value.has(prop!) && (typeof enumValue === "function" || enumMap.value.get(prop!) === enumValue)) return;
+watch(
+  () => pagination,
+  (newValue) => {
+    pagination.value = newValue;
+  }
+);
 
-  // The current enum is static data and is stored directly in enumMap.
-  if (typeof enumValue !== "function") return enumMap.value.set(prop!, unref(enumValue!));
-
-  // In order to prevent slow execution of the interface and slow storage, resulting in repeated requests, it is stored as [] in advance, and then stored again after the interface returns.
-  enumMap.value.set(prop!, []);
-
-  // The current enum is background data and needs to request data, then call the request interface and store it in enumMap
-  const { data } = await enumValue();
-  enumMap.value.set(prop!, data);
+const handlePageChange = (newPage: number) => {
+  emit("pagination-change", newPage);
 };
 
-const colSetting = tableColumns!.filter((item) => {
-  const { type, prop, isShow } = item;
-  return !columnTypes.includes(type!) && prop !== "operation" && isShow;
-});
-
-const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
-  columns.forEach(async (col) => {
-    if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
-    flatArr.push(col);
-
-    // column adds default isShow && isFilterEnum property value
-    col.isShow = col.isShow ?? true;
-    col.isFilterEnum = col.isFilterEnum ?? true;
-
-    // set enumMap
-    await setEnumMap(col);
-  });
-  return flatArr.filter((item) => !item._children?.length);
-};
-const openColSetting = () => colRef.value.openColSetting();
-
-// handle tool button
-const showToolButton = (key: "refresh" | "setting" | "search") => {
-  return Array.isArray(props.toolButton) ? props.toolButton.includes(key) : props.toolButton;
-};
-
-const dragSort = () => {
-  const tbody = document.querySelector(".el-table__body-wrapper tbody") as HTMLElement;
-  Sortable.create(tbody, {
+const initDragSort = () => {
+  const tableBody = document.querySelector(".el-table__body-wrapper tbody") as HTMLElement;
+  Sortable.create(tableBody, {
     handle: ".drag__row",
     animation: 300,
-    onEnd({ newIndex, oldIndex }) {
-      const [removedItem] = processTableData.value.splice(oldIndex!, 1);
-      processTableData.value.splice(newIndex!, 0, removedItem);
+    onEnd: ({ newIndex, oldIndex }) => {
+      const movedItem = dataTables.value.splice(oldIndex, 1)[0];
+      dataTables.value.splice(newIndex, 0, movedItem);
       emit("dragSort", { newIndex, oldIndex });
     },
   });
 };
+
+const handleSortChange = (sort: { prop: string; order: "ascending" | "descending" }) => {
+  // Handle sort change logic here
+  emit("sort-change", sort);
+};
+
+const handleSelectionChange = (selection: any[]) => {
+  // Handle selection change logic here
+  emit("selection-change", selection);
+};
+
+const handleRowClick = (row: any) => {
+  // Handle row click logic here
+  console.log(row);
+};
 </script>
+<style>
+.el-popper {
+  max-width: 50%; /* set the max-width of the tooltip */
+}
+</style>

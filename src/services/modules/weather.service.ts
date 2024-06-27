@@ -1,6 +1,6 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import ApiService from "../api.service";
-import { OpenWeatherMap } from "@/constant/externalAPI";
+import { BaseApiService } from "../api.service";
+import { OpenWeatherMap } from "@/constants/externalAPI";
 interface ApiResponse<T> {
   data: T;
 }

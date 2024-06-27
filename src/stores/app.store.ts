@@ -1,37 +1,18 @@
 import { defineStore } from "pinia";
-
 import { store } from "@/plugins/pinia";
-
-import type { LayoutType } from "@/types/layout";
-
-interface AppState {
-  collapse: boolean;
-  footer: boolean;
-  locale: boolean;
-  layout: LayoutType;
-  logo: boolean;
-  dark: boolean;
-  title: string;
-  userInfo: string;
-  fullScreen: boolean;
-  pageLoading: boolean;
-  size: boolean;
-}
+import type { AppType, LayoutType } from "@/types/app";
 
 export const useAppStore = defineStore("app", {
-  state: (): AppState => {
-    return <AppState>{
+  state: (): AppType => {
+    return <AppType>{
       collapse: false,
       footer: true,
       layout: localStorage.getItem("layout") || "classic",
       locale: true,
       logo: true, // logo
-
       title: import.meta.env.VITE_APP_TITLE,
       userInfo: "userInfo",
       fullScreen: true,
-      pageLoading: false,
-      size: true,
       dark: false,
     };
   },
@@ -63,12 +44,6 @@ export const useAppStore = defineStore("app", {
     getFullScreen(): boolean {
       return this.fullScreen;
     },
-    getSize(): boolean {
-      return this.size;
-    },
-    getPageLoading(): boolean {
-      return this.pageLoading;
-    },
   },
   actions: {
     setIsDark(val: boolean) {
@@ -98,12 +73,6 @@ export const useAppStore = defineStore("app", {
 
     setFullScreen(fullScreen: boolean) {
       this.fullScreen = fullScreen;
-    },
-    setSize(size: boolean) {
-      this.size = size;
-    },
-    setPageLoading(pageLoading: boolean) {
-      this.pageLoading = pageLoading;
     },
   },
 });
