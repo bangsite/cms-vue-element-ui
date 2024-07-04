@@ -15,7 +15,8 @@ export const chartLinearGradient = (canvas: HTMLElement | null, height: number, 
 export const customTooltips = function (this: any, context: any) {
   // Tooltip Element
   let tooltipEl: HTMLElement | null = document.querySelector(".chartjs-tooltip");
-  if (!this._chart.canvas.closest(".chartjs-container").contains(tooltipEl)) {
+
+  if (!this._chart?.canvas.closest(".chartjs-container").contains(tooltipEl)) {
     tooltipEl = document.createElement("div");
     tooltipEl.className = "chartjs-tooltip";
     tooltipEl.innerHTML = "<table></table>";
@@ -26,7 +27,7 @@ export const customTooltips = function (this: any, context: any) {
       }
     });
 
-    this._chart.canvas.closest(".chart-container").appendChild(tooltipEl);
+    this._chart?.canvas.closest(".chart-container").appendChild(tooltipEl);
   }
   const tooltipModel = context.tooltip;
   // Hide if no tooltip

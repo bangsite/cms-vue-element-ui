@@ -1,34 +1,45 @@
 <template>
-  <el-row :gutter="15" justify="center" align="middle">
-    <el-col :span="12" class="flex justify-center align-center">
-      <div class="flex flex-col justify-center align-center" style="max-height: 40rem">
-        <NoPermissionSvg v-if="+exception === 403" name="403" />
-        <NotFoundSvg v-if="+exception === 404" name="404" />
-        <NetworkError v-if="+exception === 500" name="500" />
+  <div class="flex flex-col items-center justify-center h-full">
+    <NoPermissionSvg v-if="+exception === 403" name="403" class="max-h-96" />
+    <NotFoundSvg v-if="+exception === 404" name="404" class="max-h-96" />
+    <NetworkError v-if="+exception === 500" name="500" class="max-h-96" />
 
-        <div class="mb-20">
-          {{ $t(`EXCEPTION.${exception}`) }}
-        </div>
+    <div class="mb-20">
+      {{ $t(`EXCEPTION.${errorMessage}.MESSAGE`) }}
+    </div>
 
-        <el-button type="primary" @click="goBackHome">
-          {{ $t("COMMON.BTN_BACK_HOME") }}
-        </el-button>
-      </div>
-    </el-col>
-  </el-row>
+    <el-button type="primary" @click="goBackHome">
+      {{ $t("COMMON.ACTIONS.BACK_HOME") }}
+    </el-button>
+  </div>
 </template>
 <script setup lang="ts">
+import { computed } from "vue";
 import router from "@/router";
 
 import NoPermissionSvg from "@/components/svgs/NoPermissionSvg.vue";
 import NotFoundSvg from "@/components/svgs/NotFoundSvg.vue";
 import NetworkError from "@/components/svgs/NetworkError.vue";
+import { ExceptionKeys } from "@/enums/exception";
 
-defineProps({
+const props = defineProps({
   exception: {
     type: Number,
     default: 404,
   },
+});
+
+const errorMessage = computed(() => {
+  switch (props.exception) {
+    case 403:
+      return ExceptionKeys.FORBIDDEN_ERROR;
+    case 404:
+      return ExceptionKeys.NOT_FOUND_ERROR;
+    case 500:
+      return ExceptionKeys.INTERNAL_SERVER_ERROR;
+    default:
+      return ExceptionKeys.NETWORK_ERROR;
+  }
 });
 
 const goBackHome = () => {

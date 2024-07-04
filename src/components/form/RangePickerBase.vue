@@ -1,12 +1,12 @@
 <template>
-  <a-form-item
+  <el-form-item
     :label="label"
     :help="errorMessage ? $t(errorMessage, { field: label }) : errorMessage"
     :validate-status="errorMessage ? 'error' : undefined"
     :required="rules.includes('required')"
   >
     <!--Field-->
-    <a-range-picker
+    <el-range-picker
       style="width: 100%"
       :value="value"
       :id="name"
@@ -16,7 +16,7 @@
       :getPopupContainer="(trigger: any) => trigger.parentElement"
       @calendarChange="handleChangeCustom"
     />
-  </a-form-item>
+  </el-form-item>
 </template>
 
 <script setup lang="ts">

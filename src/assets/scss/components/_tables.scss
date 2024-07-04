@@ -1,0 +1,16 @@
+ // Override tables element-plus
+.table-best-seller.el-table thead th,
+.table-best-seller.el-table thead .el-table-fixed-column--right {
+    @apply bg-gray-100 text-gray-800;
+}
+
+ .table-head-title.el-table thead th,
+ .table-head-title.el-table thead .el-table-fixed-column--right {
+     @apply bg-gray-100 text-gray-800;
+ }
+
+.table-head-title.el-table td.el-table__cell:first-child div ,
+.table-best-seller.el-table td.el-table__cell:first-child div {
+    padding-left: 0;
+}
+

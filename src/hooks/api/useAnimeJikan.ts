@@ -1,30 +1,24 @@
-import { reactive, ref, toRefs } from "vue";
+import { ref, toRefs } from "vue";
 import { getTrendingAnime } from "@/services/modules/animeJikan.service";
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/event/useLoadingFullSceen";
+import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/useLoadingFullSceen";
+import { convertPagination } from "@/utils/convertPagination";
 
 export default function useAnimeJikan() {
   const isLoading = ref(false);
   const response = ref([]);
-  const pagination = reactive({
-    pageNum: 0,
-    pageSize: 0,
-    total: 0,
-  });
+  const paginationAPI = ref({});
   const errors = ref(null);
 
-  const fetchTopAnimes = async () => {
+  const fetchTopAnimes = async (params: { [key: string]: any }) => {
     isLoading.value = true;
     showFullScreenLoading();
 
     try {
-      const res = await getTrendingAnime({ params: { page: 5, limit: 10 } });
+      const res = await getTrendingAnime({ params: { ...params } });
       const { data, pagination } = res.data;
 
       response.value = data;
-
-      pagination.value.total = pagination?.items.total;
-      pagination.value.pageSize = pagination?.items.per_page;
-      pagination.value.pageNum = pagination?.items.count;
+      paginationAPI.value = convertPagination(pagination);
     } catch (error) {
       const { data } = error as any;
       errors.value = data;
@@ -35,8 +29,7 @@ export default function useAnimeJikan() {
   };
 
   return {
+    ...toRefs({ isLoading, response, paginationAPI, errors }),
     fetchTopAnimes,
-
-    ...toRefs({ isLoading, response, pagination, errors }),
   };
 }

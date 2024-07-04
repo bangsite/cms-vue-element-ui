@@ -7,17 +7,20 @@
   >
     <!--Field-->
     <el-select
-      :value="value"
+      v-model="value"
       :id="name"
       :show-search="showSearch"
       :filter-option="filterOption"
       :allow-clear="allowClear"
+      :placeholder="placeholder"
       @change="handleChange"
       @search="handleSearch"
     >
-      <el-option v-for="(item, index) in attrs.options" :key="item?.id + index" :value="item?.id">
-        <span v-if="te(item?.name)">{{ $t(item?.name) }}</span>
-        <span v-else>{{ item?.name }}</span>
+      <el-option v-for="(item, index) in attrs.options" :key="item?.id + index" :value="item?.id" :label="item.name">
+        <template #label="{ value }">
+          <span v-if="te(item?.name)">{{ $t(value) }}</span>
+          <span v-else>{{ value }}</span>
+        </template>
       </el-option>
     </el-select>
   </el-form-item>
@@ -32,6 +35,7 @@ const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, default: "" },
   labelDisplay: { type: Boolean, default: true },
+  placeholder: { type: String, default: "Select a item" },
   showSearch: { type: Boolean, default: false },
   filterOption: { type: Boolean, default: false },
   allowClear: { type: Boolean, default: false },
@@ -49,7 +53,7 @@ const rules = toRef(props, "rules");
 
 const { value, errorMessage, handleChange } = useField(name, rules);
 
-const handleSearch = (values) => {
+const handleSearch = (values: string | number) => {
   emit("onSearch", { value: values });
 };
 </script>

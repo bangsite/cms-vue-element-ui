@@ -29,9 +29,9 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import VueTypes from "vue-types";
 import { onBeforeUnmount, onMounted, ref, toRefs } from "vue";
 import { customTooltips } from "@/utils/chartUtilities";
+import type { IChartJS } from "@/interfaces/IChart";
 
 Chart.register(
   ArcElement,
@@ -60,117 +60,13 @@ Chart.register(
   SubTitle
 );
 
-const props = defineProps({
-  type: VueTypes.string.def("line"),
-  className: VueTypes.string.isRequired.def("bar"),
-  id: VueTypes.string.isRequired.def("bar"),
-  style: VueTypes.object.def({ marginBottom: "20px" }),
-  labels: VueTypes.arrayOf(VueTypes.string).def([
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ]),
-  height: VueTypes.number.def(479),
-  scales: VueTypes.object.def({
-    y: {
-      beginAtZero: true,
-      grid: {
-        color: "#485e9029",
-        borderDash: [3, 3],
-        zeroLineColor: "#485e9029",
-        zeroLineWidth: 1,
-      },
-      ticks: {
-        beginAtZero: true,
-        fontSize: 14,
-        fontFamily: "Jost",
-        color: "#8C90A4",
-        max: 80,
-        stepStartValue: 5,
-        stepSize: 20,
-        padding: 10,
-        callback(label: string) {
-          return `${label}k`;
-        },
-      },
-    },
-    x: {
-      grid: {
-        display: false,
-        drawBorder: false,
-        zeroLineWidth: 0,
-        color: "transparent",
-        z: 1,
-      },
-      ticks: {
-        beginAtZero: true,
-        fontSize: 14,
-        fontFamily: "Jost",
-        color: "#8C90A4",
-      },
-    },
-  }),
-  datasets: VueTypes.arrayOf(VueTypes.object).def([
-    {
-      data: [20, 60, 50, 45, 50, 60, 70, 40, 45, 35, 25, 30],
-      backgroundColor: "#001737",
-      barPercentage: 0.6,
-      label: "Profit",
-    },
-    {
-      data: [10, 40, 30, 40, 60, 55, 45, 35, 30, 20, 15, 20],
-      backgroundColor: "#1ce1ac",
-      barPercentage: 0.6,
-      label: "Lose",
-    },
-  ]),
-  layout: VueTypes.object.def({}),
-  legend: VueTypes.object.def({
-    display: false,
-    labels: {
-      display: false,
-      position: "center",
-    },
-  }),
-  elements: VueTypes.object.def({
-    line: {
-      tension: 0.6,
-      borderCapStyle: "round",
-      borderJoinStyle: "round",
-      capBezierPoints: true,
-    },
-    point: {
-      radius: 0,
-      z: 5,
-    },
-  }),
-  options: VueTypes.object.def({}),
-  tooltip: VueTypes.object.def({
-    callbacks: {
-      label(t: any) {
-        const dstLabel = t.dataset.label;
-        const { formattedValue } = t;
-        return `  ${formattedValue} ${dstLabel}`;
-      },
-      labelColor(t: any) {
-        return {
-          backgroundColor: t.dataset.hoverBackgroundColor,
-          borderColor: "transparent",
-        };
-      },
-    },
-  }),
+// const props = defineProps<IChartJS>();
+const props = withDefaults(defineProps<IChartJS>(), {
+  style: () => ({ marginBottom: "20px" }),
+  datasets: () => [],
 });
-const { type, datasets, options, labels, id, tooltip, scales, elements, legend, layout, height } = toRefs(props);
+const { type, datasets, options, labels, id, tooltip, scales, elements, legend, layout, height, className, style } =
+  toRefs(props);
 const chartInstance = ref<Chart | null>(null);
 
 const createChart = () => {

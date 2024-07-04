@@ -1,66 +1,38 @@
 import type { AxiosRequestConfig } from "axios";
 import { Buffer } from "buffer";
-import queryString from "query-string";
+import { BaseApiService } from "../api.service";
 
-import ApiService from "../api.service";
-import { Spotify } from "@/constant/externalAPI.ts";
+const apiSpotifyAccount = import.meta.env.VITE_API_SPOTIFY_ACCOUNT;
+const apiSpotifyURL = import.meta.env.VITE_API_SPOTIFY_URL;
+const apiSpotifyClientID = import.meta.env.VITE_API_SPOTIFY_CLIENT_ID;
+const apiSpotifyClientSecret = import.meta.env.VITE_API_SPOTIFY_CLIENT_SECRET;
+const apiSpotifyRefreshToken = import.meta.env.VITE_API_SPOTIFY_REFRESH_TOKEN;
 
-const { url, client_id, client_secret, refresh_token } = Spotify;
+const keys = Buffer.from(`${apiSpotifyClientID}:${apiSpotifyClientSecret}`).toString("base64");
 
+const spotifyAccountApiService = new BaseApiService(apiSpotifyAccount, {
+  Authorization: `Basic ${keys}`,
+  "Content-Type": "application/x-www-form-urlencoded",
+});
+
+const spotifyApiService = new BaseApiService(apiSpotifyURL, {
+  Authorization: `Basic ${keys}`,
+  "Content-Type": "application/x-www-form-urlencoded",
+});
 const getAccessToken = async (data?: Record<any, any>, config?: AxiosRequestConfig): Promise<any> => {
-  const keys = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
-
-  return await ApiService.post(
+  return await spotifyAccountApiService.post(
     ``,
-    new URLSearchParams({
-      grant_type: "refresh_token",
-      refresh_token,
-    }),
-    {
-      baseURL: "https://accounts.spotify.com/api/token",
-      headers: {
-        Authorization: `Basic ${keys}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      ...config,
-    }
+    new URLSearchParams({ grant_type: "refresh_token", apiSpotifyRefreshToken }),
+    { ...config }
   );
 };
 
-const getAccessToken2 = async () => {
-  // 'check note -- npm install buffer'
-  const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
-  const response = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${basic}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: queryString.stringify({
-      grant_type: "refresh_token",
-      refresh_token,
-    }),
-  });
-  return response.json();
-};
-
 const getNewRelease = async (config?: AxiosRequestConfig): Promise<any> => {
-  return await ApiService.get(`/browse/new-releases`, {
-    baseURL: url,
-    ...config,
-  });
+  return await spotifyApiService.get(`/browse/new-releases`, { ...config });
 };
+
 const getAlbums = async (id: string, config?: AxiosRequestConfig): Promise<any> => {
-  return await ApiService.get(`/albums/${id}`, {
-    baseURL: url,
-    ...config,
-  });
+  return await spotifyApiService.get(`/albums/${id}`, { ...config });
 };
 
-const encodeFormData = (data: any) => {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-};
-
-export { getAccessToken, getAccessToken2, getNewRelease, getAlbums };
+export { getAccessToken, getNewRelease, getAlbums };

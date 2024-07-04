@@ -22,7 +22,7 @@
     </a-upload>
 
     <div v-if="value && showFileName" class="upload__info">
-      <span>{{ getFileName(value) }}</span>
+      <span>{{ checkFiles(value) }}</span>
       <span @click="handleRemove"><IconTrashSvg /></span>
     </div>
   </a-form-item>
@@ -36,7 +36,7 @@ import { useI18n } from "vue-i18n";
 // import IconTrashSvg from '@/components/svg/IconTrashSvg';
 
 import { getBase64 } from "@/utils/getBase64";
-import { getFileName } from "@/utils/getFileName";
+import { checkFiles } from "@/utils/getFileName";
 
 import useCheckFiles from "@/hooks/web/useCheckFiles";
 

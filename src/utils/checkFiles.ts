@@ -1,38 +1,23 @@
-import { reactive, toRefs } from "vue";
+import { getTypeData } from "@/utils/getTypeData";
 
-export default function checkFiles() {
-  const state = reactive({
-    errorMessageKey: "",
-  });
+export const getNameFile = (data: any) => {
+  const type = getTypeData(data);
+  let fileName = "";
+  switch (type) {
+    case "file":
+      fileName = data?.name;
+      break;
+    case "string":
+      fileName = data.split("/").pop().split("#")[0].split("?")[0];
+      break;
+  }
+  return fileName;
+};
 
-  const checkFileExtension = (accept: string, fileName: string) => {
-    switch (accept) {
-      case "text/css":
-        state.errorMessageKey = fileName === "text/css" ? "" : "NOTIFICATION.CSS_TYPE";
-        break;
-      case "text/csv":
-        state.errorMessageKey = fileName === "text/csv" ? "" : "NOTIFICATION.CSV_TYPE";
-        break;
-      default:
-        state.errorMessageKey = ["image/jpg", "image/png", "image/jpeg"].includes(fileName)
-          ? ""
-          : "NOTIFICATION.FILE_IMG_TYPE";
-        break;
-    }
-  };
+export const getFileSize = (fileSize: string | number, limitSize: number = 5) => {
+  return parseInt(<string>fileSize) / 1024 / 1024 <= limitSize;
+};
 
-  const checkFileSize = (fileSize: string | number, limitSize: number = 5) => {
-    return parseInt(<string>fileSize) / 1024 / 1024 <= limitSize;
-  };
-
-  const checkFileLimit = (fileList: string | any[], limitFile: number = 10) => {
-    if (fileList && fileList.length) return fileList.length < limitFile;
-  };
-
-  return {
-    ...toRefs(state),
-    checkFileExtension,
-    checkFileSize,
-    checkFileLimit,
-  };
-}
+export const getFileLimit = (fileList: string | any[], limitFile: number = 10) => {
+  if (fileList && fileList.length) return fileList.length < limitFile;
+};

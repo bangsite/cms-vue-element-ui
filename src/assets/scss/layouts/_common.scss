@@ -1,15 +1,13 @@
 ::-webkit-scrollbar {
     background-color: #eee;
     width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #cecece;
-    border-radius: 8px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #b5b5b5;
+    &-thumb{
+        background-color: #cecece;
+        border-radius: 8px;
+        &:hover{
+            background: #b5b5b5;
+        }
+    }
 }
 
 #app {
@@ -17,7 +15,7 @@
 }
 
 .overlay {
-    background-color: $cl-dark;
+    background-color: rgba(0,0,0,0.45);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -27,12 +25,3 @@
     z-index: 99;
 }
 
-
-.table-best-seller.el-table thead th,
-.table-best-seller.el-table thead .el-table-fixed-column--right {
-    @apply bg-blue-50;
-}
-
-.table-best-seller.el-table td.el-table__cell:first-child div {
-    padding-left: 0;
-}

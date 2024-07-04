@@ -1,7 +1,6 @@
 {
     "extends": "@vue/tsconfig/tsconfig.dom.json",
     "include": [
-        "src/**/*",
         "src/**/*.vue",
         "src/**/**/*.vue",
         "src/**/*.ts",
@@ -21,28 +20,6 @@
         "sourceMap": true,
         "paths": {
             "@/*": ["./src/*"],
-        },
-        "target": "esnext",
-        "module": "esnext",
-        "jsx": "preserve",
-        "importHelpers": true,
-        "moduleResolution": "node",
-//        "allowJs": true,
-        "strict": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "lib": [
-            "esnext",
-            "dom",
-            "dom.iterable"
-        ],
-        "types": [
-            "node"
-        ],
-        "typeRoots": [
-            "./node_modules/@types/",
-            "./src/types"
-        ],
-        "skipLibCheck": true
+        }
     }
 }

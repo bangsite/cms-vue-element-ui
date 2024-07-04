@@ -1,45 +1,66 @@
 <template>
-  <el-card class="mb-15">
-    <template #header>Search Movie</template>
+  <el-card class="mb-4 rounded-lg">
+    <template #header v-if="searchTitle">
+      <h4 class="title">{{ searchTitle }}</h4>
+    </template>
 
-    <el-form ref="formRef" :model="searchParam">
-      <div class="grid">
-        <el-form-item
-          v-for="(item, index) in searchColumns"
-          :key="item.prop"
-          :index="index"
-          :label="`${item.search?.label ?? item.label}`"
-        >
-          <el-input v-model="item.prop" />
-        </el-form-item>
-        <div class="operation">
-          <el-button :icon="Delete" @click="handleReset">Reset</el-button>
-          <el-button type="primary" :icon="Search" @click="handleSearch">Search</el-button>
-        </div>
+    <el-form ref="formRef" :model="searchParam" :label-position="labelPosition">
+      <div class="grid grid-cols-2 gap-4 align-middle mb-2">
+        <template v-for="(item, index) in searchColumns" :key="item.prop">
+          <InputBase
+            v-if="item.search?.el === 'input'"
+            :label="`${item.search?.label ?? item.label}`"
+            placeholder="Input text"
+            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
+          />
+          <SelectBase
+            v-else-if="item.search?.el === 'select'"
+            :label="`${item.search?.label ?? item.label}`"
+            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
+            :options="searchSelectData"
+          />
+          <DatePicker
+            v-else-if="item.search?.el === 'date'"
+            :label="`${item.search?.label ?? item.label}`"
+            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
+            :options="searchSelectData"
+          />
+        </template>
+      </div>
+      <div class="flex justify-end">
+        <el-button :icon="Delete" @click="handleReset">Reset</el-button>
+        <el-button type="primary" :icon="Search" @click="handleSearch">Search</el-button>
       </div>
     </el-form>
   </el-card>
 </template>
 <script setup lang="ts">
 import { Delete, Search } from "@element-plus/icons-vue";
-import type { BreakPoint } from "@/interfaces/responsive.interface";
-// import type { ColumnProps } from "@/interfaces/table.interface";
+
+import InputBase from "@/components/form/InputBase.vue";
+import SelectBase from "@/components/form/SelectBase.vue";
+import DatePicker from "@/components/form/DatePicker.vue";
+
+import { toLowerCase } from "@/utils/fortmatString";
 
 interface ProTableProps {
+  labelPosition?: string;
+  searchTitle?: string;
   searchColumns?: any[];
   searchParam?: { [key: string]: any };
-  searchCol: number | Record<BreakPoint, number>;
+  searchCol?: number;
+  searchSelectData?: any[];
 }
 
-const props = withDefaults(defineProps<ProTableProps>(), {
+withDefaults(defineProps<ProTableProps>(), {
+  labelPosition: "top",
   searchColumns: () => [],
   searchParam: () => ({}),
 });
 
-console.log(props.searchColumns);
 const emit = defineEmits(["search", "reset"]);
 
-const handleSearch = () => {
+const handleSearch = (newValue: any) => {
   emit("search", newValue);
 };
 
