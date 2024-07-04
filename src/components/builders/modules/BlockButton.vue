@@ -3,7 +3,6 @@ import InputBase from "@/components/form/InputBase.vue";
 import { useDialogStore } from "@/stores/dialog.store";
 import { storeToRefs } from "pinia";
 import { useForm } from "vee-validate";
-import { string } from "vue-types";
 
 defineProps({
   // data: {
