@@ -69,7 +69,7 @@ const isLoading = ref(false);
 
 const bestsellerColumns = computed(() => BEST_SELLER_COLUMNS);
 const bestSellerData = computed(
-  ()
+  () => DATA_BEST_SELLER.bestSeller !== null && DATA_BEST_SELLER.bestSeller[sellerTab.value]
 );
 
 const handleTabActivation = (value: string) => {
