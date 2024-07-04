@@ -5,7 +5,7 @@ module.exports = {
         instances: 1,
         max_memory_restart: '1G',
         script: 'serve',
-        args: '--spa',
+        // args: '--spa',
         // script: './dist',
 
         // Logging
