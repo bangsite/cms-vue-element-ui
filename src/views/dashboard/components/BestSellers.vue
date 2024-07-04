@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-xl">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Best Sellers</h4>
@@ -33,14 +33,7 @@
       </div>
     </template>
 
-    <TableList
-      ref="tableBestSellers"
-      :columns="bestsellerColumns"
-      :border="false"
-      :data-tables="bestSellerData"
-      :custom-cols="['name']"
-      :custom-class="'table-best-seller'"
-    >
+    <TableBasic ref="tableBasic" :columns="bestsellerColumns" :data="bestSellerData" :customCols="['name']">
       <!-- expand -->
       <template #expand="scope">
         {{ scope.row }}
@@ -53,13 +46,15 @@
           <span>{{ scope.row.name }}</span>
         </div>
       </template>
-    </TableList>
+
+      <!-- operation -->
+    </TableBasic>
   </el-card>
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-import TableList from "@/components/tables/TableList.vue";
+import TableBasic from "@/components/tables/TableBasic.vue";
 
 import { DATA_BEST_SELLER } from "@/db/dataBestSellers";
 import { BEST_SELLER_COLUMNS } from "@/enums/bestSellerColumns.enum";
@@ -69,7 +64,7 @@ const isLoading = ref(false);
 
 const bestsellerColumns = computed(() => BEST_SELLER_COLUMNS);
 const bestSellerData = computed(
-  ()
+  () => DATA_BEST_SELLER.bestSeller !== null && DATA_BEST_SELLER.bestSeller[sellerTab.value]
 );
 
 const handleTabActivation = (value: string) => {
