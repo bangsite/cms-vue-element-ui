@@ -23,6 +23,18 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
+    assetsInlineLimit: 4096,
+    cssCodeSplit: true,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            return id.split("node_modules")[1].split("/")[1].toString();
+          }
+        },
+      },
+    },
   },
   // server: {
   //   proxy: {
