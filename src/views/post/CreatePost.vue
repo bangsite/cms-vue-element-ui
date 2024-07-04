@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import FormPost from "@/views/post/FormPost.vue";
+import FormPost from "@/views/post/PostForm.vue";
 </script>
 
 <style scoped></style>

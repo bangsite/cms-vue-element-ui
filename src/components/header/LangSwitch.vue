@@ -4,11 +4,11 @@
       <SvgIcon :icon="'lucide:languages'" :size="20" />
     </span>
     <template #dropdown>
-      <el-menu>
-        <el-menu-item v-for="item in langMap" :key="item.lang" :command="item.lang">
+      <el-dropdown-menu>
+        <el-dropdown-item v-for="item in langMap" :key="item.lang" :command="item.lang">
           {{ item.name }}
-        </el-menu-item>
-      </el-menu>
+        </el-dropdown-item>
+      </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>
@@ -32,3 +32,4 @@ const setLang = (lang: LocaleType) => {
   changeLocale(lang);
 };
 </script>
+<style lang="scss"></style>

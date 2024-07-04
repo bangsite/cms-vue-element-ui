@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-xl">
+  <el-card class="rounded-lg">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Latest Transections</h4>
@@ -32,10 +32,11 @@
         </div>
       </div>
     </template>
-    <TableBasic
+    <TableList
       ref="tableTransection"
+      :border="false"
       :columns="transectionColumns"
-      :data="transectionData"
+      :data-tables="transectionData"
       :customCols="['info', 'credit']"
     >
       <!-- expand -->
@@ -46,7 +47,7 @@
       <!-- info -->
       <template #info="scope">
         <div class="flex items-center gap-2">
-          <div class="flex items-center justify-center w-[55px] h-[55px] rounded-xl" :class="`bg-${scope.row.style}`">
+          <div class="flex items-center justify-center w-[55px] h-[55px] rounded-lg" :class="`bg-${scope.row.style}`">
             <SvgIcon :icon="`${scope.row.icon}`" :size="24" />
           </div>
 
@@ -66,14 +67,14 @@
         </template>
       </template>
       <!-- operation -->
-    </TableBasic>
+    </TableList>
   </el-card>
 </template>
 <script setup lang="tsx">
 import { computed, ref } from "vue";
 
-import TableBasic from "@/components/tables/TableBasic.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import TableList from "@/components/tables/TableList.vue";
 
 import TableData from "@/db/transactions.json";
 import { TRANSACTION_COLUMNS } from "@/enums/transactionsColumns.enum";

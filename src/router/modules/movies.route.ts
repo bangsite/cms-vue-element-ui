@@ -21,15 +21,5 @@ export const Movies = {
         icon: "ic:outline-movie",
       },
     },
-    {
-      path: "pro-list",
-      name: "MovieProList",
-      component: () => import("@/views/movies/MovieProList.vue"),
-      beforeEnter: [AuthGuard],
-      meta: {
-        title: i18n.global.t("ROUTER.MOVIES.MOVIES_PRO_LIST"),
-        icon: "mdi:movie-star-outline",
-      },
-    },
   ],
 };

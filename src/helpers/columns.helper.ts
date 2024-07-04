@@ -1,4 +1,4 @@
-import type { ColumnProps } from "@/interfaces/tables";
+import type { ColumnProps } from "@/interfaces/ITables";
 
 export function isDefaultColumnType(item: ColumnProps): boolean {
   const defaultColumnTypes: string[] = ["selection", "radio", "index", "expand", "sort"];

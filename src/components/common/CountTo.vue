@@ -5,31 +5,49 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, toRefs, watch } from "vue";
-interface Data {
-  timestamp: number;
-  startTimestamp: number;
-  currentStartAmount: number;
-  currentAmount: number;
-  currentDuration: number;
-  paused: boolean;
-  remaining: number;
-  animationFrame: number;
-}
-
-import { propTypes } from "@/utils/propTypes";
+import type { ICountTo } from "@/interfaces/ICountTo";
 
 const props = defineProps({
-  startAmount: propTypes.number.def(0),
-  endAmount: propTypes.number.def(0),
-  duration: propTypes.number.def(3),
-  autoplay: propTypes.bool.def(true),
-  autoInit: propTypes.bool.def(true),
-  prefix: propTypes.string.def("$"),
-  suffix: propTypes.string.def(""),
-  separator: propTypes.string.def(","),
-  decimalSeparator: propTypes.string.def("."),
-  decimals: propTypes.number.def(0),
-  decimal: propTypes.string.def("."),
+  startAmount: {
+    type: Number,
+    default: 0,
+  },
+  endAmount: {
+    type: Number,
+    default: 0,
+  },
+  duration: {
+    type: Number,
+    default: 3,
+  },
+  autoplay: {
+    type: Boolean,
+    default: true,
+  },
+  autoInit: {
+    type: Boolean,
+    default: true,
+  },
+  prefix: {
+    type: String,
+    default: "$",
+  },
+  suffix: {
+    type: String,
+    default: "",
+  },
+  separator: {
+    type: String,
+    default: ",",
+  },
+  decimalSeparator: {
+    type: String,
+    default: ".",
+  },
+  decimals: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const { startAmount, endAmount, duration, autoInit, decimals, separator, suffix, prefix, decimalSeparator } =
@@ -37,7 +55,7 @@ const { startAmount, endAmount, duration, autoInit, decimals, separator, suffix,
 
 const emits = defineEmits(["mounted", "callback"]);
 
-const data = reactive<Data>({
+const data = reactive<ICountTo>({
   timestamp: 0,
   startTimestamp: 0,
   currentAmount: 0,
@@ -95,6 +113,7 @@ const pause = () => {
   cancelAnimation();
   data.paused = true;
 };
+
 const resume = () => {
   if (!data.paused) return;
   data.startTimestamp = 0;
@@ -103,6 +122,7 @@ const resume = () => {
   data.animationFrame = window.requestAnimationFrame(counting);
   data.paused = false;
 };
+
 const reset = () => {
   data.paused = false;
   data.startTimestamp = 0;
@@ -111,6 +131,7 @@ const reset = () => {
   if (autoInit.value) start();
   else data.paused = true;
 };
+
 const counting = (timestamp: number) => {
   data.timestamp = timestamp;
   if (!data.startTimestamp) data.startTimestamp = data.timestamp;
@@ -139,24 +160,9 @@ onUnmounted(() => {
   cancelAnimation();
 });
 
-watch(
-  () => startAmount,
-  () => {
-    reset();
-  }
-);
-watch(
-  () => endAmount,
-  () => {
-    reset();
-  }
-);
+watch(startAmount, reset);
+watch(endAmount, reset);
+watch(duration, reset);
 
-watch(
-  () => duration,
-  () => {
-    reset();
-  }
-);
 start();
 </script>

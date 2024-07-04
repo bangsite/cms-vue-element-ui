@@ -30,12 +30,12 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import type { MessageTab } from "@/interfaces/INotifyMessage";
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { MessageData } from "@/data/message.data";
-import type { MessageTab } from "@/interfaces/notify-message.interface";
+import { DATA_MESSAGE_TAB } from "@/db/dataMessageTab";
 
-const tabData = ref<MessageTab[]>([...MessageData]);
+const tabData = ref<MessageTab[]>([...DATA_MESSAGE_TAB]);
 const clicked = ref<boolean>(false);
 const hovered = ref<boolean>(false);
 const currentTab = ref(0);

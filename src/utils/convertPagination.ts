@@ -1,4 +1,4 @@
-import type { PaginationAPI } from "@/interfaces/pagination";
+import type { PaginationAPI } from "@/interfaces/IPagination";
 // import { i18n } from "@/plugins/vue-i18n";
 
 const pagination: PaginationAPI = {

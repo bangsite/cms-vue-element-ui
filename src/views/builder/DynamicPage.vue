@@ -1,7 +1,7 @@
 <template>
   <el-card class="rounded-lg">
     <template #header>
-      <h4>Dynamic Section</h4>
+      <h4 class="title">Dynamic Section</h4>
     </template>
     <el-form
       ref="formSection"

@@ -3,7 +3,7 @@ import { store } from "@/plugins/pinia";
 
 import type { LocaleDropdownOption, LocaleState } from "@/types/locale";
 import { getDefaultLanguage } from "@/hooks/useLocale";
-import { elLocaleMap, localeOptions } from "@/constants/locales";
+import { elLocaleMap, localeOptions } from "@/enums/locales.enum";
 
 function createInitialState(): LocaleState {
   const defaultLanguage = getDefaultLanguage();

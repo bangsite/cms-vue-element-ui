@@ -1,9 +1,9 @@
 import { reactive, toRefs } from "vue";
-import { PAGINATION } from "@/enums/pagination.enum";
+import { PaginationEnum } from "@/enums/pagination.enum";
 
 export default function usePagination() {
   const state = reactive({
-    params: { ...PAGINATION },
+    params: { ...PaginationEnum },
   });
 
   // Pagination & Page size

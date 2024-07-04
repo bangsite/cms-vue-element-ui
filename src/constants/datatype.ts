@@ -1,4 +1,4 @@
-export const dataTypeLabels = {
+export const DATA_TYPE = {
   string: "[object String]",
   number: "[object Number]",
   boolean: "[object Boolean]",

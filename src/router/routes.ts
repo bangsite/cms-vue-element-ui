@@ -5,7 +5,7 @@ import { Exception } from "@/router/modules/exception.route";
 import { Builder } from "@/router/modules/builder.route";
 import { Post } from "@/router/modules/post.route";
 import { Product } from "@/router/modules/product.route";
-import { Movies } from "@/router/modules/movies.route";
+import { Table } from "@/router/modules/table.route";
 
 import { AuthGuard } from "@/router/guard/auth.guard";
 
@@ -23,7 +23,7 @@ export const routerMap = [
   { ...Auth },
   { ...Dashboard },
   { ...Builder },
-  { ...Movies },
+  { ...Table },
   { ...Post },
   { ...Product },
   { ...Exception },

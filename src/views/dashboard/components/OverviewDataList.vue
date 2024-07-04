@@ -12,7 +12,7 @@
     >
       <Suspense>
         <template #default>
-          <OverviewCard :ocData="item" />
+          <OverviewCard :data="item" />
         </template>
         <template #fallback>
           <el-card>

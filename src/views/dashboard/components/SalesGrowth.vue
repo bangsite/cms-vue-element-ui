@@ -1,6 +1,6 @@
 <template>
   <div class="chartjs-container" v-if="DATA_SALES_GROWTH[overviewTab]">
-    <el-card class="rounded-xl">
+    <el-card class="rounded-lg">
       <template #header>
         <div class="chartjs-tooltip flex items-center justify-between cursor-pointer">
           <h4 class="title">Sales Growth</h4>
@@ -80,7 +80,7 @@ import Chart from "@/components/charts/ChartJS.vue";
 
 import { DATA_SALES_GROWTH, filterDataScales, filterSalesGrowthDataset } from "@/db/dataSalesGrowth";
 import { customTooltips } from "@/utils/chartUtilities";
-import type { SalesGrowthData } from "@/interfaces/salesGrowth";
+import type { SalesGrowthData } from "@/interfaces/ISalesGrowth";
 
 const overviewTab = ref("today");
 const isLoading = ref(false);

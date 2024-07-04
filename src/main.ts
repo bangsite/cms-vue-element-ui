@@ -8,6 +8,7 @@ import { setupTinyMCE } from "@/plugins/tinyMCE";
 import { libElementPlus } from "@/plugins/element-plus";
 import { libVeeValidate } from "@/plugins/vee-validate";
 import { libVueQuery } from "@/plugins/vue-query";
+import { libVueCountUp3 } from "@/plugins/vue-countup";
 // import { libApexCharts } from "@/plugins/apex-charts";
 import { libVueDraggableNext } from "@/plugins/vue-draggable-next";
 
@@ -45,6 +46,9 @@ async function setupAppAll() {
 
   // Setup VueDraggableNext
   libVueDraggableNext(app);
+
+  // Setup VueCountUp 3
+  libVueCountUp3(app);
 
   app.mount("#app");
 }

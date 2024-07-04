@@ -40,11 +40,7 @@ onMounted(() => {
 
 const handleSelect = (event: string) => {
   activeIndex.value = event;
-  console.log("handleSelect", event);
 };
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log("handleOpen", key);
-  console.log("handleOpen", keyPath);
-};
+const handleOpen = (key: string, keyPath: string[]) => {};
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="chartjs-container" v-if="dataSalesReport">
-    <el-card class="rounded-xl">
+    <el-card class="rounded-lg">
       <template #header>
         <div class="chartjs-tooltip flex items-center justify-between cursor-pointer">
           <h4 class="title">Sales Report</h4>
@@ -48,7 +48,7 @@
       <div class="sales-revenue-lineChart">
         <div class="flex items-center gap-3 justify-center">
           <div
-            class="label-detailed flex items-center gap-1"
+            class="label-detailed flex items-center gap-2"
             v-for="(item, index) in dataSalesRevenueDatasets"
             :key="index"
           >
@@ -87,12 +87,12 @@
 import { computed, onMounted, ref } from "vue";
 import Chart from "@/components/charts/ChartJS.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { DATA_SCALES, SALES_REPORT_DATA, salesRevenueDatasets } from "@/db/salesReport";
+import { DATA_SCALES, SALES_REPORT_DATA, salesRevenueDatasets } from "@/db/dataSalesReport";
 import { customTooltips } from "@/utils/chartUtilities";
 
 const dataScales = computed(() => DATA_SCALES);
 const dataSalesReport = computed(() => SALES_REPORT_DATA);
-const dataSalesRevenueDatasets = ref();
+const dataSalesRevenueDatasets = ref([]);
 const heightChart = ref(window.innerWidth <= 575 ? 200 : 100);
 const isLoading = ref(false);
 

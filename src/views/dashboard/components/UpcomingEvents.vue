@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-xl">
+  <el-card class="rounded-lg">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Upcoming Events</h4>
@@ -33,12 +33,18 @@
       </div>
     </template>
 
-    <TableBasic ref="tableEvents" :columns="eventColumns" :data="eventData" :customCols="['event', 'actions']">
+    <TableList
+      ref="tableEvents"
+      :border="false"
+      :columns="eventColumns"
+      :data-tables="eventData"
+      :customCols="['event', 'actions']"
+    >
       <!-- event -->
       <template #event="scope">
-        <div class="flex items-cente gap-2">
+        <div class="flex items-center gap-2">
           <div
-            class="flex flex-col items-center justify-center w-[72px] h-[72px] rounded-xl min-w-[72px]"
+            class="flex flex-col items-center justify-center w-[72px] h-[72px] rounded-lg min-w-[72px]"
             :class="`bg-${scope.row.type}`"
           >
             <span class="text-[12px]">{{ scope.row.date }}</span>
@@ -63,15 +69,14 @@
         </div>
       </template>
       <!-- operation -->
-    </TableBasic>
+    </TableList>
   </el-card>
 
   <!-- Modal-->
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
-
-import TableBasic from "@/components/tables/TableBasic.vue";
+import TableList from "@/components/tables/TableList.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { UP_EVENT_COLUMNS } from "@/enums/upEventColumns.enum";

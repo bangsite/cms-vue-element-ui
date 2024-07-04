@@ -35,7 +35,6 @@ import { inputProps } from "element-plus";
 
 const props = defineProps({
   labelDisplay: { type: Boolean, default: true },
-  labelPosition: { type: String },
   rules: { type: [String, Object], default: "" },
   rulesAttrMessage: {
     type: [Object],

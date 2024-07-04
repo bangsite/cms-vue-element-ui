@@ -13,12 +13,10 @@ export default {
     MOVIES_LIST: "Movie List",
     MOVIES_PRO_LIST: "Movie List Pro",
   },
-  TABLES: {
+  TABLE: {
     TITLE: "Tables",
-    BASIC_TABLE: "Basic Table",
-    PRO_TABLE: "Pro Table",
-    TABLE_DRAG_COLUMN: "Table drag column",
-    TABLE_DRAG_ROW: "Table drag row",
+    TABLE_BASIC: "Table Basic",
+    TABLE_ANIMES: "Table Animes",
   },
   BUILDER: {
     TITLE: "Builder",

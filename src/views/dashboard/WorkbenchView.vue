@@ -39,7 +39,7 @@
   </el-row>
   <el-row>
     <el-col>
-      <WorkActivityData />
+      <WorkbenchActivity />
     </el-col>
   </el-row>
 </template>
@@ -48,5 +48,5 @@ import WeatherDaily from "@/views/dashboard/components/WeatherDaily.vue";
 import WorkbenchTechCard from "@/views/dashboard/components/WorkbenchTechCard.vue";
 import WorkbenchShortcut from "@/views/dashboard/components/WorkbenchShortcut.vue";
 import WorkbenchBanner from "@/views/dashboard/components/WorkbenchBanner.vue";
-import WorkActivityData from "@/views/dashboard/components/WorkActivityData.vue";
+import WorkbenchActivity from "@/views/dashboard/components/WorkbenchActivity.vue";
 </script>

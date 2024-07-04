@@ -13,7 +13,7 @@ export const Post = {
     {
       path: "",
       name: "ListPost",
-      component: () => import("@/views/post/ListPost.vue"),
+      component: () => import("@/views/post/PostList.vue"),
       meta: {
         title: i18n.global.t("ROUTER.POST.LIST"),
         icon: "mdi:list-box-outline",
@@ -31,7 +31,7 @@ export const Post = {
     {
       path: "edit/:id",
       name: "EditPost",
-      component: () => import("@/views/post/FormPost.vue"),
+      component: () => import("@/views/post/PostForm.vue"),
       meta: {
         title: i18n.global.t("ROUTER.POST.EDIT"),
         hidden: true,

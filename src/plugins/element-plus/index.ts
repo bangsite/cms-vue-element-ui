@@ -1,47 +1,49 @@
 import {
+  ElBadge,
   ElBreadcrumb,
   ElButton,
-  ElBadge,
   ElCard,
-  ElConfigProvider,
   ElCheckbox,
   ElCol,
   ElCollapse,
+  ElConfigProvider,
   ElContainer,
   ElDatePicker,
+  ElDescriptions,
   ElDialog,
   ElDivider,
   ElDropdown,
   ElEmpty,
   ElForm,
   ElIcon,
+  ElInfiniteScroll,
   ElInput,
   ElInputNumber,
+  ElImage,
   ElLink,
-  ElMenu,
-  ElPageHeader,
-  ElPagination,
-  ElProgress,
-  ElRadio,
-  ElRow,
-  ElSelect,
-  ElSkeleton,
-  ElScrollbar,
-  ElSpace,
-  ElStatistic,
-  ElTable,
-  ElTag,
-  ElTabs,
-  ElTimePicker,
-  ElTimeline,
-  ElTooltip,
-  ElUpload,
-  ElInfiniteScroll,
   ElLoading,
+  ElMenu,
   ElMessage,
   ElMessageBox,
   ElNotification,
+  ElPageHeader,
+  ElPagination,
   ElPopover,
+  ElProgress,
+  ElRadio,
+  ElRow,
+  ElScrollbar,
+  ElSelect,
+  ElSkeleton,
+  ElSpace,
+  ElStatistic,
+  ElTable,
+  ElTabs,
+  ElTag,
+  ElTimeline,
+  ElTimePicker,
+  ElTooltip,
+  ElUpload,
 } from "element-plus";
 import type { App } from "vue";
 
@@ -59,11 +61,13 @@ export function libElementPlus(app: App<Element>) {
     .use(ElDialog)
     .use(ElDivider)
     .use(ElDropdown)
+    .use(ElDescriptions)
     .use(ElEmpty)
     .use(ElForm)
     .use(ElIcon)
     .use(ElInput)
     .use(ElInputNumber)
+    .use(ElImage)
     .use(ElLink)
     .use(ElMenu)
     .use(ElPageHeader)

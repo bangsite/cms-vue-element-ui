@@ -1,12 +1,12 @@
 <template>
   <template v-if="!isLoading">
-    <el-card class="rounded-xl">
+    <el-card class="rounded-lg">
       <el-row justify="space-between" align="middle">
         <el-col>
-          <div class="flex items-center flex-wrap justify-center md:justify-between gap-2">
+          <div class="flex items-center flex-wrap justify-center md:justify-between gap-2 min-h-[18rem]">
             <template v-for="(item, idx) in dataWeather?.list" :key="idx">
               <template v-if="idx === 0">
-                <div class="bg-blue-500/10 rounded-xl flex flex-col w-full md:w-auto py-2 px-6 items-center">
+                <div class="bg-blue-500/10 rounded-lg flex flex-col w-full md:w-auto py-1 px-6 items-center">
                   <img
                     v-if="item?.weather[0]?.icon"
                     class="mb-3"
@@ -66,20 +66,12 @@
 import { computed, onBeforeMount } from "vue";
 import { weekdayNames } from "@/utils/formatDateTime";
 import useFetchWeather from "@/hooks/api/useFetchWeather";
-import { DATA_WEATHER } from "@/db/dataWaether";
+import { DATA_WEATHER } from "@/db/dataWeather";
 
 const { fetchDataWeather, response, isLoading } = useFetchWeather();
-console.log(response);
-// const currentWeather = computed(() => response.value?.current);
-// const locationWeather = computed(() => response.value?.location);
-// const forecastday = computed(() => {
-//   if (response.value && "forecast" in response.value) {
-//     return response.value.forecast.forecastday;
-//   }
-//   return null;
-// });
-const dataWeather = computed(() => DATA_WEATHER);
-console.log(dataWeather);
+
+const dataWeather = computed(() => response.value || DATA_WEATHER);
+
 onBeforeMount(async () => {
   await fetchDataWeather();
 });

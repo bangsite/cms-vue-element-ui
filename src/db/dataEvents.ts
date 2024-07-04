@@ -1,4 +1,4 @@
-import type { EventData } from "@/interfaces/events";
+import type { EventData } from "@/interfaces/IEvents";
 export const DATA_EVENTS: EventData = {
   today: [
     {

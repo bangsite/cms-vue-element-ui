@@ -12,7 +12,7 @@
 </template>
 <script setup lang="ts">
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import type { Technology } from "@/interfaces/workbench.interface";
+import type { Technology } from "@/interfaces/IWorkbench";
 
 const props = defineProps<Technology>();
 </script>

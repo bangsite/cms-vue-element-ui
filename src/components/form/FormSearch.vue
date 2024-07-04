@@ -1,8 +1,10 @@
 <template>
-  <el-card class="mb-4">
-    <template #header>Search Movie</template>
+  <el-card class="mb-4 rounded-lg">
+    <template #header v-if="searchTitle">
+      <h4 class="title">{{ searchTitle }}</h4>
+    </template>
 
-    <el-form ref="formRef" :model="searchParam">
+    <el-form ref="formRef" :model="searchParam" :label-position="labelPosition">
       <div class="grid grid-cols-2 gap-4 align-middle mb-2">
         <template v-for="(item, index) in searchColumns" :key="item.prop">
           <InputBase
@@ -14,7 +16,12 @@
           <SelectBase
             v-else-if="item.search?.el === 'select'"
             :label="`${item.search?.label ?? item.label}`"
-            placeholder="Select item"
+            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
+            :options="searchSelectData"
+          />
+          <DatePicker
+            v-else-if="item.search?.el === 'date'"
+            :label="`${item.search?.label ?? item.label}`"
             :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
             :options="searchSelectData"
           />
@@ -29,19 +36,24 @@
 </template>
 <script setup lang="ts">
 import { Delete, Search } from "@element-plus/icons-vue";
-import type { BreakPoint } from "@/interfaces/responsive.interface";
+
 import InputBase from "@/components/form/InputBase.vue";
-import { toLowerCase } from "@/utils/fortmatString";
 import SelectBase from "@/components/form/SelectBase.vue";
+import DatePicker from "@/components/form/DatePicker.vue";
+
+import { toLowerCase } from "@/utils/fortmatString";
 
 interface ProTableProps {
+  labelPosition?: string;
+  searchTitle?: string;
   searchColumns?: any[];
   searchParam?: { [key: string]: any };
-  searchCol?: number | Record<BreakPoint, number>;
+  searchCol?: number;
   searchSelectData?: any[];
 }
 
 withDefaults(defineProps<ProTableProps>(), {
+  labelPosition: "top",
   searchColumns: () => [],
   searchParam: () => ({}),
 });

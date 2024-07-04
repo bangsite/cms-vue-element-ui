@@ -13,7 +13,7 @@ export const Product = {
     {
       path: "",
       name: "ListProduct",
-      component: () => import("@/views/product/ListProduct.vue"),
+      component: () => import("@/views/product/ProductList.vue"),
       meta: {
         title: i18n.global.t("ROUTER.PRODUCT.LIST"),
         icon: "fluent-mdl2:product-list",

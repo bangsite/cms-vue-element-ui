@@ -1,8 +1,8 @@
 <template>
-  <el-card shadow="hover" class="rounded-xl">
+  <el-card shadow="hover" class="rounded-lg">
     <template #header><h4 class="title">Shortcuts</h4></template>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <el-card hoverable shadow="hover" v-for="item in WorkShortcutsData" :key="item.id" class="rounded-xl">
+      <el-card hoverable shadow="hover" v-for="item in data" :key="item.id" class="rounded-xl">
         <div class="flex flex-col items-center">
           <SvgIcon :icon="item.icon" :size="32" :style="{ color: item.color }" />
           <p class="line-clamp-3">{{ item.label }}</p>
@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { WorkShortcuts } from "@/data/workbench.data";
+import { DATA_WORK_SHORTCUT } from "@/db/dataWorkShortcut";
 
-const WorkShortcutsData = computed(() => WorkShortcuts);
+const data = computed(() => DATA_WORK_SHORTCUT);
 </script>

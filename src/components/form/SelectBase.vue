@@ -12,6 +12,7 @@
       :show-search="showSearch"
       :filter-option="filterOption"
       :allow-clear="allowClear"
+      :placeholder="placeholder"
       @change="handleChange"
       @search="handleSearch"
     >
@@ -34,6 +35,7 @@ const props = defineProps({
   name: { type: String, required: true },
   label: { type: String, default: "" },
   labelDisplay: { type: Boolean, default: true },
+  placeholder: { type: String, default: "Select a item" },
   showSearch: { type: Boolean, default: false },
   filterOption: { type: Boolean, default: false },
   allowClear: { type: Boolean, default: false },
