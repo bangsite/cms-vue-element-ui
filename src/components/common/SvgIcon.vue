@@ -5,17 +5,17 @@
     </svg>
   </template>
   <template v-else>
-    <Icon v-if="icon" :icon="icon" v-bind="bindAttrs" :style="{ 'font-size': size + 'px' }" />
+    <Icon v-if="icon" :icon="icon" v-bind="bindAttrs" :height="size" />
   </template>
 </template>
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
-import type { IconTypes } from "@/types/icon";
+import type { ISvgIcon } from "@/interfaces/ISvgIcon";
 import { Icon } from "@iconify/vue";
 
 defineOptions({ name: "SvgIcon" });
 
-const props = defineProps<IconTypes>();
+const props = defineProps<ISvgIcon>();
 const attrs = useAttrs();
 
 const bindAttrs = computed<{ class: string; style: string }>(() => ({

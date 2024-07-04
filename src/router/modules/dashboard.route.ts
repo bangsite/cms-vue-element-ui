@@ -1,23 +1,22 @@
-import { Layout } from "@/helpers/router.helper";
-import { i18n } from "@/plugins/i18n";
+import { i18n } from "@/plugins/vue-i18n";
 import { AuthGuard } from "@/router/guard/auth.guard";
 
-export const Dashboard: AppRouteRecordRaw = {
+export const Dashboard = {
   path: "/",
   redirect: "/cms",
   name: "Dashboard",
-  component: Layout,
+  component: () => import("@/layouts/Default.vue"),
   beforeEnter: [AuthGuard],
   meta: {
     title: i18n.global.t("ROUTER.DASHBOARD.TITLE"),
     icon: "mdi:monitor-dashboard",
-    alwaysShow: true,
+    hidden: false,
   },
   children: [
     {
       path: "/cms",
       name: "Overview",
-      component: () => import("@/views/Dashboard/DashboardView.vue"),
+      component: () => import("@/views/dashboard/DashboardView.vue"),
       beforeEnter: [AuthGuard],
       meta: {
         title: i18n.global.t("ROUTER.DASHBOARD.OVERVIEW"),
@@ -27,7 +26,7 @@ export const Dashboard: AppRouteRecordRaw = {
     {
       path: "/cms/workbench",
       name: "Workbench",
-      component: () => import("@/views/Dashboard/WorkbenchView.vue"),
+      component: () => import("@/views/dashboard/WorkbenchView.vue"),
       beforeEnter: [AuthGuard],
       meta: {
         title: i18n.global.t("ROUTER.DASHBOARD.WORKBENCH"),

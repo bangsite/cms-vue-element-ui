@@ -12,12 +12,10 @@ export default {
     MOVIES_LIST: "Movie List JP",
     MOVIES_PRO_LIST: "Movie List Pro JP",
   },
-  TABLES: {
+  TABLE: {
     TITLE: "Tables",
-    BASIC_TABLE: "Basic Table",
-    PRO_TABLE: "Pro Table",
-    TABLE_DRAG_COLUMN: "Table drag column",
-    TABLE_DRAG_ROW: "Table drag row",
+    TABLE_BASIC: "Table Basic",
+    TABLE_MOVIES: "Table Movies",
   },
   BUILDER: {
     TITLE: "Builder",

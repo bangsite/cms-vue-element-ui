@@ -1,29 +1,27 @@
-import ElPagination from "element-plus/lib/components/pagination";
-import type { PaginationAPI } from "@/interfaces/pagination.interface";
-import { i18n } from "@/plugins/i18n";
+import type { PaginationAPI } from "@/interfaces/IPagination";
+// import { i18n } from "@/plugins/vue-i18n";
 
-const pagination = { ...ElPagination };
+const pagination: PaginationAPI = {
+  currentPage: 1,
+  pageSize: 10,
+  total: 0,
+  pageCount: 0,
+};
 
-pagination.defaultCurrentPage = 1;
-pagination.defaultPageSize = 20;
-
-export const convertPagination = (paginationAPI: PaginationAPI) => {
-  pagination.current = paginationAPI?.currentPage
-    ? parseInt(String(paginationAPI.currentPage))
-    : pagination.defaultCurrentPage;
-  pagination.total = paginationAPI?.total ? parseInt(String(paginationAPI.total)) : 0;
-  pagination.pageSize = paginationAPI?.pageSize ? parseInt(String(paginationAPI.pageSize)) : pagination.defaultPageSize;
-  pagination.pageCount = paginationAPI.total ? parseInt(String(paginationAPI.total)) : 0;
-  pagination.showSizeChanger = true;
-  pagination.locale = { items_per_page: "" };
-  pagination.showTotal = (total: number, range: [number, number]) => {
-    return `${i18n.global.t("PAGINATION.TOTAL", {
-      range1: range[0],
-      range2: range[1],
-      total: total,
-    })}`;
-  };
-  pagination.position = ["topRight", "bottomRight"];
-
+export const convertPagination = (paginationAPI: { [keys: string]: any }) => {
+  pagination.currentPage = paginationAPI?.current_page || paginationAPI?.items?.current_page;
+  pagination.total = paginationAPI?.total || paginationAPI?.items?.total;
+  pagination.pageSize = paginationAPI?.per_page || paginationAPI?.items?.per_page;
+  pagination.pageCount =
+    Math.ceil(paginationAPI.total / paginationAPI?.per_page) ||
+    Math.ceil(paginationAPI?.items?.total / paginationAPI?.items?.per_page);
+  // pagination.showSizeChanger = true;
+  // pagination.total = (total: number, range: [number, number]) => {
+  //   return `${i18n.global.t("PAGINATION.TOTAL", {
+  //     range1: range[0],
+  //     range2: range[1],
+  //     total: total,
+  //   })}`;
+  // };
   return pagination;
 };

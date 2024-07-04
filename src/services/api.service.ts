@@ -1,38 +1,88 @@
-import type { AxiosRequestConfig } from "axios";
-import { axiosInstance } from "@/services/config/interceptors.axios";
-import { formatJsonToUrlParams } from "@/utils/formatJson";
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
+import { i18n } from "@/plugins/vue-i18n";
+import { onLoading } from "@/hooks/useLoading";
+import { NotificationService } from "@/services/notification.service";
 
-const ApiService = {
-  get<T = any>(url: string, config: AxiosRequestConfig) {
-    return axiosInstance.get<T>(`${url}`, { ...config });
-  },
+export class BaseApiService {
+  private axiosInstance: AxiosInstance;
 
-  post<T = unknown>(url: string, data: Record<string, any> | [] | any, config: AxiosRequestConfig) {
-    return axiosInstance.post<T>(`${url}`, data, config);
-  },
+  constructor(baseURL: string, headers: Record<string, string> = {}) {
+    this.axiosInstance = axios.create({
+      baseURL,
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
+    });
 
-  put<T = unknown>(url: string, data: Record<string, any> | [], config: AxiosRequestConfig) {
-    return axiosInstance.put<T>(`${url}`, data, config);
-  },
+    // set up interceptor
+    this.axiosInstance.interceptors.request.use(this.onRequest, this.onRequestError);
+    this.axiosInstance.interceptors.response.use(this.onResponse, this.onResponseError);
+  }
 
-  patch<T = unknown>(url: string, data: Record<string, any> | [], config: AxiosRequestConfig) {
-    return axiosInstance.patch<T>(`${url}`, data, config);
-  },
+  private onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+    onLoading("start");
 
-  delete(url: string, config: AxiosRequestConfig) {
-    return axiosInstance.delete(`${url}`, config);
-  },
+    const token = localStorage.getItem("token");
+    if (token) config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
 
-  postWithFile<T = unknown>(url: string, file: File, config: AxiosRequestConfig) {
-    return axiosInstance.post<T>(url, file, {
+    // if (i18n.global.locale) {
+    //   config.headers = { ...config.headers, "Accept-Language": i18n.global.locale };
+    // }
+
+    // if (config?.data instanceof FormData) {
+    //   headers["Content-Type"] = "multipart/form-data";
+    // } else {
+    //   headers["Content-Type"] = "application/json";
+    // }
+
+    return config;
+  };
+
+  private onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
+    onLoading("cancel");
+
+    return Promise.reject(error);
+  };
+
+  private onResponse = (response: AxiosResponse): AxiosResponse => {
+    onLoading("end");
+    NotificationService.showSuccess(response);
+    return response;
+  };
+
+  private onResponseError = (error: AxiosError): Promise<AxiosError> => {
+    onLoading("cancel");
+    NotificationService.showError(error);
+    return Promise.reject(error.response);
+  };
+
+  // Generic methods for making requests
+  public get<T>(url: string, config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.get<T>(`${url}`, { ...config });
+  }
+
+  public post<T>(url: string, data: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.post<T>(`${url}`, data, config);
+  }
+
+  public put<T>(url: string, data: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.put<T>(`${url}`, data, config);
+  }
+
+  public patch<T>(url: string, data: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.patch<T>(`${url}`, data, config);
+  }
+
+  public delete<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.delete<T>(`${url}`, config);
+  }
+
+  public postWithFile<T = unknown>(url: string, file: File, config?: AxiosRequestConfig) {
+    return this.axiosInstance.post<T>(url, file, {
       ...config,
       headers: { "Content-Type": "multipart/form-data" },
     });
-  },
-
-  downloadWithFile(url: string, data: Record<string, any> | []) {
-    window.location.href = `${import.meta.env.VUE_APP_ROOT_API}/${url}?${formatJsonToUrlParams(data)}`;
-  },
-};
-
-export default ApiService;
+  }
+}

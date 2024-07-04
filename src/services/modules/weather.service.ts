@@ -1,39 +1,20 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import ApiService from "../api.service";
-import { OpenWeatherMap } from "@/constant/externalAPI";
-interface ApiResponse<T> {
-  data: T;
-}
-// const { url, key } = Weather;
-// const { url, key } = Weather;
-// const query = {
-//   name_city: "Ho Chi Minh",
-//   lang: "en",
-//   days: 7,
-// };
+import { BaseApiService } from "../api.service";
 
-const { url, key } = OpenWeatherMap;
 const query = {
   lat: "10.762622",
   lon: "106.660172",
   cnt: 5,
   units: "metric",
 };
+const apiWeatherURL = import.meta.env?.VITE_API_WEATHER_URL;
+const apiWeatherKey = import.meta.env?.VITE_API_WEATHER_KEY;
+const mapURL = `${apiWeatherURL}?lat=${query.lat}&lon=${query.lon}&appid=${apiWeatherKey}&cnt=${query.cnt}&units=${query.units}`;
 
-// const getWeather = async (config?: AxiosRequestConfig): Promise<ApiResponse<T>> => {
-//   return await ApiService.get(``, {
-//     baseURL: `${url}/daily?&q=${query.name_city}&lang=${query.lang}&key=${key}&days=${query.days}`,
-//     ...config,
-//   });
-// };
+const weatherApiService = new BaseApiService(mapURL);
 
-const getOpenWeatherMap = async (config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-  // return await fetch(`${url}?lat=${query.lat}&lon=${query.lon}&appid=${key}`);
-
-  return await ApiService.get(``, {
-    baseURL: `${url}?lat=${query.lat}&lon=${query.lon}&appid=${key}&cnt=${query.cnt}&units=${query.units}`,
-    ...config,
-  });
+const getOpenWeatherMap = async (config?: AxiosRequestConfig): Promise<AxiosResponse<any>> => {
+  return await weatherApiService.get(``, { ...config });
 };
 
 export { getOpenWeatherMap };

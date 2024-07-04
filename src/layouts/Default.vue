@@ -49,7 +49,6 @@ const appStore = useAppStore();
 const { active } = storeToRefs(useDialogStore());
 
 const logo = computed(() => appStore.logo);
-const pageLoading = computed(() => appStore.getPageLoading);
 const collapsed = computed(() => appStore.getCollapse);
 const footer = computed(() => appStore.getFooter);
 </script>

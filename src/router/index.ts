@@ -2,14 +2,14 @@ import type { App } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
-import { constantRouterMap } from "./routes";
+import { routerMap } from "./routes";
 import { routeBeforeEach, routeAfterEach } from "./guard/routeBeforeEach.guard";
 
 const router = createRouter({
   strict: true,
   history: createWebHistory(),
   linkActiveClass: "active",
-  routes: constantRouterMap as RouteRecordRaw[],
+  routes: routerMap as RouteRecordRaw[],
   scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
 });
 

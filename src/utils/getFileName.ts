@@ -1,6 +1,6 @@
 import { getTypeData } from "./getTypeData";
 
-export const getFileName = (data: any) => {
+export const checkFiles = (data: any) => {
   const type = getTypeData(data);
   let fileName = "";
 

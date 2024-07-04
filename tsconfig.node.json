@@ -4,6 +4,7 @@
         "vite.config.*",
         "vitest.config.*",
         "cypress.config.*",
+        "nightwatch.conf.*",
         "playwright.config.*"
     ],
     "compilerOptions": {
@@ -16,7 +17,6 @@
         "types": [
             "node"
         ],
-        //        "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true
     }
 }

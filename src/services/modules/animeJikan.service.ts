@@ -1,13 +1,11 @@
-import type { AxiosRequestConfig } from "axios";
-import ApiService from "../api.service";
-import { AnimeJikan } from "@/constant/externalAPI";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import { BaseApiService } from "../api.service";
 
-const { url } = AnimeJikan;
-const getTrendingAnime = async (config?: AxiosRequestConfig): Promise<any> => {
-  return await ApiService.get(`/top/anime`, {
-    baseURL: url,
-    ...config,
-  });
+const apiAnimeJikanURL = import.meta.env.VITE_API_ANIMEJIKAN_URL;
+const animeJikanApiService = new BaseApiService(apiAnimeJikanURL);
+
+const getTrendingAnime = async (config?: AxiosRequestConfig): Promise<AxiosResponse<any>> => {
+  return await animeJikanApiService.get(`/top/anime`, { ...config });
 };
 
 export { getTrendingAnime };

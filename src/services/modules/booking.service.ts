@@ -1,18 +1,17 @@
 import type { AxiosRequestConfig } from "axios";
-import ApiService from "../api.service";
-import { Booking } from "@/constant/externalAPI.ts";
+import { BaseApiService } from "../api.service";
 
-const { url, key, host } = Booking;
+const apiBookingURL = import.meta.env.VITE_API_BOOKING_URL;
+const apiBookingKey = import.meta.env.VITE_API_BOOKING_KEY;
+const apiBookingHost = import.meta.env.VITE_API_BOOKING_HOST;
+
+const bookingApiService = new BaseApiService(apiBookingURL, {
+  "X-RapidAPI-Key": apiBookingKey,
+  "X-RapidAPI-Host": apiBookingHost,
+});
 
 const getHotels = async (config?: AxiosRequestConfig): Promise<any> => {
-  return await ApiService.get(`/static/hotels`, {
-    baseURL: url,
-    headers: {
-      "X-RapidAPI-Key": key,
-      "X-RapidAPI-Host": host,
-    },
-    ...config,
-  });
+  return await bookingApiService.get(`/static/hotels`, { ...config });
 };
 
 export { getHotels };

@@ -19,6 +19,11 @@ export default {
     DYNAMIC_BLOCK: "Dynamic Block",
     DYNAMIC_PAGE: "Giao diện Động",
   },
+  TABLE: {
+    TITLE: "Tables",
+    TABLE_BASIC: "Table Basic",
+    TABLE_ANIMES: "Table Animes",
+  },
   MOVIES: {
     TITLE: "Phim",
     MOVIES_LIST: "Danh Sách Phim",

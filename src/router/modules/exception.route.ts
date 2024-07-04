@@ -1,10 +1,9 @@
-import { Layout } from "@/helpers/router.helper";
-import { i18n } from "@/plugins/i18n";
+import { i18n } from "@/plugins/vue-i18n";
 
-export const Exception: AppRouteRecordRaw = {
+export const Exception = {
   path: "/exception",
   name: "Exception",
-  component: Layout,
+  component: () => import("@/layouts/Default.vue"),
   meta: {
     title: i18n.global.t("ROUTER.EXCEPTION.TITLE"),
     icon: "ant-design:exception-outlined",
@@ -14,7 +13,7 @@ export const Exception: AppRouteRecordRaw = {
     {
       path: "403",
       name: "Exception403",
-      component: () => import("@/views/Exception/Error403.vue"),
+      component: () => import("@/views/exception/Error403.vue"),
       meta: {
         title: i18n.global.t("ROUTER.EXCEPTION.403"),
         icon: "ic:baseline-block",
@@ -23,7 +22,7 @@ export const Exception: AppRouteRecordRaw = {
     {
       path: "404",
       name: "Exception404",
-      component: () => import("@/views/Exception/Error404.vue"),
+      component: () => import("@/views/exception/Error404.vue"),
       meta: {
         title: i18n.global.t("ROUTER.EXCEPTION.404"),
         icon: "ic:baseline-web-asset-off",
@@ -32,7 +31,7 @@ export const Exception: AppRouteRecordRaw = {
     {
       path: "500",
       name: "Exception500",
-      component: () => import("@/views/Exception/Error500.vue"),
+      component: () => import("@/views/exception/Error500.vue"),
       meta: {
         title: i18n.global.t("ROUTER.EXCEPTION.500"),
         icon: "ic:baseline-wifi-off",

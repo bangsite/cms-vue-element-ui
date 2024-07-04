@@ -1,8 +1,8 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 // import { useAuthStore } from "@/stores/auth.store";
-import { useTitle } from "@/hooks/web/useTitle";
+import { useTitle } from "@/hooks/useTitle";
 import { getCookie } from "@/utils/useCookies";
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/event/useLoadingFullSceen";
+import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/useLoadingFullSceen";
 
 /**
  * If the user is not authenticated and the route is not the login route, redirect to the login route

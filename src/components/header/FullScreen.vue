@@ -11,12 +11,7 @@
 </template>
 <script setup lang="ts">
 import { useFullscreen } from "@vueuse/core";
-import { propTypes } from "@/utils/propTypes";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-
-defineProps({
-  color: propTypes.string.def(""),
-});
 
 const { toggle, isFullscreen } = useFullscreen();
 </script>

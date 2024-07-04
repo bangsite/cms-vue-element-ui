@@ -5,22 +5,22 @@
     </el-button>
 
     <template #dropdown>
-      <el-dropdown-menu class="pt-10 pb-10">
+      <el-dropdown-menu class="pY-4">
         <el-dropdown-item>
           <el-link :underline="false" @click="handleSetStatus">
-            <SvgIcon :icon="'ant-design:user-outlined'" :size="20" class="mr-5" />
+            <SvgIcon :icon="'ant-design:user-outlined'" :size="20" class="mr-2" />
             <span>Set status </span>
           </el-link>
         </el-dropdown-item>
         <el-dropdown-item>
           <el-link :underline="false" @click="handleSetting">
-            <SvgIcon :icon="'ant-design:setting-outlined'" :size="20" class="mr-5" />
+            <SvgIcon :icon="'ant-design:setting-outlined'" :size="20" class="mr-2" />
             <span>Account Settings</span>
           </el-link>
         </el-dropdown-item>
         <el-dropdown-item>
           <el-link :underline="false" @click="handleLogout">
-            <SvgIcon :icon="'tabler:logout'" :size="20" class="mr-5" />
+            <SvgIcon :icon="'tabler:logout'" :size="20" class="mr-2" />
             <span>Logout</span>
           </el-link>
         </el-dropdown-item>
