@@ -103,7 +103,7 @@ const tableColumns = reactive<ColumnProps[]>(props.columns);
 
 const dataTables = toRef(props, "dataTables");
 const pagination = toRef(props, "pagination");
-console.log(pagination.value);
+
 onMounted(() => {
   initDragSort();
 });
