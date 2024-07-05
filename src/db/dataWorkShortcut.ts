@@ -1,4 +1,4 @@
-import type { IShortcut } from "@/interfaces/IWorkbench";
+import type { IShortcut } from "@/types";
 
 export const DATA_WORK_SHORTCUT: IShortcut[] = [
   { id: 0, label: "System", icon: "mdi:desktop-mac-dashboard", color: "#409eff" },

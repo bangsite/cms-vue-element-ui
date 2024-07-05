@@ -52,10 +52,20 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { CountUpOptions } from "vue-countup-v3";
+import type { CountUpOptions } from "vue-countup-v3";
 
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import type { IStatsCard } from "@/interfaces/ICard";
+
+interface IStatsCard {
+  id: string;
+  type: string;
+  icon: string;
+  total: string;
+  label: string;
+  growth: string;
+  growthRate: string;
+  dataPeriod: string;
+}
 
 defineProps({
   data: {

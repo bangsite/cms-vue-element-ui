@@ -10,8 +10,14 @@
 </template>
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
-import type { ISvgIcon } from "@/interfaces/ISvgIcon";
 import { Icon } from "@iconify/vue";
+
+interface ISvgIcon {
+  size?: number;
+  color?: string;
+  icon?: string;
+  localIcon?: string;
+}
 
 defineOptions({ name: "SvgIcon" });
 

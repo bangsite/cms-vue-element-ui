@@ -1,11 +1,11 @@
 import { i18n } from "@/plugins/vue-i18n";
 import { useLocaleStoreWithOut } from "@/stores/locale.store";
 import { setHtmlPageLang } from "@/utils/setHtmlPageLang";
-import type { LocaleType } from "@/types/locale";
+import type { LocaleType } from "@/types";
 
 function getDefaultLanguage(): LocaleType {
-    const lang = localStorage.getItem("lang") as LocaleType;
-    return lang || 'en'; // default to 'en' if no language is set
+  const lang = localStorage.getItem("lang") as LocaleType;
+  return lang || "en"; // default to 'en' if no language is set
 }
 
 const setI18nLanguage = (locale: LocaleType) => {
@@ -17,9 +17,7 @@ const setI18nLanguage = (locale: LocaleType) => {
     i18n.global.locale = locale;
   }
 
-  localeStore.setCurrentLocale({
-    lang: locale,
-  });
+  localeStore.setCurrentLocale(locale);
 
   setHtmlPageLang(locale);
 };
@@ -38,5 +36,4 @@ const useLocale = () => {
   };
 };
 
-
-export { useLocale,getDefaultLanguage };
+export { useLocale, getDefaultLanguage };

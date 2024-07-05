@@ -55,11 +55,11 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { PaginationOptions } from "swiper/types";
 
 import LoginProcess from "@/components/svgs/LoginProcess.vue";
 import LoginDesignComponent from "@/components/svgs/LoginDesignComponent.vue";
 import LoginSolutionMindSet from "@/components/svgs/LoginSolutionMindSet.vue";
+import type { PaginationOptions } from "swiper/types";
 
 const modules = reactive([Pagination, Autoplay]);
 const autoPlay = reactive({

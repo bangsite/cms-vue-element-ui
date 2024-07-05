@@ -64,9 +64,10 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount } from "vue";
-import { weekdayNames } from "@/utils/formatDateTime";
 import useFetchWeather from "@/hooks/api/useFetchWeather";
-import { DATA_WEATHER } from "@/db/dataWeather";
+import { weekdayNames } from "@/utils/formatDateTime";
+
+import { DATA_WEATHER } from "@/db";
 
 const { fetchDataWeather, response, isLoading } = useFetchWeather();
 

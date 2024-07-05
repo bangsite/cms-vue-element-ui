@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { Block, BlockFormMap, BuilderState, Section } from "@/types/builderLayout";
+import type { Block, BlockFormMap, BuilderState, Section } from "@/types/BuilderLayout";
 
 // interface Section {
 //   sectionIndex: number;

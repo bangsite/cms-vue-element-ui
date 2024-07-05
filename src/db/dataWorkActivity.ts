@@ -1,4 +1,4 @@
-import type { IActivity } from "@/interfaces/IWorkbench";
+import type { IActivity } from "@/types";
 
 export const DATA_WORK_ACTIVITY: IActivity[] = [
   {

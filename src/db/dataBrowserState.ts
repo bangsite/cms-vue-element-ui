@@ -1,4 +1,6 @@
-export const DATA_BROWSER_STATE = {
+import type { BrowserState } from "@/types";
+
+export const DATA_BROWSER_STATE: BrowserState = {
   today: [
     {
       key: "1",
