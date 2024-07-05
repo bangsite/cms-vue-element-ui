@@ -31,7 +31,7 @@ import {
 } from "chart.js";
 import { onBeforeUnmount, onMounted, ref, toRefs } from "vue";
 import { customTooltips } from "@/utils/chartUtilities";
-import type { IChartJS } from "@/interfaces/IChart";
+import type { IChartJS } from "@/types";
 
 Chart.register(
   ArcElement,

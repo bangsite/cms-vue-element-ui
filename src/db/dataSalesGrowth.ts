@@ -1,4 +1,4 @@
-import type { SalesGrowthData } from "@/interfaces/ISalesGrowth";
+import type { SalesGrowthData } from "@/types";
 
 export const DATA_SALES_GROWTH: SalesGrowthData = {
   today: {

@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { DATA_WORK_SHORTCUT } from "@/db/dataWorkShortcut";
+import { DATA_WORK_SHORTCUT } from "@/db";
 
 const data = computed(() => DATA_WORK_SHORTCUT);
 </script>

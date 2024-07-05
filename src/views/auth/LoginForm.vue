@@ -56,30 +56,33 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import type { LoginInput } from "@/interfaces/IAuth";
-import SvgIcon from "@/components/common/SvgIcon.vue";
 import useFetchAuth from "@/hooks/useFetchAuth";
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
-const router = useRouter();
-const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
-
-const { doLogin, response, errors, isLoading } = useFetchAuth();
-
-const ruleForm: LoginInput = {
+interface LoginForm {
+  email: string;
+  password: string;
+  remember?: boolean;
+}
+const ruleForm = ref<LoginForm>({
   email: "",
   password: "",
   remember: false,
-};
+});
 
-const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm } });
+const router = useRouter();
+const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
+const { doLogin, response, errors, isLoading } = useFetchAuth();
+const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);

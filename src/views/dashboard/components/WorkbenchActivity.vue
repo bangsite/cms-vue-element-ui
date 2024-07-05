@@ -20,7 +20,7 @@
 import { computed } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
-import { DATA_WORK_ACTIVITY } from "@/db/dataWorkActivity";
+import { DATA_WORK_ACTIVITY } from "@/db";
 
 const data = computed(() => DATA_WORK_ACTIVITY);
 </script>

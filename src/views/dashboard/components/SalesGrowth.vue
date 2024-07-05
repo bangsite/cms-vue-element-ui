@@ -1,5 +1,5 @@
 <template>
-  <div class="chartjs-container" v-if="DATA_SALES_GROWTH[overviewTab]">
+  <div class="chartjs-container" v-if="data && Object.keys(data).length > 0">
     <el-card class="rounded-lg">
       <template #header>
         <div class="chartjs-tooltip flex items-center justify-between cursor-pointer">
@@ -55,7 +55,7 @@
             type="bar"
             id="sales-growth-chart"
             className="sales-growth-chart"
-            :labels="DATA_SALES_GROWTH[overviewTab].labels"
+            :labels="data.labels"
             :datasets="dataSalesGrowthDataset"
             :height="heightChart"
             :layout="{ padding: { top: 20 } }"
@@ -77,17 +77,23 @@
 import { computed, ref } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import Chart from "@/components/charts/ChartJS.vue";
+import { customTooltips } from "@/utils/chartUtilities";
 
 import { DATA_SALES_GROWTH, filterDataScales, filterSalesGrowthDataset } from "@/db/dataSalesGrowth";
-import { customTooltips } from "@/utils/chartUtilities";
-import type { SalesGrowthData } from "@/interfaces/ISalesGrowth";
 
 const overviewTab = ref("today");
 const isLoading = ref(false);
-const heightChart = ref(window.innerWidth < 575 ? 200 : 110);
+const heightChart = ref(window.innerWidth < 575 ? 200 : 102);
 
-const dataScalesGrowth = computed(() => filterDataScales(DATA_SALES_GROWTH[overviewTab.value]));
-const dataSalesGrowthDataset = computed(() => filterSalesGrowthDataset(DATA_SALES_GROWTH[overviewTab.value]));
+const data = computed(() => {
+  return DATA_SALES_GROWTH && Object.keys(DATA_SALES_GROWTH[overviewTab.value]).length > 0
+    ? DATA_SALES_GROWTH[overviewTab.value]
+    : {};
+});
+console.log(data);
+
+const dataScalesGrowth = computed(() => filterDataScales(data.value));
+const dataSalesGrowthDataset = computed(() => filterSalesGrowthDataset(data.value));
 
 const handleTabActivation = (value: string) => {
   isLoading.value = true;

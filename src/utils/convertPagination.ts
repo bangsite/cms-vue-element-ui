@@ -1,7 +1,7 @@
-import type { PaginationAPI } from "@/interfaces/IPagination";
+import type { PaginationApi } from "@/types";
 // import { i18n } from "@/plugins/vue-i18n";
 
-const pagination: PaginationAPI = {
+const pagination: PaginationApi = {
   currentPage: 1,
   pageSize: 10,
   total: 0,

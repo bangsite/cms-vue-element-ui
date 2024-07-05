@@ -78,8 +78,7 @@ import TableList from "@/components/tables/TableList.vue";
 import { COLUMN_BASIC } from "@/views/table/composables/useColumnBasic";
 import { COLUMN_BROWSER_STATE } from "@/views/table/composables/useColumnBrowser";
 
-import { DATA_BASIC_USAGE } from "@/db/dataTableBasic";
-import { DATA_BROWSER_STATE } from "@/db/dataBrowserState";
+import { DATA_BASIC_USAGE, DATA_BROWSER_STATE } from "@/db";
 
 const browserTab = ref("today");
 const isLoading = ref(false);
@@ -88,8 +87,12 @@ const columnBasic = computed(() => COLUMN_BASIC);
 const columnBrowser = computed(() => COLUMN_BROWSER_STATE);
 
 const dataBasic = computed(() => DATA_BASIC_USAGE);
-const dataBrowser = computed(() => DATA_BROWSER_STATE[browserTab.value]);
-console.log(dataBrowser);
+const dataBrowser = computed(() => {
+  return DATA_BROWSER_STATE && DATA_BROWSER_STATE[browserTab.value].length > 0
+    ? DATA_BROWSER_STATE[browserTab.value]
+    : [];
+});
+
 const handleTabActivation = (value: string) => {
   isLoading.value = true;
   browserTab.value = value;

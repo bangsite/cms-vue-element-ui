@@ -76,14 +76,19 @@ import { computed, ref } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import TableList from "@/components/tables/TableList.vue";
 
-import TableData from "@/db/transactions.json";
 import { TRANSACTION_COLUMNS } from "@/enums/transactionsColumns.enum";
+import { DATA_TRANSACTION } from "@/db";
 
 const transectionTab = ref("today");
 const isLoading = ref(false);
 
 const transectionColumns: any = computed(() => TRANSACTION_COLUMNS);
-const transectionData: any = computed(() => TableData[transectionTab.value]);
+
+const transectionData: any = computed(() => {
+  return DATA_TRANSACTION && DATA_TRANSACTION[transectionTab.value].length > 0
+    ? DATA_TRANSACTION[transectionTab.value]
+    : [];
+});
 const handleTabActivation = (value: string) => {
   isLoading.value = true;
   transectionTab.value = value;

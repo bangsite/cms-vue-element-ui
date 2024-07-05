@@ -1,11 +1,22 @@
 import { defineStore } from "pinia";
 import { store } from "@/plugins/pinia";
-import type { IApp } from "@/interfaces/IApp";
-import type { LayoutTypes } from "@/types/LayoutTypes";
+import type { Layouts } from "@/types";
+
+interface App {
+  collapse: boolean;
+  footer: boolean;
+  locale: boolean;
+  layout: Layouts;
+  logo: boolean;
+  dark: boolean;
+  title: string;
+  userInfo: string;
+  fullScreen: boolean;
+}
 
 export const useAppStore = defineStore("app", {
-  state: (): IApp => {
-    return <IApp>{
+  state: (): App => {
+    return <App>{
       collapse: false,
       footer: true,
       layout: localStorage.getItem("layout") || "classic",

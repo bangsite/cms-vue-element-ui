@@ -1,4 +1,4 @@
-import type { ITechnology } from "@/interfaces/IWorkbench";
+import type { ITechnology } from "@/types";
 
 export const DATA_WORK_TECH: ITechnology[] = [
   {

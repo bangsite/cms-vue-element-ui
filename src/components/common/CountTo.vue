@@ -5,7 +5,16 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, toRefs, watch } from "vue";
-import type { ICountTo } from "@/interfaces/ICountTo";
+interface ICountTo {
+  timestamp: number;
+  startTimestamp: number;
+  currentStartAmount: number;
+  currentAmount: number;
+  currentDuration: number;
+  paused: boolean;
+  remaining: number;
+  animationFrame: number;
+}
 
 const props = defineProps({
   startAmount: {
@@ -149,7 +158,7 @@ const counting = (timestamp: number) => {
   }
 
   if (progress < data.currentDuration) data.animationFrame = window.requestAnimationFrame(counting);
-  else emits("finished");
+  else emits("callback", null);
 };
 
 const cancelAnimation = () => {

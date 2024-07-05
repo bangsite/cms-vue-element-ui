@@ -18,6 +18,7 @@ import { computed } from "vue";
 import { useLocaleStore } from "@/stores/locale.store";
 import { useLocale } from "@/hooks/useLocale";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import type { LocaleType } from "@/types";
 
 const localeStore = useLocaleStore();
 const { changeLocale } = useLocale();
@@ -28,7 +29,7 @@ const currentLang = computed(() => localeStore.getCurrentLocale);
 const setLang = (lang: LocaleType) => {
   if (lang === currentLang.value.lang) return;
   window.location.reload();
-  localeStore.setCurrentLocale({ lang });
+  localeStore.setCurrentLocale(lang);
   changeLocale(lang);
 };
 </script>

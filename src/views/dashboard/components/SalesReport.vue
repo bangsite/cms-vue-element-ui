@@ -52,11 +52,11 @@
             v-for="(item, index) in dataSalesRevenueDatasets"
             :key="index"
           >
-            <span :class="`label-type--${item.labelType} text-sm`">{{ item.label }}</span>
-            <strong class="total text-xl">{{ item.amount }}</strong>
-            <span :class="`${item.growthStatus === 'up' ? 'text-success' : 'text-danger'} text-sm flex items-center`">
-              <SvgIcon :icon="'pajamas:arrow-up'" :size="16" v-if="item.growthStatus === 'up'" />
-              <SvgIcon :icon="'pajamas:arrow-down'" :size="16" v-if="item.growthStatus === 'down'" />
+            <span :class="`label-type--${item?.labelType} text-sm`">{{ item?.label }}</span>
+            <strong class="total text-xl">{{ item?.amount }}</strong>
+            <span :class="`${item?.growthStatus === 'up' ? 'text-success' : 'text-danger'} text-sm flex items-center`">
+              <SvgIcon :icon="'pajamas:arrow-up'" :size="16" v-if="item?.growthStatus === 'up'" />
+              <SvgIcon :icon="'pajamas:arrow-down'" :size="16" v-if="item?.growthStatus === 'down'" />
               <strong>{{ item.growthRate }}%</strong>
             </span>
           </div>
@@ -87,7 +87,8 @@
 import { computed, onMounted, ref } from "vue";
 import Chart from "@/components/charts/ChartJS.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { DATA_SCALES, SALES_REPORT_DATA, salesRevenueDatasets } from "@/db/dataSalesReport";
+
+import { DATA_SCALES, SALES_REPORT_DATA, salesRevenueDatasets } from "@/db";
 import { customTooltips } from "@/utils/chartUtilities";
 
 const dataScales = computed(() => DATA_SCALES);

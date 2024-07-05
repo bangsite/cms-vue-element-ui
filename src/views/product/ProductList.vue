@@ -33,7 +33,7 @@
         <template #product_attributes="scope">
           <template v-if="scope.row.product_attributes">
             <div class="flex flex-wrap gap-2">
-              <el-tag v-for="(item, idx) in scope.row.product_attributes" :key="idx">{{ item }} </el-tag>
+              <el-tag v-for="(item, idx) in scope.row.product_attributes" :key="idx">{{ item }}</el-tag>
             </div>
           </template>
         </template>
@@ -57,7 +57,7 @@ import TableHeader from "@/components/tables/TableHeader.vue";
 
 import { COLUMN_PRODUCT } from "@/views/product/composables/useColumnProduct";
 import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
-import { DATA_PRODUCT } from "@/db/dataProduct";
+import { DATA_PRODUCT } from "@/db";
 
 const customCols = reactive(["product_thumb", "product_attributes", "operations"]);
 const isShowSearch = ref(true);
@@ -67,7 +67,9 @@ const columns = computed(() => COLUMN_PRODUCT);
 const searchColumns = computed(() => {
   return columns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
 });
-const data = computed(() => DATA_PRODUCT);
+const data = computed(() => {
+  return DATA_PRODUCT && DATA_PRODUCT.length > 0 ? DATA_PRODUCT : [];
+});
 
 const handleCreate = () => {};
 
@@ -79,12 +81,8 @@ const handleDelete = (record: Record<string, any>) => {
   console.log("delete row:", record);
 };
 
-const onSearch = () => {
-  fetchTopAnimes(params.value);
-};
-const onReset = () => {
-  fetchTopAnimes(params.value);
-};
+const onSearch = () => {};
+const onReset = () => {};
 
 const onToggleSearch = (data: boolean) => (isShowSearch.value = data);
 

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ColumnProps } from "@/interfaces/ITables";
+import type { ColumnProps } from "@/types";
 
 defineProps<{ column: ColumnProps; customCols?: any[] }>();
 </script>

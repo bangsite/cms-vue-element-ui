@@ -80,7 +80,7 @@ import TableList from "@/components/tables/TableList.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { UP_EVENT_COLUMNS } from "@/enums/upEventColumns.enum";
-import { DATA_EVENTS } from "@/db/dataEvents";
+import { DATA_EVENTS } from "@/db";
 
 const eventColumns: any = computed(() => UP_EVENT_COLUMNS);
 const eventData = computed(() => DATA_EVENTS[eventTab.value]);

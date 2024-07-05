@@ -1,4 +1,4 @@
-export interface PaginationAPI {
+export interface PaginationApi {
   pageSize?: number;
   total?: number;
   pageCount?: number;

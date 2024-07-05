@@ -4,7 +4,7 @@ export const textRefactor = (text: string, size: number) => {
 
 export const chartLinearGradient = (canvas: HTMLElement | null, height: number, color: Record<string, any>) => {
   if (canvas) {
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas?.getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
     gradient.addColorStop(0, `${color.start}`);
     gradient.addColorStop(1, `${color.end}`);
@@ -35,6 +35,7 @@ export const customTooltips = function (this: any, context: any) {
     tooltipEl.style.opacity = 0;
     return;
   }
+
   // Set caret Position
   tooltipEl.classList.remove("above", "below", "no-transform");
   if (tooltipModel.yAlign) {
@@ -75,8 +76,8 @@ export const customTooltips = function (this: any, context: any) {
     tableRoot.innerHTML = innerHtml;
   }
 
-  const positionY = this._chart.canvas.offsetTop;
-  const positionX = this._chart.canvas.offsetLeft;
+  const positionY = this._chart.canvas.offsetTop || 0;
+  const positionX = this._chart.canvas.offsetLeft || 0;
   const toolTip = document.querySelector(".chartjs-tooltip");
   const toolTipHeight = toolTip.clientHeight;
 

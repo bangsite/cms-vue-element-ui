@@ -16,7 +16,7 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 import { BLOCK_FORM, BLOCK_TYPES } from "@/enums/builderLayout.enum";
 
 import { storeToRefs } from "pinia";
-import { type BlockFormMap, type ExtendedBlockFormMap } from "@/types/builderLayout";
+import { type BlockFormMap, type ExtendedBlockFormMap } from "@/types";
 
 // const blockTitle: Record<string, string> = reactive({
 //   button: "BLOCK.BLOCK_BUTTON",

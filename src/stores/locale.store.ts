@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { store } from "@/plugins/pinia";
 
-import type { LocaleDropdownOption, LocaleState } from "@/types/locale";
+import type { LocaleState, LocaleType } from "@/types";
 import { getDefaultLanguage } from "@/hooks/useLocale";
 import { elLocaleMap, localeOptions } from "@/enums/locales.enum";
 
@@ -19,19 +19,19 @@ function createInitialState(): LocaleState {
 const useLocaleStore = defineStore("locales", {
   state: createInitialState,
   getters: {
-    getCurrentLocale(state): LocaleDropdownOption {
+    getCurrentLocale(state) {
       return state.currentLocale;
     },
-    getLocaleMap(state): LocaleDropdownOption[] {
+    getLocaleMap(state) {
       return state.localeMap;
     },
   },
   actions: {
-    setCurrentLocale(localeOption: LocaleDropdownOption) {
-      if (localeOption.lang) {
-        this.currentLocale.lang = localeOption.lang;
-        this.currentLocale.elLocale = elLocaleMap[localeOption.lang];
-        localStorage.setItem("lang", localeOption.lang);
+    setCurrentLocale(lang: LocaleType) {
+      if (lang) {
+        this.currentLocale.lang = lang;
+        this.currentLocale.elLocale = elLocaleMap[lang];
+        localStorage.setItem("lang", lang);
       }
     },
   },

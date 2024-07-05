@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import type { ThemeModeSwitch } from "@/interfaces/ITheme";
+import type { ThemeModeSwitch } from "@/types";
 
 const props = withDefaults(defineProps<ThemeModeSwitch>(), {
   dark: false,
@@ -30,12 +30,12 @@ function handleSwitch(event: MouseEvent) {
   const y = event.clientY;
   const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
-  if (!document.startViewTransition) {
+  if (!document?.startViewTransition) {
     darkMode.value = !darkMode.value;
     return;
   }
 
-  const transition = document.startViewTransition(() => {
+  const transition = document?.startViewTransition(() => {
     darkMode.value = !darkMode.value;
   });
 
