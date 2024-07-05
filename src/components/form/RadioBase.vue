@@ -19,10 +19,10 @@ import { useField } from "vee-validate";
 import { toRef, useAttrs } from "vue";
 
 const props = defineProps({
-    name: { type: String, required: true },
-    label: { type: String, default: "" },
-    labelDisplay: { type: Boolean, default: true },
-    rules: { type: [String, Object], default: "" },
+  name: { type: String, required: true },
+  label: { type: String, default: "" },
+  labelDisplay: { type: Boolean, default: true },
+  rules: { type: [String, Object], default: "" },
 });
 
 const name = toRef(props, "name");
@@ -31,7 +31,7 @@ const attrs = useAttrs();
 
 const { value, errorMessage, setValue } = useField(name, rules);
 
-const handleChangeStatus = (event) => {
-    if (event?.target?.value) setValue(event.target.value);
+const handleChangeStatus = (event: any) => {
+  if (event?.target?.value) setValue(event.target.value);
 };
 </script>

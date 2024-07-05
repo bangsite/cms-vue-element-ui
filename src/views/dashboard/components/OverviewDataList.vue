@@ -27,7 +27,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import OverviewCard from "@/components/cards/OverviewCard.vue";
-import OverviewData from "@/db/overviewCard.json";
+import { DATA_OVERVIEW_CARD } from "@/db";
 
-const overviewCardSorted = computed(() => OverviewData.slice(0, 4));
+const overviewCardSorted = computed(() => {
+  return DATA_OVERVIEW_CARD && DATA_OVERVIEW_CARD.length > 0 ? DATA_OVERVIEW_CARD.slice(0, 4) : [];
+});
 </script>

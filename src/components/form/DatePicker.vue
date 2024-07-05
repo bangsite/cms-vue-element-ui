@@ -30,9 +30,9 @@ const props = defineProps({
   placeholder: { type: String, default: "Pick a day" },
   showTime: { type: [Object, Boolean], default: false },
   format: { type: String, default: "YYYY-MM-DD" },
-  type: { type: String, default: "day" },
+  type: { type: String, default: "date" },
   labelDisplay: { type: Boolean, default: true },
-  shortcuts: { type: [], default: () => [] },
+  shortcuts: { type: Array<{ text: string; value: Date | Function }>, default: () => [] },
   rules: { type: [String, Object], default: "" },
 });
 

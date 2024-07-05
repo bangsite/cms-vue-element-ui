@@ -30,10 +30,16 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import type { MessageTab } from "@/interfaces/INotifyMessage";
-
+import type { BadgeProps } from "element-plus";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { DATA_MESSAGE_TAB } from "@/db/dataMessageTab";
+import { DATA_MESSAGE_TAB } from "@/db";
+
+interface MessageTab {
+  key: number;
+  name: string;
+  badgeProps?: BadgeProps;
+  list: any[];
+}
 
 const tabData = ref<MessageTab[]>([...DATA_MESSAGE_TAB]);
 const clicked = ref<boolean>(false);

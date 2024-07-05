@@ -81,7 +81,7 @@ import Sortable from "sortablejs";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import ColumnRender from "@/components/tables/ColumnRender.vue";
 
-import type { ColumnProps, TableProProps, TypeProps } from "@/interfaces/ITables";
+import type { ColumnProps, TableProProps, TypeProps } from "@/types";
 import { useTables } from "@/hooks/web/useTables";
 import { useSelection } from "@/hooks/web/useSelection";
 

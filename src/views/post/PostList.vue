@@ -16,6 +16,7 @@
           <el-button type="primary" :icon="Plus" @click="handleCreate">Create</el-button>
         </div>
       </template>
+
       <TableHeader :tool-button="true" @toggle-search="onToggleSearch" @refresh-data="onRefreshData" />
 
       <TableList
@@ -59,7 +60,7 @@ import { computed, reactive, ref } from "vue";
 import TableList from "@/components/tables/TableList.vue";
 
 import { COLUMN_POST } from "@/views/post/composables/useColumnPost";
-import { DATA_POST } from "@/db/dataPost";
+import { DATA_POST } from "@/db";
 import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
 import { dateTime } from "@/utils/formatDateTime";
 import { ANIME_SEARCH_TYPE } from "@/enums/anime.enum";
@@ -87,18 +88,9 @@ const handleDelete = (record: Record<string, any>) => {
   console.log("delete row:", record);
 };
 
-const onSearch = () => {
-  // set pageNum= 1
-  // updated search param
-  // get list
-  fetchTopAnimes(params.value);
-};
-const onReset = () => {
-  // set pageNum= 1
-  // updated search param
-  // get list
-  fetchTopAnimes(params.value);
-};
+const onSearch = () => {};
+
+const onReset = () => {};
 
 const onToggleSearch = (data: boolean) => (isShowSearch.value = data);
 

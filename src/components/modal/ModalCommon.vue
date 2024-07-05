@@ -56,8 +56,8 @@ const closeModal = () => {
   emits("closeModal", false);
 };
 
-const clickOutside = (event) => {
-  if (event) emit("closeModal", false);
+const clickOutside = (event: boolean) => {
+  if (event) emits("closeModal", false);
 };
 </script>
 

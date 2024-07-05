@@ -61,7 +61,7 @@ import { computed, ref } from "vue";
 
 import TableList from "@/components/tables/TableList.vue";
 
-import { DATA_BEST_SELLER } from "@/db/dataBestSellers";
+import { DATA_BEST_SELLER } from "@/db";
 import { BEST_SELLER_COLUMNS } from "@/enums/bestSellerColumns.enum";
 
 const sellerTab = ref("today");

@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { DATA_WORK_TECH } from "@/db/dataWorkTech";
+import { DATA_WORK_TECH } from "@/db";
 
 const data = computed(() => DATA_WORK_TECH);
 

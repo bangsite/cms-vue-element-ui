@@ -1,6 +1,6 @@
 import type { TableColumnCtx } from "element-plus";
 import type { Ref, VNode } from "vue";
-import type { PaginationAPI } from "@/interfaces/IPagination";
+import type { PaginationApi } from "./pagination";
 
 export interface EnumProps {
   label?: string;
@@ -8,7 +8,6 @@ export interface EnumProps {
   disabled?: boolean;
   tagType?: string;
   children?: EnumProps[];
-
   [key: string]: any;
 }
 
@@ -58,7 +57,7 @@ export interface TableProProps {
   customClass?: string;
   dataTables: any[];
   rowKey?: string;
-  pagination?: PaginationAPI;
+  pagination?: PaginationApi;
   border?: boolean;
   defaultSort?: { prop: string; order: "ascending" | "descending" };
   title?: string;

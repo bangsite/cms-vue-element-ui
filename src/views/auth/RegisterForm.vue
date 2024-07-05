@@ -51,18 +51,22 @@ import { useRouter } from "vue-router";
 
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import type { LoginInput } from "@/interfaces/IAuth";
-import SvgIcon from "@/components/common/SvgIcon.vue";
 import useFetchAuth from "@/hooks/useFetchAuth";
 // import { transformErrors } from "@/shared/utils/transformErrors";
+
+export interface RegisterForm {
+  email: string;
+  password: string;
+}
 
 const router = useRouter();
 const { doSignUp, response, errors, isLoading } = useFetchAuth();
 const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
 
-const ruleForm = ref<LoginInput>({
+const ruleForm = ref<RegisterForm>({
   email: "",
   password: "",
 });
