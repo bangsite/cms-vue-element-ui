@@ -14,7 +14,7 @@
   <el-card class="rounded-lg">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
-        <h4 class="title">Best Sellers</h4>
+        <h4 class="title">Browser State</h4>
         <div class="flex items-center">
           <el-button
             class="rounded-md"
@@ -62,7 +62,8 @@
       <!-- name -->
       <template #browser="scope">
         <div class="flex items-center gap-1">
-          <img :src="`/src/assets/images/browser/${scope.row.img}`" alt="browser" width="30" />
+          <img :src="`/images/browser/${scope.row.img}`" alt="browser" width="30" />
+          <!--          <img v-if="scope.row.img" :src="getImageUrl(`${scope.row.img}`)" alt="browser" width="30" />-->
           <span>{{ scope.row.name }}</span>
         </div>
       </template>

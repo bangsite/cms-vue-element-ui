@@ -18,6 +18,9 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-vue": "^5.1.0",
+        "@schedule-x/calendar": "^1.48.0",
+        "@schedule-x/theme-default": "^1.48.0",
+        "@schedule-x/vue": "^1.44.1",
         "@tanstack/vue-query": "^5.29.0",
         "@tinymce/tinymce-vue": "^5.1.1",
         "@types/sortablejs": "^1.15.8",

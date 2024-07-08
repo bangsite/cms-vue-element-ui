@@ -90,8 +90,6 @@ const data = computed(() => {
     ? DATA_SALES_GROWTH[overviewTab.value]
     : {};
 });
-console.log(data);
-
 const dataScalesGrowth = computed(() => filterDataScales(data.value));
 const dataSalesGrowthDataset = computed(() => filterSalesGrowthDataset(data.value));
 
