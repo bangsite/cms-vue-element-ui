@@ -8,6 +8,7 @@ import {
   ElCollapse,
   ElConfigProvider,
   ElContainer,
+  ElCalendar,
   ElDatePicker,
   ElDescriptions,
   ElDialog,
@@ -57,6 +58,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElCol)
     .use(ElCollapse)
     .use(ElContainer)
+    .use(ElCalendar)
     .use(ElDatePicker)
     .use(ElDialog)
     .use(ElDivider)

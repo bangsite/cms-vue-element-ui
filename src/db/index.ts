@@ -1,5 +1,6 @@
 export * from "./dataBestSellers";
 export * from "./dataBrowserState";
+export * from "./dataCalendar";
 export * from "./dataEvents";
 export * from "./dataMessageTab";
 export * from "./dataOverviewCard";

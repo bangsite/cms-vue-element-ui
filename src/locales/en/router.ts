@@ -8,6 +8,11 @@ export default {
     ANALYSIS: "Analysis",
     WORKBENCH: "Workbench",
   },
+  CALENDAR: {
+    TITLE: "Calendar",
+    SCHEDULE: "Schedules",
+    CUSTOM: "Custom Japan",
+  },
   MOVIES: {
     TITLE: "Movie",
     MOVIES_LIST: "Movie List",

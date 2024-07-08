@@ -70,7 +70,6 @@ const { type, datasets, options, labels, id, tooltip, scales, elements, legend, 
 const chartInstance = ref<Chart | null>(null);
 
 const createChart = () => {
-  console.log("createChart");
   if (!chartInstance.value) {
     const chartElement = document.getElementById(`${id.value}`) as HTMLCanvasElement;
     if (chartElement) {
