@@ -7,7 +7,7 @@ export const Table = {
   component: () => import("@/layouts/Default.vue"),
   meta: {
     title: i18n.global.t("ROUTER.TABLE.TITLE"),
-    icon: "fluent:table-28-regular",
+    icon: "ri:table-view",
     hidden: false,
   },
   children: [

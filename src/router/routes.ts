@@ -7,6 +7,7 @@ import { Builder } from "@/router/modules/builder.route";
 import { Post } from "@/router/modules/post.route";
 import { Product } from "@/router/modules/product.route";
 import { Table } from "@/router/modules/table.route";
+import { Task } from "@/router/modules/task.route";
 
 import { AuthGuard } from "@/router/guard/auth.guard";
 
@@ -26,6 +27,7 @@ export const routerMap = [
   { ...Calendar },
   { ...Builder },
   { ...Table },
+  { ...Task },
   { ...Post },
   { ...Product },
   { ...Exception },

@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    VueDevTools(),
+    // VueDevTools(),
     VueI18nPlugin({
       runtimeOnly: false,
       // include: resolve(dirname(fileURLToPath(import.meta.url)), "./src/locales/**"),

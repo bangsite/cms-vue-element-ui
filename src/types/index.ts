@@ -12,4 +12,5 @@ export * from "./post";
 export * from "./product";
 export * from "./router";
 export * from "./tables";
+export * from "./tasks";
 export * from "./themes";

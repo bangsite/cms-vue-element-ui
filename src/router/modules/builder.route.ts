@@ -8,7 +8,7 @@ export const Builder = {
   beforeEnter: [AuthGuard],
   meta: {
     title: i18n.global.t("ROUTER.BUILDER.TITLE"),
-    icon: "fluent:building-20-regular",
+    icon: "mingcute:layout-4-line",
     hidden: false,
   },
   children: [

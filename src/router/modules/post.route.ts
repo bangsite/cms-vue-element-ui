@@ -6,7 +6,7 @@ export const Post = {
   component: () => import("@/layouts/Default.vue"),
   meta: {
     title: i18n.global.t("ROUTER.POST.TITLE"),
-    icon: "ic:outline-article",
+    icon: "ri:article-line",
     hidden: false,
   },
   children: [

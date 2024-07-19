@@ -24,6 +24,10 @@ export default {
     TABLE_BASIC: "Table Basic",
     TABLE_ANIMES: "Table Animes",
   },
+  TASK: {
+    TITLE: "Nhiệm Vụ",
+    TASK_LIST: "Danh sách nhiệm vụ",
+  },
   MOVIES: {
     TITLE: "Phim",
     MOVIES_LIST: "Danh Sách Phim",
