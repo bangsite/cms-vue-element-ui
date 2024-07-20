@@ -6,7 +6,7 @@ export const Exception = {
   component: () => import("@/layouts/Default.vue"),
   meta: {
     title: i18n.global.t("ROUTER.EXCEPTION.TITLE"),
-    icon: "ant-design:exception-outlined",
+    icon: "iconoir:error-window",
     alwaysShow: true,
   },
   children: [

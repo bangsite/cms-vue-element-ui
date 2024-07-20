@@ -6,7 +6,7 @@ export const Product = {
   component: () => import("@/layouts/Default.vue"),
   meta: {
     title: i18n.global.t("ROUTER.PRODUCT.TITLE"),
-    icon: "icon-park-outline:ad-product",
+    icon: "eos-icons:products-outlined",
     alwaysShow: true,
   },
   children: [

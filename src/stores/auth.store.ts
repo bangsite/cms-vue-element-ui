@@ -3,8 +3,8 @@ import { setCookie } from "@/utils/useCookies";
 
 export const useAuthStore = defineStore("AuthStore", {
   state: () => ({
-    userInfo: <Auth.Shop>{ roles: ["ADMIN"] },
-    tokens: <Auth.Tokens>{},
+    userInfo: { roles: ["ADMIN"] },
+    tokens: {},
     layoutForm: "LoginForm",
     isLoading: false,
   }),
@@ -39,8 +39,8 @@ export const useAuthStore = defineStore("AuthStore", {
     },
 
     resetAuth() {
-      this.userInfo = <Auth.Shop>{};
-      this.tokens = <Auth.Tokens>{};
+      this.userInfo = {};
+      this.tokens = {};
     },
   },
 });
