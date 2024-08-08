@@ -27,6 +27,10 @@ export default {
     TITLE: "Task",
     LIST: "Task List",
   },
+  BOARD: {
+    TITLE: "Board",
+    LIST: "Board List",
+  },
   BUILDER: {
     TITLE: "Builder",
     DYNAMIC_BLOCK: "Dynamic Block",

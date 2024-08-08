@@ -26,8 +26,7 @@
         <div class="slide__content">
           <h3 class="slide__title">Modular Component Architecture</h3>
           <p class="slide__para">
-            Allows for the creation of modular and reusable components. Each component can represent a specific aspect
-            of the control system, promoting code organization and maintainability.
+            Allows for the creation of modular and reusable components. Promoting code organization and maintainability.
           </p>
         </div>
       </swiper-slide>

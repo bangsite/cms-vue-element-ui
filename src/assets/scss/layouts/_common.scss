@@ -1,10 +1,13 @@
 ::-webkit-scrollbar {
     background-color: #eee;
     width: 10px;
-    &-thumb{
+    height: 10px;
+
+    &-thumb {
         background-color: #cecece;
         border-radius: 8px;
-        &:hover{
+
+        &:hover {
             background: #b5b5b5;
         }
     }
@@ -15,7 +18,7 @@
 }
 
 .overlay {
-    background-color: rgba(0,0,0,0.45);
+    background-color: rgba(0, 0, 0, 0.45);
     height: 100%;
     width: 100%;
     position: absolute;
