@@ -5,12 +5,19 @@
     height: 100%;
     width: 100%;
 
-    //&__wrap {
-    //    display: grid;
-    //    grid-template-columns: 60% 40%;
-    //    height: 100%;
-    //    overflow: hidden;
-    //}
+    &--bg{
+        background-image: url("@/assets/images/bg-noise-50.webp"), linear-gradient(#f7f8f9 15%, #e0eaf8 70%, #e5ecf7 20%);
+        background-position: 0 0;
+        background-size: 200px auto;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        transition: all .3s ease-in;
+    }
 
     &__header {
         display: flex;
@@ -68,14 +75,7 @@
         background-image: url("@/assets/images/bg-noise-50.webp"), linear-gradient(#007aff 5%, #e0eaf8 70%, #e5ecf7 20%);
         background-position: 0 0;
         background-size: 200px auto;
-        position: relative;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
+        @apply hidden lg:flex items-center justify-center relative w-full h-full overflow-hidden;
         transition: all .3s ease-in;
         animation: fadeLeft 0.4s ease-in;
 

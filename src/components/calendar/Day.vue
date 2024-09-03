@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr v-for="(time, key) in DATA_TIME_12H" :key="key + 1">
-          <td>{{ time }}</td>
+          <td class="text-sm w-fit">{{ time }}</td>
           <td></td>
         </tr>
       </tbody>

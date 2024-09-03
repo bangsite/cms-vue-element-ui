@@ -1,6 +1,5 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
-import { i18n } from "@/plugins/vue-i18n";
 import { onLoading } from "@/hooks/useLoading";
 import { NotificationService } from "@/services/notification.service";
 
@@ -42,6 +41,7 @@ export class BaseApiService {
 
   private onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
     onLoading("cancel");
+    NotificationService.showError(error, "Request");
 
     return Promise.reject(error);
   };
@@ -54,8 +54,8 @@ export class BaseApiService {
 
   private onResponseError = (error: AxiosError): Promise<AxiosError> => {
     onLoading("cancel");
-    NotificationService.showError(error);
-    return Promise.reject(error.response);
+    NotificationService.showError(error, "Response");
+    return Promise.reject(error);
   };
 
   // Generic methods for making requests
@@ -64,19 +64,19 @@ export class BaseApiService {
   }
 
   public post<T>(url: string, data: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post<T>(`${url}`, data, config);
+    return this.axiosInstance.post<T>(`${url}`, data, { ...config });
   }
 
   public put<T>(url: string, data: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.put<T>(`${url}`, data, config);
+    return this.axiosInstance.put<T>(url, data, { ...config });
   }
 
   public patch<T>(url: string, data: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.patch<T>(`${url}`, data, config);
+    return this.axiosInstance.patch<T>(url, data, { ...config });
   }
 
   public delete<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.delete<T>(`${url}`, config);
+    return this.axiosInstance.delete<T>(url, { ...config });
   }
 
   public postWithFile<T = unknown>(url: string, file: File, config?: AxiosRequestConfig) {

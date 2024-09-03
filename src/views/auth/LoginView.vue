@@ -1,7 +1,7 @@
 <template>
   <AuthWrapper>
     <template #authLeft>
-      <div class="auth__left none md:block">
+      <div class="auth__left">
         <LoginSwiper />
       </div>
     </template>

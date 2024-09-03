@@ -13,7 +13,7 @@
             </el-button-group>
           </template>
         </el-calendar>
-        <el-card class="rounded-lg">
+        <el-card class="rounded-lg mb-4">
           <h3 class="title">My Calendar</h3>
           <ul class="event-list">
             <li v-for="{ id, title, label } in dataEvent" :key="id">

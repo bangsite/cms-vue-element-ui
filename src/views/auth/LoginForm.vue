@@ -66,6 +66,7 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
 import useFetchAuth from "@/hooks/useFetchAuth";
+
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
 interface LoginForm {
@@ -73,6 +74,7 @@ interface LoginForm {
   password: string;
   remember?: boolean;
 }
+
 const ruleForm = ref<LoginForm>({
   email: "",
   password: "",
@@ -87,7 +89,7 @@ const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);
 
-  const { shop, tokens }: Record<any, any> = response.value;
+  const { shop, tokens }: Record<string, any> = response.value || {};
   if (shop) setUserInfo(shop);
   if (tokens) setToken(tokens);
 

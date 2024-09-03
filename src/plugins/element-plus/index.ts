@@ -1,14 +1,15 @@
 import {
+  ElAlert,
   ElBadge,
   ElBreadcrumb,
   ElButton,
+  ElCalendar,
   ElCard,
   ElCheckbox,
   ElCol,
   ElCollapse,
   ElConfigProvider,
   ElContainer,
-  ElCalendar,
   ElDatePicker,
   ElDescriptions,
   ElDialog,
@@ -17,10 +18,10 @@ import {
   ElEmpty,
   ElForm,
   ElIcon,
+  ElImage,
   ElInfiniteScroll,
   ElInput,
   ElInputNumber,
-  ElImage,
   ElLink,
   ElLoading,
   ElMenu,
@@ -50,6 +51,7 @@ import type { App } from "vue";
 
 export function libElementPlus(app: App<Element>) {
   app
+    .use(ElAlert)
     .use(ElBreadcrumb)
     .use(ElButton)
     .use(ElBadge)

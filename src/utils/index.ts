@@ -2,6 +2,7 @@ export * from "./chartUtilities";
 export * from "./checkFiles";
 export * from "./convertErrors";
 export * from "./convertPagination";
+export * from "./errorHandler";
 export * from "./findIndex";
 export * from "./formatDateTime";
 export * from "./fortmatRequestParams";

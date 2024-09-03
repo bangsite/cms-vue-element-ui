@@ -1,14 +1,29 @@
 import { defineStore } from "pinia";
-import { computed } from "vue";
 import type { Board, Tasks } from "@/types";
 import { DATA_BOARD } from "@/db";
+import { useSessionStorage } from "@vueuse/core/index";
 
 interface BoardStore {
   data: Board[];
   loading: boolean;
   error: any;
 }
-const data = computed(() => DATA_BOARD || []);
+
+// const data = computed(() => DATA_BOARD || []);
+const data = useSessionStorage("board", DATA_BOARD, {
+  serializer: {
+    read: (value: any) => {
+      return JSON.parse(value).map((board: Board) => {
+        board.tasks = board.tasks.map((task: Tasks) => {
+          task.createdAt = new Date(task.createdAt);
+          return task;
+        });
+        return board;
+      });
+    },
+    write: (value: any) => JSON.stringify(value),
+  },
+});
 
 const useBoardStore = defineStore("BoardStore", {
   state: (): BoardStore => ({
@@ -20,38 +35,69 @@ const useBoardStore = defineStore("BoardStore", {
     getBoardList: (state) => state.data,
   },
   actions: {
-    addBoard(data: Board) {
-      if (data) this.data.push(data);
-    },
-
-    addTask(data: Tasks) {
-      if (data) {
-        this.data.tasks.push(data);
+    addBoard(board: Board) {
+      if (board && Object.keys(board).length > 0) {
+        this.data.push(board);
+      } else {
+        this.error = `Board is empty.`;
       }
     },
 
-    editBoard(updatedTask: Board) {
-      const index = this.data.findIndex((item) => item.id === updatedTask.id);
-      if (index !== -1) {
-        this.data[index] = { ...this.data[index], ...updatedTask };
+    addTask(boardId: string, task: Tasks) {
+      const board = this.data.find((item) => item.id === boardId);
+
+      if (board) {
+        board.tasks.push(task);
+      } else {
+        this.error = `Board with id ${boardId} not found.`;
       }
     },
 
-    editTask(updatedTask: Tasks) {
-      const index = this.data.findIndex((item) => item.id === updatedTask.id);
+    editBoard(updatedBoard: Board) {
+      const index = this.data.findIndex((item) => item.id === updatedBoard.id);
       if (index !== -1) {
-        this.data[index] = { ...this.data[index], ...updatedTask };
+        this.data[index] = { ...this.data[index], ...updatedBoard };
+      } else {
+        this.error = `Board with id ${updatedBoard.id} not found.`;
+      }
+    },
+
+    editTask(boardId: string, updatedTask: Tasks) {
+      const board = this.data.find((item) => item.id === boardId);
+      if (board) {
+        const index = board.tasks.findIndex((task) => task.id === updatedTask.id);
+
+        if (index !== -1) {
+          board.tasks[index] = { ...board.tasks[index], ...updatedTask };
+        } else {
+          this.error = `Task with id ${updatedTask.id} not found in board ${boardId}.`;
+        }
+      } else {
+        this.error = `Board with id ${boardId} not found.`;
       }
     },
 
     deleteBoard(id: string | number) {
       const index = this.data.findIndex((item) => item.id === id);
-      if (index !== -1) this.data[index].deleted = true;
+      if (index !== -1) {
+        this.data.splice(index, 1); // Remove the board instead of marking it as deleted
+      } else {
+        this.error = `Board with id ${id} not found.`;
+      }
     },
 
-    deleteTask(id: string | number) {
-      const index = this.data.findIndex((item) => item.id === id);
-      if (index !== -1) this.data[index].deleted = true;
+    deleteTask(boardId: string, taskId: string) {
+      const board = this.data.find((item) => item.id === boardId);
+      if (board) {
+        const taskIndex = board.tasks.findIndex((task) => task.id === taskId);
+        if (taskIndex !== -1) {
+          board.tasks.splice(taskIndex, 1); // Remove the task instead of marking it as deleted
+        } else {
+          this.error = `Task with id ${taskId} not found in board ${boardId}.`;
+        }
+      } else {
+        this.error = `Board with id ${boardId} not found.`;
+      }
     },
   },
 });
