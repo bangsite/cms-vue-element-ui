@@ -40,8 +40,10 @@
 
         <!-- operation -->
         <template #operations="scope">
-          <el-button type="primary" :icon="EditPen" @click="handleEdit('edit', scope.row)">Edit</el-button>
-          <el-button type="danger" :icon="Delete" @click="handleDelete(scope.row)">Delete</el-button>
+          <div class="flex">
+            <el-button type="primary" :icon="EditPen" @click="handleEdit('edit', scope.row)">Edit </el-button>
+            <el-button type="danger" :icon="Delete" @click="handleDelete(scope.row)">Delete</el-button>
+          </div>
         </template>
       </TableList>
     </el-card>

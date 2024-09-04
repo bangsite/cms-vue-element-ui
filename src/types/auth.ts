@@ -21,7 +21,7 @@ export type Login = {
   password: string;
 };
 
-type Register = {
+export type Register = {
   email: string;
   password: string;
 };

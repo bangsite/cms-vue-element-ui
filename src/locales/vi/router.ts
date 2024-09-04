@@ -14,6 +14,10 @@ export default {
     TABLE_DRAG_COLUMN: "Table drag column",
     TABLE_DRAG_ROW: "Table drag row",
   },
+  BOARD: {
+    TITLE: "Bảng Công Việc",
+    LIST: "Danh Sách Bảng Công Việc",
+  },
   BUILDER: {
     TITLE: "Builder",
     DYNAMIC_BLOCK: "Dynamic Block",

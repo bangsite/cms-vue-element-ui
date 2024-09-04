@@ -1,22 +1,22 @@
 import type { AxiosError, AxiosResponse } from "axios";
 import { HttpStatusCode } from "axios";
-
 import { ElNotification } from "element-plus";
+
 import { i18n } from "@/plugins/vue-i18n";
 import { ExceptionKeys } from "@/enums/exception";
-import { capitalizeFirstLetter } from "@/utils/fortmatString";
+import { capitalizeFirstLetter } from "@/utils";
 
-class NotificationService {
-  public static showError(error: Error | AxiosError) {
+export class NotificationService {
+  public static showError(error: Error | AxiosError, context?: string) {
     const status = (error as AxiosError)?.response?.status || 0;
-    const serverMessage = (error as AxiosError)?.response?.data?.message || error.message;
+    const serverMessage = (error as AxiosError)?.response?.data?.message || error?.message || error;
 
     const titleKey = this.getErrorTitleKey(status);
     const messageKey = serverMessage || this.getErrorMessageKey(status);
 
     ElNotification({
       type: "error",
-      title: i18n.global.t(`EXCEPTION.${titleKey}.TITLE`),
+      title: `${i18n.global.t(`EXCEPTION.${titleKey}.TITLE`)} (${context})`,
       message: capitalizeFirstLetter(serverMessage) || i18n.global.t(`EXCEPTION.${messageKey}.MESSAGE`),
     });
   }
@@ -71,4 +71,4 @@ class NotificationService {
   }
 }
 
-export { NotificationService };
+export const notificationService = new NotificationService();

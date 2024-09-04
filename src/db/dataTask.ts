@@ -38,3 +38,31 @@ export const DATA_TASK = [
     deleted: false,
   },
 ];
+
+export const DATA_BOARD = [
+  {
+    id: uuidv4(),
+    title: "Selected for dev",
+    tasks: [],
+  },
+  {
+    id: uuidv4(),
+    title: "Todo",
+    tasks: [...DATA_TASK],
+  },
+  {
+    id: uuidv4(),
+    title: "Doing",
+    tasks: [],
+  },
+  {
+    id: uuidv4(),
+    title: "QA",
+    tasks: [],
+  },
+  {
+    id: uuidv4(),
+    title: "Completed",
+    tasks: [],
+  },
+];
