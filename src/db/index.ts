@@ -1,5 +1,6 @@
 export * from "./dataBestSellers";
 export * from "./dataBrowserState";
+export * from "./dataCalendar";
 export * from "./dataEvents";
 export * from "./dataMessageTab";
 export * from "./dataOverviewCard";
@@ -8,6 +9,7 @@ export * from "./dataProduct";
 export * from "./dataSalesGrowth";
 export * from "./dataSalesReport";
 export * from "./dataTableBasic";
+export * from "./dataTask";
 export * from "./dataTransactions";
 export * from "./dataWeather";
 export * from "./dataWorkActivity";

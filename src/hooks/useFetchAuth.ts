@@ -1,57 +1,42 @@
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import { login, logout, signUp } from "@/services/modules/auth.service";
+import type { Login, Register } from "@/types";
 
 export default function useFetchAuth() {
   const isLoading = ref(false);
-  const response = ref({});
+  const response = ref(null);
   const errors = ref(null);
 
-  const doLogin = async (data: Auth.Login) => {
+  const handleApiCall = async (apiFunc: Function, data: any) => {
     isLoading.value = true;
 
     try {
-      const res = await login(data);
+      const res = await apiFunc(data);
       response.value = res?.data?.data;
-    } catch (error) {
-      const { data } = error as any;
-      errors.value = data;
+    } catch (error: any) {
+      errors.value = error.response?.data || error.message;
     } finally {
       isLoading.value = false;
     }
   };
+  const doLogin = async (data: Login) => {
+    await handleApiCall(login, data);
+  };
 
-  const doSignUp = async (data: Auth.Register) => {
-    isLoading.value = true;
-
-    try {
-      const res = await signUp(data);
-      response.value = res?.data?.data;
-    } catch (err) {
-      const { data } = err as any;
-      errors.value = data;
-    } finally {
-      isLoading.value = false;
-    }
+  const doSignUp = async (data: Register) => {
+    await handleApiCall(signUp, data);
   };
 
   const doLogout = async () => {
-    isLoading.value = true;
-
-    try {
-      const res = await logout();
-      response.value = res?.data?.data;
-    } catch (error) {
-      const { data } = error as any;
-      errors.value = data;
-    } finally {
-      isLoading.value = false;
-    }
+    await handleApiCall(logout, {});
   };
 
   return {
     doLogin,
     doLogout,
     doSignUp,
-    ...toRefs({ isLoading, response, errors }),
+    isLoading,
+    errors,
+    response,
   };
 }

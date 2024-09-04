@@ -16,17 +16,17 @@ type Keys = {
   key: string;
 };
 
-type Login = {
+export type Login = {
   email: string;
   password: string;
 };
 
-type Register = {
+export type Register = {
   email: string;
   password: string;
 };
 
-type Access = {
+export type Access = {
   shop: Shop;
   token: Tokens;
   key?: Keys;

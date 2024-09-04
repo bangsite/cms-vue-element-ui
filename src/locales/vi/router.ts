@@ -14,6 +14,10 @@ export default {
     TABLE_DRAG_COLUMN: "Table drag column",
     TABLE_DRAG_ROW: "Table drag row",
   },
+  BOARD: {
+    TITLE: "Bảng Công Việc",
+    LIST: "Danh Sách Bảng Công Việc",
+  },
   BUILDER: {
     TITLE: "Builder",
     DYNAMIC_BLOCK: "Dynamic Block",
@@ -23,6 +27,10 @@ export default {
     TITLE: "Tables",
     TABLE_BASIC: "Table Basic",
     TABLE_ANIMES: "Table Animes",
+  },
+  TASK: {
+    TITLE: "Nhiệm Vụ",
+    TASK_LIST: "Danh sách nhiệm vụ",
   },
   MOVIES: {
     TITLE: "Phim",

@@ -35,7 +35,7 @@ export const useAppStore = defineStore("app", {
     getCollapse(): boolean {
       return this.collapse;
     },
-    getLayout(): LayoutTypes {
+    getLayout(): Layouts {
       return this.layout;
     },
     getLocale(): boolean {
@@ -68,7 +68,7 @@ export const useAppStore = defineStore("app", {
     setFooter(footer: boolean) {
       this.footer = footer;
     },
-    setLayout(layout: LayoutType) {
+    setLayout(layout: Layouts) {
       this.layout = layout;
       localStorage.setItem("layout", this.layout);
     },

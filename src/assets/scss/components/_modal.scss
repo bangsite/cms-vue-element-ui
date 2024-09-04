@@ -1,29 +1,40 @@
 .modal {
-    background-color: rgba(0, 0, 0, 0.3);
+    &-overlay {
+        background-color: rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+    }
+}
+.modal {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
+    width: 100%;
 
     &-container {
         background: #FFFFFF;
         border-radius: 8px;
         box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-        overflow:hidden;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        min-width: calc(40% - 30px);
-        width: fit-content;
+        max-width: calc(50% - 30px);
+        width: 100%;
+        @media (min-width: 992px) {
+            max-width: calc(40% - 30px);
+        }
     }
 
     &-header,
     &-footer {
-        padding: 1.25rem 1.5rem;
+        padding: 1.25rem;
         display: flex;
     }
 
@@ -62,7 +73,7 @@
 
     &-body {
         position: relative;
-        padding: 1.25rem 1.5rem;
+        //padding: 1rem;
         flex: 1;
     }
 }

@@ -1,7 +1,9 @@
 import {
+  ElAlert,
   ElBadge,
   ElBreadcrumb,
   ElButton,
+  ElCalendar,
   ElCard,
   ElCheckbox,
   ElCol,
@@ -16,10 +18,10 @@ import {
   ElEmpty,
   ElForm,
   ElIcon,
+  ElImage,
   ElInfiniteScroll,
   ElInput,
   ElInputNumber,
-  ElImage,
   ElLink,
   ElLoading,
   ElMenu,
@@ -49,6 +51,7 @@ import type { App } from "vue";
 
 export function libElementPlus(app: App<Element>) {
   app
+    .use(ElAlert)
     .use(ElBreadcrumb)
     .use(ElButton)
     .use(ElBadge)
@@ -57,6 +60,7 @@ export function libElementPlus(app: App<Element>) {
     .use(ElCol)
     .use(ElCollapse)
     .use(ElContainer)
+    .use(ElCalendar)
     .use(ElDatePicker)
     .use(ElDialog)
     .use(ElDivider)

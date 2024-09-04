@@ -8,6 +8,11 @@ export default {
     ANALYSIS: "Analysis",
     WORKBENCH: "Workbench",
   },
+  CALENDAR: {
+    TITLE: "Calendar",
+    SCHEDULE: "Schedules",
+    CUSTOM: "Custom Japan",
+  },
   MOVIES: {
     TITLE: "Movie",
     MOVIES_LIST: "Movie List",
@@ -17,6 +22,14 @@ export default {
     TITLE: "Tables",
     TABLE_BASIC: "Table Basic",
     TABLE_ANIMES: "Table Animes",
+  },
+  TASK: {
+    TITLE: "Task",
+    LIST: "Task List",
+  },
+  BOARD: {
+    TITLE: "Board",
+    LIST: "Board List",
   },
   BUILDER: {
     TITLE: "Builder",

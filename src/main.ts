@@ -12,10 +12,13 @@ import { libVueCountUp3 } from "@/plugins/vue-countup";
 // import { libApexCharts } from "@/plugins/apex-charts";
 import { libVueDraggableNext } from "@/plugins/vue-draggable-next";
 
+// import { clickOutsideEvent } from "./directives";
+
 // @ts-ignore
 import App from "./App.vue";
 
 import "@/assets/scss/main.scss";
+import { clickOutside } from "@/directives";
 
 const app = createApp(App);
 
@@ -49,6 +52,9 @@ async function setupAppAll() {
 
   // Setup VueCountUp 3
   libVueCountUp3(app);
+
+  // Directives
+  app.directive("click-outside", clickOutside);
 
   app.mount("#app");
 }

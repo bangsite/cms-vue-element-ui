@@ -15,6 +15,7 @@ export default {
       gray: colors.gray,
       red: colors.red,
       para: "#232323",
+      transparent: "transparent",
     },
     extend: {},
   },

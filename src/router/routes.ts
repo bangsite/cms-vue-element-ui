@@ -1,11 +1,14 @@
 import { i18n } from "@/plugins/vue-i18n";
 import { Auth } from "@/router/modules/auth.route";
+import { Calendar } from "@/router/modules/calendar.route";
 import { Dashboard } from "@/router/modules/dashboard.route";
 import { Exception } from "@/router/modules/exception.route";
 import { Builder } from "@/router/modules/builder.route";
+import { Board } from "@/router/modules/board.route";
 import { Post } from "@/router/modules/post.route";
 import { Product } from "@/router/modules/product.route";
 import { Table } from "@/router/modules/table.route";
+import { Task } from "@/router/modules/task.route";
 
 import { AuthGuard } from "@/router/guard/auth.guard";
 
@@ -22,11 +25,24 @@ export const routerMap = [
   },
   { ...Auth },
   { ...Dashboard },
+  { ...Calendar },
   { ...Builder },
+  { ...Board },
   { ...Table },
+  { ...Task },
   { ...Post },
   { ...Product },
   { ...Exception },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/views/exception/Error404.vue"),
+    meta: {
+      title: i18n.global.t("router.exception.403"),
+      hidden: true,
+      noTagsView: true,
+    },
+  },
+
   {
     path: "/403",
     name: "403",
