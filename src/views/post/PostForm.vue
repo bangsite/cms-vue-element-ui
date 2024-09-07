@@ -38,8 +38,8 @@ import { useForm } from "vee-validate";
 import { useRoute } from "vue-router";
 
 import InputBase from "@/components/form/InputBase.vue";
-import Categories from "@/components/posts/Categories.vue";
-import Tags from "@/components/posts/Tags.vue";
+import Categories from "@/components/common/Categories.vue";
+import Tags from "@/components/common/Tags.vue";
 import Thumbnail from "@/components/posts/Thumbnail.vue";
 import EditorTinyMCE from "@/components/form/EditorTinyMCE.vue";
 import ActionSubmit from "@/components/posts/ActionSubmit.vue";

@@ -1,12 +1,12 @@
 <template>
   <template v-if="!isLoading">
-    <el-card class="rounded-lg">
+    <el-card class="rounded-md">
       <el-row justify="space-between" align="middle">
         <el-col>
           <div class="flex items-center flex-wrap justify-center md:justify-between gap-2 min-h-[18rem]">
             <template v-for="(item, idx) in dataWeather?.list" :key="idx">
               <template v-if="idx === 0">
-                <div class="bg-blue-500/10 rounded-lg flex flex-col w-full md:w-auto py-1 px-6 items-center">
+                <div class="bg-blue-500/10 rounded-md flex flex-col w-full md:w-auto py-1 px-6 items-center">
                   <img
                     v-if="item?.weather[0]?.icon"
                     class="mb-3"

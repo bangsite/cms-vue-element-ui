@@ -1,7 +1,14 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import axios from "axios";
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
+import axios, { HttpStatusCode } from "axios";
 import { onLoading } from "@/hooks/useLoading";
-import { NotificationService } from "@/services/notification.service";
+import { notifier } from "@/notifications";
 
 export class BaseApiService {
   private axiosInstance: AxiosInstance;
@@ -20,11 +27,12 @@ export class BaseApiService {
     this.axiosInstance.interceptors.response.use(this.onResponse, this.onResponseError);
   }
 
-  private onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+  private onRequest = (config: InternalAxiosRequestConfig) => {
     onLoading("start");
 
     const token = localStorage.getItem("token");
-    if (token) config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
+
+    if (token) config.headers = { ...config.headers, Authorization: `Bearer ${token}` } as AxiosRequestHeaders;
 
     // if (i18n.global.locale) {
     //   config.headers = { ...config.headers, "Accept-Language": i18n.global.locale };
@@ -41,20 +49,38 @@ export class BaseApiService {
 
   private onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
     onLoading("cancel");
-    NotificationService.showError(error, "Request");
+
+    const status = (error as AxiosError)?.response?.status || 0;
+    const message = error?.message || (error as AxiosError)?.response?.statusText || "";
+    const title = "";
+
+    notifier.showError(title, message, status);
 
     return Promise.reject(error);
   };
 
   private onResponse = (response: AxiosResponse): AxiosResponse => {
     onLoading("end");
-    NotificationService.showSuccess(response);
+
+    const status = response.status;
+    const title = "";
+    const message = response.data.message;
+
+    if (status === HttpStatusCode.Ok || status === HttpStatusCode.Created) {
+      notifier.showSuccess(title, message, status);
+    }
+
     return response;
   };
 
   private onResponseError = (error: AxiosError): Promise<AxiosError> => {
     onLoading("cancel");
-    NotificationService.showError(error, "Response");
+    const status = (error as AxiosError)?.response?.status || 0;
+    const title = "";
+    const message = error?.message || (error as AxiosError)?.response?.statusText || "";
+
+    notifier.showError(title, message, status);
+
     return Promise.reject(error);
   };
 

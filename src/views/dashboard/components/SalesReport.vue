@@ -1,6 +1,6 @@
 <template>
   <div class="chartjs-container" v-if="dataSalesReport">
-    <el-card class="rounded-lg">
+    <el-card class="rounded-md">
       <template #header>
         <div class="chartjs-tooltip flex items-center justify-between cursor-pointer">
           <h4 class="title">Sales Report</h4>
@@ -90,10 +90,11 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { DATA_SCALES, SALES_REPORT_DATA, salesRevenueDatasets } from "@/db";
 import { customTooltips } from "@/utils/chartUtilities";
+import type { IChartSaleReport } from "@/types";
 
 const dataScales = computed(() => DATA_SCALES);
 const dataSalesReport = computed(() => SALES_REPORT_DATA);
-const dataSalesRevenueDatasets = ref([]);
+const dataSalesRevenueDatasets = ref<IChartSaleReport[]>([]);
 const heightChart = ref(window.innerWidth <= 575 ? 200 : 100);
 const isLoading = ref(false);
 

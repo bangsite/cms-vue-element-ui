@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     apps: [{
         name: 'CMS Vue Element UI',
         exec_mode: 'cluster',

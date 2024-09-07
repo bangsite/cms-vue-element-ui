@@ -4,10 +4,11 @@ export const textRefactor = (text: string, size: number) => {
 
 export const chartLinearGradient = (canvas: HTMLElement | null, height: number, color: Record<string, any>) => {
   if (canvas) {
-    const ctx = canvas?.getContext("2d");
-    const gradient = ctx.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, `${color.start}`);
-    gradient.addColorStop(1, `${color.end}`);
+    const ctx = (canvas as HTMLCanvasElement)?.getContext("2d");
+    const gradient = ctx?.createLinearGradient(0, 0, 0, height);
+    gradient?.addColorStop(0, `${color.start}`);
+    gradient?.addColorStop(1, `${color.end}`);
+
     return gradient;
   }
 };
@@ -23,7 +24,7 @@ export const customTooltips = function (this: any, context: any) {
 
     document.querySelectorAll(".chart-container").forEach((el: Element) => {
       if (el.contains(document.querySelector(".chartjs-tooltip"))) {
-        document.querySelector(".chartjs-tooltip").remove();
+        document.querySelector(".chartjs-tooltip")?.remove();
       }
     });
 
@@ -31,18 +32,14 @@ export const customTooltips = function (this: any, context: any) {
   }
   const tooltipModel = context.tooltip;
   // Hide if no tooltip
-  if (tooltipModel.opacity === 0) {
-    tooltipEl.style.opacity = 0;
+  if (tooltipEl && tooltipModel.opacity === 0) {
+    tooltipEl.style.opacity = "0";
     return;
   }
 
   // Set caret Position
-  tooltipEl.classList.remove("above", "below", "no-transform");
-  if (tooltipModel.yAlign) {
-    tooltipEl.classList.add(tooltipModel.yAlign);
-  } else {
-    tooltipEl.classList.add("no-transform");
-  }
+  tooltipEl?.classList.remove("above", "below", "no-transform");
+  tooltipEl?.classList.add(tooltipModel.yAlign ?? "no-transform");
 
   function getBody(bodyItem: any) {
     return bodyItem.lines;
@@ -72,8 +69,9 @@ export const customTooltips = function (this: any, context: any) {
 
     innerHtml += "</tbody>";
 
-    const tableRoot = tooltipEl.querySelector("table");
-    tableRoot.innerHTML = innerHtml;
+    const tableRoot = tooltipEl?.querySelector("table");
+
+    if (tableRoot) tableRoot.innerHTML = innerHtml;
   }
 
   const positionY = this._chart.canvas.offsetTop || 0;

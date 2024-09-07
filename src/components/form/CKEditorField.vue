@@ -1,5 +1,5 @@
 <template>
-  <a-form-item
+  <el-form-item
     :label="labelDisplay ? label : ' '"
     :help="
       errorMessage
@@ -17,25 +17,25 @@
     :class="{ 'no-label': !labelDisplay }"
   >
     <!--Field-->
-    <ckeditor
-      :id="name"
-      :editor="customBuildEditor"
-      :config="editorConfig"
-      :disabled="disabled"
-      v-bind="attrs"
-      v-model="value"
-      @input="handleChange"
-    />
+    <!--    <ckeditor-->
+    <!--      :id="name"-->
+    <!--      :editor="customBuildEditor"-->
+    <!--      :config="editorConfig"-->
+    <!--      :disabled="disabled"-->
+    <!--      v-bind="attrs"-->
+    <!--      v-model="value"-->
+    <!--      @input="handleChange"-->
+    <!--    />-->
 
     <span class="note" v-if="attrs.note">{{ attrs.note }}</span>
-  </a-form-item>
+  </el-form-item>
 </template>
 
 <script setup lang="ts">
 import { toRef, useAttrs, reactive } from "vue";
 import { useField } from "vee-validate";
 
-import { customBuildEditor } from "@/plugins/ckeditor";
+// import { customBuildEditor } from "@/plugins/ckeditor";
 
 const props = defineProps({
   name: { type: String, required: true },

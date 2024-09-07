@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover" class="rounded-lg">
+  <el-card shadow="hover" class="rounded-md">
     <template #header>
       <div class="flex items-center justify-between cursor-pointer">
         <h4 class="title">Activity</h4>

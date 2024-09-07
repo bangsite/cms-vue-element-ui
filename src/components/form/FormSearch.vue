@@ -1,5 +1,5 @@
 <template>
-  <el-card class="mb-4 rounded-lg">
+  <el-card class="mb-4 rounded-md">
     <template #header v-if="searchTitle">
       <h4 class="title">{{ searchTitle }}</h4>
     </template>

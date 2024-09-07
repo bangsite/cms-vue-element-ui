@@ -53,13 +53,15 @@ export default {
     },
     ERROR: {
       TITLE: "Error",
-      DESCRIPTION: "Operation failed",
+      DESCRIPTION: "Operation error",
     },
     WARNING: {
       TITLE: "Warning",
+      DESCRIPTION: "Operation warning",
     },
     NOTICE: {
       TITLE: "Notice",
+      DESCRIPTION: "Operation notice",
     },
   },
   UPLOAD: {

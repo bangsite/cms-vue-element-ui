@@ -1,5 +1,5 @@
 <template>
-  <a-form-item
+  <el-form-item
     class="upload__input"
     :label="label"
     :help="errorMessage ? $t(errorMessage, { field: label }) : errorMessage"
@@ -7,7 +7,7 @@
     :required="rules.includes('required')"
   >
     <!-- Field -->
-    <a-upload
+    <el-upload
       :id="name"
       :value="value"
       :multiple="multiple"
@@ -18,29 +18,29 @@
       :accept="accept"
       action=""
     >
-      <slot name="description"> </slot>
-    </a-upload>
+      <slot name="description"></slot>
+    </el-upload>
 
     <div v-if="value && showFileName" class="upload__info">
       <span>{{ checkFiles(value) }}</span>
-      <span @click="handleRemove"><IconTrashSvg /></span>
+      <span @click="handleRemove">
+        <SvgIcon :icon="'material-symbols-light:delete-outline'" :size="24" />
+      </span>
     </div>
-  </a-form-item>
+  </el-form-item>
 </template>
 
 <script setup lang="ts">
-import { ref, toRef, computed } from "vue";
+import { computed, ref, toRef } from "vue";
 import { useField } from "vee-validate";
 import { useI18n } from "vue-i18n";
 
 // import IconTrashSvg from '@/components/svg/IconTrashSvg';
-
 import { getBase64 } from "@/utils/getBase64";
 import { checkFiles } from "@/utils/getFileName";
-
-import useCheckFiles from "@/hooks/web/useCheckFiles";
-
-import { notificationInstance } from "@/hooks/web/useNotify";
+import { checkFileLimit, checkFileSize, checkNameFile } from "@/utils";
+import { notifier } from "@/notifications";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 
 const props = defineProps({
   name: { type: String, required: true },
@@ -57,26 +57,21 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["dataFiles", "removeFile"]);
-
-const { t } = useI18n();
-// const { openNotification } = useNotifications();
-const { errorMessageKey, checkFileLimit, checkFileExtension, checkFileSize } = useCheckFiles();
-
 const percentCompleted = computed({
-  // getter
   get: () => props.progress,
-
-  // setter
   set: () => {
     percentCompleted.value = 0;
   },
 });
+
 const name = toRef(props, "name");
 const rules = toRef(props, "rules");
 const acceptFile = toRef(props, "accept");
-const { value, setValue, errorMessage } = useField(name, rules);
 const indexFile = ref(0);
 const dataFiles = ref([]);
+
+const { t } = useI18n();
+const { value, setValue, errorMessage } = useField(name, rules);
 
 const beforeUpload = (file: any, fileList: any[]) => {
   indexFile.value++;
@@ -96,35 +91,28 @@ const handleCheckFileUpload = (fileList: any[]) => {
     validLimit = checkFileLimit(fileList);
 
     if (!validLimit) {
-      notificationInstance("error", {
-        message: t("NOTIFICATION.TITLE_ERROR"),
-        description: t("NOTIFICATION.FILE_QUEUE_LIMIT"),
-      });
+      const title = t("NOTIFICATION.TITLE_ERROR");
+      const message = t("NOTIFICATION.FILE_QUEUE_LIMIT");
+
+      notifier.showError(title, message);
+
       emits("dataFiles", dataFiles.value);
 
       return false;
     }
 
     fileList.every((file: { type: string; size: string | number }) => {
-      checkFileExtension(acceptFile.value, file?.type);
+      checkNameFile(acceptFile.value);
+
+      // validate extension of image  png | jpg |...
+
       validSize = checkFileSize(file?.size, 20);
 
-      if (errorMessageKey.value) {
-        notificationInstance("error", {
-          message: t("NOTIFICATION.TITLE_ERROR"),
-          description: t(errorMessageKey.value),
-        });
-
-        emits("dataFiles", dataFiles.value);
-
-        return false;
-      }
-
       if (!validSize) {
-        notificationInstance("error", {
-          message: t("NOTIFICATION.TITLE_ERROR"),
-          description: t("NOTIFICATION.FILE_SIZE_20MB"),
-        });
+        const title = t("NOTIFICATION.TITLE_ERROR");
+        const message = t("NOTIFICATION.FILE_SIZE_20MB");
+
+        notifier.showError(title, message);
 
         emits("dataFiles", dataFiles.value);
 
@@ -135,7 +123,7 @@ const handleCheckFileUpload = (fileList: any[]) => {
     });
   }
 
-  if (validLimit && validSize && !errorMessageKey.value) handleFileBase64(fileList);
+  if (validLimit && validSize) handleFileBase64(fileList);
 };
 
 const handleFileBase64 = async (fileList: any[]) => {
@@ -148,7 +136,7 @@ const handleFileBase64 = async (fileList: any[]) => {
     };
 
     setValue(file);
-    dataFiles.value.push(newObjFile);
+    if (newObjFile && Object.keys(newObjFile).length) dataFiles.value.push(newObjFile);
   }
 
   emits("dataFiles", dataFiles.value);

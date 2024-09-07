@@ -69,7 +69,7 @@ const editTask = () => {
 const saveTask = () => {
   if (editedTitle.value.trim() !== "") {
     data.value.title = editedTitle.value;
-    showNotification("Task edited successfully!", "success", "Success");
+    showNotification("Task edited successfully!", "success");
   }
   isEditing.value = false;
   showEditIcon.value = false;

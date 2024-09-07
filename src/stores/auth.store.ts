@@ -1,17 +1,31 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { setCookie } from "@/utils/useCookies";
+import type { Shop, Tokens } from "@/types";
+
+// Define state type
+interface AuthState {
+  userInfo: Shop;
+  tokens: Tokens;
+  layoutForm: string;
+  isLoading: boolean;
+}
 
 export const useAuthStore = defineStore("AuthStore", {
-  state: () => ({
-    userInfo: { roles: ["ADMIN"] },
-    tokens: {},
+  state: (): AuthState => ({
+    userInfo: {
+      id: "",
+      name: "",
+      email: "",
+      roles: ["ADMIN"],
+    },
+    tokens: { accessToken: "", refreshToken: "" },
     layoutForm: "LoginForm",
     isLoading: false,
   }),
 
   getters: {
-    isLogin(state) {
-      return Boolean(state.tokens?.accessToken);
+    isLogin(): boolean {
+      return Boolean(this.tokens?.accessToken);
     },
   },
 
@@ -19,18 +33,20 @@ export const useAuthStore = defineStore("AuthStore", {
     setLayoutForm(name: string) {
       this.layoutForm = name;
     },
-    setUserInfo(data: Record<string, any>) {
-      const { _id, email } = data;
-
-      if (_id) this.userInfo["id"] = _id;
-      if (email) this.userInfo["email"] = email;
+    setUserInfo(data: Partial<Shop>) {
+      if (data.id && data.name && data.email) {
+        this.userInfo = {
+          ...this.userInfo,
+          ...data,
+        };
+      }
     },
 
-    setToken(tokens: Record<string, string>) {
+    setToken(tokens: Partial<Tokens>) {
       const { accessToken, refreshToken } = tokens;
 
       if (accessToken) {
-        this.tokens["accessToken"] = accessToken;
+        this.tokens.accessToken = accessToken;
         // localStorage.setItem("x-key-at", accessToken);
         setCookie("__x_key_at", accessToken);
       }
@@ -39,8 +55,13 @@ export const useAuthStore = defineStore("AuthStore", {
     },
 
     resetAuth() {
-      this.userInfo = {};
-      this.tokens = {};
+      this.userInfo = {
+        id: "",
+        name: "",
+        email: "",
+        roles: [],
+      };
+      this.tokens = { accessToken: "", refreshToken: "" };
     },
   },
 });

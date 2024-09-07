@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import type { Board, Tasks } from "@/types";
 import { DATA_BOARD } from "@/db";
-import { useSessionStorage } from "@vueuse/core/index";
+import { useSessionStorage } from "@vueuse/core";
 
 interface BoardStore {
   data: Board[];
@@ -15,7 +15,8 @@ const data = useSessionStorage("board", DATA_BOARD, {
     read: (value: any) => {
       return JSON.parse(value).map((board: Board) => {
         board.tasks = board.tasks.map((task: Tasks) => {
-          task.createdAt = new Date(task.createdAt);
+          if (task.createdAt) task.createdAt = new Date(task.createdAt);
+          else task.createdAt = new Date();
           return task;
         });
         return board;

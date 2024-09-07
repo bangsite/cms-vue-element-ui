@@ -1,3 +1,16 @@
+export interface SalesGrowthDataset {
+  barThickness: number;
+  backgroundColor: string;
+  total: string;
+  growthStatus: string;
+  data: any[];
+  growthRate: string;
+  hoverBackgroundColor: string;
+  maxBarThickness: number;
+  labelType: string;
+  label: string;
+}
+
 export type SalesGrowthData = {
   today?: SalesData;
   week?: SalesData;

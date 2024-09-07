@@ -84,7 +84,7 @@ const ruleForm = ref<LoginForm>({
 const router = useRouter();
 const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
 const { doLogin, response, errors, isLoading } = useFetchAuth();
-const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
+const { handleSubmit } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);

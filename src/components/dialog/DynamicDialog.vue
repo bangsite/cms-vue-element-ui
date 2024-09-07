@@ -1,5 +1,12 @@
 <template>
-  <el-dialog v-model="dialogVisible" :title="title" align-center @close="handleClose" destroy-on-close>
+  <el-dialog
+    v-model="dialogVisible"
+    :title="title"
+    align-center
+    @close="handleClose"
+    destroy-on-close
+    class="w-[85%] md:w-[60%] lg:w-[40%] overflow-auto max-h-[95vh] rounded-md"
+  >
     <template #header="{ titleClass }">
       <span :class="titleClass">{{ title }}</span>
     </template>
@@ -15,19 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from "vue";
+import { type Component, computed, defineAsyncComponent } from "vue";
 import { useDialogStore } from "@/stores/dialog.store";
 
-const BlockTypes = defineAsyncComponent(() => import("@/components/builders/BlockTypes.vue"));
-const BlockButton = defineAsyncComponent(() => import("@/components/builders/modules/BlockButton.vue"));
-const BlockImage = defineAsyncComponent(() => import("@/components/builders/modules/BlockImage.vue"));
-const BlockHtml = defineAsyncComponent(() => import("@/components/builders/modules/BlockHtml.vue"));
-
-const DYNAMIC_LAYOUT = {
-  BlockTypes,
-  BlockButton,
-  BlockImage,
-  BlockHtml,
+const DYNAMIC_LAYOUT: Record<string, Component> = {
+  button: defineAsyncComponent(() => import("@/components/builders/modules/BlockButton.vue")),
+  image: defineAsyncComponent(() => import("@/components/builders/modules/BlockImage.vue")),
+  html: defineAsyncComponent(() => import("@/components/builders/modules/BlockHtml.vue")),
 };
 
 const { title, active, activeFooter, layoutName, setActive } = useDialogStore();
