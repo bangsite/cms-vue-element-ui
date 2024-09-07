@@ -1,5 +1,5 @@
 <template>
-  <el-card :bordered="false" class="rounded-lg p-1">
+  <el-card :bordered="false" class="rounded-md p-1">
     <div :class="`overview-card overview-card-${data.type}`">
       <div class="overview-card__top flex items-center justify-between gap-4 mb-6">
         <div class="overview-card__top--content">
@@ -34,12 +34,12 @@
             <span class="overview-label text-base">{{ data.label }}</span>
           </template>
         </div>
-        <div class="flex items-center justify-center w-16 h-16 rounded-lg" :class="`bg-${data.type}`">
+        <div class="flex items-center justify-center w-16 h-16 rounded-md" :class="`bg-${data.type}`">
           <SvgIcon :icon="`${data.icon}`" :size="24" />
         </div>
       </div>
 
-      <div v-if="bottomStatus" class="overview-card__bottom flex items-center gap-4 px-1 py-2 bg-gray-50 rounded-lg">
+      <div v-if="bottomStatus" class="overview-card__bottom flex items-center gap-4 px-1 py-2 bg-gray-50 rounded-md">
         <span class="flex items-center gap-1" :class="data.growth === 'upward' ? 'text-success' : 'text-danger'">
           <SvgIcon :icon="data.growth === 'upward' ? 'pajamas:arrow-up' : 'pajamas:arrow-down'" :size="16" />
           <span> {{ data?.growthRate }}%</span>

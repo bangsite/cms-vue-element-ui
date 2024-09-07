@@ -25,10 +25,9 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        max-width: calc(50% - 30px);
-        width: 100%;
+        width: calc(50% - 30px);
         @media (min-width: 992px) {
-            max-width: calc(40% - 30px);
+            width: calc(40% - 30px);
         }
     }
 

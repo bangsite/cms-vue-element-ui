@@ -1,7 +1,19 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
+import type { ExtraBlockForm, Section } from "@/types";
+
+// Define the structure for the dialog store state
+export interface DialogState {
+  title: string;
+  layoutName: string;
+  data: ExtraBlockForm | Record<string, any>; // Assuming Block type is present
+  active: boolean;
+  activeFooter: boolean;
+  rerender: boolean;
+  width: string;
+}
 
 export const useDialogStore = defineStore("DialogStore", {
-  state: () => ({
+  state: (): DialogState => ({
     title: "",
     layoutName: "",
     data: {},
@@ -12,7 +24,7 @@ export const useDialogStore = defineStore("DialogStore", {
   }),
 
   getters: {
-    getData: (state) => state.data,
+    getData: (state): ExtraBlockForm | Record<string, any> => state.data,
   },
 
   actions: {
@@ -31,7 +43,7 @@ export const useDialogStore = defineStore("DialogStore", {
     setTitle(title: string) {
       this.title = title;
     },
-    setDataRender(data: {}) {
+    setDataRender(data: ExtraBlockForm | Record<string, any>): void {
       this.data = data;
     },
   },

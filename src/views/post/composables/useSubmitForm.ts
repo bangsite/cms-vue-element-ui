@@ -6,14 +6,12 @@ export const useSubmitForm = () => {
   const errorsApi = ref([]);
   const status = ref({});
   const onUpdate = (id: string | RouteParamValue[], value: Record<any, any>) => {
-    console.log(id, value);
     // check clean data
     // call api
     // return status
   };
 
   const onCreate = (value: Record<any, any>) => {
-    console.log(value);
     // check clean data
     // call api
     // return status

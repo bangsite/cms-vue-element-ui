@@ -1,12 +1,11 @@
-// Define the Section interface or type
 export interface BuilderState {
   sections: Section[];
-  blockTypes: Block[];
 }
 
 export interface Section {
+  id: string;
   name: string;
-  blocks?: BlockFormMap[];
+  blocks: BlockFormMap[];
 }
 
 // Define the BuilderState interface or type
@@ -19,7 +18,7 @@ export interface SectionField {
   [key: string]: string;
 }
 
-export interface Block {
+export interface BlockTypes {
   icon: string;
   type: string;
   name: string;
@@ -51,15 +50,13 @@ export interface BlockFormHtml extends BlockFormCommon {
   html: string;
 }
 
-export interface BlockFormMap {
-  [key: string]: BlockFormCommon | BlockFormButton | BlockFormImage | BlockFormHtml;
-}
+// Union type for all possible block forms
+export type BlockFormMap = BlockFormButton | BlockFormImage | BlockFormHtml;
 
 // Fixed attributes
 interface BlockFormExtras {
   block_title: string;
   block_type: string;
-  section_name: string;
 }
 
 export type ExtendedBlockFormMap = BlockFormMap & BlockFormExtras;

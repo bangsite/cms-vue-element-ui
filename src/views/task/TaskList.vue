@@ -3,7 +3,7 @@
     <div
       v-for="item in data"
       :key="item.id"
-      class="flex items-center gap-4 justify-between p-2 cursor-pointer hover:shadow-[0_5px_30px_#8d8e9120;] rounded-lg"
+      class="flex items-center gap-4 justify-between p-2 cursor-pointer hover:shadow-[0_5px_30px_#8d8e9120;] rounded-md"
     >
       <!--drag-->
       <div class="flex items-center gap-2">

@@ -52,13 +52,13 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
+import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
 
 import TableList from "@/components/tables/TableList.vue";
 import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";
 
 import { COLUMN_PRODUCT } from "@/views/product/composables/useColumnProduct";
-import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
 import { DATA_PRODUCT } from "@/db";
 
 const customCols = reactive(["product_thumb", "product_attributes", "operations"]);

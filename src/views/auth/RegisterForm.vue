@@ -55,18 +55,14 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
 import useFetchAuth from "@/hooks/useFetchAuth";
+import type { Access, Register } from "@/types";
 // import { transformErrors } from "@/shared/utils/transformErrors";
-
-export interface RegisterForm {
-  email: string;
-  password: string;
-}
 
 const router = useRouter();
 const { doSignUp, response, errors, isLoading } = useFetchAuth();
 const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
 
-const ruleForm = ref<RegisterForm>({
+const ruleForm = ref<Register>({
   email: "",
   password: "",
 });
@@ -76,9 +72,12 @@ const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value
 const onSubmit = handleSubmit(async (values, actions) => {
   await doSignUp(values);
 
-  const { shop, tokens }: Record<any, any> = response.value;
-  if (shop) setUserInfo(shop);
-  if (tokens) setToken(tokens);
+  if (response.value) {
+    const { shop, tokens } = response.value;
+
+    if (shop) setUserInfo(shop);
+    if (tokens) setToken(tokens);
+  }
 
   if (errors.value) {
     console.log("errors:::", errors.value);

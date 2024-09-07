@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-md">
     <template #header>
       <div class="flex items-center justify-between">
         <h3 class="title">Board</h3>
@@ -15,7 +15,7 @@
       class="flex gap-3 pb-4 overflow-x-auto mb-4"
     >
       <template #item="{ element: board }">
-        <div class="board bg-gray-200 min-w-[280px] px-2 py-4 rounded-lg hover:shadow-sm">
+        <div class="board bg-gray-200 min-w-[280px] px-2 py-4 rounded-md hover:shadow-sm">
           <div class="cursor-move flex items-center justify-between gap-2 mb-2">
             <div class="flex items-center drag-handle">
               <SvgIcon :icon="'ri:draggable'" :size="24" />
@@ -46,7 +46,7 @@
             item-key="id"
             :group="{ name: 'tasks', pull: alt ? 'clone' : true }"
             :animation="150"
-            class="cursor-pointer task flex flex-col rounded-lg min-h-4 overflow-x-auto"
+            class="cursor-pointer task flex flex-col rounded-md min-h-4 overflow-x-auto"
           >
             <template #item="{ element: task }">
               <BoardTask :data="task" />
@@ -59,7 +59,7 @@
       </template>
     </Draggable>
 
-    <div class="border border-solid border-gray-300 flex max-h-96 rounded-lg overflow-y-auto p-4">
+    <div class="border border-solid border-gray-300 flex max-h-96 rounded-md overflow-y-auto p-4">
       <vue-json-pretty :data="data" />
       <!--      <pre>-->
       <!--        {{ JSON.stringify(data, null, 1) }}-->
@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, watch } from "vue";
+import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { v4 as uuidv4 } from "uuid";
 
@@ -117,7 +117,7 @@ const handleAddBoard = () => {
   if (error.value) {
     showNotification(error.value, "error", "Error");
   } else {
-    showNotification("Board added successfully!", "success", "Success");
+    showNotification("Board added successfully!", "success");
 
     nextTick(() => {
       const boardElements = document.querySelectorAll(".board");
@@ -139,7 +139,7 @@ const removeBoard = (boardId: string) => {
 
 const handleAddTask = (board: Board, task: Tasks) => {
   if (board) board.tasks.push(task);
-  showNotification("Task added successfully!", "success", "Success");
+  showNotification("Task added successfully!", "success");
 };
 </script>
 

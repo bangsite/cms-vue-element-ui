@@ -13,3 +13,24 @@ export interface IChartJS {
   options?: Record<string, any>;
   tooltip: Record<string, any>;
 }
+
+export interface IChartSaleReport {
+  data: Record<string, any>;
+  borderColor: string;
+  borderWidth: number;
+  fill: boolean;
+  backgroundColor: any;
+  label: string;
+  pointStyle: string;
+  pointRadius: string;
+  hoverRadius: string;
+  pointBorderColor: string;
+  pointBackgroundColor: string;
+  hoverBorderWidth: number;
+  amount: string;
+  amountClass: string;
+  growthStatus: string;
+  labelType: string;
+  growthRate: string;
+  lineTension: number;
+}

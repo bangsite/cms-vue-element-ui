@@ -1,8 +1,8 @@
 <template>
-  <el-card shadow="hover" class="rounded-lg">
+  <el-card shadow="hover" class="rounded-md">
     <template #header><h4 class="title">Ecosystem</h4></template>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <el-card shadow="hover" v-for="item in data" :key="item.id" class="rounded-lg">
+      <el-card shadow="hover" v-for="item in data" :key="item.id" class="rounded-md">
         <div class="flex flex-col justify-center cursor-pointer" @click="handleOpenSite(item.site)">
           <div class="flex justify-start mb-2">
             <SvgIcon :icon="item.icon" :size="24" :style="{ color: item?.color }" class="mr-2" />

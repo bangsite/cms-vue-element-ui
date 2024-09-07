@@ -3,46 +3,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onActivated, onBeforeUnmount, onMounted, ref, unref, watch } from "vue";
 import type { PropType } from "vue";
+import { computed, onActivated, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import type { EChartsOption } from "echarts";
-import { debounce } from "lodash-es";
 
 import echarts from "@/plugins/echarts";
-// import { useAppStore } from "@/stores/app.store";
-import { propTypes } from "@/utils/propTypes";
-import { isString } from "@/utils/isCheckVal";
-
-// const appStore = useAppStore();
+import { debounce, isString } from "@/utils";
 
 const props = defineProps({
   options: {
     type: Object as PropType<EChartsOption>,
     required: true,
   },
-  width: propTypes.oneOfType([Number, String]).def(""),
-  height: propTypes.oneOfType([Number, String]).def("500px"),
+  width: {
+    type: [Number, String],
+    default: "",
+  },
+  height: {
+    type: [Number, String],
+    default: "500px",
+  },
 });
 
-// const isDark = computed(() => appStore.getIsDark);
-
-// const theme = computed(() => {
-//   return isDark.value ? true : "auto";
-// });
-
-// const options = computed(() => {
-//   const { options } = props;
-//
-//   return Object.assign(options, {
-//     darkMode: theme.value,
-//   });
-// });
-
-const elRef = ref<ElRef>();
-
-let echartRef: Nullable<echarts.ECharts> = null;
-
-const contentEl = ref<Element>();
+const elRef = ref<HTMLElement | null>(null);
+const contentEl = ref<HTMLElement | null>(null);
+let echartRef: echarts.ECharts | null = null;
 
 const styles = computed(() => {
   const { width, height } = props;
@@ -56,11 +41,9 @@ const styles = computed(() => {
 });
 
 const initChart = () => {
-  const { options } = props;
-
-  if (elRef.value && options) {
-    echartRef = echarts.init(elRef.value as HTMLElement);
-    echartRef?.setOption(options);
+  if (elRef.value && props.options) {
+    echartRef = echarts.init(elRef.value);
+    echartRef?.setOption(props.options);
   }
 };
 
@@ -75,32 +58,28 @@ const contentResizeHandler = async (e: TransitionEvent) => {
     resizeHandler();
   }
 };
+
 onMounted(() => {
   initChart();
-
   window.addEventListener("resize", resizeHandler);
 
-  contentEl.value = document.getElementsByClassName(`layout-content`)[0];
-  contentEl.value && (contentEl.value as Element).addEventListener("transitionend", contentResizeHandler);
+  contentEl.value = document.getElementsByClassName(`layout-content`)[0] as HTMLElement;
+  contentEl.value?.addEventListener("transitionend", contentResizeHandler);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("resize", resizeHandler);
-  unref(contentEl) && (unref(contentEl) as Element).removeEventListener("transitionend", contentResizeHandler);
+  contentEl.value?.removeEventListener("transitionend", contentResizeHandler);
 });
 
 onActivated(() => {
-  if (echartRef) {
-    echartRef.resize();
-  }
+  if (echartRef) echartRef.resize();
 });
 
 watch(
-  () => options.value,
+  () => props.options,
   (options) => {
-    if (echartRef) {
-      echartRef?.setOption(options);
-    }
+    if (echartRef) echartRef?.setOption(options);
   },
   {
     deep: true,

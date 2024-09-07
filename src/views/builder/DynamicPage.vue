@@ -1,141 +1,169 @@
 <template>
-  <el-card class="rounded-lg">
-    <template #header>
-      <h4 class="title">Dynamic Section</h4>
-    </template>
-    <el-form
-      ref="formSection"
-      :labelPosition="'top'"
-      class="border border-gray-300 border-dashed px-16 py-8 mx-auto rounded-lg max-w-6xl overflow-auto h-[35rem] max-h-[35rem]"
-    >
-      <el-collapse
-        v-model="activeKey"
-        v-for="(item, idx) in sections"
-        :key="idx"
-        class="el-card section mb-10 px-4 rounded-lg"
-        @change="handleChange"
-      >
-        <el-collapse-item :name="idx" class="el-card__body">
-          <template #title>
-            <h5>{{ item.name }}</h5>
-          </template>
+  <div class="flex flex-col lg:flex-row gap-2 items-start">
+    <el-card class="rounded-md w-full lg:w-9/12">
+      <template #header>
+        <h5 class="title">{{ pages[0].name }}</h5>
+      </template>
+      <el-form ref="formSection" :labelPosition="'top'" class="overflow-auto min-h-96 max-h-[80vh]">
+        <el-collapse
+          v-model="activeKey"
+          v-for="(item, idx) in pages[0].sections"
+          :key="item.id"
+          class="section mb-4 rounded-md"
+          @change="handleChange"
+        >
+          <el-collapse-item :name="idx" class="p-3">
+            <template #title>
+              <div class="flex items-center justify-between w-full">
+                <h6>{{ item.name + " " + idx }}</h6>
+                <el-button @click="handleRemoveSection(idx, $event)" link type="danger">
+                  <SvgIcon :icon="'material-symbols:delete-outline'" :size="24" />
+                </el-button>
+              </div>
+            </template>
 
-          <RenderBlock v-if="activeKey && activeKey.length" :disabled="true" :data="item.blocks" />
-          <!-- Add Block -->
-          <el-button v-if="activeKey" class="btn-add-block rounded-lg" plain>
-            <SvgIcon :icon="'mi:add'" :size="24" />
-            Add Block
-          </el-button>
-        </el-collapse-item>
-      </el-collapse>
+            <BlockRender
+              v-if="activeKey && activeKey.length"
+              :disabled="true"
+              :data="item"
+              :pageId="pages[0].id"
+              :sectionIndex="idx"
+              @editBlock="handleBlockEdit"
+              @removedBlock="handleBlockRemove"
+            />
 
-      <!-- Add Block -->
-      <el-button v-if="activeKey" @click="addNewSection" class="btn-add-block rounded-lg" plain>
-        <SvgIcon :icon="'mi:add'" :size="24" />
-        Add Section
-      </el-button>
-    </el-form>
+            <!-- Add Block -->
+            <el-button v-if="activeKey" class="btn-add-block rounded-md" plain @click="handleBlockAdd(item)">
+              <SvgIcon :icon="'mi:add'" :size="24" />
+              Add Block
+            </el-button>
+          </el-collapse-item>
+        </el-collapse>
 
-    <template #footer>
-      <!-- Actions -->
-      <el-row justify="end">
-        <el-button :disabled="Object.keys(errors).length > 0 || isSubmitting" type="primary" @click="onSubmit">
-          Submit
+        <!-- Add Section -->
+        <el-button v-if="activeKey" @click="handleAddSection" class="btn-add-block" plain>
+          <SvgIcon :icon="'mi:add'" :size="24" />
+          Add Section
         </el-button>
-      </el-row>
+      </el-form>
+    </el-card>
+
+    <div class="rounded-md w-full lg:w-3/12">
+      <Publish name="pushlish" />
+
+      <Categories name="categories" />
+
+      <Tags name="tags" />
+    </div>
+  </div>
+
+  <ModalView
+    v-if="isModalActive"
+    :modalActive="isModalActive"
+    :disable-footer="true"
+    @close-modal="isModalActive = !isModalActive"
+  >
+    <template #header><h4>Block types</h4></template>
+    <template #body>
+      <component
+        :is="BlockTypes"
+        :pageId="pages[0].id"
+        :sectionId="sectionId"
+        @blockAdded="handleBlockAdded"
+        @closeModal="isModalActive = !isModalActive"
+      />
     </template>
-  </el-card>
-
-  <!--  <el-form ref="formSection" :labelPosition="'top'" class="container mx-auto max-w-[65%]">-->
-  <!--    <el-collapse-->
-  <!--      v-model="activeKey"-->
-  <!--      v-for="(item, idx) in Object.keys(SECTION_FIELD)"-->
-  <!--      :key="idx"-->
-  <!--      class="el-card section mb-10"-->
-  <!--      @change="handleChange"-->
-  <!--    >-->
-  <!--      <el-collapse-item :name="idx" class="el-card__body">-->
-  <!--        <template #title>-->
-  <!--          <h4>{{ `Section  ${idx + 1}` }}</h4>-->
-  <!--        </template>-->
-
-  <!--        <RenderBlock-->
-  <!--          v-if="activeKey && activeKey.length"-->
-  <!--          :label="item"-->
-  <!--          :disabled="true"-->
-  <!--          :data="-->
-  <!--            item === 'section_1'-->
-  <!--              ? fieldsS1-->
-  <!--              : item === 'section_2'-->
-  <!--              ? fieldsS2-->
-  <!--              : item === 'section_3'-->
-  <!--              ? fieldsS3-->
-  <!--              : fieldsS4-->
-  <!--          "-->
-  <!--        />-->
-  <!--      </el-collapse-item>-->
-  <!--    </el-collapse>-->
-
-  <!--    &lt;!&ndash; Actions &ndash;&gt;-->
-  <!--    <el-row justify="end" class="mt-20">-->
-  <!--      <el-button :disabled="Object.keys(errors).length > 0 || isSubmitting" type="primary" @click="onSubmit">-->
-  <!--        Submit-->
-  <!--      </el-button>-->
-  <!--    </el-row>-->
-  <!--  </el-form>-->
+  </ModalView>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, onBeforeMount, ref, watch } from "vue";
-import { useFieldArray, useForm } from "vee-validate";
+import { defineAsyncComponent, onBeforeMount, ref } from "vue";
+import { useFieldArray, useFieldValue, useForm } from "vee-validate";
 import { storeToRefs } from "pinia";
 
-import { useBuilderLayout } from "@/hooks/web/useBuilderLayout";
+import { useBuilderLayout } from "@/hooks/useBuilderLayout";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
 
-const RenderBlock = defineAsyncComponent(() => import("@/components/builders/RenderBlock.vue"));
+import ModalView from "@/components/modal/ModalView.vue";
+import Categories from "@/components/common/Categories.vue";
+import Tags from "@/components/common/Tags.vue";
+import Publish from "@/components/common/Publish.vue";
+import type { Page, Section } from "@/types";
+
+const BlockRender = defineAsyncComponent(() => import("@/components/builders/BlockRender.vue"));
+const BlockTypes = defineAsyncComponent(() => import("@/components/builders/BlockTypes.vue"));
 const SvgIcon = defineAsyncComponent(() => import("@/components/common/SvgIcon.vue"));
 
 const activeKey = ref([""]);
+const isModalActive = ref(false);
+const sectionId = ref("");
 
-const { initBlockTypes, initSection, initBlock, addNewSection } = useBuilderLayout();
-const { blockTypeSelected } = useBuilderLayoutStore();
-const { sections } = storeToRefs(useBuilderLayoutStore());
+const { initPage, initSection } = useBuilderLayout();
+const { addPage, addSectionToPage, removeSectionFromPage } = useBuilderLayoutStore();
+const { pages } = storeToRefs(useBuilderLayoutStore());
 
-const { handleSubmit, setValues, setFieldValue, setErrors, errors, isSubmitting, values } = useForm({
+const { handleSubmit, setErrors, errors, isSubmitting, values, setFieldValue } = useForm<Page>({
   initialValues: {
-    ...sections,
+    ...initPage(),
   },
 });
-
-const { remove: removeS1, push: pushS1, fields: fieldsS1, move: moveS1 } = useFieldArray("section_1");
-const { remove: removeS2, push: pushS2, fields: fieldsS2, move: moveS2 } = useFieldArray("section_2");
-const { remove: removeS3, push: pushS3, fields: fieldsS3, move: moveS3 } = useFieldArray("section_3");
-const { remove: removeS4, push: pushS4, fields: fieldsS4, move: moveS4 } = useFieldArray("section_4");
+// Use FieldArray for sections in Vee-Validate
+const { fields: sections, push: pushSection, remove: removeSection } = useFieldArray("sections");
 
 onBeforeMount(() => {
-  initBlockTypes();
-  initSection();
-  initBlock();
+  const newPage = initPage();
+  addPage({ ...newPage });
 });
-const handleAddSection = () => {};
+
+const handleAddSection = () => {
+  const newSection = initSection();
+  addSectionToPage(pages.value[0].id, newSection);
+  pushSection(newSection);
+};
+
+const handleRemoveSection = (sectionIdx: number, event: MouseEvent) => {
+  event.stopPropagation();
+  if (pages.value[0].id) removeSectionFromPage(pages.value[0].id, sectionIdx);
+  removeSection(sectionIdx);
+};
+
+const handleBlockAdd = (section: Section) => {
+  sectionId.value = section.id;
+  isModalActive.value = true;
+};
+
+const handleBlockAdded = (data: Record<string, any>) => {
+  const { sectionId, blockForm } = data;
+  const sectionIdx = pages.value[0].sections.findIndex((s: any) => s.id === sectionId);
+
+  if (sectionIdx !== -1) {
+    const currentBlocks = useFieldValue("sections");
+    console.log(currentBlocks.value);
+
+    if (currentBlocks && Array.isArray(currentBlocks)) {
+      setFieldValue(`sections[${sectionIdx}].blocks`, [...currentBlocks, blockForm]);
+    } else {
+      setFieldValue(`sections[${sectionIdx}].blocks`, [blockForm]);
+    }
+  }
+};
+const handleBlockEdit = (data: Record<string, any>) => {};
+
+const handleBlockRemove = (data: Record<string, any>) => {
+  const { sectionId } = data;
+  const sectionIdx = pages.value[0].sections.findIndex((s: any) => s.id === sectionId);
+  const section = pages.value[0].sections.find((s: any) => s.id === sectionId);
+
+  if (section && section.blocks) setFieldValue(`sections[${sectionIdx}].blocks`, section.blocks);
+};
 
 const handleChange = (val: string[]) => {
   activeKey.value = val;
 };
 
-const pushBlockToForm = (sectionName: string) => {
-  if (sectionName === "section_1") pushS1(blockTypeSelected.value);
-  if (sectionName === "section_2") pushS2(blockTypeSelected.value);
-  if (sectionName === "section_3") pushS3(blockTypeSelected.value);
-  if (sectionName === "section_4") pushS4(blockTypeSelected.value);
-};
-
 const onSubmit = handleSubmit(async (values) => {
   console.log(values);
 });
-
-watch(blockTypeSelected, () => pushBlockToForm(sectionName.value));
 </script>
 
 <style scoped></style>

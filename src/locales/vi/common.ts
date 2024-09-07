@@ -53,13 +53,15 @@ export default {
     },
     ERROR: {
       TITLE: "Lỗi",
-      DESCRIPTION: "Thao tác thất bại",
+      DESCRIPTION: "Thao tác lỗi",
     },
     WARNING: {
       TITLE: "Cảnh Báo",
+      DESCRIPTION: "Thao tác cảnh Báo",
     },
     NOTICE: {
       TITLE: "Thông Báo",
+      DESCRIPTION: "Thao tác thông báo",
     },
   },
   UPLOAD: {

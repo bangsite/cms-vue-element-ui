@@ -1,6 +1,6 @@
 import { getTypeData } from "@/utils/getTypeData";
 
-export const getNameFile = (data: any) => {
+export const checkNameFile = (data: any) => {
   const type = getTypeData(data);
   let fileName = "";
   switch (type) {
@@ -14,10 +14,10 @@ export const getNameFile = (data: any) => {
   return fileName;
 };
 
-export const getFileSize = (fileSize: string | number, limitSize: number = 5) => {
+export const checkFileSize = (fileSize: string | number, limitSize: number = 5) => {
   return parseInt(<string>fileSize) / 1024 / 1024 <= limitSize;
 };
 
-export const getFileLimit = (fileList: string | any[], limitFile: number = 10) => {
+export const checkFileLimit = (fileList: string | any[], limitFile: number = 10) => {
   if (fileList && fileList.length) return fileList.length < limitFile;
 };

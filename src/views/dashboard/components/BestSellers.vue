@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-md">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Best Sellers</h4>
@@ -68,9 +68,7 @@ const sellerTab = ref("today");
 const isLoading = ref(false);
 
 const bestsellerColumns = computed(() => BEST_SELLER_COLUMNS);
-const bestSellerData = computed(
-  () => DATA_BEST_SELLER.bestSeller !== null && DATA_BEST_SELLER.bestSeller[sellerTab.value]
-);
+const bestSellerData = computed(() => DATA_BEST_SELLER.bestSeller && DATA_BEST_SELLER.bestSeller[sellerTab.value]);
 
 const handleTabActivation = (value: string) => {
   isLoading.value = true;

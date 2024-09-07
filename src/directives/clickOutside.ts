@@ -10,8 +10,6 @@ function handleClickOutside(event: Event, el: HTMLElement, binding: DirectiveBin
 
 const clickOutsideDirective = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
-    console.log(el);
-
     const onClick = (event: Event) => handleClickOutside(event, el, binding);
     el.__clickOutsideHandler__ = onClick;
     document.addEventListener("click", onClick);

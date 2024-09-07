@@ -1,7 +1,5 @@
 import type { RouteMeta } from "vue-router";
 import { hasOneShowingChild } from "@/helpers/menu.helper";
-import { pathResolve } from "@/helpers/router.helper";
-import { isUrl } from "@/utils/isCheckVal";
 
 export const useFilterMenu = (routers: any[]) => {
   const filterMenuFirst = routers.filter((item) => {
