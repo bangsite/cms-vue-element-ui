@@ -36,7 +36,7 @@ jobs:
                     key: ${{ secrets.SSH_PRIVATE_KEY }}
                     #passphrase: ${{ secrets.SSH_PASSPHRASE }}
                     #port: ${{ secrets.PORT }} #port of server - often port is 22
-                    source: "ecosystem.config.cjs"
+                    source: "ecosystem.config.mjs"
                     target: "/var/www/vue-cms-element-ui"
 
             -   name: Copy folder to VPS
@@ -59,4 +59,4 @@ jobs:
                     #passphrase: ${{ secrets.SSH_PASSPHRASE }}
                     script: |
                         cd /var/www/vue-cms-element-ui
-                        pm2 startOrRestart ecosystem.config.cjs --env production --update-env
+                        pm2 startOrRestart ecosystem.config.mjs --env production --update-env

@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-md">
     <template #header>
       <div class="flex items-center justify-between">
         <h3 class="title">Todo List</h3>

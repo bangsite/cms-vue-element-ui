@@ -1,77 +1,56 @@
 import { defineStore } from "pinia";
-import type { Block, BlockFormMap, BuilderState, Section } from "@/types/BuilderLayout";
+import type { BlockFormMap, Page, Section } from "@/types";
 
-// interface Section {
-//   sectionIndex: number;
-//   sectionName: string;
-//   sectionData: SectionForm[];
-//   blocks: BlockFormMap[];
-//   blockTypeSelected: [];
-// }
-//
-// interface BuilderState {
-//   sections: Section[];
-// }
+// Define the structure of the state, which holds multiple pages
+export interface BuilderLayoutState {
+  pages: Page[]; // Array of pages, each with sections and blocks
+}
 
 export const useBuilderLayoutStore = defineStore("BuilderLayoutStore", {
-  state: (): BuilderState => ({
-    sections: [],
-    blockTypes: [],
+  state: (): BuilderLayoutState => ({
+    pages: [],
   }),
 
   getters: {},
 
   actions: {
-    // Add a new section
-    addSection(section: Section): void {
-      this.sections.push(section);
+    addPage(page: Page): void {
+      this.pages.push(page);
     },
 
-    // Remove a section by index
-    removeSection(index: number): void {
-      this.sections.splice(index, 1);
+    removePage(pageId: string): void {
+      this.pages = this.pages.filter((page) => page.id !== pageId); // Xóa một page theo ID
     },
 
-    // Add a block to a section
-    addBlock(sectionIndex: number, blockForm: BlockFormMap): void {
-      if (this.sections[sectionIndex]) {
-        if (!this.sections[sectionIndex]?.blocks) {
-          this.sections[sectionIndex]["blocks"] = [];
-        }
+    addSectionToPage(pageId: string, section: Section): void {
+      const page = this.pages.find((p) => p.id === pageId);
+      if (page) {
+        page.sections.push(section);
+      }
+    },
 
-        this.sections[sectionIndex]?.blocks.push(blockForm);
+    removeSectionFromPage(pageId: string, sectionIndex: number): void {
+      const page = this.pages.find((p) => p.id === pageId);
+      if (page && page.sections) page.sections.splice(sectionIndex, 1);
+    },
+
+    addBlockToSection(pageId: string, sectionId: string, block: BlockFormMap): void {
+      const page = this.pages.find((p) => p.id === pageId);
+
+      if (page) {
+        const section = page.sections.find((s) => s.id === sectionId);
+        if (section && section.blocks) section.blocks.push(block);
       }
     },
 
     // Remove a block from a section by index
-    removeBlock(sectionIndex: number, blockIndex: number): void {
-      if (this.sections[sectionIndex] && this.sections[sectionIndex]?.blocks[blockIndex]) {
-        this.sections[sectionIndex].blocks.splice(blockIndex, 1);
+    removeBlock(pageId: string, sectionId: string, blockIndex: number): void {
+      const page = this.pages.find((p) => p.id === pageId);
+
+      if (page) {
+        const section = page.sections.find((s) => s.id === sectionId);
+        if (section && section.blocks) section.blocks.splice(blockIndex, 1);
       }
     },
-
-    // Set block types for dynamic block selection
-    setBlockTypes(blockTypes: Block[]): void {
-      this.blockTypes = blockTypes;
-    },
-
-    // setSectionIndex(position: number) {
-    //   this.sections.sec = position;
-    // },
-    // setSectionName(name: string) {
-    //   this.sectionName = name;
-    // },
-    // setBlockTypes(types: Block[]) {
-    //   this.blockTypes.push({ ...types });
-    // },
-    // setBlockTypeSelected(data: []) {
-    //   this.blockTypeSelected = data;
-    // },
   },
 });
-
-// Hot Module Replacement (HMR) handling
-// Hot Module Replacement (HMR): The HMR code is not needed if you are not using Hot Module Replacement. If you are not using HMR, you can remove that part of the code.
-// if (import.meta.hot) {
-//   import.meta.hot.accept(acceptHMRUpdate(useBuilderLayoutStore, import.meta.hot));
-// }

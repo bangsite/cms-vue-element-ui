@@ -4,8 +4,8 @@
 
     <el-row :gutter="20">
       <el-col :xl="6" :lg="8" :xs="24">
-        <el-calendar ref="calendar" class="mb-4 rounded-lg">
-          <template #header="{ date }">
+        <el-calendar ref="calendar" class="mb-4 rounded-md">
+          <template #header="">
             <el-button-group class="flex justify-center w-full">
               <el-button @click="selectDate('prev-month')"> Previous Month</el-button>
               <el-button @click="selectDate('today')">Today</el-button>
@@ -13,7 +13,7 @@
             </el-button-group>
           </template>
         </el-calendar>
-        <el-card class="rounded-lg mb-4">
+        <el-card class="rounded-md mb-4">
           <h3 class="title">My Calendar</h3>
           <ul class="event-list">
             <li v-for="{ id, title, label } in dataEvent" :key="id">
@@ -26,7 +26,7 @@
         </el-card>
       </el-col>
       <el-col :xl="18" :lg="16" :xs="24">
-        <el-card class="rounded-lg">
+        <el-card class="rounded-md">
           <div class="flex items-center justify-between gap-2">
             <h3 class="title">My ElCalendar</h3>
             <div class="mb-4">
@@ -58,7 +58,7 @@ const dataEvent = reactive([
 
 const tabs = { Day };
 
-const currentTab = ref("Day");
+const currentTab = ref<keyof typeof tabs>("Day");
 
 const selectDate = (val: CalendarDateType) => {
   if (!calendar.value) return;

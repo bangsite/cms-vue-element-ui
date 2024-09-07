@@ -72,9 +72,7 @@ const pagination = reactive<PaginationOptions>({
   clickable: true,
 });
 
-const onSwiper = (swiper: any) => {
-  console.log(swiper);
-};
+const onSwiper = (swiper: any) => {};
 
 const onSlideChange = () => {};
 </script>

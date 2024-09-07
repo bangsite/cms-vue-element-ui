@@ -1,6 +1,6 @@
 <template>
   <div class="chartjs-container" v-if="data && Object.keys(data).length > 0">
-    <el-card class="rounded-lg">
+    <el-card class="rounded-md">
       <template #header>
         <div class="chartjs-tooltip flex items-center justify-between cursor-pointer">
           <h4 class="title">Sales Growth</h4>
@@ -42,7 +42,6 @@
             :key="index"
           >
             <span :class="`label-type--${item?.labelType} text-sm`">{{ item?.label }}</span>
-            <strong class="total text-xl">{{ item?.amount }}</strong>
             <span :class="`${item.growthStatus === 'up' ? 'text-success' : 'text-danger'} text-sm flex items-center`">
               <SvgIcon :icon="'pajamas:arrow-up'" :size="16" v-if="item.growthStatus === 'up'" />
               <SvgIcon :icon="'pajamas:arrow-down'" :size="16" v-if="item.growthStatus === 'down'" />
@@ -80,18 +79,19 @@ import Chart from "@/components/charts/ChartJS.vue";
 import { customTooltips } from "@/utils/chartUtilities";
 
 import { DATA_SALES_GROWTH, filterDataScales, filterSalesGrowthDataset } from "@/db/dataSalesGrowth";
+import type { SalesGrowthDataset } from "@/types";
 
 const overviewTab = ref("today");
 const isLoading = ref(false);
 const heightChart = ref(window.innerWidth < 575 ? 200 : 102);
 
-const data = computed(() => {
+const data: { [key: string]: any } = computed(() => {
   return DATA_SALES_GROWTH && Object.keys(DATA_SALES_GROWTH[overviewTab.value]).length > 0
     ? DATA_SALES_GROWTH[overviewTab.value]
     : {};
 });
-const dataScalesGrowth = computed(() => filterDataScales(data.value));
-const dataSalesGrowthDataset = computed(() => filterSalesGrowthDataset(data.value));
+const dataScalesGrowth: { [key: string]: any } = computed(() => filterDataScales(data.value));
+const dataSalesGrowthDataset = computed<SalesGrowthDataset[]>(() => filterSalesGrowthDataset(data.value));
 
 const handleTabActivation = (value: string) => {
   isLoading.value = true;

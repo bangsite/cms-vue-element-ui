@@ -55,27 +55,16 @@ const props = defineProps({
 const init = reactive({
   selector: "textarea#ifram",
   plugins: ["quickbars"],
-
   quickbars_selection_toolbar: "bold italic | blocks | quicklink blockquote",
   height: 600,
   resize: "both",
 });
 
-// const { modelValue } = toRefs(props);
-// const editorValue = ref(modelValue.value);
 const name = toRef(props, "name");
 const rules = toRef(props, "rules");
 const attrs = useAttrs();
 
 const { value, errorMessage, handleChange } = useField(name, rules);
-
-// watch(modelValue, (newValue) => {
-//   editorValue.value = newValue;
-// });
-//
-// watch(editorValue, (newValue) => {
-//   emit("update:modelValue", newValue);
-// });
 </script>
 
 <style scoped></style>

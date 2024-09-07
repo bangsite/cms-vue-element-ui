@@ -1,13 +1,13 @@
 type RoleType = "SHOP" | "ADMIN" | "TEST";
 
-interface Shop {
+export interface Shop {
   id: string;
   name: string;
   email: string;
   roles?: RoleType[];
 }
 
-type Tokens = {
+export type Tokens = {
   accessToken: string;
   refreshToken: string;
 };
@@ -28,6 +28,6 @@ export type Register = {
 
 export type Access = {
   shop: Shop;
-  token: Tokens;
+  tokens: Tokens;
   key?: Keys;
 };

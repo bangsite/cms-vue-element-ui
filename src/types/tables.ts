@@ -21,7 +21,7 @@ export type FieldNamesProps = {
 
 export type HeaderRenderScope<T> = {
   $index: number;
-  // column: TableColumnCtx<T>;
+  column?: TableColumnCtx<T>;
   [key: string]: any;
 };
 

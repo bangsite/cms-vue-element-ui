@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover" class="rounded-lg">
+  <el-card shadow="hover" class="rounded-md">
     <template #header><h4 class="title">Shortcuts</h4></template>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
       <el-card hoverable shadow="hover" v-for="item in data" :key="item.id" class="rounded-xl">

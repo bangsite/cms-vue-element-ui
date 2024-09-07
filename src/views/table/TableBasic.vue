@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg mb-4">
+  <el-card class="rounded-md mb-4">
     <template #header>
       <h4 class="title">Basic Usage</h4>
     </template>
@@ -11,7 +11,7 @@
       :custom-class="'table-head-title'"
     />
   </el-card>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-md">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Browser State</h4>

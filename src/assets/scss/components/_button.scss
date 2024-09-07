@@ -11,12 +11,5 @@
 }
 
 .btn-add-block {
-    border:1px dashed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    width: 100%;
-
-    min-height: 40px;
+    @apply  border border-dashed flex items-center justify-center p-7 w-full;
 }

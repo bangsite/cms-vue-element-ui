@@ -10,7 +10,7 @@ const parent = {
     const i18n = useI18n();
 
     const formContext = useForm<TValues>(opts);
-    watch(i18n.locale, (val) => {
+    watch(i18n.locale, () => {
       const errorsField = formContext.errors.value;
       const errors = Object.keys(errorsField);
 

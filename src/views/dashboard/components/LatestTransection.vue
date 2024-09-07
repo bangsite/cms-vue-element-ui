@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-md">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Latest Transections</h4>
@@ -47,7 +47,7 @@
       <!-- info -->
       <template #info="scope">
         <div class="flex items-center gap-2">
-          <div class="flex items-center justify-center w-[55px] h-[55px] rounded-lg" :class="`bg-${scope.row.style}`">
+          <div class="flex items-center justify-center w-[55px] h-[55px] rounded-md" :class="`bg-${scope.row.style}`">
             <SvgIcon :icon="`${scope.row.icon}`" :size="24" />
           </div>
 

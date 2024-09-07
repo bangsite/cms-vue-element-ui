@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-lg">
+  <el-card class="rounded-md">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
         <h4 class="title">Upcoming Events</h4>
@@ -44,7 +44,7 @@
       <template #event="scope">
         <div class="flex items-center gap-2">
           <div
-            class="flex flex-col items-center justify-center w-[72px] h-[72px] rounded-lg min-w-[72px]"
+            class="flex flex-col items-center justify-center w-[72px] h-[72px] rounded-md min-w-[72px]"
             :class="`bg-${scope.row.type}`"
           >
             <span class="text-[12px]">{{ scope.row.date }}</span>

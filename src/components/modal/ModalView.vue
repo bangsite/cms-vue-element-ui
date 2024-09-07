@@ -10,9 +10,8 @@
             role="dialog"
             aria-labelledby="modal-header"
             aria-describedby="modal-body"
-            v-click-outside="handleClickOutside"
           >
-            <div class="modal-container" :style="{ width: width, height: height }">
+            <div class="modal-container" :style="{ width: widthPx, height: heightPx }">
               <header class="modal-header" id="modal-header" :class="classHead">
                 <slot name="header"></slot>
 
@@ -45,14 +44,13 @@ const props = defineProps({
   stopEvent: { type: Boolean, default: false },
   modalActive: { type: Boolean },
   disableFooter: { type: Boolean, default: false },
-  width: { type: [Number] },
-  height: { type: [Number] },
+  width: { type: [Number, String] },
+  height: { type: [Number, String] },
 });
 const emits = defineEmits(["closeModal"]);
-console.log(props.modalActive);
 const modalActive = ref(props.modalActive);
-const width = ref(props.width + "px");
-const height = ref(props.width + "px");
+const widthPx = ref(props.width + "px");
+const heightPx = ref(props.height + "px");
 
 const closeModal = () => {
   modalActive.value = false;

@@ -10,7 +10,7 @@
       :search-select-data="ANIME_SEARCH_TYPE"
     />
 
-    <el-card class="rounded-lg">
+    <el-card class="rounded-md">
       <TableHeader :tool-button="true" @toggle-search="onToggleSearch" @refresh-data="onRefreshData" />
 
       <TableList
