@@ -54,7 +54,6 @@ const dragBlock = (index: number) => {
   console.log(index);
 };
 const editBlock = (data: Record<string, any>, index: number) => {
-  debugger;
   if (data && Object.keys(data).length > 0) {
     const mapDataBlockFrom = { ...data, sectionIndex: props.sectionIndex, blockIndex: index };
 
