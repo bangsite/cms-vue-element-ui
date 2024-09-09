@@ -40,7 +40,7 @@ export const treeToList = <T = any>(tree: any, config: Partial<TreeHelperConfig>
   return result;
 };
 
-export const findNode = <T = any>(tree: any, func: Fn, config: Partial<TreeHelperConfig> = {}): T | null => {
+export const findNode = <T = any>(tree: any, func: Function, config: Partial<TreeHelperConfig> = {}): T | null => {
   config = getConfig(config);
   const { children } = config;
   const list = [...tree];
@@ -51,7 +51,7 @@ export const findNode = <T = any>(tree: any, func: Fn, config: Partial<TreeHelpe
   return null;
 };
 
-export const findNodeAll = <T = any>(tree: any, func: Fn, config: Partial<TreeHelperConfig> = {}): T[] => {
+export const findNodeAll = <T = any>(tree: any, func: Function, config: Partial<TreeHelperConfig> = {}): T[] => {
   config = getConfig(config);
   const { children } = config;
   const list = [...tree];
@@ -63,7 +63,11 @@ export const findNodeAll = <T = any>(tree: any, func: Fn, config: Partial<TreeHe
   return result;
 };
 
-export const findPath = <T = any>(tree: any, func: Fn, config: Partial<TreeHelperConfig> = {}): T | T[] | null => {
+export const findPath = <T = any>(
+  tree: any,
+  func: Function,
+  config: Partial<TreeHelperConfig> = {}
+): T | T[] | null => {
   config = getConfig(config);
   const path: T[] = [];
   const list = [...tree];
@@ -86,7 +90,7 @@ export const findPath = <T = any>(tree: any, func: Fn, config: Partial<TreeHelpe
   return null;
 };
 
-export const findPathAll = (tree: any, func: Fn, config: Partial<TreeHelperConfig> = {}) => {
+export const findPathAll = (tree: any, func: Function, config: Partial<TreeHelperConfig> = {}) => {
   config = getConfig(config);
   const path: any[] = [];
   const list = [...tree];
@@ -138,13 +142,13 @@ export const forEach = <T = any>(tree: T[], func: (n: T) => any, config: Partial
 /**
  * @description: Extract tree specified structure
  */
-export const treeMap = <T = any>(treeData: T[], opt: { children?: string; conversion: Fn }): T[] => {
+export const treeMap = <T = any>(treeData: T[], opt: { children?: string; conversion: Function }): T[] => {
   return treeData.map((item) => treeMapEach(item, opt));
 };
 
 export const treeMapEach = (
   data: any,
-  { children = "children", conversion }: { children?: string; conversion: Fn }
+  { children = "children", conversion }: { children?: string; conversion: Function }
 ) => {
   const haveChildren = Array.isArray(data[children]) && data[children].length > 0;
   const conversionData = conversion(data) || {};
@@ -170,7 +174,7 @@ export const treeMapEach = (
  * @param callBack
  * @param parentNode
  */
-export const eachTree = (treeDatas: any[], callBack: Fn, parentNode = {}) => {
+export const eachTree = (treeDatas: any[], callBack: Function, parentNode = {}) => {
   treeDatas.forEach((element) => {
     const newNode = callBack(element, parentNode) || element;
     if (element.children) {

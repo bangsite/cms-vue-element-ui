@@ -82,8 +82,8 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 import ColumnRender from "@/components/tables/ColumnRender.vue";
 
 import type { ColumnProps, TableProProps, TypeProps } from "@/types";
-import { useTables } from "@/hooks/web/useTables";
-import { useSelection } from "@/hooks/web/useSelection";
+import { useTables } from "@/hooks/useTables";
+import { useSelection } from "@/hooks/useSelection";
 
 const props = withDefaults(defineProps<TableProProps>(), {
   columns: () => [],

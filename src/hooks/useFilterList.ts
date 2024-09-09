@@ -1,34 +1,51 @@
 import { reactive, toRefs } from "vue";
-import { dateFormat } from "@/shared/utils/helper";
+import { dateTime } from "@/utils";
+import type { FilterParams, UseFilterListState } from "@/types";
 
 export default function useFilterList() {
-  const state = reactive({
+  const state = reactive<UseFilterListState>({
     filterParams: {},
-    arrDates: ["client_date", "publication_period", "redemption_period", "admin_date", "register_date"],
+    dateFields: [],
   });
 
-  const processParams = (filter) => {
-    const { filterParams, arrDates } = state;
+  const processParams = (filter: FilterParams) => {
+    const { filterParams, dateFields } = state;
 
     Object.keys(filter).forEach((key) => {
-      if (arrDates.includes(key)) {
-        handleDataRangePicker(key, filter[key]);
+      const value = filter[key];
 
-      } else if (filter[key] && (filter[key] !== null || typeof filter[key] !== "object")) {
-        filterParams[`filter[${key}]`] = filter[key];
-
+      if (dateFields.includes(key)) {
+        handleDateRange(key, value);
+      } else if (isValidFilterValue(value)) {
+        filterParams[`filter[${key}]`] = value;
       } else {
         delete filterParams[`filter[${key}]`];
-
       }
     });
   };
 
-  const handleDataRangePicker = (key, data) => {
-    if (data && data.length > 1) {
-      state.filterParams[`filter[${key}]`] = dateFormat(data[0]) + "," + dateFormat(data[1]);
+  /**
+   * Checks if a value is valid to be used as a filter.
+   * A valid value is not null or an object.
+   * @param value - The value to check.
+   * @returns True if the value is valid; otherwise, false.
+   */
+  const isValidFilterValue = (value: any) => {
+    return value !== null && typeof value !== "object";
+  };
+
+  /**
+   * Handles the date range for date fields and formats them.
+   * @param key - The field key.
+   * @param dateRange - The date range value as an array.
+   */
+  const handleDateRange = (key: string, dateRange: any[]) => {
+    const { filterParams } = state;
+
+    if (Array.isArray(dateRange) && dateRange.length === 2) {
+      filterParams[`filter[${key}]`] = `${dateTime(dateRange[0])},${dateTime(dateRange[1])}`;
     } else {
-      delete state.filterParams[`filter[${key}]`];
+      delete filterParams[`filter[${key}]`];
     }
   };
 
@@ -41,14 +58,37 @@ export default function useFilterList() {
    * @param $event
    * @param callback
    */
-  const onFilterChange = async ($event, callback) => {
+  const onChangeFilter = async ($event: { type: string; value: FilterParams }, callback: Function) => {
     state.filterParams.page = 1;
+
     const { type, value } = $event;
+
     if (type === "reset") resetParams();
-    if (type === "search") processParams(value);
+    else if (type === "search") processParams(value);
+
     if (typeof callback === "function") {
       await callback();
-      delete state.filterParams.page;
+    }
+
+    delete state.filterParams.page;
+  };
+
+  /**
+   * Adds a new date field to the filter list.
+   * @param fieldName - The name of the date field to add.
+   */
+  const addDateField = (fieldName: string) => {
+    if (!state.dateFields.includes(fieldName)) state.dateFields.push(fieldName);
+  };
+
+  /**
+   * Removes a date field from the filter list.
+   * @param fieldName - The name of the date field to remove.
+   */
+  const removeDateField = (fieldName: string) => {
+    const index = state.dateFields.indexOf(fieldName);
+    if (index > -1) {
+      state.dateFields.splice(index, 1);
     }
   };
 
@@ -56,6 +96,8 @@ export default function useFilterList() {
     ...toRefs(state),
     processParams,
     resetParams,
-    onFilterChange,
+    onChangeFilter,
+    addDateField,
+    removeDateField,
   };
 }

@@ -1,6 +1,6 @@
 import { ref, toRefs } from "vue";
 import { getHotels } from "@/services/modules/booking.service";
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/web/useLoadingFullSceen";
+import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/useLoadingFullSceen";
 
 export default function useBooking() {
   const isLoading = ref(false);
