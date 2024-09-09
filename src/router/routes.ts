@@ -16,7 +16,7 @@ export const routerMap = [
   {
     path: "/",
     component: () => import("@/layouts/Default.vue"),
-    redirect: "/cms",
+    redirect: "/cms/overview",
     name: "Root",
     beforeEnter: [AuthGuard],
     meta: {
