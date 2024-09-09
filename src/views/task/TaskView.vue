@@ -3,58 +3,60 @@
     <template #header>
       <div class="flex items-center justify-between">
         <h3 class="title">Todo List</h3>
-        <el-button type="primary" @click="addNewTask">Add New Task</el-button>
+        <el-button type="primary" @click="openAddTaskModal">Add New Task</el-button>
       </div>
     </template>
 
-    <TaskList :data="dataTaskList" @completed="completedTask" @delete="deleteTask" @edit="handleEditTask" />
+    <TaskList :data="filteredTaskList" @completed="completedTask" @delete="deleteTask" @edit="handleEditTask" />
   </el-card>
 
   <component
-    :is="ModalView"
-    v-if="isModalActive"
-    :modalActive="isModalActive"
+    :is="modalComponent"
+    v-if="isModalVisible"
+    :modalActive="isModalVisible"
     :classHead="'custom-head'"
     :disable-footer="true"
-    @close-modal="isModalActive = !isModalActive"
+    @close-modal="toggleModalVisibility"
   >
-    <template #header>{{ isEdit ? "Edit Task" : "Add task" }}</template>
+    <template #header>{{ isEditing ? "Edit Task" : "Add Task" }}</template>
     <template #body>
-      <component :is="FormTask" :data="dataForm" :columns="taskCol" :edit="isEdit" @submit="handleSubmit" />
+      <component
+        :is="formComponent"
+        :data="formData"
+        :columns="taskColumns"
+        :edit="isEditing"
+        @submit="handleFormSubmit"
+      />
     </template>
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, reactive, ref } from "vue";
+import { computed, defineAsyncComponent, reactive, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { v4 as uuidv4 } from "uuid";
 
-import { lazyLoadComponent } from "@/helpers";
 import { useTaskStore } from "@/stores/task.store";
 
 import TaskList from "@/views/task/TaskList.vue";
 
-const isModalActive = ref(false);
-const isEdit = ref(false);
+const modalComponent = ref(defineAsyncComponent(() => import("@/components/modal/ModalView.vue")));
+const formComponent = ref(defineAsyncComponent(() => import("@/components/form/FormTask.vue")));
 
-let ModalView = ref();
-let FormTask = ref();
-let dataForm = reactive({});
-const taskCol = reactive([
+const isModalVisible = ref(false);
+const isEditing = ref(false);
+let formData = reactive({});
+const taskColumns = reactive([
   { prop: "title", label: "Title", type: "input" },
   { prop: "description", label: "Description", type: "input" },
 ]);
 
 const { data } = storeToRefs(useTaskStore());
 const { completedTask, deleteTask } = useTaskStore();
-const dataTaskList = computed(() => data.value.filter((item) => !item.deleted));
 
-onBeforeMount(() => {
-  dataForm = createInitForm();
-});
+const filteredTaskList = computed(() => data.value.filter((item) => !item.deleted));
 
-const createInitForm = () => ({
+const createInitialForm = () => ({
   id: uuidv4(),
   title: "",
   description: "",
@@ -62,36 +64,23 @@ const createInitForm = () => ({
   deleted: false,
 });
 
-const loadModalView = () => {
-  ModalView.value = lazyLoadComponent("modal/ModalView");
+const toggleModalVisibility = () => {
+  isModalVisible.value = !isModalVisible.value;
 };
-
-const loadFormTask = () => {
-  FormTask.value = lazyLoadComponent("form/FormTask");
+const openAddTaskModal = () => {
+  isModalVisible.value = true;
+  isEditing.value = false;
+  formData = { ...createInitialForm() };
 };
-
-const addNewTask = () => {
-  isModalActive.value = true;
-  isEdit.value = false;
-  dataForm = { ...createInitForm() };
-
-  loadModalView();
-  loadFormTask();
-};
-
 const handleEditTask = (id: string) => {
-  isModalActive.value = true;
-  isEdit.value = true;
-  dataForm = { ...data.value.filter((item) => item.id === id)[0] };
-
-  loadModalView();
-  loadFormTask();
+  isModalVisible.value = true;
+  isEditing.value = true;
+  formData = { ...data.value.filter((item) => item.id === id)[0] };
 };
-
-const handleSubmit = (event: boolean | string) => {
+const handleFormSubmit = (event: boolean) => {
   if (event) {
-    isModalActive.value = !isModalActive.value;
-    dataForm = { ...createInitForm() };
+    toggleModalVisibility();
+    formData = { ...createInitialForm() };
   }
 };
 </script>

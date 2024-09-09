@@ -14,7 +14,7 @@ const parent = {
       const errorsField = formContext.errors.value;
       const errors = Object.keys(errorsField);
 
-      errors.forEach((error) => {
+      errors.forEach((error: any) => {
         formContext.validateField(error);
       });
     });
