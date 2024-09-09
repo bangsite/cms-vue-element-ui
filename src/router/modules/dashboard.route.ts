@@ -2,8 +2,8 @@ import { i18n } from "@/plugins/vue-i18n";
 import { AuthGuard } from "@/router/guard/auth.guard";
 
 export const Dashboard = {
-  path: "/",
-  redirect: "/cms",
+  path: "/cms",
+  redirect: "/cms/overview",
   name: "Dashboard",
   component: () => import("@/layouts/Default.vue"),
   beforeEnter: [AuthGuard],
@@ -14,7 +14,7 @@ export const Dashboard = {
   },
   children: [
     {
-      path: "/cms",
+      path: "/cms/overview",
       name: "Overview",
       component: () => import("@/views/dashboard/DashboardView.vue"),
       beforeEnter: [AuthGuard],

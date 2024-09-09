@@ -5,7 +5,7 @@
     <NetworkError v-if="+exception === 500" name="500" class="max-h-96" />
 
     <div class="mb-20">
-      {{ $t(`EXCEPTION.${errorMessage}.MESSAGE`) }}
+      {{ $t(`EXCEPTION.${exception}`) }}
     </div>
 
     <el-button type="primary" @click="goBackHome">
@@ -27,19 +27,6 @@ const props = defineProps({
     type: Number,
     default: 404,
   },
-});
-
-const errorMessage = computed(() => {
-  switch (props.exception) {
-    case 403:
-      return ExceptionKeys.FORBIDDEN_ERROR;
-    case 404:
-      return ExceptionKeys.NOT_FOUND_ERROR;
-    case 500:
-      return ExceptionKeys.INTERNAL_SERVER_ERROR;
-    default:
-      return ExceptionKeys.NETWORK_ERROR;
-  }
 });
 
 const goBackHome = () => {
