@@ -4,7 +4,7 @@
   <el-card>
     <el-collapse accordion>
       <el-collapse-item name="1">
-        <template #title><h3>Featured image</h3></template>
+        <template #title><h4>Featured image</h4></template>
 
         <div>
           <el-link href="#">Set featured image</el-link>

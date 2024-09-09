@@ -16,7 +16,7 @@ const handlePublish = () => {
   <el-card>
     <el-collapse accordion>
       <el-collapse-item name="1">
-        <template #title><h3>Publish</h3></template>
+        <template #title><h4>Publish</h4></template>
         <div>
           <div class="publish__top">
             <p>Status: Draft</p>
