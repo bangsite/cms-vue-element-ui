@@ -14,7 +14,7 @@ interface App {
   fullScreen: boolean;
 }
 
-export const useAppStore = defineStore("app", {
+export const useAppStore = defineStore("AppStore", {
   state: (): App => {
     return <App>{
       collapse: false,

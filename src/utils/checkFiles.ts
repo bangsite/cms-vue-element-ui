@@ -13,11 +13,9 @@ export const checkNameFile = (data: any) => {
   }
   return fileName;
 };
-
 export const checkFileSize = (fileSize: string | number, limitSize: number = 5) => {
   return parseInt(<string>fileSize) / 1024 / 1024 <= limitSize;
 };
-
 export const checkFileLimit = (fileList: string | any[], limitFile: number = 10) => {
   if (fileList && fileList.length) return fileList.length < limitFile;
 };

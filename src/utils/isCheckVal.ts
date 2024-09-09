@@ -1,17 +1,13 @@
 const toString = Object.prototype.toString;
-
 export const is = (val: unknown, type: string) => {
   return toString.call(val) === `[object ${type}]`;
 };
-
 export const isArray = (val: any): val is Array<any> => {
   return val && Array.isArray(val);
 };
-
 export const isBoolean = (val: unknown): val is boolean => {
   return is(val, "Boolean");
 };
-
 export const isDef = <T = unknown>(val?: T): val is T => {
   return typeof val !== "undefined";
 };
