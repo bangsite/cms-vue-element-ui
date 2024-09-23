@@ -1,39 +1,31 @@
+import { ref, toRef } from "vue";
 import { i18n } from "@/plugins/vue-i18n";
-import { useLocaleStoreWithOut } from "@/stores/locale.store";
-import { setHtmlPageLang } from "@/utils/setHtmlPageLang";
+import { ClientStorage, setHtmlLang } from "@/utils";
+import { languages } from "@/enums/locales.enum";
 import type { LocaleType } from "@/types";
 
-function getDefaultLanguage(): LocaleType {
-  const lang = localStorage.getItem("lang") as LocaleType;
-  return lang || "en"; // default to 'en' if no language is set
-}
+export const useLocale = () => {
+  const currentLang = ref<LocaleType>(ClientStorage.load("__lang__") || "en");
 
-const setI18nLanguage = (locale: LocaleType) => {
-  const localeStore = useLocaleStoreWithOut();
+  const getLanguage = (currentLang: LocaleType) => {
+    return languages[currentLang] || languages.en;
+  };
 
-  if (i18n.mode === "legacy") {
-    i18n.global.locale = locale;
-  } else {
-    i18n.global.locale = locale;
-  }
+  const setI18nLanguage = (locale: LocaleType) => {
+    if (i18n.mode === "legacy") {
+      i18n.global.locale = locale;
+    } else {
+      i18n.global.locale = locale;
+    }
 
-  localeStore.setCurrentLocale(locale);
+    ClientStorage.save("__lang__", locale);
 
-  setHtmlPageLang(locale);
-};
-
-const useLocale = () => {
-  const changeLocale = async (locale: LocaleType) => {
-    const globalI18n = i18n.global;
-    const langModule = await import(`../../locales/${locale}/index.ts`);
-
-    globalI18n.setLocaleMessage(locale, langModule.default);
-    setI18nLanguage(locale);
+    setHtmlLang(locale);
   };
 
   return {
-    changeLocale,
+    currentLang,
+    getLanguage,
+    setI18nLanguage,
   };
 };
-
-export { useLocale, getDefaultLanguage };

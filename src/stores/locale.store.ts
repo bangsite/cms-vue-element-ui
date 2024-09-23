@@ -6,6 +6,8 @@ import { getDefaultLanguage } from "@/hooks/useLocale";
 import { elLocaleMap, localeOptions } from "@/enums/locales.enum";
 
 function createInitialState(): LocaleState {
+  console.log("store I18n");
+
   const defaultLanguage = getDefaultLanguage();
   return {
     currentLocale: {

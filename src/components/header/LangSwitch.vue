@@ -5,7 +5,7 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-for="item in langMap" :key="item.lang" :command="item.lang">
+        <el-dropdown-item v-for="item in localeOptions" :key="item.lang" :command="item.lang">
           {{ item.name }}
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -13,24 +13,25 @@
   </el-dropdown>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-
-import { useLocaleStore } from "@/stores/locale.store";
+// import { useLocaleStore } from "@/stores/locale.store";
 import { useLocale } from "@/hooks/useLocale";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import type { LocaleType } from "@/types";
+import { localeOptions } from "@/enums/locales.enum";
 
-const localeStore = useLocaleStore();
-const { changeLocale } = useLocale();
+// const localeStore = useLocaleStore();
+const { currentLang, setI18nLanguage } = useLocale();
 
-const langMap = computed(() => localeStore.getLocaleMap);
-const currentLang = computed(() => localeStore.getCurrentLocale);
+// const langMap = computed(() => localeStore.getLocaleMap);
+// const currentLang = computed(() => localeStore.getCurrentLocale);
 
 const setLang = (lang: LocaleType) => {
-  if (lang === currentLang.value.lang) return;
+  if (lang === currentLang.value) return;
+
   window.location.reload();
-  localeStore.setCurrentLocale(lang);
-  changeLocale(lang);
+  setI18nLanguage(lang);
+  // localeStore.setCurrentLocale(lang);
+  // changeLocale(lang);
 };
 </script>
 <style lang="scss"></style>
