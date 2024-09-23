@@ -3,7 +3,7 @@ import vi from "element-plus/es/locale/lang/vi";
 import ja from "element-plus/es/locale/lang/ja";
 import type { LocaleDropdownOption, LocaleType } from "@/types";
 
-export const elLocaleMap: Record<LocaleType, any> = {
+export const languages: Record<LocaleType, any> = {
   en: en,
   ja: ja,
   vi: vi,

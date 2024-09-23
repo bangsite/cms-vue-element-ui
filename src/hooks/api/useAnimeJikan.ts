@@ -1,6 +1,5 @@
 import { ref, toRefs } from "vue";
 import { getTrendingAnime } from "@/services/modules/animeJikan.service";
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/useLoadingFullSceen";
 import { convertPagination } from "@/utils/convertPagination";
 
 export default function useAnimeJikan() {
@@ -11,7 +10,6 @@ export default function useAnimeJikan() {
 
   const fetchTopAnimes = async (params: { [key: string]: any }) => {
     isLoading.value = true;
-    showFullScreenLoading();
 
     try {
       const res = await getTrendingAnime({ params: { ...params } });
@@ -24,7 +22,6 @@ export default function useAnimeJikan() {
       errors.value = data;
     } finally {
       isLoading.value = false;
-      hideFullScreenLoading();
     }
   };
 

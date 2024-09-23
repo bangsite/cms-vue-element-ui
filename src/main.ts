@@ -13,7 +13,6 @@ import { libVueCountUp3 } from "@/plugins/vue-countup";
 import { libVueDraggableNext } from "@/plugins/vue-draggable-next";
 
 // import { clickOutsideEvent } from "./directives";
-
 // @ts-ignore
 import App from "./App.vue";
 
@@ -25,37 +24,28 @@ const app = createApp(App);
 async function setupAppAll() {
   // Setup I18n
   await setupI18n(app);
-
-  // Setup Store
-  setupPinia(app);
-
-  // Setup TinyMCE
-  setupTinyMCE(app);
-
   // Setup Router
   await setupRouter(app);
-
+  // Setup Store
+  setupPinia(app);
+  // Setup TinyMCE
+  setupTinyMCE(app);
   // Setup Element Plus
   libElementPlus(app);
 
   // Setup VeeValidate
   libVeeValidate(app);
-
   // Setup Vue Query
   libVueQuery(app);
-
   // Setup  ApexCharts
   // libApexCharts(app);
-
   // Setup VueDraggableNext
   libVueDraggableNext(app);
-
   // Setup VueCountUp 3
   libVueCountUp3(app);
 
   // Directives
   app.directive("click-outside", clickOutside);
-
   app.mount("#app");
 }
 

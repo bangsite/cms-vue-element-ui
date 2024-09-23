@@ -7,7 +7,7 @@ import type {
   InternalAxiosRequestConfig,
 } from "axios";
 import axios, { HttpStatusCode } from "axios";
-import { onLoading } from "@/hooks/useLoading";
+import { hideLoading, showLoading } from "@/hooks/useLoading";
 import { notifier } from "@/notifications";
 
 export class BaseApiService {
@@ -28,7 +28,7 @@ export class BaseApiService {
   }
 
   private onRequest = (config: InternalAxiosRequestConfig) => {
-    onLoading("start");
+    showLoading();
 
     const token = localStorage.getItem("token");
 
@@ -48,7 +48,7 @@ export class BaseApiService {
   };
 
   private onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
-    onLoading("cancel");
+    hideLoading();
 
     const status = (error as AxiosError)?.response?.status || 0;
     const message = error?.message || (error as AxiosError)?.response?.statusText || "";
@@ -60,7 +60,7 @@ export class BaseApiService {
   };
 
   private onResponse = (response: AxiosResponse): AxiosResponse => {
-    onLoading("end");
+    hideLoading();
 
     const status = response.status;
     const title = "";
@@ -74,7 +74,8 @@ export class BaseApiService {
   };
 
   private onResponseError = (error: AxiosError): Promise<AxiosError> => {
-    onLoading("cancel");
+    hideLoading();
+
     const status = (error as AxiosError)?.response?.status || 0;
     const title = "";
     const message = error?.message || (error as AxiosError)?.response?.statusText || "";

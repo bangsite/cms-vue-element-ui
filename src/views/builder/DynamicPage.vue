@@ -138,7 +138,6 @@ const handleBlockAdded = (data: Record<string, any>) => {
 
   if (sectionIdx !== -1) {
     const currentBlocks = useFieldValue("sections");
-    console.log(currentBlocks.value);
 
     if (currentBlocks && Array.isArray(currentBlocks)) {
       setFieldValue(`sections[${sectionIdx}].blocks`, [...currentBlocks, blockForm]);

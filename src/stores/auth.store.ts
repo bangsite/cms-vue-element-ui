@@ -1,5 +1,5 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { setCookie } from "@/utils/useCookies";
+import { setCookie } from "@/utils/cookieUtil";
 import type { Shop, Tokens } from "@/types";
 
 // Define state type
@@ -48,10 +48,10 @@ export const useAuthStore = defineStore("AuthStore", {
       if (accessToken) {
         this.tokens.accessToken = accessToken;
         // localStorage.setItem("x-key-at", accessToken);
-        setCookie("__x_key_at", accessToken);
+        setCookie("__x_key_at__", accessToken);
       }
 
-      if (refreshToken) setCookie("__x_key_rf", refreshToken, { "max-age": 604800 });
+      if (refreshToken) setCookie("__x_key_rf__", refreshToken, { "max-age": 604800 });
     },
 
     resetAuth() {

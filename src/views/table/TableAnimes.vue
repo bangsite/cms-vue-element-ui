@@ -31,8 +31,8 @@
         <!-- operation -->
         <template #operations="scope">
           <el-button type="primary" link :icon="View" @click="openDrawer('check', scope.row)">View</el-button>
-          <el-button type="primary" link :icon="EditPen" @click="openDrawer('edit', scope.row)" disabled
-            >Edit
+          <el-button type="primary" link :icon="EditPen" @click="openDrawer('edit', scope.row)" disabled>
+            Edit
           </el-button>
           <el-button type="danger" link :icon="Delete" @click="deleteRow(scope.row)" disabled>Delete</el-button>
         </template>

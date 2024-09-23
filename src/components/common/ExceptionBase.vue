@@ -14,13 +14,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
 import router from "@/router";
 
 import NoPermissionSvg from "@/components/svgs/NoPermissionSvg.vue";
 import NotFoundSvg from "@/components/svgs/NotFoundSvg.vue";
 import NetworkError from "@/components/svgs/NetworkError.vue";
-import { ExceptionKeys } from "@/enums/exception";
 
 const props = defineProps({
   exception: {

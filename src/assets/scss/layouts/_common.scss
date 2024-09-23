@@ -28,6 +28,12 @@
     z-index: 99;
 }
 
+a{
+    &.route-link-active{
+        @apply font-medium;
+    }
+}
+
 .custom-head {
     border-bottom: 1px solid #e5e6e7;
 }
