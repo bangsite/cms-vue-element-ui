@@ -1,28 +1,28 @@
 type CookieOption = {
   path?: string;
   secure?: boolean;
-  // httpOnly?: boolean; // httpOnly not setup from JavaScript
+  httpOnly?: boolean; // httpOnly not setup from JavaScript
   samesite?: "lax" | "strict" | "none";
   "max-age"?: number;
   expires?: Date | string | number;
 };
 export const setCookie = (name: string, value: string, options: CookieOption = {}) => {
-  options = {
+  const config = {
     ...options,
     path: "/",
     secure: true,
     // httpOnly: true,
     samesite: "lax",
-    "max-age": 86400,
+    // "max-age": 86400,
   };
 
-  if (options?.expires instanceof Date) {
-    options.expires = options?.expires.toUTCString();
+  if (config?.expires instanceof Date) {
+    config.expires = config?.expires.toUTCString();
   }
 
   let updatedCookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
 
-  for (const [key, val] of Object.entries(options)) {
+  for (const [key, val] of Object.entries(config)) {
     updatedCookie += `; ${key}`;
     if (val !== true) updatedCookie += `=${val}`;
   }

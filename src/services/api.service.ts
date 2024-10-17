@@ -1,19 +1,13 @@
-import type {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosRequestHeaders,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios, { HttpStatusCode } from "axios";
 import { hideLoading, showLoading } from "@/hooks/useLoading";
 import { notifier } from "@/notifications";
+import { refreshToken } from "@/services/modules/token.service";
 
 export class BaseApiService {
+  private static instances: Map<string, BaseApiService> = new Map(); // Map to store instances based on baseURL
   private axiosInstance: AxiosInstance;
-
-  constructor(baseURL: string, headers: Record<string, string> = {}) {
+  private constructor(baseURL: string, headers: Record<string, string> = {}) {
     this.axiosInstance = axios.create({
       baseURL,
       headers: {
@@ -22,34 +16,35 @@ export class BaseApiService {
       },
     });
 
-    // set up interceptor
+    // setup interceptor
+    this.setupInterceptors();
+  }
+
+  // Singleton static method to get or create the instance
+  public static getInstance(baseURL: string, headers: Record<string, string> = {}) {
+    if (!this.instances.has(baseURL)) {
+      this.instances.set(baseURL, new BaseApiService(baseURL, headers));
+    }
+    return this.instances.get(baseURL);
+  }
+
+  private setupInterceptors() {
     this.axiosInstance.interceptors.request.use(this.onRequest, this.onRequestError);
     this.axiosInstance.interceptors.response.use(this.onResponse, this.onResponseError);
   }
 
   private onRequest = (config: InternalAxiosRequestConfig) => {
-    showLoading();
+    showLoading({ fullscreen: true });
 
-    const token = localStorage.getItem("token");
+    // const token = getAccessToken();
 
-    if (token) config.headers = { ...config.headers, Authorization: `Bearer ${token}` } as AxiosRequestHeaders;
-
-    // if (i18n.global.locale) {
-    //   config.headers = { ...config.headers, "Accept-Language": i18n.global.locale };
-    // }
-
-    // if (config?.data instanceof FormData) {
-    //   headers["Content-Type"] = "multipart/form-data";
-    // } else {
-    //   headers["Content-Type"] = "application/json";
-    // }
+    // if (token) setAuthorizationHeader(config, token);
 
     return config;
   };
 
   private onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
     hideLoading();
-
     const status = (error as AxiosError)?.response?.status || 0;
     const message = error?.message || (error as AxiosError)?.response?.statusText || "";
     const title = "";
@@ -62,9 +57,15 @@ export class BaseApiService {
   private onResponse = (response: AxiosResponse): AxiosResponse => {
     hideLoading();
 
+    const url = response?.request?.responseURL || response?.data?.data;
     const status = response.status;
     const title = "";
     const message = response.data.message;
+
+    // If it's an OAuth provider URL, skip notifications and redirect
+    if (url && (url.includes("google") || url.includes("facebook") || url.includes("github"))) {
+      return response;
+    }
 
     if (status === HttpStatusCode.Ok || status === HttpStatusCode.Created) {
       notifier.showSuccess(title, message, status);
@@ -73,14 +74,36 @@ export class BaseApiService {
     return response;
   };
 
-  private onResponseError = (error: AxiosError): Promise<AxiosError> => {
+  private onResponseError = async (error: AxiosError): Promise<AxiosError> => {
     hideLoading();
+    const status = error?.response?.data?.status || 0;
+    const message = error?.response?.data?.message || error?.response?.statusText || "";
+    // const { status, message }: any = error?.response?.data;
 
-    const status = (error as AxiosError)?.response?.status || 0;
     const title = "";
-    const message = error?.message || (error as AxiosError)?.response?.statusText || "";
+    const statusRes = status || 0;
+    const messageRes = message || error?.message || "";
 
-    notifier.showError(title, message, status);
+    if (status === 401) {
+      try {
+        // Pass the baseURL to the refreshToken function
+        const { data } = await refreshToken(this.axiosInstance.defaults.baseURL || "");
+        console.log(data);
+
+        // Set the new access token in cookies
+        // setAccessToken(data.token);
+
+        // Retry the original request with the new token
+        // if (error.config) {
+        //   const updatedConfig = setAuthorizationHeader(error.config, data.token);
+        //   return this.axiosInstance(updatedConfig); // Retry the request
+        // }
+      } catch (error) {
+        notifier.showError(title, `Failed to refresh token ${error}`, status);
+      }
+    }
+
+    notifier.showError(title, messageRes, statusRes);
 
     return Promise.reject(error);
   };

@@ -1,5 +1,5 @@
 <template>
-  <ElConfigProvider :locale="getLanguage(currentLang)">
+  <ElConfigProvider :locale="langEl[getLang()]">
     <slot></slot>
   </ElConfigProvider>
 </template>
@@ -10,10 +10,11 @@ import { useWindowSize } from "@vueuse/core";
 
 import { useLocale } from "@/hooks/useLocale";
 import { useAppStore } from "@/stores/app.store";
+import { langEl } from "@/enums/locales.enum";
 
 const appStore = useAppStore();
 const { width } = useWindowSize();
-const { currentLang, getLanguage } = useLocale();
+const { getLang } = useLocale();
 
 // const configTheme = reactive({
 //   fontSize: 16,

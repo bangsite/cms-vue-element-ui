@@ -10,37 +10,31 @@
       </p>
     </div>
     <div class="auth__form">
-      <el-form :labelPosition="'top'" ref="formRef" class="form">
-        <el-form-item label="Email">
-          <InputBase name="email" rules="required|email" placeholder="Enter email..." style="width: 100%" />
-        </el-form-item>
+      <el-form require-asterisk-position="right" labelPosition="top" ref="formRef" class="form">
+        <InputBase label="Email" name="email" rules="required|email" placeholder="Enter email..." style="width: 100%" />
 
-        <el-form-item label="Password">
-          <PasswordBase name="password" rules="required" placeholder="Enter password..." style="width: 100%" />
-        </el-form-item>
+        <PasswordBase
+          label="Password"
+          name="password"
+          rules="required"
+          placeholder="Enter password..."
+          style="width: 100%"
+        />
 
-        <el-form-item>
-          <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
-            >Sign up
-          </el-button>
-          <span class="w-full text-center"><strong>OR</strong></span>
-
-          <el-row :gutter="10" justify="center" class="w-full">
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
-            </el-button>
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'logos:facebook'" :size="24" />
-            </el-button>
-          </el-row>
-
-          <el-divider />
-          <el-row :gutter="10" justify="center" class="w-full">
-            <span class="mr-5">Already have an account ? </span>
-            <el-link href="#" @click="handleRegisterNew">Sign in</el-link>
-          </el-row>
-        </el-form-item>
+        <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
+          >Sign up
+        </el-button>
       </el-form>
+      <div class="flex flex-col">
+        <p class="w-full text-center mb-3 text-gray-600"><strong>OR</strong></p>
+
+        <LoginSSO />
+
+        <el-row :gutter="10" justify="center" class="w-full">
+          <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
+          <el-link href="#" @click="handleRegisterNew"><strong>Sign Up</strong></el-link>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -49,18 +43,19 @@ import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 
+import LoginSSO from "@/views/auth/LoginSSO.vue";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
 import useFetchAuth from "@/hooks/useFetchAuth";
-import type { Access, Register } from "@/types";
+import type { Register } from "@/types";
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
 const router = useRouter();
-const { doSignUp, response, errors, isLoading } = useFetchAuth();
-const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
+const { doRegister, response, errors, isLoading } = useFetchAuth();
+const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
 
 const ruleForm = ref<Register>({
   email: "",
@@ -70,14 +65,11 @@ const ruleForm = ref<Register>({
 const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
-  await doSignUp(values);
+  await doRegister(values);
 
-  if (response.value) {
-    const { shop, tokens } = response.value;
-
-    if (shop) setUserInfo(shop);
-    if (tokens) setToken(tokens);
-  }
+  const { user, tokens } = response.value || {};
+  if (user) setUserInfo(user);
+  if (tokens) setToken(tokens);
 
   if (errors.value) {
     console.log("errors:::", errors.value);
@@ -88,8 +80,5 @@ const onSubmit = handleSubmit(async (values, actions) => {
   actions.resetForm();
 });
 
-const handleLoginWith = () => {};
-const handleRegisterNew = () => {
-  setLayoutForm("LoginForm");
-};
+const handleRegisterNew = () => setLayoutAuth("LoginForm");
 </script>
