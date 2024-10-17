@@ -1,15 +1,12 @@
-import { ref, toRef } from "vue";
+import { ref } from "vue";
 import { i18n } from "@/plugins/vue-i18n";
 import { ClientStorage, setHtmlLang } from "@/utils";
-import { languages } from "@/enums/locales.enum";
 import type { LocaleType } from "@/types";
 
 export const useLocale = () => {
-  const currentLang = ref<LocaleType>(ClientStorage.load("__lang__") || "en");
+  const currentLang = ref<LocaleType>(ClientStorage.load("__lang__") || "en-US");
 
-  const getLanguage = (currentLang: LocaleType) => {
-    return languages[currentLang] || languages.en;
-  };
+  const getLang = () => currentLang.value;
 
   const setI18nLanguage = (locale: LocaleType) => {
     if (i18n.mode === "legacy") {
@@ -24,8 +21,7 @@ export const useLocale = () => {
   };
 
   return {
-    currentLang,
-    getLanguage,
+    getLang,
     setI18nLanguage,
   };
 };

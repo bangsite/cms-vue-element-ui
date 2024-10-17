@@ -21,8 +21,9 @@
       <TableList
         ref="tablePost"
         :columns="columns"
-        :data-tables="data && data.length > 0 ? data : []"
+        :data-tables="response && response.length > 0 ? response : []"
         :custom-cols="customCols"
+        v-loading="isLoading"
       >
         <!-- images -->
         <template #product_thumb="scope">
@@ -51,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from "vue";
+import { computed, onBeforeMount, reactive, ref } from "vue";
 import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
 
 import TableList from "@/components/tables/TableList.vue";
@@ -59,7 +60,8 @@ import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";
 
 import { COLUMN_PRODUCT } from "@/views/product/composables/useColumnProduct";
-import { DATA_PRODUCT } from "@/db";
+// import { DATA_PRODUCT } from "@/db";
+import useProduct from "@/hooks/api/useProduct";
 
 const customCols = reactive(["product_thumb", "product_attributes", "operations"]);
 const isShowSearch = ref(true);
@@ -69,8 +71,14 @@ const columns = computed(() => COLUMN_PRODUCT);
 const searchColumns = computed(() => {
   return columns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
 });
-const data = computed(() => {
-  return DATA_PRODUCT && DATA_PRODUCT.length > 0 ? DATA_PRODUCT : [];
+// const data = computed(() => {
+//   return DATA_PRODUCT && DATA_PRODUCT.length > 0 ? DATA_PRODUCT : [];
+// });
+
+const { fetchListProduct, response, isLoading } = useProduct();
+
+onBeforeMount(async () => {
+  await fetchListProduct();
 });
 
 const handleCreate = () => {};

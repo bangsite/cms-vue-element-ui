@@ -1,16 +1,13 @@
 <template>
   <div class="post__create">
-    <form class="form post__create-form" @submit="onSubmit">
+    <el-form :labelPosition="'top'" class="form post__create-form" @submit="onSubmit">
       <div class="post__create-left">
         <el-card title="Add new post" class="form__card">
-          <div class="post__create-title">
-            <InputBase name="title" rules="required" placeholder="Enter title here" />
-
-            <TextAreaBase name="description" rules="required" placeholder="Enter description here" />
-          </div>
-          <div class="post__create-body">
-            <EditorTinyMCE name="body" rules="required" placeholder="Please input content!" />
-          </div>
+          <InputBase label="Product Name" name="title" rules="required" placeholder="Enter name here" />
+          <InputNumber label="Product Price" name="price" rules="required" placeholder="Enter price here" />
+          <InputNumber label="Product Quantity" name="quantity" rules="required" placeholder="Enter quantity here" />
+          <SelectBase name="type" />
+          <EditorTinyMCE label="Product Description" name="body" rules="required" placeholder="Please input content!" />
         </el-card>
       </div>
 
@@ -29,7 +26,7 @@
         <Thumbnail name="thumbnail" />
         <!--End Thumbnail-->
       </div>
-    </form>
+    </el-form>
   </div>
 </template>
 
@@ -45,6 +42,8 @@ import ActionSubmit from "@/components/posts/ActionSubmit.vue";
 import TextAreaBase from "@/components/form/TextAreaBase.vue";
 
 import { PRODUCT_FORM } from "@/views/product/composables/useDataForm";
+import InputNumber from "@/components/form/InputNumber.vue";
+import SelectBase from "@/components/form/SelectBase.vue";
 
 const { handleSubmit } = useForm({
   initialValues: {

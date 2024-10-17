@@ -1,13 +1,5 @@
-type RoleType = "SHOP" | "ADMIN" | "TEST";
-
-export interface Shop {
-  id: string;
-  name: string;
-  email: string;
-  roles?: RoleType[];
-}
-
-export type Tokens = {
+// type RoleType = "SHOP" | "ADMIN" | "TEST";
+type Tokens = {
   accessToken: string;
   refreshToken: string;
 };
@@ -15,6 +7,18 @@ export type Tokens = {
 type Keys = {
   key: string;
 };
+
+export interface Role {
+  roleName: string;
+  permissions: string[];
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  roles: Role[];
+}
 
 export type Login = {
   email: string;
@@ -26,8 +30,14 @@ export type Register = {
   password: string;
 };
 
-export type Access = {
-  shop: Shop;
+export interface AuthState {
+  userInfo: User;
+  layoutForm: string;
+  isAuth: boolean;
+}
+
+export interface Access {
+  user: User;
   tokens: Tokens;
-  key?: Keys;
-};
+  keys: Keys;
+}

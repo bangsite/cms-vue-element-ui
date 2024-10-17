@@ -33,7 +33,6 @@ import { useRouter } from "vue-router";
 
 import { useAuthStore } from "@/stores/auth.store";
 import SvgIcon from "@/components/common/SvgIcon.vue";
-import { deleteCookie } from "@/utils/cookieUtil";
 
 const { resetAuth } = useAuthStore();
 const router = useRouter();
@@ -47,8 +46,6 @@ const handleSetting = () => {
 };
 const handleLogout = () => {
   resetAuth();
-  deleteCookie("__x_key_at__");
-  deleteCookie("__x_key_rf__");
   router.push("/login");
 };
 </script>

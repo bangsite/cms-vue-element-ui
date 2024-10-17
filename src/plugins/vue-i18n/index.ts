@@ -1,35 +1,33 @@
 import type { App } from "vue";
 import { createI18n, type I18nOptions } from "vue-i18n";
 import { ClientStorage, setHtmlLang } from "@/utils";
-import { LOCALE_DATA } from "@/constants/locale";
+import { langCurrency, langOptions } from "@/enums/locales.enum";
+import type { LocaleType } from "@/types";
 
-async function loadLocaleMessages(locale: string): Promise<Record<string, any>> {
-  const messages = await import(`../../locales/${locale}/index.ts`);
+async function loadLocaleMessages(locale: string) {
+  let langStr = "";
+  if (locale) langStr = locale.split("-")[0];
+
+  const messages = await import(`../../locales/${langStr}/index.ts`);
   return messages.default ?? {};
 }
 
 async function createI18nOptions(): Promise<I18nOptions> {
-  const locale = ClientStorage.load("__lang__") || "en";
-  const message = await loadLocaleMessages(locale);
+  const currentLang: LocaleType = ClientStorage.load("__lang__") || "en-US";
+  const message = await loadLocaleMessages(currentLang);
 
-  // const locale = localeStore.getCurrentLocale.lang;
-  // const localeMap = localeStore.getLocaleMap;
-  // const message = await loadLocaleMessages(locale);
-
-  setHtmlLang(locale);
-
-  // localeStore.setCurrentLocale({
-  //   lang: locale.lang,
-  //   // elLocale: elLocal
-  // });
+  setHtmlLang(currentLang);
 
   return {
     legacy: false,
-    locale: locale,
-    fallbackLocale: locale,
+    locale: currentLang,
+    fallbackLocale: currentLang,
     allowComposition: true,
-    messages: { [locale]: message },
-    availableLocales: LOCALE_DATA.map((v) => v.lang),
+    messages: { [currentLang]: message },
+    numberFormats: {
+      ...langCurrency,
+    },
+    availableLocales: langOptions.map((v) => v.lang),
     sync: true,
     silentTranslationWarn: true,
     missingWarn: false,

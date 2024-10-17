@@ -7,7 +7,7 @@ export default function useFetchAuth() {
   const response = ref<Access | null>(null);
   const errors = ref(null);
 
-  const handleApiCall = async (apiFunc: Function, data: any) => {
+  const handleApiCall = async (apiFunc: Function, data: number | string | [] | {}) => {
     isLoading.value = true;
 
     try {
@@ -24,7 +24,7 @@ export default function useFetchAuth() {
     await handleApiCall(login, data);
   };
 
-  const doSignUp = async (data: Register) => {
+  const doRegister = async (data: Register) => {
     await handleApiCall(signUp, data);
   };
 
@@ -35,7 +35,7 @@ export default function useFetchAuth() {
   return {
     doLogin,
     doLogout,
-    doSignUp,
+    doRegister,
     isLoading,
     errors,
     response,

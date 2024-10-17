@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { store } from "@/plugins/pinia";
 import type { Layouts } from "@/types";
+import { ClientStorage } from "@/utils";
 
 interface App {
   collapse: boolean;
@@ -18,8 +19,8 @@ export const useAppStore = defineStore("AppStore", {
   state: (): App => {
     return <App>{
       collapse: false,
-      footer: true,
-      layout: localStorage.getItem("layout") || "classic",
+      footer: false,
+      layout: ClientStorage.load("__layout__") || "default",
       locale: true,
       logo: true, // logo
       title: import.meta.env.VITE_APP_TITLE,
@@ -70,7 +71,7 @@ export const useAppStore = defineStore("AppStore", {
     },
     setLayout(layout: Layouts) {
       this.layout = layout;
-      localStorage.setItem("layout", this.layout);
+      ClientStorage.save("__layout__", this.layout);
     },
     setLocale(locale: boolean) {
       this.locale = locale;

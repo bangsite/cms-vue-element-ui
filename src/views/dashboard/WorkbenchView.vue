@@ -6,7 +6,9 @@
           <WeatherDaily />
         </template>
         <template #fallback>
-          <el-skeleton :rows="6" animated />
+          <el-card class="rounded-md">
+            <el-skeleton :rows="7" animated />
+          </el-card>
         </template>
       </Suspense>
     </el-col>

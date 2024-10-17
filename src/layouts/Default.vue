@@ -23,8 +23,8 @@
           <DynamicDialog v-if="active" />
         </el-main>
 
-        <el-footer class="layout__footer">
-          <TheFooter v-if="footer" />
+        <el-footer v-if="footer" class="layout__footer">
+          <TheFooter />
         </el-footer>
       </el-container>
     </el-container>

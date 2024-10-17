@@ -14,18 +14,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import router from "@/router";
+import { useRouter } from "vue-router";
 
 import NoPermissionSvg from "@/components/svgs/NoPermissionSvg.vue";
 import NotFoundSvg from "@/components/svgs/NotFoundSvg.vue";
 import NetworkError from "@/components/svgs/NetworkError.vue";
 
-const props = defineProps({
+defineProps({
   exception: {
     type: Number,
     default: 404,
   },
 });
+
+const router = useRouter();
 
 const goBackHome = () => {
   router.push("/");

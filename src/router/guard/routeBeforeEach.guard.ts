@@ -1,29 +1,42 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
-// import { useAuthStore } from "@/stores/auth.store";
 import { useTitle } from "@/hooks/useTitle";
-import { getCookie } from "@/utils/cookieUtil";
 import { hideLoading, showLoading } from "@/hooks/useLoading";
+import useAuth from "@/hooks/useAuth";
 
+import { ClientStorage } from "@/utils";
+import { getParameterByName } from "@/utils/getParameterFromUrl";
 /**
  * If the user is not authenticated and the route is not the login route, redirect to the login route
  * @param {RouteLocationNormalized} to - The route we are navigating to
  * @param {RouteLocationNormalized} from - The route we are coming from
  * @param {NavigationGuardNext} next - This is a function that you must call to resolve the hook.
  */
-const routeBeforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+const routeBeforeEach = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
   showLoading({ fullscreen: true });
+  console.log("hello");
+  const { authCallback } = useAuth();
 
-  // const authStore = useAuthStore();
+  const isAuth = ClientStorage.load("__is_auth__");
+  const provider: string | null = ClientStorage.load("__provider__");
+  const code = getParameterByName("code");
 
-  if (to.name !== "Login" && !getCookie("__x_key_at__")) {
-    next({ name: "Login" });
-    hideLoading();
-  } else {
+  // login SSO
+  if (provider && code) {
+    await authCallback(provider, code);
     next();
-    hideLoading();
   }
-};
 
+  // login default
+  if (to.name !== "Login" && !isAuth) {
+    next({ name: "Login" });
+  } else next();
+
+  hideLoading();
+};
 const routeAfterEach = (to: RouteLocationNormalized) => {
   useTitle(to?.meta?.title as string);
   hideLoading();

@@ -1,41 +1,21 @@
 import { defineStore } from "pinia";
 import { store } from "@/plugins/pinia";
+import { useI18n } from "vue-i18n";
 
-import type { LocaleState, LocaleType } from "@/types";
-import { getDefaultLanguage } from "@/hooks/useLocale";
-import { elLocaleMap, localeOptions } from "@/enums/locales.enum";
-
-function createInitialState(): LocaleState {
-  console.log("store I18n");
-
-  const defaultLanguage = getDefaultLanguage();
-  return {
-    currentLocale: {
-      lang: defaultLanguage,
-      elLocale: elLocaleMap[defaultLanguage],
-    },
-    localeMap: localeOptions,
-  };
-}
+const { locale } = useI18n();
+console.log(locale);
 
 const useLocaleStore = defineStore("locales", {
-  state: createInitialState,
+  state: () => ({
+    currentLocale: locale.value,
+  }),
   getters: {
-    getCurrentLocale(state) {
-      return state.currentLocale;
-    },
-    getLocaleMap(state) {
-      return state.localeMap;
+    getCurrentLocale(): string {
+      return this.currentLocale;
     },
   },
   actions: {
-    setCurrentLocale(lang: LocaleType) {
-      if (lang) {
-        this.currentLocale.lang = lang;
-        this.currentLocale.elLocale = elLocaleMap[lang];
-        localStorage.setItem("lang", lang);
-      }
-    },
+    setCurrentLocale() {},
   },
 });
 

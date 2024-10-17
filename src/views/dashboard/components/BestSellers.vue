@@ -49,7 +49,7 @@
       <!-- name -->
       <template #name="scope">
         <div class="flex items-center gap-1">
-          <img :src="`src/assets/images/sellers/${scope.row.img}`" alt="Product" width="30" />
+          <img :src="`../images/sellers/${scope.row.img}`" alt="Product" width="30" />
           <span>{{ scope.row.name }}</span>
         </div>
       </template>

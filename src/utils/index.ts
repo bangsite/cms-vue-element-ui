@@ -1,5 +1,6 @@
 export * from "./chartUtilities";
 export * from "./checkFiles";
+export * from "./checkTokenExpiry";
 export * from "./clientStorage";
 export * from "./convertErrors";
 export * from "./convertPagination";
@@ -15,4 +16,5 @@ export * from "./getFileName";
 export * from "./getTypeData";
 export * from "./idGenerator";
 export * from "./isMisc";
+export * from "./setAuthorizationHeader";
 export * from "./setHtmlLang";

@@ -5,7 +5,7 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-for="item in localeOptions" :key="item.lang" :command="item.lang">
+        <el-dropdown-item v-for="item in langOptions" :key="item.lang" :command="item.lang">
           {{ item.name }}
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -16,7 +16,7 @@
 import { useLocale } from "@/hooks/useLocale";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import type { LocaleType } from "@/types";
-import { localeOptions } from "@/enums/locales.enum";
+import { langOptions } from "@/enums/locales.enum";
 
 const { currentLang, setI18nLanguage } = useLocale();
 

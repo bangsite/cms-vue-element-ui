@@ -1,25 +1,51 @@
 import en from "element-plus/es/locale/lang/en";
-import vi from "element-plus/es/locale/lang/vi";
 import ja from "element-plus/es/locale/lang/ja";
-import type { LocaleDropdownOption, LocaleType } from "@/types";
+import vi from "element-plus/es/locale/lang/vi";
+import type { LocaleDropdownOption } from "@/types";
 
-export const languages: Record<LocaleType, any> = {
-  en: en,
-  ja: ja,
-  vi: vi,
+export const langEl: Record<string, any> = {
+  "en-US": en,
+  "ja-JA": ja,
+  "vi-VN": vi,
 };
 
-export const localeOptions: LocaleDropdownOption[] = [
+export const langOptions: LocaleDropdownOption[] = [
   {
-    lang: "en",
+    lang: "en-US",
+    currency: "$",
     name: "English",
   },
   {
-    lang: "ja",
+    lang: "ja-JP",
+    currency: "¥",
     name: "Japanese",
   },
   {
-    lang: "vi",
+    lang: "vi-VN",
+    currency: "đ",
     name: "Vietnamese",
   },
 ];
+
+export const langCurrency = {
+  "en-US": {
+    currency: {
+      style: "currency",
+      currency: "USD",
+    },
+  },
+
+  "vi-VN": {
+    currency: {
+      style: "currency",
+      currency: "VND",
+    },
+  },
+
+  "ja-JP": {
+    currency: {
+      style: "currency",
+      currency: "JPY",
+    },
+  },
+};
