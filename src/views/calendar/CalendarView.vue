@@ -14,9 +14,9 @@
           </template>
         </el-calendar>
         <el-card class="rounded-md mb-4">
-          <h3 class="title">My Calendar</h3>
+          <h3 class="title mb-4">My Calendar</h3>
           <ul class="event-list">
-            <li v-for="{ id, title, label } in dataEvent" :key="id">
+            <li v-for="{ id, title, label } in dataEvent" :key="id" class="mb-2">
               <el-link to="#">
                 <span :class="`bullet ${label}`" />
                 {{ title }}

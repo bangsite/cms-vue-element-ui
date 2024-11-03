@@ -1,23 +1,45 @@
 <template>
-  <div class="upload">
-    <div class="upload__wrap">
-      <FileInput
-        name="files"
-        accept=".png, .jpg, .jpeg"
-        :label="label"
-        :multiple="true"
-        :list-type="'picture-card'"
-        :show-note="true"
-        @dataFiles="handleFiles"
+  <div class="flex items-center justify-between gap-2 mb-4">
+    <ElUpload
+      name="files"
+      accept=".png, .jpg, .jpeg"
+      listType="picture-card"
+      className="upload-custom"
+      :label="label"
+      :multiple="true"
+      :showNote="true"
+      :autoUpload="false"
+      @dataFiles="handleFiles"
+    >
+      <template v-slot:description>
+        <div class="flex flex-col items-center">
+          <SvgIcon :icon="'mdi-light:image'" :size="36" />
+
+          <span class="mt-2">{{ $t("UPLOAD.IMG.DESC") }}</span>
+          <span class="text-gray-400 text-[12px]">{{ $t("UPLOAD.IMG.NOTES") }} </span>
+        </div>
+      </template>
+    </ElUpload>
+
+    <template v-if="dataFiles && dataFiles.length > 0">
+      <div
+        class="border border-gray-300 border-dashed rounded-md flex flex-col gap-2 bg-white p-4 w-fit flex-grow overflow-y-auto h-[32vh]"
       >
-        <template v-slot:description>
-          <div class="upload__desc">
-            <IconUpload />
-            <!-- <span>{{ $t('IMAGE_MANAGE.NOTES') }}</span> -->
+        <div v-for="item in dataFiles" :key="item.images.uid" class="flex items-center gap-2">
+          <img class="w-16 h-16 object-cover" :src="item.url" alt="image" />
+
+          <div class="flex flex-col">
+            <span class="font-medium">{{ truncateImageFile(item.images.name, 12) }}</span>
+            <span class="text-gray-600 text-[14px]"> {{ formatFileSize(item.images.size) }}</span>
           </div>
-        </template>
-      </FileInput>
-    </div>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="border border-gray-300 border-dashed flex-grow rounded-md h-[32vh] w-fit">
+        <el-empty description="No data" />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -25,11 +47,10 @@
 import { ref, toRefs } from "vue";
 import { useI18n } from "vue-i18n";
 import { useForm } from "vee-validate";
-
-import IconUpload from "@/components/svgs/IconUpload.vue";
-import FileInput from "@/components/upload/FileInput.vue";
-
-// import useAllowPermission from '@/composables/useAllowPermission';
+// import FileInput from "@/components/upload/FileInput.vue";
+import ElUpload from "@/components/upload/ElUpload.vue";
+import { formatFileSize, truncateImageFile } from "@/utils";
+import SvgIcon from "@/components/common/SvgIcon.vue";
 
 const props = defineProps({
   label: { type: String },
@@ -48,11 +69,10 @@ const dataFiles = ref([]);
 const multipleFile = ref(false);
 const { uploadError } = toRefs(props);
 
-const handleFiles = (data: string | any[]) => {
-  if (data && data.length) {
-    dataFiles.value = data;
-    emits("uploadNewFile", true);
-  } else dataFiles.value = [];
+const handleFiles = (data: any) => {
+  console.log("handleFiles:::", data);
+  console.log("handleFiles:::", data.length);
+  dataFiles.value = data;
 };
 
 const handleUploadFiles = (data: any) => {
@@ -85,3 +105,23 @@ const handleRemoveAll = () => {
 //   }
 // });
 </script>
+
+<style lang="scss">
+//override el
+.upload-custom {
+  width: 55%;
+  height: 32vh;
+  margin-bottom: 0;
+
+  .el-upload {
+    border-width: 2px;
+    width: 100%;
+    min-height: 8rem;
+    height: 32vh;
+  }
+
+  div {
+    width: 100%;
+  }
+}
+</style>

@@ -53,7 +53,6 @@
             </template>
           </Draggable>
 
-          <!--          <NewTask @add="handleAddCard(board, $event)" />-->
           <NewTask ref="newTaskRef" @add="handleAddTask(board, $event)" />
         </div>
       </template>
@@ -115,7 +114,7 @@ const handleAddBoard = () => {
   addBoard(board);
 
   if (error.value) {
-    showNotification(error.value, "error", "Error");
+    showNotification(error.value, "error");
   } else {
     showNotification("Board added successfully!", "success");
 

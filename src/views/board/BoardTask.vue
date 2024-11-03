@@ -4,9 +4,6 @@
     @mouseenter="showEditIcon = true"
     @mouseleave="showEditIcon = false"
   >
-    <!--    <div class="cursor-move flex items-center drag-handle">-->
-    <!--      <SvgIcon :icon="'ri:draggable'" :size="20" />-->
-    <!--    </div>-->
     <div class="flex-1">
       <textarea
         ref="inputElement"

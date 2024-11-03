@@ -52,7 +52,6 @@ const { value, errorMessage } = useField(name, rules, {
 
 const currencySymbol = computed(() => langOptions.filter((item) => item.lang === locale.value)[0]);
 // const handleChange = (data) => {
-//   console.log(n(parseInt(data), "currency", locale.value));
 //   return data ? n(parseInt(data), "currency", locale.value) : 0;
 // };
 </script>

@@ -17,7 +17,6 @@ const routeBeforeEach = async (
   next: NavigationGuardNext
 ) => {
   showLoading({ fullscreen: true });
-  console.log("hello");
   const { authCallback } = useAuth();
 
   const isAuth = ClientStorage.load("__is_auth__");

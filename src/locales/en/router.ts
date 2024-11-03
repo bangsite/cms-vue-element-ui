@@ -18,6 +18,12 @@ export default {
     MOVIES_LIST: "Movie List",
     MOVIES_PRO_LIST: "Movie List Pro",
   },
+  MEDIA: {
+    TITLE: "Media",
+    IMAGE_LIST: "Image List",
+    IMAGE_UPLOAD: "Image Upload",
+    AUDIO_LIST: "Audio List",
+  },
   TABLE: {
     TITLE: "Tables",
     TABLE_BASIC: "Table Basic",

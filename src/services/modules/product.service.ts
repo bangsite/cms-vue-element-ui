@@ -9,15 +9,15 @@ const productApiService = BaseApiService.getInstance(apiRootURL, {
   "x-api-key": apiXKey,
 });
 const getListProduct = async (config?: AxiosRequestConfig): Promise<any> => {
-  return await productApiService.get("/product", { ...config });
+  return await productApiService.get("/product", { ...config, withCredentials: true });
 };
 
 const createProduct = async (data: PRODUCT, config?: AxiosRequestConfig): Promise<any> => {
-  return await productApiService.post("/product", data, { ...config });
+  return await productApiService.post("/product", data, { ...config, withCredentials: true });
 };
 
 const editProduct = (data: PRODUCT, id: string, config?: AxiosRequestConfig): Promise<AxiosResponse> => {
-  return productApiService.post(`/product/${id}`, data, { ...config });
+  return productApiService.post(`/product/${id}`, data, { ...config, withCredentials: true });
 };
 
 export { getListProduct, createProduct, editProduct };

@@ -32,7 +32,7 @@
 
         <el-row :gutter="10" justify="center" class="w-full">
           <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
-          <el-link href="#" @click="handleRegisterNew"><strong>Sign Up</strong></el-link>
+          <el-link href="#" @click="handleRegister"><strong>Sign in</strong></el-link>
         </el-row>
       </div>
     </div>
@@ -55,7 +55,7 @@ import type { Register } from "@/types";
 
 const router = useRouter();
 const { doRegister, response, errors, isLoading } = useFetchAuth();
-const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
+const { setUserInfo, setLayoutAuth } = useAuthStore();
 
 const ruleForm = ref<Register>({
   email: "",
@@ -67,18 +67,15 @@ const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value
 const onSubmit = handleSubmit(async (values, actions) => {
   await doRegister(values);
 
-  const { user, tokens } = response.value || {};
-  if (user) setUserInfo(user);
-  if (tokens) setToken(tokens);
+  const { shop }: Record<string, any> = response.value || {};
+  if (shop) setUserInfo(shop);
 
-  if (errors.value) {
-    console.log("errors:::", errors.value);
-  }
+  if (errors.value) console.log("errors:::", errors.value);
 
-  await router.push("/dashboard");
+  await router.push("/");
 
   actions.resetForm();
 });
 
-const handleRegisterNew = () => setLayoutAuth("LoginForm");
+const handleRegister = () => setLayoutAuth("LoginForm");
 </script>

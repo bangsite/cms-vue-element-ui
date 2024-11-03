@@ -7,6 +7,7 @@
           <el-button type="primary" @click="dragBlock(idx)" class="btn-up" link>
             <SvgIcon :icon="'carbon:drag-vertical'" :size="24" />
           </el-button>
+
           <h6>{{ block.title + " " + idx }}</h6>
         </div>
 

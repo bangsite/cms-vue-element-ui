@@ -1,12 +1,18 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios, { HttpStatusCode } from "axios";
-import { hideLoading, showLoading } from "@/hooks/useLoading";
+import { useRouter } from "vue-router";
 import { notifier } from "@/notifications";
-import { refreshToken } from "@/services/modules/token.service";
+import { refreshToken } from "@/services/modules/auth.service";
+import { useAuthStore } from "@/stores/auth.store";
+import { ClientStorage } from "@/utils";
+
+const { resetAuth } = useAuthStore();
+const router = useRouter();
 
 export class BaseApiService {
   private static instances: Map<string, BaseApiService> = new Map(); // Map to store instances based on baseURL
   private axiosInstance: AxiosInstance;
+
   private constructor(baseURL: string, headers: Record<string, string> = {}) {
     this.axiosInstance = axios.create({
       baseURL,
@@ -34,8 +40,6 @@ export class BaseApiService {
   }
 
   private onRequest = (config: InternalAxiosRequestConfig) => {
-    showLoading({ fullscreen: true });
-
     // const token = getAccessToken();
 
     // if (token) setAuthorizationHeader(config, token);
@@ -44,7 +48,6 @@ export class BaseApiService {
   };
 
   private onRequestError = (error: Error | AxiosError): Promise<AxiosError> => {
-    hideLoading();
     const status = (error as AxiosError)?.response?.status || 0;
     const message = error?.message || (error as AxiosError)?.response?.statusText || "";
     const title = "";
@@ -55,8 +58,6 @@ export class BaseApiService {
   };
 
   private onResponse = (response: AxiosResponse): AxiosResponse => {
-    hideLoading();
-
     const url = response?.request?.responseURL || response?.data?.data;
     const status = response.status;
     const title = "";
@@ -75,7 +76,6 @@ export class BaseApiService {
   };
 
   private onResponseError = async (error: AxiosError): Promise<AxiosError> => {
-    hideLoading();
     const status = error?.response?.data?.status || 0;
     const message = error?.response?.data?.message || error?.response?.statusText || "";
     // const { status, message }: any = error?.response?.data;
@@ -88,10 +88,9 @@ export class BaseApiService {
       try {
         // Pass the baseURL to the refreshToken function
         const { data } = await refreshToken(this.axiosInstance.defaults.baseURL || "");
-        console.log(data);
 
-        // Set the new access token in cookies
-        // setAccessToken(data.token);
+        // Retry the original request
+        return this.axiosInstance.request(error.config as AxiosRequestConfig);
 
         // Retry the original request with the new token
         // if (error.config) {
@@ -100,6 +99,8 @@ export class BaseApiService {
         // }
       } catch (error) {
         notifier.showError(title, `Failed to refresh token ${error}`, status);
+        resetAuth();
+        await router.push("/login");
       }
     }
 
@@ -129,10 +130,10 @@ export class BaseApiService {
     return this.axiosInstance.delete<T>(url, { ...config });
   }
 
-  public postWithFile<T = unknown>(url: string, file: File, config?: AxiosRequestConfig) {
-    return this.axiosInstance.post<T>(url, file, {
-      ...config,
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-  }
+  // public postWithFile<T = unknown>(url: string, file: File, config?: AxiosRequestConfig) {
+  //   return this.axiosInstance.post<T>(url, file, {
+  //     ...config,
+  //     headers: { "Content-Type": "multipart/form-data" },
+  //   });
+  // }
 }

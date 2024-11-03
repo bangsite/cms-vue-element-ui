@@ -41,7 +41,7 @@
 
         <el-row :gutter="10" justify="center" class="w-full">
           <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
-          <el-link href="#" @click="handleRegisterNew"><strong>Sign Up</strong></el-link>
+          <el-link href="#" @click="handleRegisterNew"><strong>Sign up</strong></el-link>
         </el-row>
       </div>
     </div>
@@ -82,9 +82,9 @@ const { handleSubmit } = useForm({ initialValues: { ...ruleForm.value } });
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);
 
-  const { shop, tokens }: Record<string, any> = response.value || {};
+  const { shop }: Record<string, any> = response.value || {};
   if (shop) setUserInfo(shop);
-  if (tokens) setToken(tokens);
+  // if (tokens) setToken(tokens);
 
   if (errors.value) {
     console.log("errors:::", errors.value);
