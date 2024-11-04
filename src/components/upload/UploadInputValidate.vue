@@ -14,7 +14,6 @@
       :multiple="multiple"
       :accept="accept"
       :limit="limit"
-      :beforeUpload="beforeUpload"
       :listType="listType"
       :showFileList="showFileList"
       :autoUpload="autoUpload"
@@ -29,10 +28,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, toRef } from "vue";
+import { computed, ref, toRef } from "vue";
 import { useField } from "vee-validate";
 import { useI18n } from "vue-i18n";
-import type { UploadFile, UploadFiles, UploadRawFile } from "element-plus";
+import type { UploadFile, UploadFiles } from "element-plus";
 
 import { checkFileLimit, checkFileSize, getBase64 } from "@/utils";
 import { notifier } from "@/notifications";
@@ -64,66 +63,57 @@ const percentCompleted = computed({
 
 const name = toRef(props, "name");
 const rules = toRef(props, "rules");
-const acceptFile = toRef(props, "accept");
-let dataFiles = reactive([]);
-const indexFile = ref(0);
-const dataShow = ref([]);
 
 const { t } = useI18n();
 const { value, setValue, errorMessage } = useField(name, rules);
-
-const beforeUpload = (rawFile: UploadRawFile[]) => {
-  indexFile.value++;
-
-  if (indexFile.value === rawFile.length) indexFile.value = 0;
-
-  return false;
-};
+const dataFiles = ref([]);
 
 const handleChange = (uploadFile: UploadFile, uploadFiles: UploadFiles) => {
   let validLimit: boolean | undefined = false;
   let validSize: boolean | undefined = false;
-  validLimit = checkFileLimit(uploadFiles);
+  const { size } = uploadFile;
 
+  validLimit = checkFileLimit(uploadFiles);
   if (!validLimit) {
     const title = t("NOTIFICATION.TITLE_ERROR");
     const message = t("NOTIFICATION.FILE_QUEUE_LIMIT");
 
     notifier.showError(title, message);
 
-    emits("dataFiles", dataShow.value);
+    emits("dataFiles", dataFiles.value);
 
     return false;
   }
 
-  validSize = checkFileSize(uploadFile?.size, 20);
-
+  validSize = checkFileSize(size, 20);
   if (!validSize) {
     const title = t("NOTIFICATION.TITLE_ERROR");
     const message = t("NOTIFICATION.FILE_SIZE_20MB");
 
     notifier.showError(title, message);
 
-    emits("dataFiles", dataShow.value);
+    emits("dataFiles", dataFiles.value);
 
     return false;
   }
 
   if (validLimit && validSize) {
     handleFileBase64(uploadFile);
-    emits("dataFiles", dataShow.value);
+    emits("dataFiles", dataFiles.value);
   }
 };
 const handleFileBase64 = async (file: UploadFile) => {
   if (file) {
+    const dataImgBase64 = await getBase64(file.raw);
+    setValue(file);
+
     let newObjFile = {
       images: file,
-      url: await getBase64(file.raw),
+      url: dataImgBase64,
       progress: 0,
     };
 
-    setValue(file);
-    if (newObjFile && Object.keys(newObjFile).length) dataShow.value.push(newObjFile);
+    if (newObjFile && Object.keys(newObjFile).length) dataFiles.value.push(newObjFile);
   }
 };
 const handleRemove = () => {

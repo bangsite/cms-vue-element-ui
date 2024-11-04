@@ -1,9 +1,10 @@
 import { ref } from "vue";
 import { deleteMedia, listMedia, uploadMedia, uploadMedias } from "@/services/modules/media.service";
+import type { Images } from "@/types";
 
 export default function useMedia() {
   const isLoading = ref(false);
-  const response = ref(null);
+  const response = ref<Images>(null);
   const errors = ref(null);
 
   const handleApiCall = async (apiFunc: Function, data?: number | string | [] | {}) => {

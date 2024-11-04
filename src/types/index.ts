@@ -15,3 +15,4 @@ export * from "./sorter";
 export * from "./tables";
 export * from "./tasks";
 export * from "./themes";
+export * from "./upload";

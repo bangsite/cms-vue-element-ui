@@ -71,10 +71,8 @@
 import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { v4 as uuidv4 } from "uuid";
-
-import VueJsonPretty from "vue-json-pretty";
-import "vue-json-pretty/lib/styles.css";
 import { useKeyModifier } from "@vueuse/core";
+
 import { useBoardStore } from "@/stores/board.store";
 
 import BoardTask from "@/views/board/BoardTask.vue";
