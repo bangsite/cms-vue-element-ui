@@ -21,15 +21,11 @@
           style="width: 100%"
         />
 
-        <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
+        <el-button size="large" type="primary" class="btn-submit mb-4 mt-4" :disabled="isLoading" @click="onSubmit"
           >Sign up
         </el-button>
       </el-form>
       <div class="flex flex-col">
-        <p class="w-full text-center mb-3 text-gray-600"><strong>OR</strong></p>
-
-        <LoginSSO />
-
         <el-row :gutter="10" justify="center" class="w-full">
           <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
           <el-link href="#" @click="handleRegister"><strong>Sign in</strong></el-link>

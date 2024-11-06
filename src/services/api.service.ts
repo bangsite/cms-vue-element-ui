@@ -1,10 +1,16 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 import axios, { HttpStatusCode } from "axios";
 import { useRouter } from "vue-router";
 import { notifier } from "@/notifications";
 import { refreshToken } from "@/services/modules/auth.service";
 import { useAuthStore } from "@/stores/auth.store";
-import { ClientStorage } from "@/utils";
 
 const { resetAuth } = useAuthStore();
 const router = useRouter();
@@ -12,13 +18,16 @@ const router = useRouter();
 export class BaseApiService {
   private static instances: Map<string, BaseApiService> = new Map(); // Map to store instances based on baseURL
   private axiosInstance: AxiosInstance;
+  private isRefreshing = false;
+  private retryCount = 0;
+  private maxRetryAttempts = 3; // Retry limit
 
   private constructor(baseURL: string, headers: Record<string, string> = {}) {
     this.axiosInstance = axios.create({
       baseURL,
       headers: {
         "Content-Type": "application/json",
-        ...headers,
+        ...(headers as AxiosRequestHeaders),
       },
     });
 
@@ -40,10 +49,7 @@ export class BaseApiService {
   }
 
   private onRequest = (config: InternalAxiosRequestConfig) => {
-    // const token = getAccessToken();
-
-    // if (token) setAuthorizationHeader(config, token);
-
+    // Optional: Add token handling logic here
     return config;
   };
 
@@ -78,34 +84,42 @@ export class BaseApiService {
   private onResponseError = async (error: AxiosError): Promise<AxiosError> => {
     const status = error?.response?.data?.status || 0;
     const message = error?.response?.data?.message || error?.response?.statusText || "";
-    // const { status, message }: any = error?.response?.data;
-
     const title = "";
     const statusRes = status || 0;
     const messageRes = message || error?.message || "";
 
-    if (status === 401) {
-      try {
-        // Pass the baseURL to the refreshToken function
-        const { data } = await refreshToken(this.axiosInstance.defaults.baseURL || "");
-
-        // Retry the original request
-        return this.axiosInstance.request(error.config as AxiosRequestConfig);
-
-        // Retry the original request with the new token
-        // if (error.config) {
-        //   const updatedConfig = setAuthorizationHeader(error.config, data.token);
-        //   return this.axiosInstance(updatedConfig); // Retry the request
-        // }
-      } catch (error) {
-        notifier.showError(title, `Failed to refresh token ${error}`, status);
-        resetAuth();
-        await router.push("/login");
-      }
+    if (status === HttpStatusCode.Unauthorized) {
+      return await this.handleRefreshToken(error);
     }
 
     notifier.showError(title, messageRes, statusRes);
+    return Promise.reject(error);
+  };
 
+  private handleRefreshToken = async (error: AxiosError): Promise<AxiosError> => {
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
+      this.retryCount = 0;
+    }
+    if (this.retryCount < this.maxRetryAttempts) {
+      this.retryCount++;
+
+      try {
+        await refreshToken();
+
+        // Retry the original request with new token
+        return this.axiosInstance.request(error.config as AxiosRequestConfig);
+      } catch (err) {
+        // If refresh fails, logout and redirect to login again
+        notifier.showError("Error", "Please login again.", HttpStatusCode.Unauthorized);
+        resetAuth();
+        await router.push("/login");
+        throw err;
+      } finally {
+        this.isRefreshing = false; // Reset flag after each refresh attempt
+      }
+    }
+    // Return the error if max retries are exceeded
     return Promise.reject(error);
   };
 

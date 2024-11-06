@@ -91,15 +91,6 @@ const handleFiles = (data: any) => {
   dataFiles.value = data;
 };
 
-// const handleUploadFiles = (data: any) => {
-//   multipleFile.value = false;
-//   emits("uploadFiles", {
-//     dataFiles: data,
-//     type: "one",
-//     length: dataFiles.value.length,
-//   });
-// };
-
 const handleUploadFiles = () => {
   const dataUpload = {
     files: [],
@@ -127,13 +118,6 @@ const handleReset = () => {
 
   emits("dataUpload", null);
 };
-
-// watch(uploadError, () => {
-//   if (uploadError.value?.images) {
-//     dataFiles.value = [];
-//     setFieldError('files', uploadError.value?.images[0]);
-//   }
-// });
 </script>
 
 <style lang="scss">

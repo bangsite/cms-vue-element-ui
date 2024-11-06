@@ -35,10 +35,6 @@
         </el-button>
       </el-form>
       <div class="flex flex-col">
-        <p class="w-full text-center mb-3 text-gray-600"><strong>OR</strong></p>
-
-        <LoginSSO />
-
         <el-row :gutter="10" justify="center" class="w-full">
           <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
           <el-link href="#" @click="handleRegisterNew"><strong>Sign up</strong></el-link>

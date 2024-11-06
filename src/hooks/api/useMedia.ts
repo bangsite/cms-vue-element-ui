@@ -1,27 +1,11 @@
-import { ref } from "vue";
+import useApi from "@/hooks/api/useApi";
 import { deleteMedia, listMedia, uploadMedia, uploadMedias } from "@/services/modules/media.service";
-import type { Images } from "@/types";
 
 export default function useMedia() {
-  const isLoading = ref(false);
-  const response = ref<Images>(null);
-  const errors = ref(null);
-
-  const handleApiCall = async (apiFunc: Function, data?: number | string | [] | {}) => {
-    isLoading.value = true;
-
-    try {
-      const res = await apiFunc(data);
-      response.value = res?.data?.data || null;
-    } catch (error: any) {
-      errors.value = error.response?.data || error.message;
-    } finally {
-      isLoading.value = false;
-    }
-  };
+  const { handleApiCall, isLoading, response, errors } = useApi();
 
   const getListImage = async () => {
-    await handleApiCall(listMedia);
+    await handleApiCall(listMedia, { transformResponse: (res: any) => res?.data?.data || [] });
   };
 
   const uploadImage = async (data: Record<string, any>) => {
@@ -32,8 +16,8 @@ export default function useMedia() {
     await handleApiCall(uploadMedias, data);
   };
 
-  const deleteImage = async () => {
-    await handleApiCall(deleteMedia, {});
+  const deleteImage = async (id: string) => {
+    await handleApiCall(deleteMedia, id);
   };
 
   return {

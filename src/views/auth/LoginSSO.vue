@@ -1,4 +1,5 @@
 <template>
+  <p class="w-full text-center mb-3 text-gray-600"><strong>OR</strong></p>
   <el-row :gutter="10" justify="center" class="w-full mb-8">
     <el-button size="large" class="btn-login--social" @click="loginWithProvider('google')" circle>
       <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
