@@ -3,8 +3,8 @@
     <table class="border border-solid border-[#F1F2F6]" width="100%">
       <thead class="bg-gray-100">
         <tr>
-          <th colspan="2">
-            <p>{{ dayjs(defaultValue).format("dddd") }}</p>
+          <th colspan="2" style="padding: 8px 0">
+            <span>{{ dayjs(defaultValue).format("dddd") }}</span>
           </th>
         </tr>
       </thead>

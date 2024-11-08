@@ -48,13 +48,13 @@ import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 
-import LoginSSO from "@/views/auth/LoginSSO.vue";
+// import LoginSSO from "@/views/auth/LoginSSO.vue";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import useFetchAuth from "@/hooks/useFetchAuth";
+import useAuth from "@/hooks/api/useAuth";
 
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
@@ -72,7 +72,7 @@ const ruleForm = ref<LoginForm>({
 
 const router = useRouter();
 const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
-const { doLogin, response, errors, isLoading } = useFetchAuth();
+const { doLogin, response, errors, isLoading } = useAuth();
 const { handleSubmit } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
@@ -88,7 +88,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   await router.push("/");
 
-  actions.resetForm();
+  // actions.resetForm();
 });
 
 const handleRegisterNew = () => setLayoutAuth("RegisterForm");

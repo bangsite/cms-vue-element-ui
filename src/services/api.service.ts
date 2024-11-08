@@ -1,11 +1,4 @@
-import type {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosRequestHeaders,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios, { HttpStatusCode } from "axios";
 import { useRouter } from "vue-router";
 import { notifier } from "@/notifications";
@@ -22,31 +15,30 @@ export class BaseApiService {
   private retryCount = 0;
   private maxRetryAttempts = 3; // Retry limit
 
-  private constructor(baseURL: string, headers: Record<string, string> = {}) {
+  private constructor(axiosConfig: AxiosRequestConfig) {
     this.axiosInstance = axios.create({
-      baseURL,
-      headers: {
-        "Content-Type": "application/json",
-        ...(headers as AxiosRequestHeaders),
-      },
+      ...axiosConfig,
     });
-
     // setup interceptor
     this.setupInterceptors();
   }
 
   // Singleton static method to get or create the instance
-  public static getInstance(baseURL: string, headers: Record<string, string> = {}) {
-    if (!this.instances.has(baseURL)) {
-      this.instances.set(baseURL, new BaseApiService(baseURL, headers));
+  public static getInstance = (axiosConfig: AxiosRequestConfig) => {
+    if (!axiosConfig.baseURL) {
+      throw new Error("baseURL is required");
     }
-    return this.instances.get(baseURL);
-  }
 
-  private setupInterceptors() {
+    if (!this.instances.has(axiosConfig.baseURL)) {
+      this.instances.set(axiosConfig.baseURL, new BaseApiService(axiosConfig));
+    }
+    return this.instances.get(axiosConfig.baseURL);
+  };
+
+  private setupInterceptors = () => {
     this.axiosInstance.interceptors.request.use(this.onRequest, this.onRequestError);
     this.axiosInstance.interceptors.response.use(this.onResponse, this.onResponseError);
-  }
+  };
 
   private onRequest = (config: InternalAxiosRequestConfig) => {
     // Optional: Add token handling logic here
@@ -124,6 +116,23 @@ export class BaseApiService {
   };
 
   // Generic methods for making requests
+  // public request<T>(
+  //   method: "get" | "post" | "put" | "patch" | "delete",
+  //   url: string,
+  //   data?: any,
+  //   headers: Record<string, string> = {},
+  //   config: AxiosRequestConfig = {}
+  // ): Promise<AxiosResponse<T>> {
+  //   const requestConfig: AxiosRequestConfig = {
+  //     method,
+  //     url,
+  //     data,
+  //     headers,
+  //     ...config,
+  //   };
+  //   return this.axiosInstance.request<T>(requestConfig);
+  // }
+
   public get<T>(url: string, config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axiosInstance.get<T>(`${url}`, { ...config });
   }

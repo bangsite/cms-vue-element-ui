@@ -28,7 +28,7 @@
         "@vitejs/plugin-basic-ssl": "^1.1.0",
         "@vueuse/core": "^10.9.0",
         "apexcharts": "^3.48.0",
-        "axios": "^1.6.8",
+        "axios": "^1.7.7",
         "chart.js": "^4.4.2",
         "dayjs": "^1.11.10",
         "echarts": "^5.5.0",
