@@ -1,52 +1,56 @@
 <template>
   <div class="flex flex-col lg:flex-row gap-2 items-start">
-    <el-card class="rounded-md w-full lg:w-9/12">
-      <template #header>
-        <h5 class="title">{{ pages[0].name }}</h5>
-      </template>
-      <el-form ref="formSection" :labelPosition="'top'" class="overflow-auto min-h-96 max-h-[80vh]">
-        <el-collapse
-          v-model="activeKey"
-          v-for="(item, idx) in pages[0].sections"
-          :key="item.id"
-          class="section mb-4 rounded-md"
-          @change="handleChange"
-        >
-          <el-collapse-item :name="idx" class="p-3">
-            <template #title>
-              <div class="flex items-center justify-between w-full">
-                <h6>{{ item.name + " " + idx }}</h6>
-                <el-button @click="handleRemoveSection(idx, $event)" link type="danger">
-                  <SvgIcon :icon="'material-symbols:delete-outline'" :size="24" />
-                </el-button>
-              </div>
-            </template>
+    <div class="rounded-md w-full lg:w-9/12">
+      <el-card class="rounded-md mb-4">
+        <template #header>
+          <h5 class="title">{{ pages[0].name }}</h5>
+        </template>
+        <el-form ref="formSection" :labelPosition="'top'" class="overflow-auto min-h-96 max-h-[80vh]">
+          <el-collapse
+            v-model="activeKey"
+            v-for="(item, idx) in pages[0].sections"
+            :key="item.id"
+            class="section mb-4 rounded-md"
+            @change="handleChange"
+          >
+            <el-collapse-item :name="idx" class="p-3">
+              <template #title>
+                <div class="flex items-center justify-between w-full">
+                  <h6>{{ item.name + " " + idx }}</h6>
+                  <el-button @click="handleRemoveSection(idx, $event)" link type="danger">
+                    <SvgIcon :icon="'material-symbols:delete-outline'" :size="24" />
+                  </el-button>
+                </div>
+              </template>
 
-            <BlockRender
-              v-if="activeKey && activeKey.length"
-              :disabled="true"
-              :data="item"
-              :pageId="pages[0].id"
-              :sectionIndex="idx"
-              @editBlock="handleBlockEdit"
-              @removedBlock="handleBlockRemove"
-            />
+              <BlockRender
+                v-if="activeKey && activeKey.length"
+                :disabled="true"
+                :data="item"
+                :pageId="pages[0].id"
+                :sectionIndex="idx"
+                @editBlock="handleBlockEdit"
+                @removedBlock="handleBlockRemove"
+              />
 
-            <!-- Add Block -->
-            <el-button v-if="activeKey" class="btn-add-block rounded-md" plain @click="handleBlockAdd(item)">
-              <SvgIcon :icon="'mi:add'" :size="24" />
-              Add Block
-            </el-button>
-          </el-collapse-item>
-        </el-collapse>
+              <!-- Add Block -->
+              <el-button v-if="activeKey" class="btn-add-block rounded-md" plain @click="handleBlockAdd(item)">
+                <SvgIcon :icon="'mi:add'" :size="24" />
+                Add Block
+              </el-button>
+            </el-collapse-item>
+          </el-collapse>
 
-        <!-- Add Section -->
-        <el-button v-if="activeKey" @click="handleAddSection" class="btn-add-block" plain>
-          <SvgIcon :icon="'mi:add'" :size="24" />
-          Add Section
-        </el-button>
-      </el-form>
-    </el-card>
+          <!-- Add Section -->
+          <el-button v-if="activeKey" @click="handleAddSection" class="btn-add-block" plain>
+            <SvgIcon :icon="'mi:add'" :size="24" />
+            Add Section
+          </el-button>
+        </el-form>
+      </el-card>
+
+      <DataJsonPretty :data="values" :showLine="true" />
+    </div>
 
     <div class="rounded-md w-full lg:w-3/12">
       <Publish name="pushlish" />
@@ -89,6 +93,7 @@ import Categories from "@/components/common/Categories.vue";
 import Tags from "@/components/common/Tags.vue";
 import Publish from "@/components/common/Publish.vue";
 import type { Page, Section } from "@/types";
+import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
 
 const BlockRender = defineAsyncComponent(() => import("@/components/builders/BlockRender.vue"));
 const BlockTypes = defineAsyncComponent(() => import("@/components/builders/BlockTypes.vue"));
@@ -166,5 +171,3 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <style scoped></style>
-gh api \ --method DELETE \ -H "Accept: application/vnd.github+json" \ -H "X-GitHub-Api-Version: 2022-11-28" \
-/repos/bangsite/cms-vue-element-ui/deployments/DEPLOYMENT_ID

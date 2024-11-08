@@ -5,8 +5,8 @@
     </el-button>
 
     <template #dropdown>
-      <el-dropdown-menu class="pY-4">
-        <el-dropdown-item>
+      <el-dropdown-menu class="py-3">
+        <el-dropdown-item class="py-2">
           <el-link :underline="false" @click="handleSetStatus">
             <SvgIcon :icon="'ant-design:user-outlined'" :size="20" class="mr-2" />
             <span>Set status </span>
@@ -33,7 +33,9 @@ import { useRouter } from "vue-router";
 
 import { useAuthStore } from "@/stores/auth.store";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import useAuth from "@/hooks/api/useAuth";
 
+const { doLogout, response } = useAuth();
 const { resetAuth } = useAuthStore();
 const router = useRouter();
 
@@ -44,9 +46,11 @@ const handleSetStatus = () => {
 const handleSetting = () => {
   console.log("");
 };
-const handleLogout = () => {
+const handleLogout = async () => {
+  await doLogout();
+  console.log(response.value);
   resetAuth();
-  router.push("/login");
+  await router.push("/login");
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped></style>

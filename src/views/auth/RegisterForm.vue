@@ -21,18 +21,14 @@
           style="width: 100%"
         />
 
-        <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
+        <el-button size="large" type="primary" class="btn-submit mb-4 mt-4" :disabled="isLoading" @click="onSubmit"
           >Sign up
         </el-button>
       </el-form>
       <div class="flex flex-col">
-        <p class="w-full text-center mb-3 text-gray-600"><strong>OR</strong></p>
-
-        <LoginSSO />
-
         <el-row :gutter="10" justify="center" class="w-full">
           <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
-          <el-link href="#" @click="handleRegisterNew"><strong>Sign Up</strong></el-link>
+          <el-link href="#" @click="handleRegister"><strong>Sign in</strong></el-link>
         </el-row>
       </div>
     </div>
@@ -49,13 +45,13 @@ import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import useFetchAuth from "@/hooks/useFetchAuth";
+import useAuth from "@/hooks/useFetchAuth";
 import type { Register } from "@/types";
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
 const router = useRouter();
-const { doRegister, response, errors, isLoading } = useFetchAuth();
-const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
+const { doRegister, response, errors, isLoading } = useAuth();
+const { setUserInfo, setLayoutAuth } = useAuthStore();
 
 const ruleForm = ref<Register>({
   email: "",
@@ -67,18 +63,15 @@ const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value
 const onSubmit = handleSubmit(async (values, actions) => {
   await doRegister(values);
 
-  const { user, tokens } = response.value || {};
-  if (user) setUserInfo(user);
-  if (tokens) setToken(tokens);
+  const { shop }: Record<string, any> = response.value || {};
+  if (shop) setUserInfo(shop);
 
-  if (errors.value) {
-    console.log("errors:::", errors.value);
-  }
+  if (errors.value) console.log("errors:::", errors.value);
 
-  await router.push("/dashboard");
+  await router.push("/");
 
   actions.resetForm();
 });
 
-const handleRegisterNew = () => setLayoutAuth("LoginForm");
+const handleRegister = () => setLayoutAuth("LoginForm");
 </script>

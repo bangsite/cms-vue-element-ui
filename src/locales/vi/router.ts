@@ -34,8 +34,14 @@ export default {
   },
   MOVIES: {
     TITLE: "Phim",
-    MOVIES_LIST: "Danh Sách Phim",
-    MOVIES_PRO_LIST: "Danh Sách Phim Pro",
+    MOVIES_LIST: "Danh sách phim",
+    MOVIES_PRO_LIST: "Danh sách phim vip",
+  },
+  MEDIA: {
+    TITLE: "Đa phương tiện",
+    IMAGE_LIST: "Danh sách hình ảnh",
+    IMAGE_UPLOAD: "Tải hình ảnh",
+    AUDIO_LIST: "Danh sách âm thanh",
   },
   POST: {
     TITLE: "Posts",

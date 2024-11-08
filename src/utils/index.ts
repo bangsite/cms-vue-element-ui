@@ -1,5 +1,5 @@
 export * from "./chartUtilities";
-export * from "./checkFiles";
+export * from "./file.util";
 export * from "./checkTokenExpiry";
 export * from "./clientStorage";
 export * from "./convertErrors";

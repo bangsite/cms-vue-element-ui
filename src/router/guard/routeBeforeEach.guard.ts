@@ -1,7 +1,7 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import { useTitle } from "@/hooks/useTitle";
 import { hideLoading, showLoading } from "@/hooks/useLoading";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/hooks/api/useAuth";
 
 import { ClientStorage } from "@/utils";
 import { getParameterByName } from "@/utils/getParameterFromUrl";
@@ -17,7 +17,6 @@ const routeBeforeEach = async (
   next: NavigationGuardNext
 ) => {
   showLoading({ fullscreen: true });
-  console.log("hello");
   const { authCallback } = useAuth();
 
   const isAuth = ClientStorage.load("__is_auth__");

@@ -15,6 +15,7 @@
       :placeholder="placeholder"
       @change="handleChange"
       @search="handleSearch"
+      class="min-w-36"
     >
       <el-option v-for="(item, index) in attrs.options" :key="item?.id + index" :value="item?.id" :label="item.name">
         <template #label="{ value }">
@@ -57,3 +58,4 @@ const handleSearch = (values: string | number) => {
   emit("onSearch", { value: values });
 };
 </script>
+<style lang="scss" scoped></style>

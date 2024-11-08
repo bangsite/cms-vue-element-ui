@@ -3,7 +3,7 @@
     <el-card class="rounded-md">
       <el-row justify="space-between" align="middle">
         <el-col>
-          <div class="flex items-center flex-wrap justify-center md:justify-between gap-2 min-h-[18rem]">
+          <div class="flex items-center flex-wrap justify-center md:justify-between gap-2 h-full min-h-[20rem]">
             <template v-for="(item, idx) in dataWeather?.list" :key="idx">
               <template v-if="idx === 0">
                 <div class="bg-blue-500/10 rounded-md flex flex-col w-full md:w-auto py-1 px-6 items-center">
@@ -70,8 +70,9 @@ import { weekdayNames } from "@/utils/formatDateTime";
 import { DATA_WEATHER } from "@/db";
 
 const { fetchDataWeather, response, isLoading } = useFetchWeather();
-
+console.log(response.value);
 const dataWeather = computed(() => response.value || DATA_WEATHER);
+console.log(dataWeather);
 
 onBeforeMount(async () => {
   await fetchDataWeather();

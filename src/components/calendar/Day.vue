@@ -3,14 +3,14 @@
     <table class="border border-solid border-[#F1F2F6]" width="100%">
       <thead class="bg-gray-100">
         <tr>
-          <th colspan="2">
-            <p>{{ dayjs(defaultValue).format("dddd") }}</p>
+          <th colspan="2" style="padding: 8px 0">
+            <span>{{ dayjs(defaultValue).format("dddd") }}</span>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(time, key) in DATA_TIME_12H" :key="key + 1">
-          <td class="text-sm w-fit">{{ time }}</td>
+          <td class="text-sm" style="width: 66px">{{ time }}</td>
           <td></td>
         </tr>
       </tbody>

@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-md">
+  <el-card class="rounded-md mb-4">
     <template #header>
       <div class="flex items-center justify-between">
         <h3 class="title">Todo List</h3>
@@ -10,6 +10,9 @@
     <TaskList :data="filteredTaskList" @completed="completedTask" @delete="deleteTask" @edit="handleEditTask" />
   </el-card>
 
+  <DataJsonPretty :data="filteredTaskList" :showLine="true" />
+
+  <!-- Modal -->
   <component
     :is="modalComponent"
     v-if="isModalVisible"
@@ -39,6 +42,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useTaskStore } from "@/stores/task.store";
 
 import TaskList from "@/views/task/TaskList.vue";
+import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
 
 const modalComponent = ref(defineAsyncComponent(() => import("@/components/modal/ModalView.vue")));
 const formComponent = ref(defineAsyncComponent(() => import("@/components/form/FormTask.vue")));

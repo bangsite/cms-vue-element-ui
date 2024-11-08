@@ -35,13 +35,9 @@
         </el-button>
       </el-form>
       <div class="flex flex-col">
-        <p class="w-full text-center mb-3 text-gray-600"><strong>OR</strong></p>
-
-        <LoginSSO />
-
         <el-row :gutter="10" justify="center" class="w-full">
           <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
-          <el-link href="#" @click="handleRegisterNew"><strong>Sign Up</strong></el-link>
+          <el-link href="#" @click="handleRegisterNew"><strong>Sign up</strong></el-link>
         </el-row>
       </div>
     </div>
@@ -52,13 +48,13 @@ import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 
-import LoginSSO from "@/views/auth/LoginSSO.vue";
+// import LoginSSO from "@/views/auth/LoginSSO.vue";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import useFetchAuth from "@/hooks/useFetchAuth";
+import useAuth from "@/hooks/api/useAuth";
 
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
@@ -76,15 +72,15 @@ const ruleForm = ref<LoginForm>({
 
 const router = useRouter();
 const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
-const { doLogin, response, errors, isLoading } = useFetchAuth();
+const { doLogin, response, errors, isLoading } = useAuth();
 const { handleSubmit } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);
 
-  const { shop, tokens }: Record<string, any> = response.value || {};
+  const { shop }: Record<string, any> = response.value || {};
   if (shop) setUserInfo(shop);
-  if (tokens) setToken(tokens);
+  // if (tokens) setToken(tokens);
 
   if (errors.value) {
     console.log("errors:::", errors.value);
@@ -92,7 +88,7 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   await router.push("/");
 
-  actions.resetForm();
+  // actions.resetForm();
 });
 
 const handleRegisterNew = () => setLayoutAuth("RegisterForm");

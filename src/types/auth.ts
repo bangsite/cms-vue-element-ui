@@ -1,11 +1,11 @@
 // type RoleType = "SHOP" | "ADMIN" | "TEST";
-type Tokens = {
-  accessToken: string;
-  refreshToken: string;
-};
-
 type Keys = {
   key: string;
+};
+
+export type Tokens = {
+  accessToken: string;
+  refreshToken: string;
 };
 
 export interface Role {
