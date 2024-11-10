@@ -1,22 +1,22 @@
 <template>
-  <el-sub-menu v-if="item.children" :index="item.name">
+  <el-sub-menu v-if="data.children" :index="data.name">
     <template #title>
       <el-icon size="24">
-        <Icon :icon="item?.meta.icon" />
+        <Icon :icon="data?.meta.icon" />
       </el-icon>
-      <span class="ml-2">{{ $t(item?.meta.title) }}</span>
+      <span class="ml-2">{{ $t(data?.meta.title) }}</span>
     </template>
-    <menu-item v-for="child in item.children" :key="child.id" :item="child" />
+    <menu-item v-for="(child, idx) in data.children" :key="idx" :data="child" />
   </el-sub-menu>
-  <el-menu-item v-else :index="item.name">
-    <router-link :to="{ name: item.name }">{{ $t(item.meta.title) }}</router-link>
+  <el-menu-item v-else :index="data.name">
+    <router-link :to="{ name: data.name }">{{ $t(data.meta.title) }}</router-link>
   </el-menu-item>
 </template>
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 
 defineProps({
-  item: {
+  data: {
     type: Object,
     default: () => {},
   },

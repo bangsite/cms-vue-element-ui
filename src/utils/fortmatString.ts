@@ -1,3 +1,5 @@
+type Convertible<T> = Record<string, (typeof T)[keyof T]>;
+
 export function capitalizeFirstLetter(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
@@ -15,4 +17,30 @@ export const truncateString = (str: string, maxLength: number) => {
     return str.substring(0, maxLength) + "...";
   }
   return str;
+};
+
+export const toCamelCase = (str: string) => {
+  return str
+    .split(/[_\s\-]+/)
+    .map((word, index) => {
+      if (index === 0) {
+        return word.toLowerCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join("");
+};
+
+export const convertKeysToCamelCase = (data: { [key: string]: any }) => {
+  const newObj: { [key: string]: any } = {};
+
+  for (const key in data) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (data.hasOwnProperty(key)) {
+      const camelCaseKey = toCamelCase(key);
+      newObj[camelCaseKey] = data[key];
+    }
+  }
+
+  return newObj;
 };

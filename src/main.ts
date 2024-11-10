@@ -11,7 +11,7 @@ import { libVueQuery } from "@/plugins/vue-query";
 import { libVueCountUp3 } from "@/plugins/vue-countup";
 import { libVueJsonPretty } from "@/plugins/vue-json-pretty";
 // import { libApexCharts } from "@/plugins/apex-charts";
-import { libVueDraggableNext } from "@/plugins/vue-draggable-next";
+import { libVueDraggablePlus } from "@/plugins/vue-draggable-plus";
 
 // import { clickOutsideEvent } from "./directives";
 // @ts-ignore
@@ -36,14 +36,18 @@ async function setupAppAll() {
 
   // Setup VeeValidate
   libVeeValidate(app);
+
   // Setup Vue Query
   libVueQuery(app);
+
   // Setup  ApexCharts
   // libApexCharts(app);
-  // Setup VueDraggableNext
-  libVueDraggableNext(app);
+  // Setup VueDraggablePlus
+  libVueDraggablePlus(app);
+
   // Setup VueCountUp 3
   libVueCountUp3(app);
+
   // Setup Vue Json Pretty
   libVueJsonPretty(app);
 

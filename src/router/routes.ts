@@ -44,7 +44,6 @@ export const routerMap = [
       noTagsView: true,
     },
   },
-
   {
     path: "/403",
     name: "403",
