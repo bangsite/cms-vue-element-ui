@@ -7,9 +7,10 @@
     @open="handleOpen"
     @select="handleSelect"
   >
-    <menu-item v-for="(item, idx) in filterMenu" :key="idx" :item="item" />
+    <menu-item v-for="(menu, idx) in filterMenu" :key="idx" :data="menu" />
   </el-menu>
 </template>
+
 <script lang="ts" setup>
 import { computed, onMounted, type PropType, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -32,7 +33,6 @@ const layout = computed(() => appStore.getLayout);
 const isCollapse = computed(() => appStore.getCollapse);
 const routers = computed(() => (layout.value === "default" ? options.routes : []));
 const filterMenu = computed(() => useFilterMenu(routers.value));
-
 onMounted(() => {
   // selectedKeys.value = ["menu_sub_0_0"];
   // openKeys.value = ["menu_sub_0"];

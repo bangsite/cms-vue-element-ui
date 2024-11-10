@@ -6,25 +6,32 @@
 
     <el-form ref="formRef" :model="searchParam" :label-position="labelPosition">
       <div class="grid grid-cols-2 gap-4 align-middle mb-2">
-        <template v-for="(item, index) in searchColumns" :key="item.prop">
-          <InputBase
-            v-if="item.search?.el === 'input'"
-            :label="`${item.search?.label ?? item.label}`"
-            placeholder="Input text"
-            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
+        <template v-for="item in searchColumns" :key="item.prop">
+          <component
+            :is="getComponentType(item.search.el)"
+            v-bind="getComponentProps(item)"
+            v-model="searchParam[item.prop]"
+            @onChange="onChangeData"
           />
-          <SelectBase
-            v-else-if="item.search?.el === 'select'"
-            :label="`${item.search?.label ?? item.label}`"
-            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
-            :options="searchSelectData"
-          />
-          <DatePicker
-            v-else-if="item.search?.el === 'date'"
-            :label="`${item.search?.label ?? item.label}`"
-            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"
-            :options="searchSelectData"
-          />
+
+          <!--          <InputBase-->
+          <!--            v-if="item.search?.el === 'input'"-->
+          <!--            :label="`${item.search?.label ?? item.label}`"-->
+          <!--            placeholder="Input text"-->
+          <!--            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"-->
+          <!--          />-->
+          <!--          <SelectBase-->
+          <!--            v-else-if="item.search?.el === 'select'"-->
+          <!--            :label="`${item.search?.label ?? item.label}`"-->
+          <!--            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"-->
+          <!--            :options="searchSelectData"-->
+          <!--          />-->
+          <!--          <DatePicker-->
+          <!--            v-else-if="item.search?.el === 'date'"-->
+          <!--            :label="`${item.search?.label ?? item.label}`"-->
+          <!--            :name="`${toLowerCase(item.search?.label ?? item.label) + '-' + index}`"-->
+          <!--            :options="searchSelectData"-->
+          <!--          />-->
         </template>
       </div>
       <div class="flex justify-end">
@@ -42,29 +49,65 @@ import SelectBase from "@/components/form/SelectBase.vue";
 import DatePicker from "@/components/form/DatePicker.vue";
 
 import { toLowerCase } from "@/utils/fortmatString";
+import { reactive } from "vue";
 
-interface ProTableProps {
+interface SearchColumn {
+  prop?: string;
+  label?: string;
+  type?: "input" | "select" | "date" | "sort" | "selection";
+  width?: number;
+  showOverflowTooltip?: boolean;
+  fixed?: string;
+  search?: { el: string; props?: Record<string, any> };
+}
+
+interface SearchProps {
   labelPosition?: string;
   searchTitle?: string;
-  searchColumns?: any[];
+  searchColumns?: SearchColumn[];
   searchParam?: { [key: string]: any };
   searchCol?: number;
   searchSelectData?: any[];
 }
 
-withDefaults(defineProps<ProTableProps>(), {
+const props = withDefaults(defineProps<SearchProps>(), {
   labelPosition: "top",
   searchColumns: () => [],
   searchParam: () => ({}),
 });
 
 const emit = defineEmits(["search", "reset"]);
+const searchParam = reactive({ ...props.searchParam });
+const searchComponent = reactive({
+  input: InputBase,
+  select: SelectBase,
+  date: DatePicker,
+});
 
-const handleSearch = (newValue: any) => {
-  emit("search", newValue);
+const getComponentType = (type: string) => searchComponent[type] || InputBase;
+
+const getComponentProps = (item: SearchColumn) => ({
+  label: item.label,
+  placeholder: item.placeholder || `Enter ${item.label}`,
+  options: item.search.el === "select" ? props.searchSelectData?.[item.prop] : undefined,
+  name: `${toLowerCase(item.search?.label || item.label)}`,
+});
+
+const onChangeData = (data: Record<string, any>) => {
+  const { key, value } = data;
+
+  searchParam[key] = value;
+};
+
+const handleSearch = (val) => {
+  console.log(val);
+  emit("search", searchParam);
 };
 
 const handleReset = () => {
+  Object.keys(searchParam).forEach((key) => {
+    searchParam[key] = ""; // Reset each field in searchParam
+  });
   emit("reset", true);
 };
 </script>
