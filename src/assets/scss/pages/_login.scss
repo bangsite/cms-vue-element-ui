@@ -24,7 +24,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding-top: 8rem;
         margin-bottom: 2rem;
 
         &-logo {
@@ -55,7 +54,7 @@
     }
 
     &__form {
-        flex: 1;
+        //flex: 1;
         max-width: 28rem;
         margin-bottom: 4rem;
         width: 100%;

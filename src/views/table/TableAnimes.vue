@@ -12,13 +12,13 @@
 
     <el-card class="rounded-md">
       <TableHeader :tool-button="true" @toggle-search="onToggleSearch" @refresh-data="onRefreshTable" />
-
       <DraggablePlus
         v-model="response"
         @start="onStart"
         @end="onEnd"
         animation="150"
         target=".el-table__body-wrapper tbody"
+        handle=".drag"
       >
         <TableList
           ref="tableAnime"
