@@ -4,26 +4,29 @@ import vi from "element-plus/es/locale/lang/vi";
 import type { LocaleDropdownOption } from "@/types";
 
 export const langEl: Record<string, any> = {
-  "en-US": en,
-  "ja-JA": ja,
-  "vi-VN": vi,
+  en: en,
+  ja: ja,
+  vi: vi,
 };
 
 export const langOptions: LocaleDropdownOption[] = [
   {
-    lang: "en-US",
+    lang: "en",
     currency: "$",
     name: "English",
+    icon: "twemoji:flag-united-states",
   },
   {
-    lang: "ja-JP",
+    lang: "ja",
     currency: "¥",
     name: "Japanese",
+    icon: "twemoji:flag-japan",
   },
   {
-    lang: "vi-VN",
+    lang: "vi",
     currency: "đ",
     name: "Vietnamese",
+    icon: "twemoji:flag-vietnam",
   },
 ];
 

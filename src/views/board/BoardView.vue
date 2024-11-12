@@ -7,14 +7,8 @@
       </div>
     </template>
 
-    <Draggable
-      v-model="data"
-      item-key="id"
-      group="boards"
-      :animation="150"
-      class="flex gap-3 pb-4 overflow-x-auto mb-4"
-    >
-      <template #item="{ element: board }">
+    <DraggablePlus v-model="data" group="boards" :animation="150" class="flex gap-3 pb-4 overflow-x-auto mb-4">
+      <template v-for="board in data" :key="board.id">
         <div class="board bg-gray-200 min-w-[280px] px-2 py-4 rounded-md hover:shadow-sm">
           <div class="cursor-move flex items-center justify-between gap-2 mb-2">
             <div class="flex items-center drag-handle">
@@ -41,22 +35,22 @@
             </el-dropdown>
           </div>
 
-          <Draggable
+          <DraggablePlus
             v-model="board.tasks"
             item-key="id"
             :group="{ name: 'tasks', pull: alt ? 'clone' : true }"
             :animation="150"
             class="cursor-pointer task flex flex-col rounded-md min-h-4 overflow-x-auto"
           >
-            <template #item="{ element: task }">
+            <template v-for="task in board.tasks" :key="task.id">
               <BoardTask :data="task" />
             </template>
-          </Draggable>
+          </DraggablePlus>
 
           <NewTask ref="newTaskRef" @add="handleAddTask(board, $event)" />
         </div>
       </template>
-    </Draggable>
+    </DraggablePlus>
   </el-card>
 
   <DataJsonPretty :data="data" :showLine="true" />

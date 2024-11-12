@@ -14,7 +14,6 @@
       :allow-clear="allowClear"
       :placeholder="placeholder"
       @change="handleChange"
-      @search="handleSearch"
       class="min-w-36"
     >
       <el-option v-for="(item, index) in attrs.options" :key="item?.id + index" :value="item?.id" :label="item.name">
@@ -55,7 +54,6 @@ const rules = toRef(props, "rules");
 const { value, errorMessage } = useField(name, rules);
 
 const handleChange = (values: string | number) => {
-  console.log(values);
   emit("onChange", { key: name.value, value: values });
 };
 </script>

@@ -11,6 +11,7 @@ export * from "./notification";
 export * from "./pagination";
 export * from "./post";
 export * from "./product";
+export * from "./search";
 export * from "./sorter";
 export * from "./tables";
 export * from "./tasks";

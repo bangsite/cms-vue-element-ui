@@ -4,16 +4,16 @@ import { ClientStorage, setHtmlLang } from "@/utils";
 import { langCurrency, langOptions } from "@/enums/locales.enum";
 import type { LocaleType } from "@/types";
 
-async function loadLocaleMessages(locale: string) {
-  let langStr = "";
-  if (locale) langStr = locale.split("-")[0];
-
-  const messages = await import(`../../locales/${langStr}/index.ts`);
-  return messages.default ?? {};
+export async function loadLocaleMessages(locale: string) {
+  if (locale) {
+    debugger;
+    const messages = await import(`../../locales/${locale}/index.ts`);
+    return messages.default || {};
+  }
 }
 
 async function createI18nOptions(): Promise<I18nOptions> {
-  const currentLang: LocaleType = ClientStorage.load("__lang__") || "en-US";
+  const currentLang: LocaleType = ClientStorage.load("__lang__") || "en";
   const message = await loadLocaleMessages(currentLang);
 
   setHtmlLang(currentLang);

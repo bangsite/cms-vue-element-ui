@@ -15,11 +15,13 @@ const calPageCount = (total: number, pageSize: number) => {
 };
 
 export const convertPagination = (data: { [keys: string]: any }) => {
+  if (!data) return pagination;
+
   const dataNew = convertKeysToCamelCase(data);
 
   pagination.currentPage = dataNew?.currentPage || 1;
-  pagination.total = dataNew.total || 0;
-  pagination.pageSize = dataNew?.pageSize || dataNew?.perPage || 10;
+  pagination.total = dataNew?.items.total || dataNew?.total || 0;
+  pagination.pageSize = dataNew?.items.perPage || dataNew?.perPage || 10;
   pagination.pageCount = dataNew?.pageCount ? dataNew?.pageCount : calPageCount(pagination.total, pagination.pageSize);
 
   return pagination;

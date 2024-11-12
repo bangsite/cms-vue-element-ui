@@ -7,17 +7,36 @@
     <el-form ref="formRef" :model="data" :label-position="labelPosition">
       <div class="grid grid-cols-1 gap-4 align-middle mb-2">
         <template v-for="item in columns" :key="item.prop">
-          <InputBase v-if="item.type === 'input'" :label="`${item.label}`" placeholder="Input text" :name="item.prop" />
+          <InputBase
+            v-if="item.type === 'input'"
+            :label="item.label"
+            :name="item.prop"
+            :rules="'max:50'"
+            :placeholder="`Enter ${item.prop}`"
+          />
+          <TextAreaBase
+            v-else-if="item.type === 'textarea'"
+            :label="item.label"
+            :name="item.prop"
+            :rows="5"
+            :rules="'max:100'"
+            :placeholder="`Enter ${item.prop}`"
+          />
           <SelectBase
             v-else-if="item.type === 'select'"
-            :label="`${item.label}`"
+            :label="item.label"
             :name="item.prop"
             :options="selectData"
+            :placeholder="`Enter ${item.prop}`"
           />
         </template>
       </div>
+      <el-divider border-style="dashed" />
+
       <div class="flex justify-end">
-        <el-button type="primary" @click="onSubmitTask">{{ edit ? "Update Data" : "Add New" }}</el-button>
+        <el-button type="primary" @click="onSubmitTask">
+          {{ edit ? "Update Data" : "Add New" }}
+        </el-button>
       </div>
     </el-form>
   </el-card>
@@ -25,24 +44,15 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
 import { toRef } from "vue";
+import { useTaskStore } from "@/stores/task.store";
+import type { TaskFormProps } from "@/types";
 
 import InputBase from "@/components/form/InputBase.vue";
 import SelectBase from "@/components/form/SelectBase.vue";
+import TextAreaBase from "@/components/form/TextAreaBase.vue";
 
-import { useTaskStore } from "@/stores/task.store";
-
-interface ProTableProps {
-  labelPosition?: string;
-  title?: string;
-  columns?: any[];
-  data?: { [key: string]: any };
-  selectData?: any[];
-  edit?: boolean;
-}
-
-const props = withDefaults(defineProps<ProTableProps>(), {
+const props = withDefaults(defineProps<TaskFormProps>(), {
   labelPosition: "top",
-  searchColumns: () => [],
 });
 const emit = defineEmits(["submit"]);
 

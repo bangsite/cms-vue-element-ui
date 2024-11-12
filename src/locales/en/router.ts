@@ -29,13 +29,13 @@ export default {
     TABLE_BASIC: "Table Basic",
     TABLE_ANIMES: "Table Animes",
   },
-  TASK: {
-    TITLE: "Task",
-    LIST: "Task List",
-  },
   BOARD: {
     TITLE: "Board",
     LIST: "Board List",
+  },
+  TASK: {
+    TITLE: "Task",
+    LIST: "Task List",
   },
   BUILDER: {
     TITLE: "Builder",

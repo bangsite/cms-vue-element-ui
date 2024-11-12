@@ -16,7 +16,6 @@ const props = defineProps({
   margin: { type: String, default: "2px" },
   radius: { type: String, default: "100%" },
 });
-console.log(props);
 const spinnerStyle = computed(() => {
   return {
     backgroundColor: props.color,

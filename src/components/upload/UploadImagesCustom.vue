@@ -107,7 +107,6 @@ const handleUploadFiles = () => {
   if (clientId) dataUpload.shopId = clientId;
 
   // check data
-  console.log(dataUpload);
   emits("dataUpload", dataUpload);
 
   //call api

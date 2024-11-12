@@ -1,5 +1,5 @@
 <template>
-  <ElConfigProvider :locale="langEl[getLang()]">
+  <ElConfigProvider :locale="langEl[currentLang]">
     <slot></slot>
   </ElConfigProvider>
 </template>
@@ -14,7 +14,7 @@ import { langEl } from "@/enums/locales.enum";
 
 const appStore = useAppStore();
 const { width } = useWindowSize();
-const { getLang } = useLocale();
+const { currentLang } = useLocale();
 
 // const configTheme = reactive({
 //   fontSize: 16,

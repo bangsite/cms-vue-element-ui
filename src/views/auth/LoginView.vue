@@ -6,7 +6,7 @@
       </div>
     </template>
     <template #authRight>
-      <Transition name="slide" mode="out-in" appear>
+      <Transition name="slide" appear>
         <KeepAlive>
           <component :is="currentLayoutComponent" />
         </KeepAlive>
@@ -32,3 +32,17 @@ const DYNAMIC_LAYOUT: Record<string, Component> = {
 const { layoutForm } = storeToRefs(useAuthStore());
 const currentLayoutComponent = computed(() => DYNAMIC_LAYOUT[layoutForm.value]);
 </script>
+<style lang="scss" scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(50%);
+}
+</style>
