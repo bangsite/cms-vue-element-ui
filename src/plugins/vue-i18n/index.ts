@@ -6,7 +6,6 @@ import type { LocaleType } from "@/types";
 
 export async function loadLocaleMessages(locale: string) {
   if (locale) {
-    debugger;
     const messages = await import(`../../locales/${locale}/index.ts`);
     return messages.default || {};
   }

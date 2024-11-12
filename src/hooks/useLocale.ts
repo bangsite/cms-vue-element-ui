@@ -5,7 +5,7 @@ import type { LocaleType } from "@/types";
 
 export const useLocale = () => {
   const currentLang = ref<LocaleType>(ClientStorage.load("__lang__") || "en");
-  debugger;
+
   const setI18nLanguage = async (locale: LocaleType) => {
     if (i18n.mode === "legacy") {
       i18n.global.locale.value = locale;

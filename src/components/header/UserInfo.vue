@@ -48,7 +48,6 @@ const handleSetting = () => {
 };
 const handleLogout = async () => {
   await doLogout();
-  console.log(response.value);
   resetAuth();
   await router.push("/login");
 };
