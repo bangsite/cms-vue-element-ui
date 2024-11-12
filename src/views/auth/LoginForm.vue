@@ -1,23 +1,23 @@
 <template>
   <div class="auth__right">
     <div class="auth__header">
-      <div class="auth__header-logo">
-        <SvgIcon :icon="'logos:zenhub-icon'" :size="30"></SvgIcon>
+      <div class="bg-gray-50 flex items-center justify-center mb-6 w-[60px] h-[60px] rounded-full">
+        <SvgIcon :icon="'logos:zenhub-icon'" :size="30" />
       </div>
-      <h3 class="auth__header-title">System Manager</h3>
-      <p class="auth__header-subtitle">
-        A management system is in place for analytics and informative and just beautiful.
-      </p>
+      <h2 class="text-2xl mb-2">Login to your account</h2>
+      <p class="max-w-lg text-center">Welcome back! Please your enter details</p>
     </div>
     <div class="auth__form">
-      <el-form :labelPosition="'top'" ref="formRef" class="form">
-        <el-form-item label="Email">
-          <InputBase name="email" rules="required|email" placeholder="Enter email..." style="width: 100%" />
-        </el-form-item>
+      <el-form require-asterisk-position="right" labelPosition="top" ref="formRef" class="form">
+        <InputBase label="Email" name="email" rules="required|email" placeholder="Enter email..." style="width: 100%" />
 
-        <el-form-item label="Password">
-          <PasswordBase name="password" rules="required" placeholder="Enter password..." style="width: 100%" />
-        </el-form-item>
+        <PasswordBase
+          label="Password"
+          name="password"
+          rules="required|min:8"
+          placeholder="Enter password..."
+          style="width: 100%"
+        />
 
         <el-form-item>
           <el-col :span="16">
@@ -28,30 +28,16 @@
           </el-col>
         </el-form-item>
 
-        <el-form-item>
-          <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
-            >Sign in
-          </el-button>
-
-          <p class="w-full text-center"><strong>OR</strong></p>
-
-          <el-row :gutter="10" justify="center" class="w-full">
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
-            </el-button>
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'logos:facebook'" :size="24" />
-            </el-button>
-          </el-row>
-
-          <el-divider />
-
-          <el-row :gutter="10" justify="center" class="w-full">
-            <span class="mr-5">Don't have an account yet ? </span>
-            <el-link href="#" @click="handleRegisterNew">Sign Up</el-link>
-          </el-row>
-        </el-form-item>
+        <el-button size="large" type="primary" class="btn-submit mb-4" :disabled="isLoading" @click="onSubmit"
+          >Sign in
+        </el-button>
       </el-form>
+      <div class="flex flex-col">
+        <el-row :gutter="10" justify="center" class="w-full">
+          <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
+          <el-link href="#" @click="handleRegisterNew"><strong>Sign up</strong></el-link>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +51,7 @@ import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import useFetchAuth from "@/hooks/useFetchAuth";
+import useAuth from "@/hooks/api/useAuth";
 
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
@@ -76,22 +62,22 @@ interface LoginForm {
 }
 
 const ruleForm = ref<LoginForm>({
-  email: "",
-  password: "",
+  email: "shop@gmail.com",
+  password: "@12345678",
   remember: false,
 });
 
 const router = useRouter();
-const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
-const { doLogin, response, errors, isLoading } = useFetchAuth();
+const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
+const { doLogin, response, errors, isLoading } = useAuth();
 const { handleSubmit } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
   await doLogin(values);
 
-  const { shop, tokens }: Record<string, any> = response.value || {};
+  const { shop }: Record<string, any> = response.value || {};
   if (shop) setUserInfo(shop);
-  if (tokens) setToken(tokens);
+  // if (tokens) setToken(tokens);
 
   if (errors.value) {
     console.log("errors:::", errors.value);
@@ -99,12 +85,8 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   await router.push("/");
 
-  actions.resetForm();
+  // actions.resetForm();
 });
 
-const handleLoginWith = () => {};
-
-const handleRegisterNew = () => {
-  setLayoutForm("RegisterForm");
-};
+const handleRegisterNew = () => setLayoutAuth("RegisterForm");
 </script>

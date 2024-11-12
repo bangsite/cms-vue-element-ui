@@ -1,5 +1,5 @@
 <template>
-  <el-card class="rounded-md">
+  <el-card class="rounded-md mb-4">
     <template #header>
       <div class="flex items-center justify-between">
         <h3 class="title">Board</h3>
@@ -7,14 +7,8 @@
       </div>
     </template>
 
-    <Draggable
-      v-model="data"
-      item-key="id"
-      group="boards"
-      :animation="150"
-      class="flex gap-3 pb-4 overflow-x-auto mb-4"
-    >
-      <template #item="{ element: board }">
+    <DraggablePlus v-model="data" group="boards" :animation="150" class="flex gap-3 pb-4 overflow-x-auto mb-4">
+      <template v-for="board in data" :key="board.id">
         <div class="board bg-gray-200 min-w-[280px] px-2 py-4 rounded-md hover:shadow-sm">
           <div class="cursor-move flex items-center justify-between gap-2 mb-2">
             <div class="flex items-center drag-handle">
@@ -41,46 +35,40 @@
             </el-dropdown>
           </div>
 
-          <Draggable
+          <DraggablePlus
             v-model="board.tasks"
             item-key="id"
             :group="{ name: 'tasks', pull: alt ? 'clone' : true }"
             :animation="150"
             class="cursor-pointer task flex flex-col rounded-md min-h-4 overflow-x-auto"
           >
-            <template #item="{ element: task }">
+            <template v-for="task in board.tasks" :key="task.id">
               <BoardTask :data="task" />
             </template>
-          </Draggable>
+          </DraggablePlus>
 
-          <!--          <NewTask @add="handleAddCard(board, $event)" />-->
           <NewTask ref="newTaskRef" @add="handleAddTask(board, $event)" />
         </div>
       </template>
-    </Draggable>
-
-    <div class="border border-solid border-gray-300 flex max-h-96 rounded-md overflow-y-auto p-4">
-      <vue-json-pretty :data="data" />
-      <!--      <pre>-->
-      <!--        {{ JSON.stringify(data, null, 1) }}-->
-      <!--      </pre>-->
-    </div>
+    </DraggablePlus>
   </el-card>
+
+  <DataJsonPretty :data="data" :showLine="true" />
 </template>
 
 <script setup lang="ts">
 import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { v4 as uuidv4 } from "uuid";
-
-import VueJsonPretty from "vue-json-pretty";
-import "vue-json-pretty/lib/styles.css";
 import { useKeyModifier } from "@vueuse/core";
+
 import { useBoardStore } from "@/stores/board.store";
 
 import BoardTask from "@/views/board/BoardTask.vue";
 import NewTask from "@/views/board/NewTask.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
+import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
+
 import type { Board, Tasks } from "@/types";
 import { showNotification } from "@/utils";
 
@@ -115,7 +103,7 @@ const handleAddBoard = () => {
   addBoard(board);
 
   if (error.value) {
-    showNotification(error.value, "error", "Error");
+    showNotification(error.value, "error");
   } else {
     showNotification("Board added successfully!", "success");
 

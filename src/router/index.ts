@@ -8,7 +8,7 @@ import { routeBeforeEach, routeAfterEach } from "./guard/routeBeforeEach.guard";
 const router = createRouter({
   strict: true,
   history: createWebHistory(),
-  linkActiveClass: "active",
+  linkActiveClass: "route-link-active",
   routes: routerMap as RouteRecordRaw[],
   scrollBehavior: () => ({ top: 0, behavior: "smooth" }),
 });

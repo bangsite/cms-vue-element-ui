@@ -18,18 +18,24 @@ export default {
     MOVIES_LIST: "Movie List",
     MOVIES_PRO_LIST: "Movie List Pro",
   },
+  MEDIA: {
+    TITLE: "Media",
+    IMAGE_LIST: "Image List",
+    IMAGE_UPLOAD: "Image Upload",
+    AUDIO_LIST: "Audio List",
+  },
   TABLE: {
     TITLE: "Tables",
     TABLE_BASIC: "Table Basic",
     TABLE_ANIMES: "Table Animes",
   },
-  TASK: {
-    TITLE: "Task",
-    LIST: "Task List",
-  },
   BOARD: {
     TITLE: "Board",
     LIST: "Board List",
+  },
+  TASK: {
+    TITLE: "Task",
+    LIST: "Task List",
   },
   BUILDER: {
     TITLE: "Builder",

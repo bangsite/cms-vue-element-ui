@@ -1,8 +1,10 @@
-export type LocaleType = "en" | "vi" | "ja";
+export type LocaleType = "en" | "ja" | "vi";
 
 export interface LocaleDropdownOption {
   lang: string;
   name: string;
+  currency: string;
+  icon?: string;
 }
 
 export interface LocaleDropdownType {

@@ -1,8 +1,6 @@
 import { reactive, ref, toRefs } from "vue";
 import { getAccessToken, getAlbums, getNewRelease } from "@/services/modules/spotify.service";
 
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/web/useLoadingFullSceen";
-
 export default function useSpotify() {
   const isLoading = ref(false);
   const response = ref([]);
@@ -21,7 +19,6 @@ export default function useSpotify() {
   });
   const getAccessTokenApp = async () => {
     isLoading.value = true;
-    showFullScreenLoading();
 
     try {
       const { data } = await getAccessToken();
@@ -35,13 +32,11 @@ export default function useSpotify() {
       errors.value = data;
     } finally {
       isLoading.value = false;
-      hideFullScreenLoading();
     }
   };
 
   const fetchListAlBums = async (config: Record<any, any>) => {
     isLoading.value = true;
-    showFullScreenLoading();
 
     try {
       const { data } = await getAlbums("4aawyAB9vmqN3uQ7FjRGTy", { params: { ...track }, headers: { ...config } });
@@ -51,13 +46,11 @@ export default function useSpotify() {
       errors.value = data;
     } finally {
       isLoading.value = false;
-      hideFullScreenLoading();
     }
   };
 
   const fetchNewRelease = async (config: Record<any, any>) => {
     isLoading.value = true;
-    showFullScreenLoading();
 
     try {
       const { data } = await getNewRelease({ params: { ...track }, headers: { ...config } });
@@ -68,7 +61,6 @@ export default function useSpotify() {
       errors.value = data;
     } finally {
       isLoading.value = false;
-      hideFullScreenLoading();
     }
   };
 

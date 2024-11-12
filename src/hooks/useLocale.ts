@@ -1,39 +1,30 @@
-import { i18n } from "@/plugins/vue-i18n";
-import { useLocaleStoreWithOut } from "@/stores/locale.store";
-import { setHtmlPageLang } from "@/utils/setHtmlPageLang";
+import { ref } from "vue";
+import { i18n, loadLocaleMessages } from "@/plugins/vue-i18n";
+import { ClientStorage, setHtmlLang } from "@/utils";
 import type { LocaleType } from "@/types";
 
-function getDefaultLanguage(): LocaleType {
-  const lang = localStorage.getItem("lang") as LocaleType;
-  return lang || "en"; // default to 'en' if no language is set
-}
+export const useLocale = () => {
+  const currentLang = ref<LocaleType>(ClientStorage.load("__lang__") || "en");
 
-const setI18nLanguage = (locale: LocaleType) => {
-  const localeStore = useLocaleStoreWithOut();
+  const setI18nLanguage = async (locale: LocaleType) => {
+    if (i18n.mode === "legacy") {
+      i18n.global.locale.value = locale;
+    } else {
+      if (!i18n.global.availableLocales.includes(locale)) {
+        const messages = await loadLocaleMessages(locale);
+        i18n.global.setLocaleMessage(locale, messages);
+      }
+      i18n.global.locale.value = locale;
+    }
 
-  if (i18n.mode === "legacy") {
-    i18n.global.locale = locale;
-  } else {
-    i18n.global.locale = locale;
-  }
+    ClientStorage.save("__lang__", locale);
+    setHtmlLang(locale);
 
-  localeStore.setCurrentLocale(locale);
-
-  setHtmlPageLang(locale);
-};
-
-const useLocale = () => {
-  const changeLocale = async (locale: LocaleType) => {
-    const globalI18n = i18n.global;
-    const langModule = await import(`../../locales/${locale}/index.ts`);
-
-    globalI18n.setLocaleMessage(locale, langModule.default);
-    setI18nLanguage(locale);
+    currentLang.value = locale;
   };
 
   return {
-    changeLocale,
+    currentLang,
+    setI18nLanguage,
   };
 };
-
-export { useLocale, getDefaultLanguage };

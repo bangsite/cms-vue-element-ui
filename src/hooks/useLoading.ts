@@ -1,26 +1,25 @@
-import { useLoadingStore } from "@/stores/loading.store";
+import { ElLoading } from "element-plus";
+import type { LoadingOptions } from "element-plus/es/components/loading/src/types";
 
-const onLoading = (type: string) => {
-  const commonStore = useLoadingStore();
-  const { startLoading, endLoading, cancelLoading } = commonStore;
+let loadingInstance: ReturnType<typeof ElLoading.service>;
+let loadingRequestCount = 0;
 
-  switch (type) {
-    case "start": {
-      startLoading();
-      break;
-    }
-    case "end": {
-      endLoading();
-      break;
-    }
-    case "cancel": {
-      cancelLoading();
-      break;
-    }
-    default: {
-      break;
-    }
+export const showLoading = (options: LoadingOptions) => {
+  if (loadingRequestCount === 0) {
+    loadingInstance = ElLoading.service({
+      ...options,
+      lock: true,
+      text: "Loading",
+    });
   }
+  loadingRequestCount++;
 };
 
-export { onLoading };
+export const hideLoading = () => {
+  if (loadingRequestCount <= 0) return;
+  loadingRequestCount--;
+
+  if (loadingRequestCount === 0) {
+    loadingInstance.close();
+  }
+};

@@ -1,9 +1,9 @@
 import type { AxiosRequestConfig } from "axios";
 import { BaseApiService } from "../api.service";
 
-const apiBookingURL = import.meta.env.VITE_API_BOOKING_URL;
-const apiBookingKey = import.meta.env.VITE_API_BOOKING_KEY;
-const apiBookingHost = import.meta.env.VITE_API_BOOKING_HOST;
+const apiBookingURL = import.meta.env.VITE_BOOKING_ENDPOINT;
+const apiBookingKey = import.meta.env.VITE_BOOKING_KEY;
+const apiBookingHost = import.meta.env.VITE_BOOKING_HOST;
 
 const bookingApiService = new BaseApiService(apiBookingURL, {
   "X-RapidAPI-Key": apiBookingKey,

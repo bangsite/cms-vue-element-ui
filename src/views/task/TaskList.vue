@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col gap-4 p-2" v-if="data && data.length > 0">
+  <div class="flex flex-col gap-4 py-2" v-if="data && data.length > 0">
     <div
       v-for="item in data"
       :key="item.id"
-      class="flex items-center gap-4 justify-between p-2 cursor-pointer hover:shadow-[0_5px_30px_#8d8e9120;] rounded-md"
+      class="flex items-center gap-4 justify-between p-2 cursor-pointer hover:shadow-[0px_5px_10px_#8d8e9120;] rounded-md"
     >
       <!--drag-->
       <div class="flex items-center gap-2">

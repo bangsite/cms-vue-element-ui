@@ -1,52 +1,63 @@
 export default {
   LOGIN: {
-    TITLE: "Login",
+    TITLE: "Đăng Nhập",
   },
   DASHBOARD: {
     TITLE: "Bảng Điều Khiển",
     OVERVIEW: "Tổng Quan",
     ANALYSIS: "Phân Tích",
-    WORKBENCH: "Môi Trường Làm Việc",
+    WORKBENCH: "Môi Trường",
   },
-  COMPONENT: {
-    TITLE: "Component",
-    TABLE_BASIC: "Table basic",
-    TABLE_DRAG_COLUMN: "Table drag column",
-    TABLE_DRAG_ROW: "Table drag row",
+  CALENDAR: {
+    TITLE: "Lịch",
+    SCHEDULE: "Lịch Trình",
+    CUSTOM: "Tùy chỉnh Japan",
+  },
+  MOVIES: {
+    TITLE: "Phim",
+    MOVIES_LIST: "Danh sách phim",
+    MOVIES_PRO_LIST: "Danh sách phim vip",
+  },
+  MEDIA: {
+    TITLE: "Đa phương tiện",
+    IMAGE_LIST: "Danh sách hình ảnh",
+    IMAGE_UPLOAD: "Tải hình ảnh",
+    AUDIO_LIST: "Danh sách âm thanh",
+  },
+  TABLE: {
+    TITLE: "Bảng",
+    TABLE_BASIC: "Bảng Cơ Bản",
+    TABLE_ANIMES: "Bảng Animes",
   },
   BOARD: {
     TITLE: "Bảng Công Việc",
     LIST: "Danh Sách Bảng Công Việc",
   },
-  BUILDER: {
-    TITLE: "Builder",
-    DYNAMIC_BLOCK: "Dynamic Block",
-    DYNAMIC_PAGE: "Giao diện Động",
-  },
-  TABLE: {
-    TITLE: "Tables",
-    TABLE_BASIC: "Table Basic",
-    TABLE_ANIMES: "Table Animes",
-  },
   TASK: {
     TITLE: "Nhiệm Vụ",
-    TASK_LIST: "Danh sách nhiệm vụ",
+    LIST: "Danh sách nhiệm vụ",
   },
-  MOVIES: {
-    TITLE: "Phim",
-    MOVIES_LIST: "Danh Sách Phim",
-    MOVIES_PRO_LIST: "Danh Sách Phim Pro",
+  BUILDER: {
+    TITLE: "Builder",
+    DYNAMIC_BLOCK: "Giao diện Block",
+    DYNAMIC_PAGE: "Giao diện Trang",
   },
   POST: {
-    TITLE: "Posts",
-    LIST: "List Post",
-    CREATE: "Create Post",
-    EDIT: "Edit Post",
+    TITLE: "Bài viết",
+    LIST: "Danh sách bài viết",
+    CREATE: "Tạo bài viết",
+    EDIT: "Sửa bài viết",
+  },
+  PRODUCT: {
+    TITLE: "Sản phẩm",
+    LIST: "Danh sách sản phẩm",
+    CREATE: "Tạo sản phẩm",
+    EDIT: "Sửa sản phẩm",
   },
   EXCEPTION: {
-    TITLE: "Exception",
-    403: "No Permission",
-    404: "Not Found",
-    500: "Server Error",
+    TITLE: "Lỗi ngoại lệ",
+    403: "Không có quyền",
+    404: "Không tìm thấy",
+    500: "Lỗi máy chủ",
   },
 };

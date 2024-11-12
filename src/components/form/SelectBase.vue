@@ -14,7 +14,7 @@
       :allow-clear="allowClear"
       :placeholder="placeholder"
       @change="handleChange"
-      @search="handleSearch"
+      class="min-w-36"
     >
       <el-option v-for="(item, index) in attrs.options" :key="item?.id + index" :value="item?.id" :label="item.name">
         <template #label="{ value }">
@@ -43,7 +43,7 @@ const props = defineProps({
   rules: { type: [String, Object], default: "" },
 });
 
-const emit = defineEmits(["onSearch"]);
+const emit = defineEmits(["onChange"]);
 
 const { te } = useI18n();
 const attrs = useAttrs();
@@ -51,9 +51,10 @@ const attrs = useAttrs();
 const name = toRef(props, "name");
 const rules = toRef(props, "rules");
 
-const { value, errorMessage, handleChange } = useField(name, rules);
+const { value, errorMessage } = useField(name, rules);
 
-const handleSearch = (values: string | number) => {
-  emit("onSearch", { value: values });
+const handleChange = (values: string | number) => {
+  emit("onChange", { key: name.value, value: values });
 };
 </script>
+<style lang="scss" scoped></style>

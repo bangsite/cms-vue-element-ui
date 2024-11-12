@@ -13,16 +13,6 @@ export const Builder = {
   },
   children: [
     {
-      path: "dynamic-block",
-      name: "DynamicBlock",
-      component: () => import("@/views/builder/DynamicBlock.vue"),
-      beforeEnter: [AuthGuard],
-      meta: {
-        title: i18n.global.t("ROUTER.BUILDER.DYNAMIC_BLOCK"),
-        icon: "radix-icons:section",
-      },
-    },
-    {
       path: "dynamic-page",
       name: "DynamicPage",
       component: () => import("@/views/builder/DynamicPage.vue"),

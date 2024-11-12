@@ -1,46 +1,34 @@
 <template>
   <div class="auth__right">
     <div class="auth__header">
-      <div class="auth__header-logo">
-        <SvgIcon :icon="'logos:zenhub-icon'" :size="30"></SvgIcon>
+      <div class="bg-gray-50 flex items-center justify-center mb-6 w-[60px] h-[60px] rounded-full">
+        <SvgIcon :icon="'logos:zenhub-icon'" :size="30" />
       </div>
-      <h3 class="auth__header-title">System Manager</h3>
-      <p class="auth__header-subtitle">
-        A management system is in place for analytics and informative and just beautiful.
-      </p>
+      <h2 class="text-2xl mb-2">Create account</h2>
+      <p class="max-w-lg text-center">Welcome back! Please your enter details</p>
     </div>
     <div class="auth__form">
-      <el-form :labelPosition="'top'" ref="formRef" class="form">
-        <el-form-item label="Email">
-          <InputBase name="email" rules="required|email" placeholder="Enter email..." style="width: 100%" />
-        </el-form-item>
+      <el-form require-asterisk-position="right" labelPosition="top" ref="formRef" class="form">
+        <InputBase label="Email" name="email" rules="required|email" placeholder="Enter email..." style="width: 100%" />
 
-        <el-form-item label="Password">
-          <PasswordBase name="password" rules="required" placeholder="Enter password..." style="width: 100%" />
-        </el-form-item>
+        <PasswordBase
+          label="Password"
+          name="password"
+          rules="required|password|max:30"
+          placeholder="Enter password..."
+          style="width: 100%"
+        />
 
-        <el-form-item>
-          <el-button size="large" type="primary" class="btn-submit mb-10" :disabled="isLoading" @click="onSubmit"
-            >Sign up
-          </el-button>
-          <span class="w-full text-center"><strong>OR</strong></span>
-
-          <el-row :gutter="10" justify="center" class="w-full">
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'flat-color-icons:google'" :size="24" />
-            </el-button>
-            <el-button size="large" class="btn-login--social" @click="handleLoginWith" disabled circle>
-              <SvgIcon :icon="'logos:facebook'" :size="24" />
-            </el-button>
-          </el-row>
-
-          <el-divider />
-          <el-row :gutter="10" justify="center" class="w-full">
-            <span class="mr-5">Already have an account ? </span>
-            <el-link href="#" @click="handleRegisterNew">Sign in</el-link>
-          </el-row>
-        </el-form-item>
+        <el-button size="large" type="primary" class="btn-submit mb-4 mt-4" :disabled="isLoading" @click="onSubmit"
+          >Sign up
+        </el-button>
       </el-form>
+      <div class="flex flex-col">
+        <el-row :gutter="10" justify="center" class="w-full">
+          <span class="mr-1 text-gray-600">Don't have an account yet ? </span>
+          <el-link href="#" @click="handleRegister"><strong>Sign in</strong></el-link>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -54,13 +42,14 @@ import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 
 import { useAuthStore } from "@/stores/auth.store";
-import useFetchAuth from "@/hooks/useFetchAuth";
-import type { Access, Register } from "@/types";
+import useAuth from "@/hooks/api/useAuth";
+
+import type { Register } from "@/types";
 // import { transformErrors } from "@/shared/utils/transformErrors";
 
 const router = useRouter();
-const { doSignUp, response, errors, isLoading } = useFetchAuth();
-const { setUserInfo, setToken, setLayoutForm } = useAuthStore();
+const { doRegister, response, errors, isLoading } = useAuth();
+const { setUserInfo, setLayoutAuth } = useAuthStore();
 
 const ruleForm = ref<Register>({
   email: "",
@@ -70,26 +59,17 @@ const ruleForm = ref<Register>({
 const { handleSubmit, setErrors } = useForm({ initialValues: { ...ruleForm.value } });
 
 const onSubmit = handleSubmit(async (values, actions) => {
-  await doSignUp(values);
+  await doRegister(values);
 
-  if (response.value) {
-    const { shop, tokens } = response.value;
+  const { shop }: Record<string, any> = response.value || {};
+  if (shop) setUserInfo(shop);
 
-    if (shop) setUserInfo(shop);
-    if (tokens) setToken(tokens);
-  }
+  if (errors.value) console.log("errors:::", errors.value);
 
-  if (errors.value) {
-    console.log("errors:::", errors.value);
-  }
-
-  await router.push("/dashboard");
+  await router.push("/");
 
   actions.resetForm();
 });
 
-const handleLoginWith = () => {};
-const handleRegisterNew = () => {
-  setLayoutForm("LoginForm");
-};
+const handleRegister = () => setLayoutAuth("LoginForm");
 </script>

@@ -9,11 +9,11 @@ import { libElementPlus } from "@/plugins/element-plus";
 import { libVeeValidate } from "@/plugins/vee-validate";
 import { libVueQuery } from "@/plugins/vue-query";
 import { libVueCountUp3 } from "@/plugins/vue-countup";
+import { libVueJsonPretty } from "@/plugins/vue-json-pretty";
 // import { libApexCharts } from "@/plugins/apex-charts";
-import { libVueDraggableNext } from "@/plugins/vue-draggable-next";
+import { libVueDraggablePlus } from "@/plugins/vue-draggable-plus";
 
 // import { clickOutsideEvent } from "./directives";
-
 // @ts-ignore
 import App from "./App.vue";
 
@@ -25,16 +25,12 @@ const app = createApp(App);
 async function setupAppAll() {
   // Setup I18n
   await setupI18n(app);
-
-  // Setup Store
-  setupPinia(app);
-
-  // Setup TinyMCE
-  setupTinyMCE(app);
-
   // Setup Router
   await setupRouter(app);
-
+  // Setup Store
+  setupPinia(app);
+  // Setup TinyMCE
+  setupTinyMCE(app);
   // Setup Element Plus
   libElementPlus(app);
 
@@ -46,16 +42,17 @@ async function setupAppAll() {
 
   // Setup  ApexCharts
   // libApexCharts(app);
-
-  // Setup VueDraggableNext
-  libVueDraggableNext(app);
+  // Setup VueDraggablePlus
+  libVueDraggablePlus(app);
 
   // Setup VueCountUp 3
   libVueCountUp3(app);
 
+  // Setup Vue Json Pretty
+  libVueJsonPretty(app);
+
   // Directives
   app.directive("click-outside", clickOutside);
-
   app.mount("#app");
 }
 

@@ -1,17 +1,22 @@
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import { getTrendingAnime } from "@/services/modules/animeJikan.service";
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/useLoadingFullSceen";
 import { convertPagination } from "@/utils/convertPagination";
+import type { Pagination } from "@/types";
 
 export default function useAnimeJikan() {
   const isLoading = ref(false);
   const response = ref([]);
-  const paginationAPI = ref({});
   const errors = ref(null);
+  const paginationAPI = ref<Pagination>({
+    page: 1,
+    limit: 10,
+    currentPage: 1,
+    pageSize: 1,
+    total: 0,
+  });
 
   const fetchTopAnimes = async (params: { [key: string]: any }) => {
     isLoading.value = true;
-    showFullScreenLoading();
 
     try {
       const res = await getTrendingAnime({ params: { ...params } });
@@ -24,12 +29,14 @@ export default function useAnimeJikan() {
       errors.value = data;
     } finally {
       isLoading.value = false;
-      hideFullScreenLoading();
     }
   };
 
   return {
-    ...toRefs({ isLoading, response, paginationAPI, errors }),
+    isLoading,
+    response,
+    paginationAPI,
+    errors,
     fetchTopAnimes,
   };
 }

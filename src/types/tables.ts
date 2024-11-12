@@ -1,6 +1,6 @@
 import type { TableColumnCtx } from "element-plus";
 import type { Ref, VNode } from "vue";
-import type { PaginationApi } from "./pagination";
+import type { Pagination } from "./pagination";
 
 export interface EnumProps {
   label?: string;
@@ -25,9 +25,11 @@ export type HeaderRenderScope<T> = {
   [key: string]: any;
 };
 
+// Extend Library
 export interface ColumnProps<T = any>
   extends Partial<Omit<TableColumnCtx<T>, "type" | "children" | "renderCell" | "renderHeader">> {
   type?: TypeProps;
+  render?: any | undefined;
   tag?: boolean | Ref<boolean>;
   isShow?: boolean | Ref<boolean>;
   search?: any | undefined;
@@ -38,29 +40,41 @@ export interface ColumnProps<T = any>
   _children?: ColumnProps<T>[];
 }
 
+// Custom
+export interface TableColumnProps {
+  prop?: string;
+  label?: string;
+  type?: "input" | "select" | "date" | "sort" | "selection";
+  width?: number;
+  showOverflowTooltip?: boolean;
+  fixed?: string;
+  search?: { el: string; props?: Record<string, any> };
+}
+
 export interface TableBasicProps {
+  border?: boolean;
   columns: any[];
   customCols: string[];
   dataTables: any[];
-  title?: string;
-  pagination?: Record<string, any>;
+  pagination?: Pagination;
   showOperations?: boolean;
-  initParam?: any;
-  border?: boolean;
-  toolButton?: ("refresh" | "setting" | "search")[] | boolean;
+  title?: string;
   rowKey?: string;
+  refreshTables?: boolean;
 }
 
 export interface TableProProps {
+  border?: boolean;
   columns: any[];
   customCols?: any[];
   customClass?: string;
   dataTables: any[];
-  rowKey?: string;
-  pagination?: PaginationApi;
-  border?: boolean;
   defaultSort?: { prop: string; order: "ascending" | "descending" };
+  pagination?: Pagination;
+  showOperations?: boolean;
   title?: string;
+  rowKey?: string;
+  refreshTables?: boolean;
 }
 
 export interface TableHeaderProps {

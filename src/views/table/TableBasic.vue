@@ -63,7 +63,6 @@
       <template #browser="scope">
         <div class="flex items-center gap-1">
           <img :src="`/images/browser/${scope.row.img}`" alt="browser" width="30" />
-          <!--          <img v-if="scope.row.img" :src="getImageUrl(`${scope.row.img}`)" alt="browser" width="30" />-->
           <span>{{ scope.row.name }}</span>
         </div>
       </template>

@@ -1,67 +1,66 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { setCookie } from "@/utils/useCookies";
-import type { Shop, Tokens } from "@/types";
-
-// Define state type
-interface AuthState {
-  userInfo: Shop;
-  tokens: Tokens;
-  layoutForm: string;
-  isLoading: boolean;
-}
+import { ClientStorage, deleteCookie, setCookie } from "@/utils";
+import type { AuthState, Tokens } from "@/types";
 
 export const useAuthStore = defineStore("AuthStore", {
-  state: (): AuthState => ({
-    userInfo: {
-      id: "",
-      name: "",
-      email: "",
-      roles: ["ADMIN"],
+  state: (): AuthState =>
+    <AuthState>{
+      userInfo: {
+        id: "",
+        name: "",
+        email: "",
+        roles: [],
+      },
+      layoutForm: "LoginForm",
+      isAuth: false,
     },
-    tokens: { accessToken: "", refreshToken: "" },
-    layoutForm: "LoginForm",
-    isLoading: false,
-  }),
 
   getters: {
     isLogin(): boolean {
-      return Boolean(this.tokens?.accessToken);
+      return this.isAuth;
     },
   },
 
   actions: {
-    setLayoutForm(name: string) {
+    setLayoutAuth(name: string) {
       this.layoutForm = name;
     },
-    setUserInfo(data: Partial<Shop>) {
-      if (data.id && data.name && data.email) {
+
+    setUserInfo(user: Record<string, any>) {
+      if (user && Object.keys(user).length > 0) {
         this.userInfo = {
-          ...this.userInfo,
-          ...data,
+          id: user._id || user.user_id,
+          name: user.user_name || user.shop_name || user.admin_name,
+          email: user.user_email || user.shop_email || user.admin_email,
+          roles: [user.user_role || user.shop_role || user.admin_role],
         };
+
+        this.isAuth = true;
+
+        ClientStorage.save("__user_info__", { ...this.userInfo });
+        ClientStorage.save("__is_auth__", this.isAuth);
       }
     },
 
     setToken(tokens: Partial<Tokens>) {
       const { accessToken, refreshToken } = tokens;
 
-      if (accessToken) {
-        this.tokens.accessToken = accessToken;
-        // localStorage.setItem("x-key-at", accessToken);
-        setCookie("__x_key_at", accessToken);
-      }
-
-      if (refreshToken) setCookie("__x_key_rf", refreshToken, { "max-age": 604800 });
+      if (accessToken) setCookie("__x_key_at__", accessToken);
+      if (refreshToken) setCookie("__x_key_rf__", refreshToken);
     },
 
     resetAuth() {
+      ClientStorage.clear();
+      deleteCookie("__x_key_at__");
+      deleteCookie("__x_key_rf__");
+
       this.userInfo = {
         id: "",
         name: "",
         email: "",
         roles: [],
       };
-      this.tokens = { accessToken: "", refreshToken: "" };
+      this.isAuth = false;
     },
   },
 });

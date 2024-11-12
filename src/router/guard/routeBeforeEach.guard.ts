@@ -1,32 +1,44 @@
 import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
-// import { useAuthStore } from "@/stores/auth.store";
 import { useTitle } from "@/hooks/useTitle";
-import { getCookie } from "@/utils/useCookies";
-import { hideFullScreenLoading, showFullScreenLoading } from "@/hooks/useLoadingFullSceen";
+import { hideLoading, showLoading } from "@/hooks/useLoading";
+import useAuth from "@/hooks/api/useAuth";
 
+import { ClientStorage } from "@/utils";
+import { getParameterByName } from "@/utils/getParameterFromUrl";
 /**
  * If the user is not authenticated and the route is not the login route, redirect to the login route
  * @param {RouteLocationNormalized} to - The route we are navigating to
  * @param {RouteLocationNormalized} from - The route we are coming from
  * @param {NavigationGuardNext} next - This is a function that you must call to resolve the hook.
  */
-const routeBeforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  showFullScreenLoading();
+const routeBeforeEach = async (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  showLoading({ fullscreen: true });
+  const { authCallback } = useAuth();
 
-  // const authStore = useAuthStore();
+  const isAuth = ClientStorage.load("__is_auth__");
+  const provider: string | null = ClientStorage.load("__provider__");
+  const code = getParameterByName("code");
 
-  if (to.name !== "Login" && !getCookie("__x_key_at")) {
-    next({ name: "Login" });
-    hideFullScreenLoading();
-  } else {
+  // login SSO
+  if (provider && code) {
+    await authCallback(provider, code);
     next();
-    hideFullScreenLoading();
   }
-};
 
+  // login default
+  if (to.name !== "Login" && !isAuth) {
+    next({ name: "Login" });
+  } else next();
+
+  hideLoading();
+};
 const routeAfterEach = (to: RouteLocationNormalized) => {
   useTitle(to?.meta?.title as string);
-  hideFullScreenLoading();
+  hideLoading();
 };
 
 export { routeBeforeEach, routeAfterEach };

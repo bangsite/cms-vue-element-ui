@@ -86,4 +86,4 @@ web_modules/
 ### Source ###
 .DS_Store
 coverage
-
+bundle-analysis.html

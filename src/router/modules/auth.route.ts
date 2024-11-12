@@ -7,7 +7,7 @@ export const Auth = {
   component: () => import("@/views/auth/LoginView.vue"),
   beforeEnter: [LoginGuard],
   meta: {
-    title: i18n.global.t("router.login.title"),
+    title: i18n.global.t("ROUTER.LOGIN.TITLE"),
     hidden: true,
     noTagsView: true,
   },

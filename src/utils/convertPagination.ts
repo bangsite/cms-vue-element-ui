@@ -1,19 +1,28 @@
-import type { PaginationApi } from "@/types";
+import type { Pagination } from "@/types";
+import { convertKeysToCamelCase } from "@/utils/fortmatString";
 
-const pagination: PaginationApi = {
+const pagination: Pagination = {
   currentPage: 1,
   pageSize: 10,
-  total: 0,
   pageCount: 0,
+  total: 0,
 };
 
-export const convertPagination = (paginationAPI: { [keys: string]: any }) => {
-  pagination.currentPage = paginationAPI?.current_page || paginationAPI?.items?.current_page;
-  pagination.total = paginationAPI?.total || paginationAPI?.items?.total;
-  pagination.pageSize = paginationAPI?.per_page || paginationAPI?.items?.per_page;
-  pagination.pageCount =
-    Math.ceil(paginationAPI.total / paginationAPI?.per_page) ||
-    Math.ceil(paginationAPI?.items?.total / paginationAPI?.items?.per_page);
+const calPageCount = (total: number, pageSize: number) => {
+  if (!total) return 0;
+
+  return Math.ceil(total / pageSize);
+};
+
+export const convertPagination = (data: { [keys: string]: any }) => {
+  if (!data) return pagination;
+
+  const dataNew = convertKeysToCamelCase(data);
+
+  pagination.currentPage = dataNew?.currentPage || 1;
+  pagination.total = dataNew?.items.total || dataNew?.total || 0;
+  pagination.pageSize = dataNew?.items.perPage || dataNew?.perPage || 10;
+  pagination.pageCount = dataNew?.pageCount ? dataNew?.pageCount : calPageCount(pagination.total, pagination.pageSize);
 
   return pagination;
 };

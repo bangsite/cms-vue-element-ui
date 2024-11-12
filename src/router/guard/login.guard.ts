@@ -1,8 +1,9 @@
-import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
-import { getCookie } from "@/utils/useCookies";
+import type { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
+import { ClientStorage } from "@/utils";
 
 export const LoginGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  if (to.name === "Login" && getCookie("__x_key_at")) {
+  const isAuth = ClientStorage.load("__is_auth__");
+  if (to.name === "Login" && isAuth) {
     return next({ name: "Dashboard" });
   } else next();
 };

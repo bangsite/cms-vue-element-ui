@@ -1,89 +1,112 @@
-# CMS Vue 3
+# Dashboard Vue
 
-CMS Vue 3 is template featuring a collection of components styled with Typescript, Antdesign, Pinna,... , built with Vite.
-It includes file-based routing, auto-importing for components, state management via Pinna, a layout system, PWA support and more."
+Dashboard Vue is a Vue 3-based CMS template built with TypeScript and integrated with Element Plus UI components. It
+leverages Vite for fast development, file-based routing, automatic component imports, and state management with Pinia.
 
-## Recommended IDE Setup
+## Environment
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Node.js: >= 18.x
+- NPM: >= 10.x (or use Yarn if preferred)
+- Operating System: Windows, macOS
 
-## Type Support for `.vue` Imports in TS
+## Features
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- **Multiple languages**：Built-in support for multiple languages.
+- **Authority** Built-in complete dynamic routing permission generation scheme.
+- **Component** Multiple commonly used components are encapsulated twice
+- **Examples** Built-in rich examples
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Preparation
 
-1. Disable the built-in TypeScript Extension
-    1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- [node](http://nodejs.org/) and [git](https://git-scm.com/) - Project development environment
+- [Vite](https://vitejs.dev/) - Familiar with vite features
+- [Vue3](https://v3.vuejs.org/) - Familiar with Vue basic syntax
+- [TypeScript](https://www.typescriptlang.org/) - Familiar with the basic syntax of `TypeScript`
+- [Vue Router](https://router.vuejs.org/) - The official Router for Vue.js
+- [Pinia](https://pinia.vuejs.org/) - The intuitive store for Vue.js
+- [Element-Plus](https://element-plus.org/) - Familiar with the basic use of element-plus
 
-## Customize configuration
+## Setup
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+Install Dependencies:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Start Development Server:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Build for Production:
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Run Unit Tests:
 
 ```sh
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+Run End-to-End Tests for development:
 
 ```sh
 npm run test:e2e:dev
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+Run End-to-End Tests for production:
 
 ```sh
 npm run build
 npm run test:e2e
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Lint the Code:
 
 ```sh
 npm run lint
 ```
 
-## Ecosystem
+## How to contribute
+<a href="https://github.com/bangsite/cms-vue-element-ui/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=bangsite/cms-vue-element-ui"  alt="contribute"/>
+</a>
 
-| Package                   | Version                                                                                                                                                                                                                                                                                                                                                     |
-|---------------------------| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| vite                      | [![NPM version](https://img.shields.io/npm/v/vite.svg)](https://npmjs.com/package/vite)                                                                                                                                                                                                                                                                     |
-| create-vite               | [![NPM version](https://img.shields.io/npm/v/@vitejs/plugin-vue.svg)](https://www.npmjs.com/package/create-vite)                                                                                                                                                                                                                                            |
-| vuejs/core                | [![NPM version](https://img.shields.io/npm/v/vue.svg)](https://www.npmjs.com/package/vue)                                                                                                                                                                                                                                                                   |
-| vue-router                | [![NPM version](https://img.shields.io/npm/v/vue-router.svg)](https://www.npmjs.com/package/vue-router)                                                                                                                                                                                                                                                     |
-| pinna                     | [![NPM version](https://badgen.net/npm/v/pinia)](https://npmjs.com/package/pinia)                                                                                                                                                                                                                                                                           |
-| element-plus              | [![NPM version](https://img.shields.io/npm/v/element-plus.svg)](https://www.npmjs.org/package/element-plus)                                                                                                                                                                                                                                                                           |
-| eslint                    | [![NPM version](https://img.shields.io/npm/v/eslint.svg)](https://www.npmjs.com/package/eslint)                                                                                                                                                                                                                                                             |
-| eslint-plugin-vue         | [![NPM version](https://img.shields.io/npm/v/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)                                                                                                                                                                                                                                |
-| prettier                  | [![NPM version](https://img.shields.io/npm/v/prettier.svg?style=flat-square)](https://www.npmjs.com/package/prettier)                                                                                                                                                                                                                                       |
-| commitlint                | [![NPM version](https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square)](https://www.npmjs.com/package/@commitlint/cli)                                                                                                                                                                                                                         |
-| commitizen                | [![NPM version](https://img.shields.io/npm/v/commitizen.svg)](https://www.npmjs.com/package/commitizen)                                                                                                                                                                                                                                                     |
-| commitlint-config-gitmoji | [![NPM version](https://camo.githubusercontent.com/f6b4d5145a2c07be8f4b0ea42d13d321ca361378fc5c2014b5b027637a352780/687474703a2f2f696d672e736869656c64732e696f2f6e706d2f762f636f6d6d69746c696e742d636f6e6669672d6769746d6f6a692e7376673f636f6c6f723d64656570677265656e266c6162656c3d6c6174657374)](https://www.npmjs.com/package/commitlint-config-gitmoji) |
-| cz-customizable           | [![NPM version](https://img.shields.io/npm/v/prettier.svg?style=flat-square)](https://www.npmjs.com/package/cz-customizable)                                                                                                                                                                                                                                |
+You can [Raise an issue](https://github.com/bangsite/cms-vue-element-ui/issues/new) Or submit a Pull Request.
 
-### Commit Message Format
+**Pull Request:**
+
+1. Fork code
+2. Create your own branch: `git checkout -b feat/xxxx`
+3. Submit your changes: `git commit -am 'feat(function): add xxxxx'`
+4. Push your branch: `git push origin feat/xxxx`
+5. Submit `pull request`
+
+## Git Contribution submission specification
+
+- `feat` New features
+- `fix` Fix bugs
+- `docs` document
+- `style` Format and style (changes that do not affect code operation)
+- `refactor` Refactor
+- `perf` Optimize related, such as improving performance and experience
+- `test` Add test
+- `build` Compilation related modifications, changes to project construction or dependencies
+- `ci` Continuous integration modification
+- `chore` Changes in the construction process or auxiliary tools
+- `revert` Rollback to previous version
+- `workflow` Workflow improvement
+- `mod` Uncertain modification classification
+- `wip` Under development
+- `types` type
+
+## Change Log
+
+[CHANGELOG](./CHANGELOG.md)
+
+## License
+[MIT](./LICENSE)

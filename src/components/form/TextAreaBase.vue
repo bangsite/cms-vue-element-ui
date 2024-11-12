@@ -29,14 +29,10 @@ import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 
 const props = defineProps({
-  labelDisplay: { type: Boolean, default: true },
-  //   disabled: { type: Boolean, default: false },
-  rules: { type: [String, Object], default: "" },
-  rulesAttrMessage: {
-    type: [Object],
-    default: () => {},
-  },
   ...inputProps,
+  labelDisplay: { type: Boolean, default: true },
+  rules: { type: [String, Object], default: "" },
+  rulesAttrMessage: { type: [Object], default: () => {} },
   name: { type: String, required: true },
   rows: { type: Number },
 });

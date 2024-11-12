@@ -1,10 +1,12 @@
 type ID = string;
+
 export interface Board {
   id: ID;
   title: string;
   tasks: Tasks[];
   deleted?: boolean;
 }
+
 export interface Tasks {
   id: ID;
   title?: string;
@@ -12,4 +14,13 @@ export interface Tasks {
   completed?: boolean;
   deleted?: boolean;
   createdAt?: Date;
+}
+
+export interface TaskFormProps {
+  columns: any[];
+  data: { [key: string]: any };
+  edit?: boolean;
+  labelPosition?: string;
+  title?: string;
+  selectData?: any[];
 }

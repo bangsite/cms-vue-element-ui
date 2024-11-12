@@ -2,13 +2,14 @@
   <div>
     <FormSearch
       v-show="isShowSearch"
+      :search-title="'Search Post'"
+      :search-columns="searchPostColumns"
+      :search-param="searchParams"
+      :search-select-data="searchData"
       @search="onSearch"
-      @reset="onReset"
-      :searchTitle="searchTitle"
-      :searchColumns="searchColumns"
-      :searchParam="searchParam"
-      :search-select-data="ANIME_SEARCH_TYPE"
+      @reset="onResetSearch"
     />
+
     <el-card title="Posts">
       <template #header>
         <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
@@ -17,13 +18,16 @@
         </div>
       </template>
 
-      <TableHeader :tool-button="true" @toggle-search="onToggleSearch" @refresh-data="onRefreshData" />
+      <TableHeader :tool-button="true" @toggle-search="onToggleSearch" @refresh-data="onRefreshTable" />
 
       <TableList
         ref="tablePost"
-        :columns="columns"
+        :columns="postColumns"
         :data-tables="data && data.length > 0 ? data : []"
         :custom-cols="customCols"
+        :refreshTables="isRefreshTable"
+        @pagination="onPaginationChange"
+        @sorted="onSortChange"
       >
         <!-- date -->
         <template #date="scope">
@@ -59,26 +63,49 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
-import TableList from "@/components/tables/TableList.vue";
+import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
 
+import useTables from "@/hooks/useTables";
 import { COLUMN_POST } from "@/views/post/composables/useColumnPost";
 import { DATA_POST } from "@/db";
-import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
+import { POST_SEARCH_TAGS } from "@/enums/post.enum";
 import { dateTime } from "@/utils/formatDateTime";
-import { ANIME_SEARCH_TYPE } from "@/enums/anime.enum";
+
 import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";
+import TableList from "@/components/tables/TableList.vue";
 
-const customCols = reactive(["date", "tags", "operations"]);
 const isShowSearch = ref(true);
-const searchTitle = ref("Search Post");
-const searchParam = ref({});
-
-const columns = computed(() => COLUMN_POST);
-const data = computed(() => DATA_POST);
-const searchColumns = computed(() => {
-  return columns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
+const searchData = reactive({ tags: POST_SEARCH_TAGS });
+const customCols = reactive(["date", "tags", "operations"]);
+const initParams = reactive({
+  filter: "",
+  sort: "desc",
+  orderBy: "",
 });
+
+const initPaginationParams = reactive({
+  page: 1,
+  limit: 10,
+  pageSize: 10,
+  currentPage: 1,
+  total: 0,
+});
+
+const initSearchParams = reactive({
+  type: "",
+  rating: "",
+});
+
+const { searchParams, isRefreshTable, onSearch, onResetSearch, onRefreshTable, onPaginationChange, onSortChange } =
+  useTables(undefined, initParams, initSearchParams, initPaginationParams);
+const data = computed(() => DATA_POST);
+const postColumns = computed(() => COLUMN_POST);
+const searchPostColumns = computed(() => {
+  return postColumns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
+});
+
+const onToggleSearch = (data: boolean) => (isShowSearch.value = data);
 
 const handleCreate = () => {};
 
@@ -89,14 +116,6 @@ const handleEdit = (key: string, record: Record<string, any>) => {
 const handleDelete = (record: Record<string, any>) => {
   console.log("delete row:", record);
 };
-
-const onSearch = () => {};
-
-const onReset = () => {};
-
-const onToggleSearch = (data: boolean) => (isShowSearch.value = data);
-
-const onRefreshData = async () => {};
 </script>
 
 <style scoped></style>

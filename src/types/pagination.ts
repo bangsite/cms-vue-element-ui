@@ -1,9 +1,9 @@
-export interface PaginationApi {
-  pageSize?: number;
-  total?: number;
+export interface Pagination {
+  [key: string]: any;
+  currentPage: number;
+  pageSize: number;
+  total: number;
   pageCount?: number;
-  pagerCount?: number;
-  currentPage?: number;
   prevText?: string;
   nextText?: string;
 }
