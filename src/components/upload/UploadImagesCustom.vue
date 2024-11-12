@@ -6,7 +6,7 @@
       </div>
     </template>
 
-    <div class="flex items-center justify-between gap-2 mb-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-2 mb-4">
       <UploadInputValidate
         name="files"
         accept=".png, .jpg, .jpeg"
@@ -30,7 +30,7 @@
 
       <template v-if="dataFiles && dataFiles.length > 0">
         <div
-          class="bg-[#fafafa] border border-gray-300 border-dashed rounded-md flex flex-col gap-2 bg-white p-4 w-fit flex-grow overflow-y-auto h-[36vh]"
+          class="bg-[#fafafa] border border-gray-300 border-dashed rounded-md flex flex-col gap-2 p-4 w-full flex-grow overflow-y-auto h-[36vh]"
         >
           <div
             v-for="file in dataFiles"
@@ -54,7 +54,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="border border-gray-300 border-dashed flex-grow rounded-md h-[36vh] w-fit">
+        <div class="border border-gray-300 border-dashed flex-grow rounded-md h-[36vh] w-full">
           <el-empty description="No data" />
         </div>
       </template>
@@ -75,7 +75,7 @@ import UploadInputValidate from "@/components/upload/UploadInputValidate.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import { ClientStorage, formatFileSize, truncateImageFile } from "@/utils";
 
-const props = defineProps({
+defineProps({
   label: { type: String },
   uploadStatus: { type: [Boolean], default: false },
   uploadError: { type: [Object, String] },
@@ -122,9 +122,10 @@ const handleReset = () => {
 <style lang="scss">
 //override el
 .upload-custom {
-  width: 55%;
+  //width: 55%;
   height: 36vh;
   margin-bottom: 0;
+  @apply w-full md:w-[55%];
 
   .el-upload {
     border-width: 2px;

@@ -31,7 +31,7 @@
       >
         <!-- date -->
         <template #date="scope">
-          {{ dateTime(scope.row.date) }}
+          {{ dateYMD(scope.row.date) }}
         </template>
 
         <!-- tags -->
@@ -69,7 +69,7 @@ import useTables from "@/hooks/useTables";
 import { COLUMN_POST } from "@/views/post/composables/useColumnPost";
 import { DATA_POST } from "@/db";
 import { POST_SEARCH_TAGS } from "@/enums/post.enum";
-import { dateTime } from "@/utils/formatDateTime";
+import { dateYMD } from "@/utils/formatDateTime";
 
 import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";

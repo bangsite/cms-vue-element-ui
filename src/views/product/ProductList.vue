@@ -72,7 +72,6 @@ import TableList from "@/components/tables/TableList.vue";
 import useTables from "@/hooks/useTables";
 import useProduct from "@/hooks/api/useProduct";
 import { COLUMN_PRODUCT, PRODUCT_SEARCH_TYPE } from "@/enums/product.enum";
-import UpcomingEvents from "@/views/dashboard/components/UpcomingEvents.vue";
 
 const isShowSearch = ref(true);
 const searchData = reactive({ product_type: PRODUCT_SEARCH_TYPE });

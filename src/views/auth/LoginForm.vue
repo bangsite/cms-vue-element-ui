@@ -20,12 +20,10 @@
         />
 
         <el-form-item>
-          <el-col :span="16">
+          <div class="flex items-center justify-between w-full">
             <el-checkbox v-model:checked="ruleForm.remember">Remember me</el-checkbox>
-          </el-col>
-          <el-col :span="8" style="text-align: end">
             <el-link href="#" disabled>Recovery Password</el-link>
-          </el-col>
+          </div>
         </el-form-item>
 
         <el-button size="large" type="primary" class="btn-submit mb-4" :disabled="isLoading" @click="onSubmit"
