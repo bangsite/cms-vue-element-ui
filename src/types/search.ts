@@ -6,6 +6,7 @@ export interface SearchColumn {
   showOverflowTooltip?: boolean;
   fixed?: string;
   search?: { el: string; props?: Record<string, any> };
+  placeholder?: string;
 }
 
 export interface SearchProps {

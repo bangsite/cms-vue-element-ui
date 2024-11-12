@@ -1,4 +1,4 @@
-export type LocaleType = "en-US" | "ja-JP" | "vi-VN";
+export type LocaleType = "en" | "ja" | "vi";
 
 export interface LocaleDropdownOption {
   lang: string;

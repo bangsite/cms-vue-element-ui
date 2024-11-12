@@ -1,32 +1,70 @@
-import useApi from "@/hooks/api/useApi";
+import { ref } from "vue";
 import { deleteMedia, listMedia, uploadMedia, uploadMedias } from "@/services/modules/media.service";
+import type { Images } from "@/types";
 
 export default function useMedia() {
-  const { handleApiCall, isLoading, response, errors } = useApi();
+  const isLoading = ref(false);
+  const response = ref<Images>(null);
+  const errors = ref(null);
 
   const getListImage = async () => {
-    await handleApiCall(listMedia, { transformResponse: (res: any) => res?.data?.data || [] });
+    isLoading.value = true;
+    try {
+      const res = await listMedia();
+      response.value = res?.data?.data || null;
+    } catch (error: any) {
+      errors.value = error.response?.data || error.message || null;
+    } finally {
+      isLoading.value = false;
+    }
   };
 
-  const uploadImage = async (data: Record<string, any>) => {
-    await handleApiCall(uploadMedia, data);
+  const uploadImage = async (id: string, data: Record<string, any>) => {
+    isLoading.value = true;
+
+    try {
+      const res = await uploadMedia(id, data);
+      response.value = res?.data?.data || null;
+    } catch (error: any) {
+      errors.value = error.response?.data || error.message || null;
+    } finally {
+      isLoading.value = false;
+    }
   };
 
   const uploadImages = async (data: Record<string, any>) => {
-    await handleApiCall(uploadMedias, data);
+    isLoading.value = true;
+
+    try {
+      const res = await uploadMedias(data);
+      response.value = res?.data?.data || null;
+    } catch (error: any) {
+      errors.value = error.response?.data || error.message || null;
+    } finally {
+      isLoading.value = false;
+    }
   };
 
   const deleteImage = async (id: string) => {
-    await handleApiCall(deleteMedia, id);
+    isLoading.value = true;
+
+    try {
+      const res = await deleteMedia(id);
+      response.value = res?.data?.data || null;
+    } catch (error: any) {
+      errors.value = error.response?.data || error.message || null;
+    } finally {
+      isLoading.value = false;
+    }
   };
 
   return {
+    isLoading,
+    errors,
+    response,
     getListImage,
     uploadImage,
     uploadImages,
     deleteImage,
-    isLoading,
-    errors,
-    response,
   };
 }

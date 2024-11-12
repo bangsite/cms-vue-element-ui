@@ -12,6 +12,7 @@ export default function useAnimeJikan() {
     limit: 10,
     currentPage: 1,
     pageSize: 1,
+    total: 0,
   });
 
   const fetchTopAnimes = async (params: { [key: string]: any }) => {

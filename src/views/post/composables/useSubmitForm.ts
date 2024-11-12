@@ -1,24 +1,37 @@
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import type { RouteParamValue } from "vue-router";
 
 export const useSubmitForm = () => {
-  const responseApi = ref({});
-  const errorsApi = ref([]);
-  const status = ref({});
-  const onUpdate = (id: string | RouteParamValue[], value: Record<any, any>) => {
-    // check clean data
-    // call api
-    // return status
+  const isLoading = ref(false);
+  const response = ref([]);
+  const errors = ref(null);
+
+  const onUpdate = async (id: string | RouteParamValue[], value: Record<any, any>) => {
+    isLoading.value = true;
+    try {
+      // call api
+    } catch (error) {
+      console.log(error);
+    } finally {
+      isLoading.value = false;
+    }
   };
 
-  const onCreate = (value: Record<any, any>) => {
-    // check clean data
-    // call api
-    // return status
+  const onCreate = (data: Record<any, any>) => {
+    isLoading.value = true;
+    try {
+      // call api
+    } catch (error) {
+      console.log(error);
+    } finally {
+      isLoading.value = false;
+    }
   };
 
   return {
-    ...toRefs({ responseApi, errorsApi, status }),
+    isLoading,
+    response,
+    errors,
     onCreate,
     onUpdate,
   };
