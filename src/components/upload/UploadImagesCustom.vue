@@ -55,7 +55,7 @@
       </template>
       <template v-else>
         <div class="border border-gray-300 border-dashed flex-grow rounded-md h-[36vh] w-full">
-          <el-empty description="No data" />
+          <el-empty description="No data" class="h-full" :image-size="90" />
         </div>
       </template>
     </div>
