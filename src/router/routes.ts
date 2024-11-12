@@ -39,7 +39,7 @@ export const routerMap = [
     path: "/:pathMatch(.*)*",
     component: () => import("@/views/exception/Error404.vue"),
     meta: {
-      title: i18n.global.t("router.exception.403"),
+      title: i18n.global.t("ROUTER.EXCEPTION.404"),
       hidden: true,
       noTagsView: true,
     },
@@ -49,7 +49,7 @@ export const routerMap = [
     name: "403",
     component: () => import("@/views/exception/Error403.vue"),
     meta: {
-      title: i18n.global.t("router.exception.403"),
+      title: i18n.global.t("ROUTER.EXCEPTION.403"),
       hidden: true,
       noTagsView: true,
     },
@@ -59,7 +59,7 @@ export const routerMap = [
     name: "404",
     component: () => import("@/views/exception/Error404.vue"),
     meta: {
-      title: i18n.global.t("router.exception.404"),
+      title: i18n.global.t("ROUTER.EXCEPTION.404"),
       hidden: true,
       noTagsView: true,
     },
@@ -69,7 +69,7 @@ export const routerMap = [
     name: "500",
     component: () => import("@/views/exception/Error500.vue"),
     meta: {
-      title: i18n.global.t("router.exception.500"),
+      title: i18n.global.t("ROUTER.EXCEPTION.500"),
       hidden: true,
       noTagsView: true,
     },
