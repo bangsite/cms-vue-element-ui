@@ -12,6 +12,7 @@
 
     <el-card class="rounded-md">
       <TableHeader :tool-button="true" @toggle-search="onToggleSearch" @refresh-data="onRefreshTable" />
+
       <DraggablePlus
         v-model="response"
         @start="onStart"
@@ -79,6 +80,8 @@ const initPaginationParams = reactive({
   page: 1,
   limit: 10,
   pageSize: 10,
+  currentPage: 1,
+  total: 0,
 });
 
 const initSearchParams = reactive({

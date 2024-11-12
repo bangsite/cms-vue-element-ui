@@ -8,25 +8,18 @@ interface Params {
 }
 
 export default function useTables(
-  fetchData: (params: Record<string, any>) => Promise<void>,
-  defaultParams?: Params = {},
-  defaultSearchParams?: Record<string, any> = {},
-  defaultPaginationParams?: Pagination = {}
+  fetchData?: (params: Record<string, any>) => Promise<void>,
+  defaultParams?: Params,
+  defaultSearchParams?: Record<string, any>,
+  defaultPaginationParams?: Pagination
 ) {
   const isRefreshTable = ref(false);
   const searchParams = reactive<Record<string, any>>(defaultSearchParams || {});
   const paginationParams = reactive<Pagination>({
-    page: 1,
-    limit: 10,
-    currentPage: 1,
-    pageSize: 1,
     ...defaultPaginationParams,
   });
 
   const params = reactive<Params>({
-    filter: "",
-    sort: "desc",
-    orderBy: "",
     ...defaultParams,
   });
 
@@ -46,18 +39,24 @@ export default function useTables(
     paginationParams.page = 1;
     paginationParams.currentPage = 1;
 
-    await fetchData({ ...params, ...searchParams, ...paginationParams });
+    if (fetchData) {
+      await fetchData({ ...params, ...searchParams, ...paginationParams });
+    }
   };
 
   const onResetSearch = async () => {
     resetParams();
-    await fetchData({ ...params, ...paginationParams });
+    if (fetchData) {
+      await fetchData({ ...params, ...paginationParams });
+    }
   };
 
   const onRefreshTable = async () => {
     isRefreshTable.value = true;
     resetParams();
-    await fetchData({ ...params, ...paginationParams });
+    if (fetchData) {
+      await fetchData({ ...params, ...paginationParams });
+    }
     isRefreshTable.value = false;
   };
 
@@ -70,17 +69,23 @@ export default function useTables(
       paginationParams.pageSize = data.pageSize;
       paginationParams.limit = data.pageSize;
     }
-
-    await fetchData({ ...params, ...searchParams, ...paginationParams });
+    if (fetchData) {
+      await fetchData({ ...params, ...searchParams, ...paginationParams });
+    }
   };
 
   const onSortChange = async (sortNew: string, orderByNew: string = "desc") => {
     params.sort = sortNew;
     params.orderBy = orderByNew;
-    await fetchData({ ...params, ...searchParams, ...paginationParams });
+
+    if (fetchData) {
+      await fetchData({ ...params, ...searchParams, ...paginationParams });
+    }
   };
 
-  const onDownloadCSV = async () => {};
+  const onDownloadCSV = async () => {
+    // Implement CSV download logic here
+  };
 
   return {
     params,

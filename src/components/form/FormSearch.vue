@@ -69,7 +69,10 @@ const searchParam = reactive({ ...props.searchParam });
 const getComponentType = (type: string) => searchComponent[type] || InputBase;
 const getComponentProps = (item: SearchColumn) => ({
   label: item.label,
-  placeholder: item.placeholder || `Enter ${item.label}`,
+  placeholder:
+    item.search.el === "select"
+      ? item.placeholder || `Select ${item.label}`
+      : item.placeholder || `Enter ${item.label}`,
   name: `${toLowerCase(item.search?.label || item.label)}`,
   options: item.search.el === "select" ? props.searchSelectData?.[item.prop] : [],
 });

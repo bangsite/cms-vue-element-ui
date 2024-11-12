@@ -1,4 +1,4 @@
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import { getOpenWeatherMap } from "@/services/modules/weather.service";
 
 export default function useFetchWeather() {
@@ -21,7 +21,9 @@ export default function useFetchWeather() {
   };
 
   return {
+    isLoading,
+    response,
+    errors,
     fetchDataWeather,
-    ...toRefs({ isLoading, response, errors }),
   };
 }

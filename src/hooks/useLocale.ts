@@ -1,4 +1,4 @@
-import { nextTick, ref } from "vue";
+import { ref } from "vue";
 import { i18n, loadLocaleMessages } from "@/plugins/vue-i18n";
 import { ClientStorage, setHtmlLang } from "@/utils";
 import type { LocaleType } from "@/types";

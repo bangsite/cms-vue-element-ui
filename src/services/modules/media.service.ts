@@ -15,11 +15,11 @@ const axiosConfig: AxiosRequestConfig = {
 const mediaApiService = BaseApiService.getInstance(axiosConfig);
 
 const listMedia = (config?: AxiosRequestConfig): Promise<any> => {
-  return mediaApiService.get(`/media/image`, { ...config });
+  return mediaApiService.get("/media/image", { ...config });
 };
 
 const uploadMedia = (data: Record<string, any>, config?: AxiosRequestConfig): Promise<any> => {
-  return mediaApiService.post(`/media/image`, data, { ...config });
+  return mediaApiService.post("/media/image", data, { ...config });
 };
 
 const uploadMedias = (data: Record<string, any>, config?: AxiosRequestConfig): Promise<any> => {

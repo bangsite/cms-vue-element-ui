@@ -56,7 +56,6 @@ onBeforeMount(async () => {
 });
 
 const handleRefresh = async () => {
-  response.value = [];
   await getListImage();
 };
 </script>
