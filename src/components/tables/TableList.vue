@@ -70,12 +70,12 @@
 
     <!-- Pagination slot -->
     <slot name="pagination">
-      <div class="my-4" v-if="pagination && Object.keys(pagination).length > 0">
+      <div class="my-4" v-if="pagination && Object.keys(pagination).length > 0 && pagination.total > 1">
         <el-pagination
-          v-model:current-page="currentPage"
-          v-model:page-size="pageSize"
+          :current-page="pagination?.currentPage || 1"
+          :page-size="pagination?.pageSize || 10"
+          :total="parseInt(pagination.total)"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="pagination.total"
           @size-change="handleSizeChange"
           @current-change="handlePageChange"
         />
@@ -90,9 +90,8 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 import ColumnRender from "@/components/tables/ColumnRender.vue";
 
 import type { ColumnProps, TableProProps, TypeProps } from "@/types";
-import { useTables2 } from "@/hooks/useTables2";
-import { useSelection } from "@/hooks/useSelection";
 import { type SortableEvent } from "vue-draggable-plus";
+// import { useSelection } from "@/hooks/useSelection";
 
 const props = withDefaults(defineProps<TableProProps>(), {
   columns: () => [],
@@ -108,17 +107,15 @@ const dataTables = toRef(props, "dataTables");
 const pagination = toRef(props, "pagination");
 const columnTypes: TypeProps[] = ["selection", "radio", "index", "expand", "sort"];
 const tableColumns = ref<ColumnProps[]>(props?.columns || []);
-const currentPage = ref(pagination.value.currentPage || 1);
-const pageSize = ref(pagination.value.pageSize || 10);
-const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 
+// const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 const handleSizeChange = (newPageSize: number) => {
-  pageSize.value = newPageSize;
+  // pageSize.value = newPageSize;
   emit("pagination", { pageSize: newPageSize });
 };
 
 const handlePageChange = (newPage: number) => {
-  currentPage.value = newPage;
+  // currentPage.value = newPage;
   emit("pagination", { currentPage: newPage });
 };
 

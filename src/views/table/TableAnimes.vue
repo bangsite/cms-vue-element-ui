@@ -3,7 +3,7 @@
     <FormSearch
       v-show="isShowSearch"
       :search-title="'Search Animes'"
-      :search-columns="searchColumns"
+      :search-columns="searchAnimeColumns"
       :search-param="searchParams"
       :search-select-data="searchData"
       @search="onSearch"
@@ -20,15 +20,15 @@
         target=".el-table__body-wrapper tbody"
       >
         <TableList
-          ref="table"
-          :columns="columns"
+          ref="tableAnime"
+          v-loading="isLoading"
+          :columns="animeColumns"
           :data-tables="response && response.length > 0 ? response : []"
           :custom-cols="customCols"
           :pagination="paginationAPI"
           :refreshTables="isRefreshTable"
           @pagination="onPaginationChange"
           @sorted="onSortChange"
-          v-loading="isLoading"
         >
           <!-- images -->
           <template #images="scope">
@@ -57,15 +57,14 @@ import { ElMessage } from "element-plus";
 import { Delete, EditPen, View } from "@element-plus/icons-vue";
 import { type SortableEvent } from "vue-draggable-plus";
 
+import useTables from "@/hooks/useTables";
 import useAnimeJikan from "@/hooks/api/useAnimeJikan";
 
-import { ANIME_SEARCH_RANK, ANIME_SEARCH_TYPE } from "@/enums/anime.enum";
-import { COLUMN_ANIME } from "@/views/table/composables/useColumnAnime";
+import { ANIME_SEARCH_RANK, ANIME_SEARCH_TYPE, COLUMN_ANIME } from "@/enums/anime.enum";
 
 import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";
 import TableList from "@/components/tables/TableList.vue";
-import useTables2 from "@/hooks/useTables2";
 
 const isShowSearch = ref(true);
 const searchData = reactive({ type: ANIME_SEARCH_TYPE, rating: ANIME_SEARCH_RANK });
@@ -87,8 +86,8 @@ const initSearchParams = reactive({
   rating: "",
 });
 const { fetchTopAnimes, response, paginationAPI, isLoading } = useAnimeJikan();
+
 const {
-  columns,
   params,
   paginationParams,
   searchParams,
@@ -98,12 +97,11 @@ const {
   onRefreshTable,
   onPaginationChange,
   onSortChange,
-} = useTables2(fetchTopAnimes, initParams, initSearchParams, initPaginationParams);
+} = useTables(fetchTopAnimes, initParams, initSearchParams, initPaginationParams);
 
-// const columns = computed(() => COLUMN_ANIME);
-// handle form search
-const searchColumns = computed(() => {
-  return columns.value?.filter((column) => column?.search?.el).sort((a: any, b: any) => a.search - b.search);
+const animeColumns = computed(() => COLUMN_ANIME);
+const searchAnimeColumns = computed(() => {
+  return animeColumns.value?.filter((column) => column?.search?.el).sort((a: any, b: any) => a.search - b.search);
 });
 
 onBeforeMount(async () => {

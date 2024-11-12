@@ -35,7 +35,7 @@ const createTask = (e: Event) => {
     emit("add", {
       id: uuidv4(),
       title: title.value.trim(),
-      createdAt: new Date(),
+      createdAt: new Date().toISOString(),
     });
   }
 

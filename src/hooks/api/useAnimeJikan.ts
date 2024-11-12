@@ -1,4 +1,4 @@
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import { getTrendingAnime } from "@/services/modules/animeJikan.service";
 import { convertPagination } from "@/utils/convertPagination";
 import type { Pagination } from "@/types";
@@ -6,8 +6,13 @@ import type { Pagination } from "@/types";
 export default function useAnimeJikan() {
   const isLoading = ref(false);
   const response = ref([]);
-  const paginationAPI = ref<Pagination>({});
   const errors = ref(null);
+  const paginationAPI = ref<Pagination>({
+    page: 1,
+    limit: 10,
+    currentPage: 1,
+    pageSize: 1,
+  });
 
   const fetchTopAnimes = async (params: { [key: string]: any }) => {
     isLoading.value = true;
@@ -17,7 +22,7 @@ export default function useAnimeJikan() {
       const { data, pagination } = res.data;
 
       response.value = data;
-      paginationAPI.value = convertPagination(pagination.items);
+      paginationAPI.value = convertPagination(pagination);
     } catch (error) {
       const { data } = error as any;
       errors.value = data;
@@ -27,7 +32,10 @@ export default function useAnimeJikan() {
   };
 
   return {
-    ...toRefs({ isLoading, response, paginationAPI, errors }),
+    isLoading,
+    response,
+    paginationAPI,
+    errors,
     fetchTopAnimes,
   };
 }

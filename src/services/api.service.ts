@@ -5,9 +5,6 @@ import { notifier } from "@/notifications";
 import { refreshToken } from "@/services/modules/auth.service";
 import { useAuthStore } from "@/stores/auth.store";
 
-const { resetAuth } = useAuthStore();
-const router = useRouter();
-
 export class BaseApiService {
   private static instances: Map<string, BaseApiService> = new Map(); // Map to store instances based on baseURL
   private axiosInstance: AxiosInstance;
@@ -89,6 +86,9 @@ export class BaseApiService {
   };
 
   private handleRefreshToken = async (error: AxiosError): Promise<AxiosError> => {
+    const { resetAuth } = useAuthStore();
+    const router = useRouter();
+
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.retryCount = 0;

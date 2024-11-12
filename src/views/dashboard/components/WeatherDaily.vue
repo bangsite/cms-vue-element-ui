@@ -1,6 +1,6 @@
 <template>
   <template v-if="!isLoading">
-    <el-card class="rounded-md">
+    <el-card shadow="hover" class="rounded-md">
       <el-row justify="space-between" align="middle">
         <el-col>
           <div class="flex items-center flex-wrap justify-center md:justify-between gap-2 h-full min-h-[20rem]">
@@ -29,7 +29,8 @@
               </template>
               <template v-else>
                 <div class="flex flex-col items-center">
-                  <p class="mb-6">{{ weekdayNames(item?.dt_txt) }}</p>
+                  <span class="mb-2">{{ weekdayNames(item?.dt_txt) }}</span>
+                  <strong class="mb-2">{{ dateTime(item?.dt_txt, "HH:mm") }}</strong>
 
                   <img
                     v-if="item?.weather[0]?.icon"
@@ -65,14 +66,12 @@
 <script setup lang="ts">
 import { computed, onBeforeMount } from "vue";
 import useFetchWeather from "@/hooks/api/useFetchWeather";
-import { weekdayNames } from "@/utils/formatDateTime";
+import { dateTime, weekdayNames } from "@/utils/formatDateTime";
 
 import { DATA_WEATHER } from "@/db";
 
 const { fetchDataWeather, response, isLoading } = useFetchWeather();
-console.log(response.value);
 const dataWeather = computed(() => response.value || DATA_WEATHER);
-console.log(dataWeather);
 
 onBeforeMount(async () => {
   await fetchDataWeather();

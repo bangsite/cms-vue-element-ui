@@ -1,13 +1,11 @@
 <template>
   <div class="auth__right">
     <div class="auth__header">
-      <div class="auth__header-logo">
-        <SvgIcon :icon="'logos:zenhub-icon'" :size="30"></SvgIcon>
+      <div class="bg-gray-50 flex items-center justify-center mb-6 w-[60px] h-[60px] rounded-full">
+        <SvgIcon :icon="'logos:zenhub-icon'" :size="30" />
       </div>
-      <h3 class="auth__header-title">System Manager</h3>
-      <p class="auth__header-subtitle">
-        A management system is in place for analytics and informative and just beautiful.
-      </p>
+      <h2 class="text-2xl mb-2">Login to your account</h2>
+      <p class="max-w-lg text-center">Welcome back! Please your enter details</p>
     </div>
     <div class="auth__form">
       <el-form require-asterisk-position="right" labelPosition="top" ref="formRef" class="form">
@@ -16,7 +14,7 @@
         <PasswordBase
           label="Password"
           name="password"
-          rules="required"
+          rules="required|min:8"
           placeholder="Enter password..."
           style="width: 100%"
         />
@@ -48,7 +46,6 @@ import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useRouter } from "vue-router";
 
-// import LoginSSO from "@/views/auth/LoginSSO.vue";
 import InputBase from "@/components/form/InputBase.vue";
 import PasswordBase from "@/components/form/PasswordBase.vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
@@ -65,8 +62,8 @@ interface LoginForm {
 }
 
 const ruleForm = ref<LoginForm>({
-  email: "",
-  password: "",
+  email: "shop@gmail.com",
+  password: "@12345678",
   remember: false,
 });
 

@@ -52,12 +52,11 @@ const isEditing = ref(false);
 let formData = reactive({});
 const taskColumns = reactive([
   { prop: "title", label: "Title", type: "input" },
-  { prop: "description", label: "Description", type: "input" },
+  { prop: "description", label: "Description", type: "textarea" },
 ]);
 
 const { data } = storeToRefs(useTaskStore());
 const { completedTask, deleteTask } = useTaskStore();
-
 const filteredTaskList = computed(() => data.value.filter((item) => !item.deleted));
 
 const createInitialForm = () => ({

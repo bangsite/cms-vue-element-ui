@@ -4,6 +4,7 @@ export interface LocaleDropdownOption {
   lang: string;
   name: string;
   currency: string;
+  icon?: string;
 }
 
 export interface LocaleDropdownType {

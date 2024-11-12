@@ -3,7 +3,6 @@ import { store } from "@/plugins/pinia";
 import { useI18n } from "vue-i18n";
 
 const { locale } = useI18n();
-console.log(locale);
 
 const useLocaleStore = defineStore("locales", {
   state: () => ({

@@ -49,26 +49,8 @@ import SelectBase from "@/components/form/SelectBase.vue";
 import DatePicker from "@/components/form/DatePicker.vue";
 
 import { toLowerCase } from "@/utils/fortmatString";
-import { reactive } from "vue";
-
-interface SearchColumn {
-  prop?: string;
-  label?: string;
-  type?: "input" | "select" | "date" | "sort" | "selection";
-  width?: number;
-  showOverflowTooltip?: boolean;
-  fixed?: string;
-  search?: { el: string; props?: Record<string, any> };
-}
-
-interface SearchProps {
-  labelPosition?: string;
-  searchTitle?: string;
-  searchColumns?: SearchColumn[];
-  searchParam?: { [key: string]: any };
-  searchCol?: number;
-  searchSelectData?: any[];
-}
+import { markRaw, reactive } from "vue";
+import type { SearchColumn, SearchProps } from "@/types";
 
 const props = withDefaults(defineProps<SearchProps>(), {
   labelPosition: "top",
@@ -77,20 +59,19 @@ const props = withDefaults(defineProps<SearchProps>(), {
 });
 
 const emit = defineEmits(["search", "reset"]);
+const searchComponent: Record<string, any> = {
+  input: markRaw(InputBase),
+  select: markRaw(SelectBase),
+  date: markRaw(DatePicker),
+};
 const searchParam = reactive({ ...props.searchParam });
-const searchComponent = reactive({
-  input: InputBase,
-  select: SelectBase,
-  date: DatePicker,
-});
 
 const getComponentType = (type: string) => searchComponent[type] || InputBase;
-
 const getComponentProps = (item: SearchColumn) => ({
   label: item.label,
   placeholder: item.placeholder || `Enter ${item.label}`,
-  options: item.search.el === "select" ? props.searchSelectData?.[item.prop] : undefined,
   name: `${toLowerCase(item.search?.label || item.label)}`,
+  options: item.search.el === "select" ? props.searchSelectData?.[item.prop] : [],
 });
 
 const onChangeData = (data: Record<string, any>) => {
@@ -99,8 +80,7 @@ const onChangeData = (data: Record<string, any>) => {
   searchParam[key] = value;
 };
 
-const handleSearch = (val) => {
-  console.log(val);
+const handleSearch = () => {
   emit("search", searchParam);
 };
 
