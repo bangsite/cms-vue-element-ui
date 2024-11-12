@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--table body-->
+    <!--    <DraggablePlus v-model="dataTables" animation="150" @start="onStart" @end="onEnd">-->
     <DraggablePlus
       v-model="tableColumns"
       @start="onStart"
@@ -8,6 +8,7 @@
       animation="150"
       target=".el-table__header thead tr"
     >
+      <!--table body-->
       <el-table
         ref="tableRef"
         v-bind="$attrs"
@@ -21,7 +22,6 @@
       >
         <!-- Default slot for custom columns -->
         <slot />
-
         <template v-for="item in tableColumns" :key="item.prop || item.type">
           <!-- selection || radio || index || expand || sort -->
           <el-table-column
@@ -36,7 +36,7 @@
               <component v-if="item.type === 'expand' && item.render" :is="item.render" v-bind="scope" />
               <slot v-else-if="item.type === 'expand'" :name="item.type" v-bind="scope" />
               <!-- sort -->
-              <el-link v-else-if="item.type === 'sort'" :underline="false" class="drag__row">
+              <el-link v-else-if="item.type === 'sort'" :underline="false" class="cursor-move drag">
                 <SvgIcon :icon="'carbon:drag-vertical'" />
               </el-link>
               <!-- radio -->
@@ -53,7 +53,6 @@
             </template>
           </ColumnRender>
         </template>
-
         <!-- Append slot for custom content after the table rows -->
         <template #append>
           <slot name="append" />

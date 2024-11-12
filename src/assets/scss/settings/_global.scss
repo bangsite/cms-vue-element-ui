@@ -57,3 +57,15 @@ a {
         @apply text-red-500;
     }
 }
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input, textarea, select {
+        font-size: 16px;
+
+        &:focus {
+            font-size: 16px;
+        }
+    }
+
+}
+
