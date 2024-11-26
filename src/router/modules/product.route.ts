@@ -24,7 +24,7 @@ export const Product = {
     {
       path: "create",
       name: "CreateProduct",
-      component: () => import("@/views/product/CreateProduct.vue"),
+      component: () => import("@/views/product/ProductCreate.vue"),
       meta: {
         title: i18n.global.t("ROUTER.PRODUCT.CREATE"),
         icon: "fluent-mdl2:product-release",
@@ -35,7 +35,7 @@ export const Product = {
     {
       path: "edit/:id",
       name: "EditProduct",
-      component: () => import("@/views/product/FormProduct.vue"),
+      component: () => import("@/views/product/ProductForm.vue"),
       meta: {
         title: i18n.global.t("ROUTER.PRODUCT.EDIT"),
         noCache: true,

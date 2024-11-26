@@ -1,5 +1,5 @@
 <template>
-  <el-card class="mb-4 border-none bg-transparent !shadow-none">
+  <el-card class="border-none bg-transparent !shadow-none">
     <template #header v-if="title">
       <h4 class="title">{{ title }}</h4>
     </template>
@@ -34,6 +34,7 @@
       <el-divider border-style="dashed" />
 
       <div class="flex justify-end">
+        <el-button @click="onCancel"> Cancel </el-button>
         <el-button type="primary" @click="onSubmitTask">
           {{ edit ? "Update Data" : "Add New" }}
         </el-button>
@@ -54,7 +55,7 @@ import TextAreaBase from "@/components/form/TextAreaBase.vue";
 const props = withDefaults(defineProps<TaskFormProps>(), {
   labelPosition: "top",
 });
-const emit = defineEmits(["submit"]);
+const emit = defineEmits(["submit", "cancel"]);
 
 const data = toRef(props, "data");
 const edit = toRef(props, "edit");
@@ -73,4 +74,8 @@ const onSubmitTask = handleSubmit(async (values, { resetForm }) => {
   emit("submit", true);
   resetForm();
 });
+
+const onCancel = () => {
+  emit("cancel", true);
+};
 </script>

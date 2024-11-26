@@ -61,11 +61,10 @@ import { type SortableEvent } from "vue-draggable-plus";
 import useTables from "@/hooks/useTables";
 import useAnimeJikan from "@/hooks/api/useAnimeJikan";
 
-import { ANIME_SEARCH_RANK, ANIME_SEARCH_TYPE, COLUMN_ANIME } from "@/enums/anime.enum";
-
 import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";
 import TableList from "@/components/tables/TableList.vue";
+import { ANIME_SEARCH_RANK, ANIME_SEARCH_TYPE, COLUMN_ANIME } from "@/constants/anime.constant";
 
 const isShowSearch = ref(true);
 const searchData = reactive({ type: ANIME_SEARCH_TYPE, rating: ANIME_SEARCH_RANK });

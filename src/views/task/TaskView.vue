@@ -14,20 +14,21 @@
 
   <!-- Modal -->
   <component
-    :is="modalComponent"
+    :is="ModalView"
     v-if="isModalVisible"
-    :modalActive="isModalVisible"
-    :classHead="'custom-head'"
+    :modal-active="isModalVisible"
+    :class-head="'custom-head'"
     :disable-footer="true"
     @close-modal="toggleModalVisibility"
   >
     <template #header>{{ isEditing ? "Edit Task" : "Add Task" }}</template>
     <template #body>
       <component
-        :is="formComponent"
+        :is="FormTask"
         :data="formData"
         :columns="taskColumns"
         :edit="isEditing"
+        @cancel="toggleModalVisibility"
         @submit="handleFormSubmit"
       />
     </template>
@@ -44,8 +45,8 @@ import { useTaskStore } from "@/stores/task.store";
 import TaskList from "@/views/task/TaskList.vue";
 import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
 
-const modalComponent = ref(defineAsyncComponent(() => import("@/components/modal/ModalView.vue")));
-const formComponent = ref(defineAsyncComponent(() => import("@/components/form/FormTask.vue")));
+const ModalView = ref(defineAsyncComponent(() => import("@/components/modal/ModalView.vue")));
+const FormTask = ref(defineAsyncComponent(() => import("@/components/form/FormTask.vue")));
 
 const isModalVisible = ref(false);
 const isEditing = ref(false);

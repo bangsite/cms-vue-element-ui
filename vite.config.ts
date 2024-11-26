@@ -3,11 +3,13 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
+import vueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    vueDevTools(),
     VueI18nPlugin({
       runtimeOnly: false,
     }),

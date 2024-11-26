@@ -3,26 +3,22 @@
     <form class="form post__create-form" @submit="onSubmit">
       <div class="post__create-left">
         <el-card title="Add new post" class="form__card">
-          <div class="post__create-title">
-            <InputBase name="title" rules="required" placeholder="Enter title here" />
-
-            <TextAreaBase name="description" row="4" rules="required" placeholder="Enter description here" />
-          </div>
-          <div class="post__create-body">
-            <EditorTinyMCE name="body" rules="required" placeholder="Please input content!" />
-          </div>
+          <InputBase name="title" rules="required" placeholder="Enter title here" />
+          <TextAreaBase name="description" row="6" rules="required" placeholder="Enter description here" />
+          <EditorTinyMCE name="body" rules="required" placeholder="Please input content!" />
         </el-card>
+        <DataJsonPretty :data="values" :showLine="true" />
       </div>
 
       <div class="post__create-right">
         <ActionSubmit @onPublish="onSubmitPublish" @onDraft="onSubmitDraft" @onPreview="onModalPreview" />
 
         <!--Begin Categories-->
-        <Categories name="categories" />
+        <Categories name="categories" :data="POST_CATEGORIES" @checked="handleCheckedCategories" />
         <!--End Categories-->
 
         <!--Begin Tags-->
-        <Tags name="tags" />
+        <Tags name="tags" @addTag.prevent="" :data="POST_TAGS" />
         <!--End Tags-->
 
         <!--Begin Thumbnail-->
@@ -44,18 +40,25 @@ import Thumbnail from "@/components/posts/Thumbnail.vue";
 import EditorTinyMCE from "@/components/form/EditorTinyMCE.vue";
 import ActionSubmit from "@/components/posts/ActionSubmit.vue";
 import TextAreaBase from "@/components/form/TextAreaBase.vue";
+import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
 
-import { POST_FORM } from "@/views/post/composables/useDataForm";
 import { useSubmitForm } from "@/views/post/composables/useSubmitForm";
+import { POST_CATEGORIES, POST_FORM, POST_TAGS } from "@/constants/post.contant";
 
 const route = useRoute();
-const { handleSubmit } = useForm({
+const { values, handleSubmit } = useForm({
   initialValues: {
     ...POST_FORM,
   },
 });
 
 const { onCreate, onUpdate } = useSubmitForm();
+
+const handleCheckedCategories = (data: []) => {
+  if (data && data.length > 0) {
+    setValues("categories", data);
+  }
+};
 
 const onSubmitPublish = handleSubmit(async (values) => {
   if (route?.params?.id) {

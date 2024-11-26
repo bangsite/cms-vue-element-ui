@@ -2,11 +2,11 @@
   <el-card class="rounded-md">
     <template #header>
       <div class="flex flex-wrap gap-2 items-center justify-between cursor-pointer">
-        <h4 class="title">Latest Transections</h4>
+        <h4 class="title">Latest Transactions</h4>
         <div class="flex items-center">
           <el-button
             class="rounded-md"
-            :type="transectionTab === 'today' ? 'primary' : ''"
+            :type="transactionTab === 'today' ? 'primary' : ''"
             @click="handleTabActivation('today')"
             plain
           >
@@ -14,7 +14,7 @@
           </el-button>
           <el-button
             class="rounded-md"
-            :type="transectionTab === 'week' ? 'primary' : ''"
+            :type="transactionTab === 'week' ? 'primary' : ''"
             @click="handleTabActivation('week')"
             plain
           >
@@ -23,7 +23,7 @@
 
           <el-button
             class="rounded-md"
-            :type="transectionTab === 'month' ? 'primary' : ''"
+            :type="transactionTab === 'month' ? 'primary' : ''"
             @click="handleTabActivation('month')"
             plain
           >
@@ -33,10 +33,10 @@
       </div>
     </template>
     <TableList
-      ref="tableTransection"
+      ref="tableTransaction"
       :border="false"
-      :columns="transectionColumns"
-      :data-tables="transectionData"
+      :columns="transactionColumns"
+      :data-tables="transactionData"
       :customCols="['info', 'credit']"
     >
       <!-- expand -->
@@ -76,22 +76,22 @@ import { computed, ref } from "vue";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import TableList from "@/components/tables/TableList.vue";
 
-import { TRANSACTION_COLUMNS } from "@/enums/transactionsColumns.enum";
 import { DATA_TRANSACTION } from "@/db";
+import { TRANSACTION_COLUMNS } from "@/constants/transactionsColumns.constant";
 
-const transectionTab = ref("today");
+const transactionTab = ref("today");
 const isLoading = ref(false);
 
-const transectionColumns: any = computed(() => TRANSACTION_COLUMNS);
+const transactionColumns: any = computed(() => TRANSACTION_COLUMNS);
 
-const transectionData: any = computed(() => {
-  return DATA_TRANSACTION && DATA_TRANSACTION[transectionTab.value].length > 0
-    ? DATA_TRANSACTION[transectionTab.value]
+const transactionData: any = computed(() => {
+  return DATA_TRANSACTION && DATA_TRANSACTION[transactionTab.value].length > 0
+    ? DATA_TRANSACTION[transactionTab.value]
     : [];
 });
 const handleTabActivation = (value: string) => {
   isLoading.value = true;
-  transectionTab.value = value;
+  transactionTab.value = value;
   setTimeout(() => (isLoading.value = false), 2000);
 };
 </script>

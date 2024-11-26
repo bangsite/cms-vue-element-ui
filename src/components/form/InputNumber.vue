@@ -25,7 +25,7 @@ import { useField } from "vee-validate";
 import { computed, toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
 import { useI18n } from "vue-i18n";
-import { langOptions } from "@/enums/locales.enum";
+import { langOptions } from "@/constants/locales.constant";
 
 const props = defineProps({
   labelDisplay: { type: Boolean, default: true },

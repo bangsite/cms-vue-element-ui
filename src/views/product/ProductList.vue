@@ -71,7 +71,7 @@ import TableList from "@/components/tables/TableList.vue";
 
 import useTables from "@/hooks/useTables";
 import useProduct from "@/hooks/api/useProduct";
-import { COLUMN_PRODUCT, PRODUCT_SEARCH_TYPE } from "@/enums/product.enum";
+import { PRODUCT_COLUMN, PRODUCT_SEARCH_TYPE } from "@/constants/product.contant";
 
 const isShowSearch = ref(true);
 const searchData = reactive({ product_type: PRODUCT_SEARCH_TYPE });
@@ -108,7 +108,7 @@ const {
   onSortChange,
 } = useTables(fetchListProduct, initParams, initSearchParams, initPaginationParams);
 
-const productColumns = computed(() => COLUMN_PRODUCT);
+const productColumns = computed(() => PRODUCT_COLUMN);
 const searchProductColumns = computed(() => {
   return productColumns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
 });

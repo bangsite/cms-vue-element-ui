@@ -106,7 +106,6 @@ const dataTables = toRef(props, "dataTables");
 const pagination = toRef(props, "pagination");
 const columnTypes: TypeProps[] = ["selection", "radio", "index", "expand", "sort"];
 const tableColumns = ref<ColumnProps[]>(props?.columns || []);
-
 // const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 const handleSizeChange = (newPageSize: number) => {
   // pageSize.value = newPageSize;

@@ -17,6 +17,11 @@ export default {
       para: "#232323",
       transparent: "transparent",
     },
+    fontFamily: {
+      en: ["Poppins", "sans-serif"],
+      ja: ["Noto Sans JP", "sans-serif"],
+      vi: ["Inter", "sans-serif"],
+    },
     extend: {},
   },
   plugins: [],

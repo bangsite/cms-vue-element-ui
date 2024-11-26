@@ -1,8 +1,8 @@
 import type { App } from "vue";
 import { createI18n, type I18nOptions } from "vue-i18n";
 import { ClientStorage, setHtmlLang } from "@/utils";
-import { langCurrency, langOptions } from "@/enums/locales.enum";
 import type { LocaleType } from "@/types";
+import { langCurrency, langOptions } from "@/constants/locales.constant";
 
 export async function loadLocaleMessages(locale: string) {
   if (locale) {

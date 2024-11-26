@@ -53,3 +53,9 @@ export interface BlockType {
   nameKey: string;
   status?: boolean;
 }
+
+export interface PageTreeNode {
+  id: number;
+  label: string;
+  children?: PageTreeNode[];
+}

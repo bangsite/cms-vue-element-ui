@@ -1,5 +1,6 @@
 <template>
   <el-form-item
+    :className="className"
     :label="label"
     :error="errorMessage ? $t(errorMessage, { field: label }) : errorMessage"
     :validate-status="errorMessage ? 'error' : undefined"
@@ -32,6 +33,7 @@ import { useField } from "vee-validate";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
+  className: { type: String, default: "" },
   name: { type: String, required: true },
   label: { type: String, default: "" },
   labelDisplay: { type: Boolean, default: true },
