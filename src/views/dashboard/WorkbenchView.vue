@@ -13,7 +13,16 @@
       </Suspense>
     </el-col>
     <el-col :xl="7" :lg="7" :md="24" :xs="24" class="mb-[20px]">
-      <WorkbenchBanner />
+      <Suspense>
+        <template #default>
+          <WorkbenchBanner />
+        </template>
+        <template #fallback>
+          <el-card class="rounded-md">
+            <el-skeleton :rows="7" animated />
+          </el-card>
+        </template>
+      </Suspense>
     </el-col>
   </el-row>
 
@@ -24,7 +33,9 @@
           <WorkbenchTechCard />
         </template>
         <template #fallback>
-          <el-skeleton :rows="8" animated />
+          <el-card class="rounded-md">
+            <el-skeleton :rows="7" animated />
+          </el-card>
         </template>
       </Suspense>
     </el-col>
@@ -34,21 +45,34 @@
           <WorkbenchShortcut />
         </template>
         <template #fallback>
-          <el-skeleton :rows="8" animated />
+          <el-card class="rounded-md">
+            <el-skeleton :rows="7" animated />
+          </el-card>
         </template>
       </Suspense>
     </el-col>
   </el-row>
   <el-row>
     <el-col>
-      <WorkbenchActivity />
+      <Suspense>
+        <template #default>
+          <WorkbenchActivity />
+        </template>
+        <template #fallback>
+          <el-card class="rounded-md">
+            <el-skeleton :rows="7" animated />
+          </el-card>
+        </template>
+      </Suspense>
     </el-col>
   </el-row>
 </template>
 <script setup lang="ts">
-import WeatherDaily from "@/views/dashboard/components/WeatherDaily.vue";
-import WorkbenchTechCard from "@/views/dashboard/components/WorkbenchTechCard.vue";
-import WorkbenchShortcut from "@/views/dashboard/components/WorkbenchShortcut.vue";
-import WorkbenchBanner from "@/views/dashboard/components/WorkbenchBanner.vue";
-import WorkbenchActivity from "@/views/dashboard/components/WorkbenchActivity.vue";
+import { defineAsyncComponent } from "vue";
+
+const WeatherDaily = defineAsyncComponent(() => import("@/views/dashboard/components/WeatherDaily.vue"));
+const WorkbenchTechCard = defineAsyncComponent(() => import("@/views/dashboard/components/WorkbenchTechCard.vue"));
+const WorkbenchShortcut = defineAsyncComponent(() => import("@/views/dashboard/components/WorkbenchShortcut.vue"));
+const WorkbenchBanner = defineAsyncComponent(() => import("@/views/dashboard/components/WorkbenchBanner.vue"));
+const WorkbenchActivity = defineAsyncComponent(() => import("@/views/dashboard/components/WorkbenchActivity.vue"));
 </script>

@@ -22,7 +22,7 @@ export const Post = {
     {
       path: "create",
       name: "CreatePost",
-      component: () => import("@/views/post/CreatePost.vue"),
+      component: () => import("@/views/post/PostCreate.vue"),
       meta: {
         title: i18n.global.t("ROUTER.POST.CREATE"),
         icon: "ic:round-post-add",

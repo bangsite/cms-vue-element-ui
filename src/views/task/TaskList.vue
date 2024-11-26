@@ -3,16 +3,17 @@
     <div
       v-for="item in data"
       :key="item.id"
-      class="flex items-center gap-4 justify-between p-2 cursor-pointer hover:shadow-[0px_5px_10px_#8d8e9120;] rounded-md"
+      class="border border-dashed flex items-center gap-2 justify-between p-2 cursor-pointer hover:bg-gray-100 rounded-md"
+      :class="item.completed ? 'bg-gray-100' : ''"
     >
       <!--drag-->
       <div class="flex items-center gap-2">
         <el-checkbox
-          :checked="item.completed"
-          :value="item.completed"
+          v-model:checked="item.completed"
+          v-model:value="item.completed"
           label=""
           size="large"
-          @change="handleCompleted(item.id)"
+          @change="toggleCompleted(item.id)"
         />
       </div>
 
@@ -43,8 +44,8 @@ defineProps({
 
 const emits = defineEmits(["edit", "completed", "delete"]);
 
-const handleCompleted = (id: string | number) => {
-  emits("completed", id);
+const toggleCompleted = (task: Tasks) => {
+  emits("completed", task);
 };
 
 const handleEdit = (id: string | number) => {

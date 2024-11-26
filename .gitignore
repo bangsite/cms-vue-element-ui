@@ -85,5 +85,6 @@ web_modules/
 
 ### Source ###
 .DS_Store
+environments
 coverage
 bundle-analysis.html

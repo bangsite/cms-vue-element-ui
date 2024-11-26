@@ -32,11 +32,10 @@ const useTaskStore = defineStore("TaskStore", {
       }
     },
 
-    completedTask(id: string | number) {
-      const index = this.data.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        this.data[index].completed = true;
-      }
+    completedTask(taskId: Omit<Tasks, "id">) {
+      const data = this.data.find((item) => item.id === taskId);
+
+      if (data) data.completed = !data.completed;
     },
 
     deleteTask(id: string | number) {

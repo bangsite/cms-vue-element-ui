@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { PRODUCT } from "@/types";
+import type { Product } from "@/types";
 import { BaseApiService } from "@/services/api.service";
 import { ClientStorage } from "@/utils";
 
@@ -19,11 +19,11 @@ const getListProduct = async (config?: AxiosRequestConfig): Promise<any> => {
   return await productApiService.get("/product", { ...config, withCredentials: true });
 };
 
-const createProduct = async (data: PRODUCT, config?: AxiosRequestConfig): Promise<any> => {
+const createProduct = async (data: Product, config?: AxiosRequestConfig): Promise<any> => {
   return await productApiService.post("/product", data, { ...config });
 };
 
-const editProduct = (data: PRODUCT, id: string, config?: AxiosRequestConfig): Promise<AxiosResponse> => {
+const editProduct = (data: Product, id: string, config?: AxiosRequestConfig): Promise<AxiosResponse> => {
   return productApiService.post(`/product/${id}`, data, { ...config });
 };
 

@@ -1,64 +1,55 @@
 <template>
-  <el-popover
-    trigger="hover"
-    placement="bottom"
-    class="notify w-[100px] flex item-center"
-    :open="hovered"
-    @openChange="handleHoverChange"
-  >
-    <template #reference>
-      <div class="notify flex flex-center">
-        <SvgIcon :icon="'clarity:notification-line'" :size="20" />
+  <div class="bg-transparent hover:bg-gray-100 cursor-pointer flex items-center justify-center w-9 h-9 rounded-full">
+    <el-popover
+      ref="popoverRef"
+      trigger="click"
+      placement="bottom-end"
+      :open="hovered"
+      :width="'auto'"
+      @click="handlePopover"
+    >
+      <template #reference>
+        <div class="cursor-pointer flex flex-center relative shake" @click="handlePopover">
+          <SvgIcon :icon="'clarity:notification-line'" :size="20" />
+          <el-badge is-dot :max="99" class="absolute text-sm -top-0.5 -right-0.5" />
+        </div>
+      </template>
+      <template #default>
+        <el-tabs v-model="currentTab" class="flex flex-col min-w-[24rem] w-full rounded-md" @tab-click="handleTabClick">
+          <el-tab-pane
+            v-for="(notify, index) in notifyDataMessage"
+            :key="notify.key"
+            :label="`${capitalizeFirstLetter(notify.name)}(${notify.list.length})`"
+            :name="index"
+          >
+            <div class="flex items-center gap-2 w-full mb-1" v-for="item in notify.list" :key="item.id">
+              <SvgIcon v-if="item?.icon" :icon="item.icon" :size="20" />
 
-        <el-badge :value="count" :max="99" :class="[count < 10 ? '-right-2px' : '-right-10px']" class="notify__badge" />
-      </div>
-    </template>
-    <template #default>
-      <el-tabs type="card" v-model:value="currentTab" class="flex flex-col" @tab-click="handleTabClick">
-        <el-tab-pane v-for="(item, index) in tabData" :key="item.key" :label="item.name" :name="index">
-          <span class="mr-5">{{ item.name }}</span>
-          <el-badge
-            v-bind="item.badgeProps"
-            :value="item.list.filter((message) => !message.isRead).length"
-            :max="99"
-            show-zero
-          />
-        </el-tab-pane>
-      </el-tabs>
-    </template>
-  </el-popover>
+              <div class="flex flex-col flex-grow">
+                <span class="text-sm">{{ truncateString(item?.title, 50) }}</span>
+                <span class="text-[12px] text-gray-400">{{ truncateString(item?.description, 60) }}</span>
+              </div>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+      </template>
+    </el-popover>
+  </div>
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import type { BadgeProps } from "element-plus";
 import SvgIcon from "@/components/common/SvgIcon.vue";
 import { DATA_MESSAGE_TAB } from "@/db";
+import { truncateString, capitalizeFirstLetter } from "@/utils";
 
-interface MessageTab {
-  key: number;
-  name: string;
-  badgeProps?: BadgeProps;
-  list: any[];
-}
-
-const tabData = ref<MessageTab[]>([...DATA_MESSAGE_TAB]);
-const clicked = ref<boolean>(false);
 const hovered = ref<boolean>(false);
 const currentTab = ref(0);
+const popoverRef = ref();
 
-const count = computed(() => {
-  return tabData.value.reduce((acc, cur) => {
-    return acc + cur.list.filter((item) => !item.isRead).length;
-  }, 0);
-});
+const notifyDataMessage = computed(() => [...DATA_MESSAGE_TAB]);
 
-const handleHoverChange = (visible: boolean) => {
-  clicked.value = false;
-  hovered.value = visible;
-};
-const handleClickChange = (visible: boolean) => {
-  clicked.value = visible;
-  hovered.value = false;
+const handlePopover = () => {
+  currentTab.value = 0;
 };
 
 const handleTabClick = () => {};
