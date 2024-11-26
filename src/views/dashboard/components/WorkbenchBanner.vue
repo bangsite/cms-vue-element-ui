@@ -1,5 +1,5 @@
 <template>
-  <el-card class="bg-blue-500 relative items-center rounded-md shadow h-full min-h-[18rem] min-h-[22rem]">
+  <el-card class="bg-blue-500 relative items-center rounded-md shadow h-full min-h-[22rem]">
     <div class="absolute left-5 top-1/4">
       <h2 class="text-white">Upgrade your plan</h2>
       <p class="text-white pb-6">Lorem ipsum dolor sit amet</p>

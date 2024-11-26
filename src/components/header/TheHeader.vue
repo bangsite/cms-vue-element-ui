@@ -1,12 +1,11 @@
 <template>
-  <div class="header">
-    <div class="header__left">
+  <div class="flex items-center justify-between w-full h-full">
+    <div class="flex items-center">
       <MenuCollapse />
       <!-- <TheBreadcrumb v-if="breadcrumb"></TheBreadcrumb>-->
     </div>
 
-    <div class="header__right">
-      <!--      <SearchModal />-->
+    <div class="flex items-center gap-1">
       <FullScreen />
       <ThemeMode />
       <LangSwitch />

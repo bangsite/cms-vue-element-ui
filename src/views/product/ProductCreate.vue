@@ -1,9 +1,9 @@
 <template>
-  <FormProduct />
+  <ProductForm />
 </template>
 
 <script setup lang="ts">
-import FormProduct from "@/views/product/FormProduct.vue";
+import ProductForm from "@/views/product/ProductForm.vue";
 </script>
 
 <style scoped></style>

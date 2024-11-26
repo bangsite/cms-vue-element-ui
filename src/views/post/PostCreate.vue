@@ -1,9 +1,9 @@
 <template>
-  <FormPost />
+  <PostForm />
 </template>
 
 <script setup lang="ts">
-import FormPost from "@/views/post/PostForm.vue";
+import PostForm from "@/views/post/PostForm.vue";
 </script>
 
 <style scoped></style>

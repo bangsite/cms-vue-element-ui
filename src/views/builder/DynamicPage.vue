@@ -52,12 +52,12 @@
       <DataJsonPretty :data="values" :showLine="true" />
     </div>
 
-    <div class="rounded-md w-full lg:w-3/12">
-      <Publish name="pushlish" />
+    <div class="flex flex-col gap-4 w-full lg:w-3/12">
+      <ActionSubmit @onPublish="onSubmitPublish" @onDraft="onSubmitDraft" @onPreview="onModalPreview" />
 
-      <Categories name="categories" />
+      <Categories name="categories" :data="BUILDER_CATEGORIES" @checked="handleCheckedCategories" />
 
-      <Tags name="tags" />
+      <Tags name="tags" :data="BUILDER_TAGS" />
     </div>
   </div>
 
@@ -84,6 +84,7 @@
 import { defineAsyncComponent, onBeforeMount, ref } from "vue";
 import { useFieldArray, useFieldValue, useForm } from "vee-validate";
 import { storeToRefs } from "pinia";
+import type { Page, Section } from "@/types";
 
 import { useBuilderLayout } from "@/hooks/useBuilderLayout";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
@@ -92,8 +93,9 @@ import ModalView from "@/components/modal/ModalView.vue";
 import Categories from "@/components/common/Categories.vue";
 import Tags from "@/components/common/Tags.vue";
 import Publish from "@/components/common/Publish.vue";
-import type { Page, Section } from "@/types";
 import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
+import { BUILDER_CATEGORIES, BUILDER_TAGS } from "@/constants/builderLayout.constant";
+import ActionSubmit from "@/components/posts/ActionSubmit.vue";
 
 const BlockRender = defineAsyncComponent(() => import("@/components/builders/BlockRender.vue"));
 const BlockTypes = defineAsyncComponent(() => import("@/components/builders/BlockTypes.vue"));
@@ -168,6 +170,28 @@ const handleChange = (val: string[]) => {
 const onSubmit = handleSubmit(async (values) => {
   console.log(values);
 });
+
+const handleCheckedCategories = (data: []) => {
+  if (data && data.length > 0) {
+    setValues("categories", data);
+  }
+};
+
+const onSubmitPublish = handleSubmit(async (values) => {
+  if (route?.params?.id) {
+    await onUpdate(route.params.id, values);
+  } else {
+    await onCreate(values);
+  }
+});
+
+const onSubmitDraft = (event: any) => {
+  console.log(event);
+};
+
+const onModalPreview = (event: any) => {
+  console.log(event);
+};
 </script>
 
 <style scoped></style>

@@ -10,7 +10,7 @@ import { useWindowSize } from "@vueuse/core";
 
 import { useLocale } from "@/hooks/useLocale";
 import { useAppStore } from "@/stores/app.store";
-import { langEl } from "@/enums/locales.enum";
+import { langEl } from "@/constants/locales.constant";
 
 const appStore = useAppStore();
 const { width } = useWindowSize();

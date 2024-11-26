@@ -1,14 +1,9 @@
 <template>
-  <div class="flex align-center justify-between gap-1">
-    <div>
-      <el-button type="primary" :icon="Refresh" @click="handleRefresh">Refresh</el-button>
-    </div>
-
-    <SelectBase name="Sort by" placeholder="Sort by"></SelectBase>
+  <div class="flex align-center justify-between gap-2 mb-2">
+    <el-button type="primary" :icon="Refresh" @click="handleRefresh">Refresh</el-button>
+    <SelectBase name="Sort by" placeholder="Sort by" class-name="mb-2"></SelectBase>
   </div>
-  <el-divider border-style="dashed" style="margin: 0 0 15px" />
-
-  <div class="flex h-auto w-full">
+  <div class="flex h-[calc(100%-64px)] w-full">
     <template v-if="response && response.length > 0">
       <div class="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-5 w-full">
         <el-image

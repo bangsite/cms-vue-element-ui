@@ -65,15 +65,14 @@
 import { computed, reactive, ref } from "vue";
 import { Delete, EditPen, Plus } from "@element-plus/icons-vue";
 
-import useTables from "@/hooks/useTables";
-import { COLUMN_POST } from "@/views/post/composables/useColumnPost";
-import { DATA_POST } from "@/db";
-import { POST_SEARCH_TAGS } from "@/enums/post.enum";
-import { dateYMD } from "@/utils/formatDateTime";
-
 import FormSearch from "@/components/form/FormSearch.vue";
 import TableHeader from "@/components/tables/TableHeader.vue";
 import TableList from "@/components/tables/TableList.vue";
+
+import { POST_COLUMN, POST_SEARCH_TAGS } from "@/constants/post.contant";
+import { DATA_POST } from "@/db";
+import useTables from "@/hooks/useTables";
+import { dateYMD } from "@/utils/formatDateTime";
 
 const isShowSearch = ref(true);
 const searchData = reactive({ tags: POST_SEARCH_TAGS });
@@ -100,7 +99,7 @@ const initSearchParams = reactive({
 const { searchParams, isRefreshTable, onSearch, onResetSearch, onRefreshTable, onPaginationChange, onSortChange } =
   useTables(undefined, initParams, initSearchParams, initPaginationParams);
 const data = computed(() => DATA_POST);
-const postColumns = computed(() => COLUMN_POST);
+const postColumns = computed(() => POST_COLUMN);
 const searchPostColumns = computed(() => {
   return postColumns.value?.filter((item) => item?.search?.el).sort((a: any, b: any) => a.search - b.search);
 });

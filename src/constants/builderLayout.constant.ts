@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
+import type { PageTreeNode } from "@/types";
+
 export const SECTION_DEFAULT = {
   name: "Section demo",
 };
@@ -5,8 +8,6 @@ export const SECTION_DEFAULT = {
 export const SECTION_FORM = {
   section_1: [],
   // section_2: [],
-  // section_3: [],
-  // section_4: [],
 };
 export const SECTION_FIELD = {
   section_1: "section_1",
@@ -75,3 +76,42 @@ export const BLOCK_FORM = new Map([
   ["html", { ...BLOCK_FORM_COMMON, ...BLOCK_FORM_HTML }],
   ["default", { ...BLOCK_FORM_COMMON }],
 ]);
+
+export const BUILDER_CATEGORIES: PageTreeNode[] = [
+  {
+    id: 1,
+    label: "Event",
+    children: [
+      {
+        id: 3,
+        label: "Computer",
+      },
+      {
+        id: 4,
+        label: "Smartphone",
+      },
+    ],
+  },
+  {
+    id: 2,
+    label: "Black Friday",
+    children: [
+      {
+        id: 5,
+        label: "T-shirt",
+      },
+      {
+        id: 6,
+        label: "Hat",
+      },
+    ],
+  },
+];
+
+export const BUILDER_TAGS = [
+  { id: uuidv4(), name: "page" },
+  { id: uuidv4(), name: "dynamic" },
+  { id: uuidv4(), name: "css" },
+  { id: uuidv4(), name: "js" },
+  { id: uuidv4(), name: "banner" },
+];

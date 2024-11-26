@@ -61,6 +61,7 @@ import { nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { v4 as uuidv4 } from "uuid";
 import { useKeyModifier } from "@vueuse/core";
+import { ElMessage } from "element-plus";
 
 import { useBoardStore } from "@/stores/board.store";
 
@@ -70,7 +71,6 @@ import SvgIcon from "@/components/common/SvgIcon.vue";
 import DataJsonPretty from "@/components/common/DataJsonPretty.vue";
 
 import type { Board, Tasks } from "@/types";
-import { showNotification } from "@/utils";
 
 const alt = useKeyModifier("Alt");
 const { data, error } = storeToRefs(useBoardStore());
@@ -103,9 +103,15 @@ const handleAddBoard = () => {
   addBoard(board);
 
   if (error.value) {
-    showNotification(error.value, "error");
+    ElMessage({
+      message: `Error ${error.value}`,
+      type: "error",
+    });
   } else {
-    showNotification("Board added successfully!", "success");
+    ElMessage({
+      message: "Board added successfully!",
+      type: "success",
+    });
 
     nextTick(() => {
       const boardElements = document.querySelectorAll(".board");
@@ -123,11 +129,18 @@ const handleAddBoard = () => {
 
 const removeBoard = (boardId: string) => {
   if (boardId) data.value = data.value.filter((item) => item.id !== boardId);
+  ElMessage({
+    message: "Board delete successfully!",
+    type: "success",
+  });
 };
 
 const handleAddTask = (board: Board, task: Tasks) => {
   if (board) board.tasks.push(task);
-  showNotification("Task added successfully!", "success");
+  ElMessage({
+    message: "Task added successfully!",
+    type: "success",
+  });
 };
 </script>
 

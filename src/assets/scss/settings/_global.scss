@@ -1,16 +1,27 @@
 html, body {
-    @apply font-normal;
-    background-color: #fff;
-    color: #333;
-    font-family: $font-family;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    @apply bg-[#f7f8f9] text-[#345] font-normal font-en w-full h-full p-0 m-0;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
     transition: all 0.4s;
     overflow: hidden;
+}
+
+:lang(en) {
+    body {
+        @apply font-en;
+    }
+}
+
+:lang(vi) {
+    body {
+        @apply font-vi;
+    }
+}
+
+:lang(ja) {
+    body {
+        @apply font-ja;
+    }
 }
 
 a {
@@ -58,6 +69,7 @@ a {
     }
 }
 
+// Media
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
     input, textarea, select {
         font-size: 16px;
@@ -69,3 +81,36 @@ a {
 
 }
 
+//Animation
+.shake {
+    animation: shake 0.8s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    animation-play-state: paused;
+    transform: translate3d(0, 0, 0);
+
+    &:hover {
+        animation-play-state: running;
+    }
+}
+
+@keyframes shake {
+    30%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(1px, 0, 0);
+    }
+}

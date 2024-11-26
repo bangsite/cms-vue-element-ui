@@ -1,6 +1,6 @@
 import { reactive, toRefs } from "vue";
-import { PaginationEnum } from "@/enums/pagination.enum";
 import type { PaginationApi } from "@/types";
+import { PaginationEnum } from "@/constants/pagination.constant";
 
 type PaginationState = PaginationApi & { params: { [keyof: string]: any } };
 
