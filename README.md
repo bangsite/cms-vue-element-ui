@@ -2,16 +2,6 @@
 
 **Dashboard Vue** is a modern CMS template built with **Vue 3**, utilizing **TypeScript** and integrated with **Element Plus UI** components. It leverages **Vite** for a fast and efficient development workflow, featuring file-based routing, automatic component imports, and state management with **Pinia**.
 
-## Table of Contents
-
-- [Environment](#environment)
-- [Features](#features)
-- [Preparation](#preparation)
-- [Setup](#setup)
-- [Testing](#testing)
-- [Change Log](#change-log)
-- [License](#license)
-
 ## Environment
 
 - **Node.js**: Version >= 16.x
