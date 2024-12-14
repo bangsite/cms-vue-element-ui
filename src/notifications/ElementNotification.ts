@@ -11,6 +11,7 @@ export class ElementNotification implements INotification {
       type: "error",
       title: titleConvert,
       message: messageConvert,
+      duration: 3000,
     });
   }
 
@@ -22,6 +23,7 @@ export class ElementNotification implements INotification {
       type: "success",
       title: titleConvert,
       message: messageConvert,
+      duration: 3000,
     });
   }
 }

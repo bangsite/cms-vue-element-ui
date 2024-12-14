@@ -15,7 +15,7 @@ const axiosConfig: AxiosRequestConfig = {
 const mediaApiService = BaseApiService.getInstance(axiosConfig);
 
 const listMedia = (config?: AxiosRequestConfig): Promise<any> => {
-  return mediaApiService.get("/media/image", { ...config });
+  return mediaApiService.get("/media/image", { ...config, withCredentials: true });
 };
 
 const uploadMedia = (data: Record<string, any>, config?: AxiosRequestConfig): Promise<any> => {

@@ -1,14 +1,14 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios, { HttpStatusCode } from "axios";
-import { useRouter } from "vue-router";
 import { notifier } from "@/notifications";
+import router from "@/router";
+
 import { refreshToken } from "@/services/modules/auth.service";
 import { useAuthStore } from "@/stores/auth.store";
 
 export class BaseApiService {
   private static instances: Map<string, BaseApiService> = new Map(); // Map to store instances based on baseURL
   private axiosInstance: AxiosInstance;
-  private isRefreshing = false;
   private retryCount = 0;
   private maxRetryAttempts = 3; // Retry limit
 
@@ -78,40 +78,34 @@ export class BaseApiService {
     const messageRes = message || error?.message || "";
 
     if (status === HttpStatusCode.Unauthorized) {
-      return await this.handleRefreshToken(error);
+      await this.tryRefreshToken(error);
     }
 
     notifier.showError(title, messageRes, statusRes);
     return Promise.reject(error);
   };
 
-  private handleRefreshToken = async (error: AxiosError): Promise<AxiosError> => {
+  private tryRefreshToken = async (error: AxiosError): Promise<AxiosError> => {
     const { resetAuth } = useAuthStore();
-    const router = useRouter();
 
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
-      this.retryCount = 0;
-    }
     if (this.retryCount < this.maxRetryAttempts) {
       this.retryCount++;
 
       try {
         await refreshToken();
-
         // Retry the original request with new token
         return this.axiosInstance.request(error.config as AxiosRequestConfig);
       } catch (err) {
-        // If refresh fails, logout and redirect to login again
-        notifier.showError("Error", "Please login again.", HttpStatusCode.Unauthorized);
-        resetAuth();
-        await router.push("/login");
-        throw err;
-      } finally {
-        this.isRefreshing = false; // Reset flag after each refresh attempt
+        return Promise.reject(err);
       }
     }
-    // Return the error if max retries are exceeded
+
+    if (this.retryCount === this.maxRetryAttempts) {
+      resetAuth();
+      notifier.showError("Error", "Please login again.", HttpStatusCode.Unauthorized);
+      await router.push("/login");
+    }
+
     return Promise.reject(error);
   };
 

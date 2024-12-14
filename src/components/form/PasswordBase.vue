@@ -27,6 +27,7 @@
         <slot name="suffix" />
       </template>
     </el-input>
+    <PasswordMeter :password="value" />
     <span class="note" v-if="attrs.note">{{ attrs.note }}</span>
   </el-form-item>
 </template>
@@ -35,6 +36,7 @@
 import { useField } from "vee-validate";
 import { toRef, useAttrs } from "vue";
 import { inputProps } from "element-plus";
+import PasswordMeter from "@/components/common/PasswordMeter.vue";
 
 const props = defineProps({
   labelDisplay: { type: Boolean, default: true },
