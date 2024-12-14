@@ -16,5 +16,6 @@ export * from "./getFileName";
 export * from "./getTypeData";
 export * from "./idGenerator";
 export * from "./isMisc";
+export * from "./passwordMeter.util";
 export * from "./setAuthorizationHeader";
 export * from "./setHtmlLang";

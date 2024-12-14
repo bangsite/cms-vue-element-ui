@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 
 import { useDialogStore } from "@/stores/dialog.store";
 import { useBuilderLayoutStore } from "@/stores/builderLayout.store";
@@ -45,8 +45,14 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["removedBlock"]);
+const blockData = reactive<Section>({
+  id: "",
+  name: "",
+  blocks: [],
+});
+
 const data = computed<Section>(() => {
-  return props.data || { id: "", name: "", blocks: [] };
+  return props?.data || blockData;
 });
 const { setTitle, setLayoutName, setActive, setDataRender } = useDialogStore();
 const { removeBlock } = useBuilderLayoutStore();
