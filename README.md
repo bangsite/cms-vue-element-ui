@@ -2,16 +2,6 @@
 
 **Dashboard Vue** is a modern CMS template built with **Vue 3**, utilizing **TypeScript** and integrated with **Element Plus UI** components. It leverages **Vite** for a fast and efficient development workflow, featuring file-based routing, automatic component imports, and state management with **Pinia**.
 
-## Table of Contents
-
-- [Environment](#environment)
-- [Features](#features)
-- [Preparation](#preparation)
-- [Setup](#setup)
-- [Testing](#testing)
-- [Change Log](#change-log)
-- [License](#license)
-
 ## Environment
 
 - **Node.js**: Version >= 16.x
@@ -19,18 +9,18 @@
 - **Operating System**: Windows, macOS
 
 ## Features
-- **Multilingual Support**: Supports multiple languages for a global audience.
-- **Dynamic Routing**: Generates comprehensive dynamic routing permissions.
-- **Reusable Components**: Encapsulated commonly used components for easy reuse.
-- **User Authentication**: Secure login and authentication checks for user management.
-- **Task Management**: Create, manage, and track tasks through a user-friendly board interface.
-- **Drag-and-Drop Interface**: Customizable layouts with easy item reordering.
-- **Dynamic Layouts**: Flexible arrangement of sections tailored to user preferences.
-- **Project Management**: Efficient organization and management of projects.
-- **Rich Content Handling**: Create posts with dynamic content capabilities, including images.
-- **Image Upload and Gallery**: Upload images and display them in various layouts.
-- **Calendar Integration**: Manage events and deadlines effortlessly with a calendar view.
-- **Blogging Capability**: Easily write and publish blog posts.
+- [x] **Multilingual Support**: Offers support for multiple languages to cater to a global audience.
+- [x] **Dynamic Routing**: Generates comprehensive permissions for dynamic routing.
+- [x] **Reusable Components**: Includes encapsulated components for easy reuse in various contexts.
+- [x] **Board Management**: Provides a user-friendly interface for creating, managing, and dragging & dropping boards.
+- [x] **Task Management**: Enables the creation, management, and tracking of tasks through an intuitive board interface.
+- [ ] **Product Management**: Facilitates the efficient organization and management of products.
+- [ ] **Post Management**: Allows for the efficient organization and management of posts.
+- [ ] **Image Management**: Features capabilities for displaying, uploading, and filtering images.
+- [x] **Dynamic Tables**: Offers the ability to create, manage, drag and drop, and extend tables through a user-friendly interface.
+- [ ] **User Authentication**: Ensures secure login and authentication for user management.
+- [ ] **Dynamic Layouts**: Provides flexible arrangements of sections tailored to user preferences.
+- [ ] **Calendar Integration**: Allows for effortless management of events and deadlines with a calendar view.
 
 ## Preparation
 
