@@ -14,7 +14,7 @@
         <PasswordBase
           label="Password"
           name="password"
-          rules="required|min:8"
+          rules="required|min:8|max:30"
           placeholder="Enter password..."
           style="width: 100%"
         />

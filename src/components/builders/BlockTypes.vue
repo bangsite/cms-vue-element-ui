@@ -21,16 +21,16 @@ import useBuilderBlock from "@/hooks/useBuilderBlock";
 import { showNotification } from "@/utils";
 import { BlockType } from "@/types";
 
-const props = defineProps({
-  pageId: {
-    type: String,
-    default: "",
-  },
-  sectionId: {
-    type: String,
-    default: "",
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    pageId: string;
+    sectionId: string;
+  }>(),
+  {
+    pageId: "",
+    sectionId: "",
+  }
+);
 const emit = defineEmits(["closeModal", "blockAdded"]);
 
 const { t } = useI18n();
