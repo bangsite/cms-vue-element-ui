@@ -64,8 +64,6 @@ const onSubmit = handleSubmit(async (values, actions) => {
   const { shop }: Record<string, any> = response.value || {};
   if (shop) setUserInfo(shop);
 
-  if (errors.value) console.log("errors:::", errors.value);
-
   await router.push("/");
 
   actions.resetForm();
