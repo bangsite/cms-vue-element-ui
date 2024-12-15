@@ -66,7 +66,7 @@ const ruleForm = ref<LoginForm>({
 });
 
 const router = useRouter();
-const { setUserInfo, setToken, setLayoutAuth } = useAuthStore();
+const { setUserInfo, setLayoutAuth } = useAuthStore();
 const { doLogin, response, errors, isLoading } = useAuth();
 const { handleSubmit } = useForm({ initialValues: { ...ruleForm.value } });
 
@@ -75,11 +75,6 @@ const onSubmit = handleSubmit(async (values, actions) => {
 
   const { shop }: Record<string, any> = response.value || {};
   if (shop) setUserInfo(shop);
-  // if (tokens) setToken(tokens);
-
-  if (errors.value) {
-    console.log("errors:::", errors.value);
-  }
 
   await router.push("/");
 
