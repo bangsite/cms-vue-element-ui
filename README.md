@@ -20,7 +20,8 @@
 - [x] **Dynamic Tables**: Offers the ability to create, manage, drag and drop, and extend tables through a user-friendly interface.
 - [ ] **User Authentication**: Ensures secure login and authentication for user management.
 - [ ] **Dynamic Layouts**: Provides flexible arrangements of sections tailored to user preferences.
-- [ ] **Calendar Integration**: Allows for effortless management of events and deadlines with a calendar view.
+- [ ] **Calendar Event**: Allows for effortless management of events and deadlines with a calendar view.
+- [ ] **Test Driven Development**: Test both expected functionalities and that unexpected input throws the proper errors.
 
 ## Preparation
 
