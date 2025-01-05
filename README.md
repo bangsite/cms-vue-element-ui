@@ -9,19 +9,27 @@
 - **Operating System**: Windows, macOS
 
 ## Features
-- [x] **Multilingual Support**: Offers support for multiple languages to cater to a global audience.
-- [x] **Dynamic Routing**: Generates comprehensive permissions for dynamic routing.
-- [x] **Reusable Components**: Includes encapsulated components for easy reuse in various contexts.
-- [x] **Board Management**: Provides a user-friendly interface for creating, managing, and dragging & dropping boards.
-- [x] **Task Management**: Enables the creation, management, and tracking of tasks through an intuitive board interface.
-- [ ] **Product Management**: Facilitates the efficient organization and management of products.
-- [ ] **Post Management**: Allows for the efficient organization and management of posts.
-- [ ] **Image Management**: Features capabilities for displaying, uploading, and filtering images.
-- [x] **Dynamic Tables**: Offers the ability to create, manage, drag and drop, and extend tables through a user-friendly interface.
-- [ ] **User Authentication**: Ensures secure login and authentication for user management.
-- [ ] **Dynamic Layouts**: Provides flexible arrangements of sections tailored to user preferences.
-- [ ] **Calendar Event**: Allows for effortless management of events and deadlines with a calendar view.
-- [ ] **Test Driven Development**: Test both expected functionalities and that unexpected input throws the proper errors.
+- [x] Building Vue 3 using Vite and typescript.
+- [x] Routing with Vue router, config route guards, permissions.
+- [x] State management with Pinia.
+- [x] Automatic format code with ESLint and formatting with Prettier.
+- [x] Building component UI with TailwindCSS and Element Plus UI.
+- [x] Forms and Validation with VeeValidate
+- [x] Support for multiple languages with 
+- [x] Optimize application architecture and best practices.
+- [x] Error handling and monitoring.
+- [x] Pagination and Infinite scroll support.
+- [x] Auto saving on edits to inline content.
+- [x] Data and File Storage, plus Authentication with Nodejs and MongoDB REST APIs.
+- [ ] Data filtering and searching strategies across multiple resources (projects, tasks, etc).
+- [ ] Test both expected functionalities and that unexpected input throws the proper errors
+- [ ] Dynamic Layouts section & block build landing page.
+- [ ] Building calendar and event
+- [ ] Building image management with Cloudinary
+- [ ] SEO, Sitemaps, schema.org and Metadata.
+- [ ] Transactional emails for dynamic app notifications.
+- [ ] Real-time commenting
+- [ ] Analytics and events tracking with Google Analytics 4, Google Tag Manager, and Sentry...
 
 ## Preparation
 
